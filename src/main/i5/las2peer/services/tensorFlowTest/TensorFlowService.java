@@ -214,7 +214,7 @@ public class TensorFlowService extends RESTService {
 		}
 		
 		try {
-			ProcessBuilder builder = new ProcessBuilder( "python",pythonScriptPath+"\\train_model.py",input,output);
+			ProcessBuilder builder = new ProcessBuilder( "python",pythonScriptPath+"\\train.py",input,output);
 			builder.directory( new File(pythonScriptPath).getAbsoluteFile() ); // this is where you set the root folder for the executable to run with
 			builder.redirectErrorStream(true);
 			Process process =  builder.start();
