@@ -1,0 +1,18 @@
+dist: xenial
+
+language: java
+
+jdk: oraclejdk8
+
+sudo: required
+
+before_install:
+    - wget --no-check-certificate https://www.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.gz  
+    - tar -xzvf apache-ant-1.10.2-bin.tar.gz 
+    - export PATH=`pwd`/apache-ant-1.10.2/bin:$PATH
+    - echo $(ant -version)
+
+script: "ant all"
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
