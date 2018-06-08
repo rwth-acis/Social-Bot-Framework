@@ -109,6 +109,8 @@ public class SocialBotManagerService extends RESTService {
 	/**
 	 * Template of a get function.
 	 * 
+	 * @param body Todo
+	 * 
 	 * @return Returns an HTTP response with plain text string content.
 	 */
 	@POST
@@ -528,9 +530,9 @@ public class SocialBotManagerService extends RESTService {
 	}
 
 	/**
-	 * Template of a post function.
+	 * Join function
 	 * 
-	 * @param myInput The post input the user will provide.
+	 * @param body TODO
 	 * @return Returns an HTTP response with plain text string content derived from the path input param.
 	 */
 	@POST
@@ -576,9 +578,10 @@ public class SocialBotManagerService extends RESTService {
 	}
 
 	/**
-	 * Template of a post function.
+	 * Put Model function.
 	 * 
-	 * @param myInput The post input the user will provide.
+	 * @param name TODO
+	 * @param body TODO
 	 * @return Returns an HTTP response with plain text string content derived from the path input param.
 	 */
 	@POST

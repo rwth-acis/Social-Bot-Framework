@@ -4,14 +4,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import i5.las2peer.api.p2p.ServiceNameVersion;
 import i5.las2peer.connectors.webConnector.WebConnector;
-import i5.las2peer.connectors.webConnector.client.ClientResponse;
-import i5.las2peer.connectors.webConnector.client.MiniClient;
 import i5.las2peer.p2p.LocalNode;
 import i5.las2peer.p2p.LocalNodeManager;
 import i5.las2peer.security.UserAgentImpl;
@@ -90,44 +87,8 @@ public class ServiceTest {
 	 * 
 	 */
 	@Test
-	public void testGet() {
-		try {
-			MiniClient client = new MiniClient();
-			client.setConnectorEndpoint(connector.getHttpEndpoint());
+	public void testMethod() {
 
-			client.setLogin(testAgent.getIdentifier(), testPass);
-			ClientResponse result = client.sendRequest("GET", mainPath + "get", "");
-			Assert.assertEquals(200, result.getHttpCode());
-			Assert.assertTrue(result.getResponse().trim().contains("result")); // YOUR RESULT VALUE HERE
-			System.out.println("Result of 'testGet': " + result.getResponse().trim());
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail(e.toString());
-		}
-	}
-
-	/**
-	 * 
-	 * Test the example method that consumes one path parameter which we give the value "testInput" in this test.
-	 * 
-	 */
-	@Test
-	public void testPost() {
-		try {
-			MiniClient client = new MiniClient();
-			client.setConnectorEndpoint(connector.getHttpEndpoint());
-
-			client.setLogin(testAgent.getIdentifier(), testPass);
-			// testInput is the pathParam
-			ClientResponse result = client.sendRequest("POST", mainPath + "post/testInput", "");
-			Assert.assertEquals(200, result.getHttpCode());
-			// "testInput" name is part of response
-			Assert.assertTrue(result.getResponse().trim().contains("testInput"));
-			System.out.println("Result of 'testPost': " + result.getResponse().trim());
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail(e.toString());
-		}
 	}
 
 }
