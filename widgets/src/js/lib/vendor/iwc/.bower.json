@@ -1,0 +1,14 @@
+{
+  "name": "iwc",
+  "_cacheHeaders": {
+    "ETag": "\"1e322-1f24-4c8e90f3ca5a3\"",
+    "Last-Modified": "Wed, 05 Sep 2012 00:00:15 GMT",
+    "Content-Length": "7972",
+    "Content-Type": "application/javascript"
+  },
+  "_release": "e-tag:1e322-1f2",
+  "main": "index.js",
+  "_source": "http://dbis.rwth-aachen.de/gadgets/iwc/lib/iwc.js",
+  "_target": "*",
+  "_originalSource": "http://dbis.rwth-aachen.de/gadgets/iwc/lib/iwc.js"
+}

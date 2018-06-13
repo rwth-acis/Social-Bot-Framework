@@ -1,0 +1,58 @@
+
+<html>
+             <head>
+             <meta charset="utf-8">
+             <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+             <title>Method Browser</title>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+<script src="http://127.0.0.1:8081/methodselector/src/js/lib/vendor/webcomponentsjs/webcomponents-lite.js"></script>
+<custom-style>
+<style>
+  #buttons{
+    margin-left: 25px;
+  }
+  paper-button{
+        width:130px;
+        font-weight: bold;
+      }
+      paper-button.green {
+        background-color: #388e3c;
+        color: white;
+      }
+
+      paper-button.red {
+        background-color: #d32f2f;
+        color: white;
+      }
+
+      paper-button.blue {
+        background-color: #1976d2;
+        color: white;
+      } 
+  </style>
+</custom-style>
+<script>
+
+              function startTraining(){
+                $("#t")[0].startTraining();
+              }
+             </script>
+             
+             <link rel="import" href="http://localhost:8081/methodselector/src/elements/train-selector.html">
+             </head>
+             <body style="background-color:rgb(250, 250, 250);">
+             <center>
+              <h1>Bot Forge</h1>
+             <train-selector id="t"></train-selector>
+             <div id="buttons">
+            <paper-button raised class="green" onclick="">Check</paper-button>
+            <paper-button raised class="blue" onclick="startTraining()">Train</paper-button>
+          </center>
+            <br><br>
+              <div id="log"></div>
+            </div>
+             </body>
+</html>

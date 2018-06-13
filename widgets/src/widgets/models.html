@@ -1,0 +1,115 @@
+
+<html>
+             <head>
+             <meta charset="utf-8">
+             <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+             <title>Method Browser</title>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+<script src="http://localhost:7888/methodselector/src/js/loginscript.js"></script>
+<script src="http://127.0.0.1:7888/methodselector/src/js/lib/vendor/yjs/y.js"></script>
+<script src="http://127.0.0.1:7888/methodselector/src/js/lib/vendor/y-array/y-array.js"></script>
+<script src="http://127.0.0.1:7888/methodselector/src/js/lib/vendor/y-map/y-map.js"></script>
+<script src="http://127.0.0.1:7888/methodselector/src/js/lib/vendor/y-text/y-text.js"></script>
+<script src="http://127.0.0.1:7888/methodselector/src/js/lib/vendor/y-memory/y-memory.js"></script>
+<script src="http://127.0.0.1:7888/methodselector/src/js/lib/vendor/y-websockets-client/y-websockets-client.js"></script>
+<script src="http://localhost:7888/methodselector/src/js/lib/vendor/webcomponentsjs/webcomponents-lite.js"></script>
+<custom-style>
+<style>
+  #buttons{
+    margin-left: 25px;
+  }
+  paper-button{
+        width:130px;
+        font-weight: bold;
+      }
+      paper-button.green {
+      background-color: var(--paper-green-700);
+      color: white;
+      --paper-button-raised-keyboard-focus: {
+          background-color: var(--paper-green-a200) !important;
+          color: white !important;
+        };
+      }
+
+      paper-button.red {
+      background-color: var(--paper-red-700);
+      color: white;
+      --paper-button-raised-keyboard-focus: {
+          background-color: var(--paper-red-a200) !important;
+          color: white !important;
+        };
+      }
+
+      paper-button.blue {
+      background-color: var(--paper-blue-700);
+      color: white;
+      --paper-button-raised-keyboard-focus: {
+          background-color: var(--paper-blue-a200) !important;
+          color: white !important;
+        };
+      } 
+  </style>
+</custom-style>
+             <script>
+              var x;
+              Y({
+                db: {
+                  name: 'memory' // use memory database adapter.
+                  // name: 'indexeddb' // use indexeddb database adapter instead for offline apps
+                },
+                connector: {
+                  //name: 'webrtc', // use webrtc connector
+                  name: 'websockets-client',
+                  // name: 'xmpp'
+                  room: 'SBFModeling', // clients connecting to the same room share data
+                  url: 'http://127.0.0.1:1234'
+                },
+                sourceDir: '/bower_components', // location of the y-* modules (browser only)
+                share: {
+                  users: 'Map',
+                  join: 'Map',
+                  canvas: 'Map',
+                  nodes: 'Map',
+                  edges: 'Map',
+                  userList: 'Map',
+                  select: 'Map',
+                  views: 'Map',
+                  data: 'Map',
+                  activity:'Map',
+                  globalId: 'Array',
+                  text:"Text"
+                }
+              }).then(function (y) {
+                x = y;
+                // The Yjs instance `y` is available
+                // y.share.* contains the shared types
+
+                // Bind `y.share.textarea` to `<textarea/>`
+                //y.share.textarea.bind(document.querySelector('textarea'))
+              })
+
+              function loadModel() {
+                  $("#loadedModel")[0].loadModel();
+              }
+              function saveModel() {
+                  $("#loadedModel")[0].saveModel(x);
+              }
+              function clearModel() {
+                  $("#loadedModel")[0].clearModel();
+              }
+             </script>
+             <link rel="import" href="http://localhost:7888/methodselector/src/elements/model-selector.html">
+             </head>
+             <body>
+             
+             <model-selector id="loadedModel"></model-selector>
+             <div id="buttons">
+            <paper-button raised class="green" onclick="loadModel()">Load</paper-button>
+            <paper-button raised class="blue" onclick="saveModel()">Save</paper-button>
+            <paper-button raised class="red" onclick="clearModel()">Clear</paper-button>
+            </div>
+             </body>
+</html>

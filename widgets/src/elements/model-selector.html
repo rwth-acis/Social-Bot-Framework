@@ -1,0 +1,262 @@
+<script src="http://127.0.0.1:8081/methodselector/src/js/conf.js"></script>
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="neon-animation/web-animations.html">
+<link rel="import" href="iron-ajax/iron-ajax.html">
+<link rel="import" href="iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="paper-item/paper-item.html">
+<link rel="import" href="paper-listbox/paper-listbox.html">
+<link rel="import" href="paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="paper-dropdown-menu/paper-dropdown-menu-light.html">
+
+ <link rel="import" href="iron-icon/iron-icon.html">
+  <link rel="import" href="iron-icons/iron-icons.html">
+  <link rel="import" href="iron-icons/communication-icons.html">
+  <link rel="import" href="paper-button/paper-button.html">
+  <link rel="import" href="paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="paper-item/paper-icon-item.html">
+  <link rel="import" href="paper-item/paper-item-body.html">
+  <link rel="import" href="paper-styles/color.html">
+  <link rel="import" href="paper-toast/paper-toast.html">
+  <link rel="import" href="paper-spinner/paper-spinner-lite.html">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+
+
+<dom-module id="model-selector">
+  <template>
+
+    <iron-ajax
+    id="getModels"
+    url="{{url}}/SBFManager/models/"
+    params=''
+    handle-as="json"
+    on-response="_handleModels"
+    debounce-duration="300"></iron-ajax>
+
+    <iron-ajax
+    id="getModelByName"
+    url="{{url}}/SBFManager/models/{{selectedModel}}"
+    params=''
+    handle-as="json"
+    on-response="_handleModelSelected"
+    debounce-duration="300"></iron-ajax>
+
+    <iron-ajax
+    id="saveModelByName"
+    method="post"
+    content-type="application/json"
+    url="{{url}}/SBFManager/models/{{selectedModel}}"
+    body={{modelToSave}}
+    handle-as="text"
+    on-response="_handleModelSaved"
+    debounce-duration="300">
+    </iron-ajax>
+
+    <iron-ajax
+    id="initModel"
+    method="post"
+    content-type="application/json"
+    url="{{url}}/SBFManager/init"
+    body={{modelToSave}}
+    handle-as="text"
+    on-response="_handleModelInit"
+    on-error="_handleModelInitError"
+    debounce-duration="300">
+    </iron-ajax>
+
+    <style>
+      :host {
+        display: block;
+        --paper-item-focused-before: { background: #01579B no-repeat fixed center; };
+      }
+
+
+      #widget_content{
+        margin:15 25 15px;
+      }
+
+      .dropdownMen{
+        width:430px;
+      }
+
+      .methodType{
+        border-radius: 3px;
+        padding: 5 10 5;
+        width:70px;
+        font-weight: bold;
+        text-align: center;
+        margin-right: 16px;
+        color:#FFF;
+      }
+
+      .itemTitle{
+        font-weight: bold;
+      }
+
+      .get{
+        background-color: #61affe;
+      }
+      .post{
+        background-color: #49cc90;
+      }
+      .put{
+        background-color: #fca130;
+      }
+      .delete{
+        background-color: #f93e3e;
+      }
+
+
+      paper-input{
+        width:430px;
+      }
+
+    </style>
+    <div id="widget_content">
+    <paper-dropdown-menu class="dropdownMen" label="Model" on-iron-select="_modelSelected" vertical-offset="60">
+      <paper-listbox class="dropdownMen" slot="dropdown-content" class="dropdown-content">
+        <template is="dom-repeat" items="{{models}}">
+            <paper-item>{{item}}</paper-item>
+        </template>
+    </paper-dropdown-menu>
+    <paper-input id="modelName" label="Name" value="{{selectedModel}}"></paper-input><br>
+    <div hidden$={{hideLoading}}><paper-spinner-lite active ></paper-spinner-lite></div>
+    </div>
+
+    <paper-toast id="toast0" text="Model loaded!"></paper-toast>
+    <paper-toast id="toast01" text="{{errormsg}}"></paper-toast>
+    <paper-toast id="toast1" text="Model saved!"></paper-toast>
+    <paper-toast id="toast2" text="Model initialized!"></paper-toast>
+  </template>
+
+  <script>
+    /**
+     * `model-selector`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ModelSelector extends Polymer.Element {
+      static get is() { return 'model-selector'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'model-selector'
+          },
+          url:{
+            type: String,
+            value: "http://localhost:8080"
+          },
+          models: {
+            type: Object,
+            value: []
+          },
+          selectedModel:{
+            type: String,
+            value: ""
+          },
+          modelToSave:{
+            type: String,
+            value: ""
+          },
+          definitions:{
+            type: Object,
+            value: []
+          },
+          errormsg:{
+            type: String,
+            value: ""
+          },
+          hideLoading: {
+              type: Boolean,
+              value: true // init the value to true so it will be hidden on page load
+          }
+
+        };
+      }
+      ready() {
+        super.ready();
+        this.$.getModels.generateRequest();
+      }
+      _handleModels(data){
+        var d = data.detail.response;
+        let l = this.models.length;
+        for(var i=0;i<l;i++){
+          this.pop('models');
+        }
+        var arr = []
+        $.each(d, function(i, v) {
+          arr.push(v);
+        });
+        for(var i=0;i<arr.length;i++){
+          this.push('models',arr[i]);
+        }
+      }
+      _modelSelected(e) {
+        var selectedItem = e.target.selectedItem;
+        if (selectedItem) {
+          this.selectedModel = selectedItem.innerHTML;
+          this.$.getModelByName.generateRequest();
+        }
+      }
+
+      _handleModelSelected(data){
+        var d = data.detail.response;
+        this.model = d;
+      }
+
+      _handleModelSaved(data){
+        this.$.getModels.generateRequest();
+        this.$.toast1.show();
+      }
+
+      _handleModelInit(data){
+        var d = data.detail.response;
+        this.$.toast2.show();
+        this.hideLoading = true;
+      }
+
+      _handleModelInitError(data){
+        var d = data.detail.response;
+        this.errormsg = d;
+        this.$.toast01.show();
+        this.hideLoading = true;
+      }
+
+      saveModel(x){
+        if(this.$.modelName.value.length <3){
+          console.log("Not a valid name");
+          this.errormsg = "Not a valid name"
+          this.$.toast01.show();
+        }else{
+          this.modelToSave = JSON.stringify(x.share.data.get('model'));
+          this.selectedModel = this.$.modelName.value;
+
+          this.$.saveModelByName.generateRequest();
+
+        }
+      }
+
+      loadModel(){
+        return this.model;
+      }
+
+      initModel(x){
+        this.hideLoading = false;
+        this.modelToSave = JSON.stringify(x.share.data.get('model'));
+        this.$.initModel.generateRequest();
+      }
+
+    }
+
+    window.customElements.define(ModelSelector.is, ModelSelector);
+  </script>
+</dom-module>
