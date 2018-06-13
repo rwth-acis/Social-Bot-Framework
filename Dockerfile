@@ -104,6 +104,7 @@ RUN git clone https://github.com/rwth-acis/mobsos-success-modeling.git && \
 	cd mobsos-success-modeling && git checkout SocialBotFramework && \
 	ant jar && \
 	cd ..
+# Noracle
 RUN git clone https://github.com/Distributed-Noracle/Distributed-Noracle-Backend.git && \
 	cd Distributed-Noracle-Backend && git checkout SocialBotFramework && \
 	ant jar && \
@@ -112,6 +113,7 @@ RUN git clone https://github.com/Distributed-Noracle/Distributed-Noracle-Fronten
 	cd Distributed-Noracle-Frontend && git checkout SocialBotFramework && \
 	npm install && \
 	cd .. 
+#SBF
 RUN git clone https://github.com/rwth-acis/Social-Bot-Manager.git && \
 	cd Social-Bot-Manager && \
 	ant jar && \
@@ -119,6 +121,9 @@ RUN git clone https://github.com/rwth-acis/Social-Bot-Manager.git && \
 RUN git clone https://github.com/rwth-acis/las2peer-TensorFlow-TextToText.git && \
 	cd las2peer-TensorFlow-TextToText && \
 	ant jar && \
+	cd python && wget http://las2peer.dbis.rwth-aachen.de/sbf/model.tar.gz && \
+	tar -xzf model.tar.gz && \
+	rm model.tar.gz && \
 	cd .. 
 RUN git clone https://github.com/rwth-acis/las2peer-TensorFlow-Classifier.git && \
 	cd las2peer-TensorFlow-Classifier && \
@@ -140,6 +145,9 @@ RUN cd /opt/configserver && \
 	cp /source/RoleApiJS/lib/roleApiJS.js roleApiJS.js
 
 RUN chmod +x /opt/startup.sh
+
+# python deps 
+RUN python -m pip install html numpy colorama regex python-Levenshtein requests
 
 # Copy supervisor config
 
