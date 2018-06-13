@@ -1,5 +1,5 @@
 #FROM mhart/alpine-node
-FROM tensorflow/tensorflow
+FROM tensorflow/tensorflow:latest-py3
 MAINTAINER "neumann@dbis.rwth-aachen.de"
 
 EXPOSE 3306 
@@ -26,7 +26,7 @@ RUN update-alternatives --config javac
 RUN apt-get install -y wget
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y --no-install-recommends supervisor screen nodejs python2.7 python-setuptools g++ git ant maven make bash net-tools
+RUN apt-get install -y --no-install-recommends supervisor screen nodejs g++ git ant maven make bash net-tools
 
 # MySQL
 
@@ -56,6 +56,7 @@ RUN npm install -g http-server bower grunt-cli grunt
 RUN npm i npm@latest -g
 
 # --unsafe-perm fixes gyp issue
+RUN apt-get update && apt-get -y install python2.7-dev
 RUN npm install -g --unsafe-perm y-websockets-server
 	
 #Create file structure
@@ -147,7 +148,7 @@ RUN cd /opt/configserver && \
 RUN chmod +x /opt/startup.sh
 
 # python deps 
-RUN python -m pip install html numpy colorama regex python-Levenshtein requests
+RUN pip install numpy colorama regex python-Levenshtein requests h5py==2.8.0rc1
 
 # Copy supervisor config
 
