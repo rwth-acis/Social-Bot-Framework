@@ -78,6 +78,7 @@ app.get('/generateSpaces/:auth', function(req, res) {
         api.addWidgetToSpace("SBFModeling","","http://localhost:8081/palette.xml")
         api.addWidgetToSpace("SBFModeling","","http://localhost:8081/debug.xml")
         api.addWidgetToSpace("SBFModeling","","http://localhost:8081/methodselector/src/widgets/methods.xml")
+        api.addWidgetToSpace("SBFModeling","","http://localhost:8081/methodselector/src/widgets/models.xml")
     })
     .catch((err) => {
         res.sendStatus(500);
