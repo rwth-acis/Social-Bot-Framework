@@ -24,3 +24,45 @@ docker run -it --rm -p 1234:1234 -p 8073:8073 -p 8080:8080 -p 3000:3000 -p 9011:
 ```
 ### Manual Setup
 
+First of all, the external dependencies must be running. 
+To model the bot you need a ROLE space on which the SyncMeta widgets run. 
+With the debug widget you can then load the [vls](MetaModel/vls.json). 
+To load the model into the network, the [model selector widget](widgets/src/widgets/models.xml) must be added. The [method browser](widgets/src/widgets/methods.xml) can be used as an assistant. 
+To use the widgets, the urls have to be adapted and the bower dependencies have to be installed. 
+It is important that the location of the ROLE space is set in the Access-Control-Allow-Origin header.
+The core components must run on the same network as the MobSOS services. 
+
+### Frontend Integration
+Within the service frontend two links must be provided to use the framework. 
+1. Post request to add the bot to a unit 
+JavaScript
+```JavaScript
+function addToUnit(){
+    var xhr = new XMLHttpRequest();
+    var webConnectorEndpoint = "http://localhost:8080/";
+    var url = webConnectorEndpoint + "SBFManager/join";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("Bot added");
+        }
+    };
+    var data = JSON.stringify({basePath: webConnectorEndpoint + "serviceAlias", joinPath:"serviceFunctionPath"});
+    xhr.send(data);
+}
+```
+HTML
+```html
+<a onclick="addToUnit()">Add Bot to Unit</a>
+```
+You have to adjust the `webConnectorEndpoint`, the `serviceAlias` and the `serviceFunctionPath`. If the service needs any further parameters they can be added to the body of the post request.
+If the service has no unit separation you can add the following attribut to the body: 
+```json
+"directJoin": true
+```
+2. Url for the training area
+```html
+<a href="{{urlToWidget}}/train.html?unit={{unit}}">Train Bot</a>
+```
+You have to adjust the `urlToWidget` and the `unit`. If the service has no unit separation the unit query parameter can then be omitted. 
