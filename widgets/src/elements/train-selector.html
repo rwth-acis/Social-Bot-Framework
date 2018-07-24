@@ -1,23 +1,25 @@
-<script src="http://127.0.0.1:8081/methodselector/src/js/conf.js"></script>
-<link rel="import" href="polymer/polymer-element.html">
-<link rel="import" href="neon-animation/web-animations.html">
-<link rel="import" href="iron-ajax/iron-ajax.html">
-<link rel="import" href="iron-demo-helpers/demo-snippet.html">
-<link rel="import" href="iron-demo-helpers/demo-pages-shared-styles.html">
-<link rel="import" href="paper-item/paper-item.html">
-<link rel="import" href="paper-listbox/paper-listbox.html">
-<link rel="import" href="paper-dropdown-menu/paper-dropdown-menu.html">
-<link rel="import" href="paper-dropdown-menu/paper-dropdown-menu-light.html">
+<script src="http://localhost:8080/fileservice/files/sbf/js/conf.js"></script>
+<script src="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/polymer/polymer-element.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/neon-animation/web-animations.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-ajax/iron-ajax.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-item/paper-item.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-listbox/paper-listbox.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-dropdown-menu/paper-dropdown-menu-light.html">
 
- <link rel="import" href="iron-icon/iron-icon.html">
-  <link rel="import" href="iron-icons/iron-icons.html">
-  <link rel="import" href="iron-icons/communication-icons.html">
-  <link rel="import" href="paper-button/paper-button.html">
-  <link rel="import" href="paper-icon-button/paper-icon-button.html">
-  <link rel="import" href="paper-item/paper-icon-item.html">
-  <link rel="import" href="paper-item/paper-item-body.html">
-  <link rel="import" href="paper-styles/color.html">
-  <link rel="import" href="app-route/app-location.html">
+ <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-icon/iron-icon.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-icons/iron-icons.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-icons/communication-icons.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-button/paper-button.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-item/paper-icon-item.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-item/paper-item-body.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-styles/color.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/app-route/app-location.html">
+
 
 
 
@@ -185,39 +187,39 @@
           },
           url:{
             type: String,
-            value: "http://localhost:8080"
+            value: 'http://localhost:8080'
           },
-          services: {
+          services:{
             type: Object,
             value: []
           },
-          generators: {
+          generators:{
             type: Object,
             value: []
           },
-          units: {
+          units:{
             type: Object,
             value: []
           },
           selectedGeneratorId:{
             type: String,
-            value: ""
+            value: ''
           },
           selectedGeneratorName:{
             type: String,
-            value: ""
+            value: ''
           },
           selectedGeneratorStatus:{
             type: String,
-            value: ""
+            value: ''
           },
           selectedService:{
             type: String,
-            value: ""
+            value: ''
           },
           trainService:{
             type: String,
-            value: ""
+            value: ''
           },
           trainBody:{
             type: Object,
@@ -225,13 +227,13 @@
           },
           messageType:{
             type: String,
-            value: "SERVICE_CUSTOM_MESSAGE_40"
+            value: 'SERVICE_CUSTOM_MESSAGE_40'
           },
           definitions:{
             type: Object,
             value: []
           },
-          hideLog: {
+          hideLog:{
               type: Boolean,
               value: true // init the value to true so it will be hidden on page load
           }

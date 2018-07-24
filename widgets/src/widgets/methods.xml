@@ -32,7 +32,7 @@
 <script src="http://127.0.0.1:8081/methodselector/src/js/lib/iwc.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/lib/syncmeta-plugin.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/lib/las2peerWidgetLibrary.js"></script>
-<script src="http://127.0.0.1:8081/methodselector/src/js/lib/vendor/webcomponentsjs/webcomponents-lite.js"></script>
+<script src="http://127.0.0.1:8081/methodselector/src/elements/webcomponentsjs/webcomponents-lite.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/loginscript.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/lib/vendor/yjs/y.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/lib/vendor/y-array/y-array.js"></script>

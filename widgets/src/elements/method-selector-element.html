@@ -225,7 +225,7 @@
         $.each(nodes, function(name, values) {
           if(values.type == "VLE Instance"){
             $.each(values.attributes, function(aname, avalue) {
-              if(avalue.name=="addr"){
+              if(avalue.name=="Addr"){
                 if(this.url!=avalue.value.value)
                 {
                   console.log(avalue.value.value)

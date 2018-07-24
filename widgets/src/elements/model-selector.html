@@ -225,13 +225,34 @@
       }
 
       _handleModelInitError(data){
-        var d = data.detail.response;
+        var d = data.detail.request.xhr.response;
         this.errormsg = d;
         this.$.toast01.show();
         this.hideLoading = true;
       }
 
       saveModel(x){
+        var y = x.share.data.get('model');
+        var nodes = y.nodes;
+        var change = false;
+        var changeUrl = "";
+        $.each(nodes, function(name, values) {
+          if(values.type == "VLE Instance"){
+            $.each(values.attributes, function(aname, avalue) {
+              if(avalue.name=="Addr"){
+                if(this.url!=avalue.value.value)
+                {
+                  console.log(avalue.value.value)
+                  changeUrl = avalue.value.value;
+                  change = true;
+                }
+              }
+            });
+          }
+        });
+        if(change) {
+          this.url = changeUrl;
+        }
         if(this.$.modelName.value.length <3){
           console.log("Not a valid name");
           this.errormsg = "Not a valid name"
@@ -245,6 +266,29 @@
         }
       }
 
+      setUrl(y){
+        var nodes = y.nodes;
+        var change = false;
+        var changeUrl = "";
+        $.each(nodes, function(name, values) {
+          if(values.type == "VLE Instance"){
+            $.each(values.attributes, function(aname, avalue) {
+              if(avalue.name=="Addr"){
+                if(this.url!=avalue.value.value)
+                {
+                  changeUrl = avalue.value.value;
+                  change = true;
+                }
+              }
+            });
+          }
+        });
+        if(change) {
+          this.url = changeUrl;
+          this.$.getModels.generateRequest();
+        }
+      }
+
       loadModel(){
         return this.model;
       }
@@ -252,7 +296,34 @@
       initModel(x){
         this.hideLoading = false;
         this.modelToSave = JSON.stringify(x.share.data.get('model'));
-        this.$.initModel.generateRequest();
+        var y = x.share.data.get('model');
+        var nodes = y.nodes;
+        if(nodes==null){
+          this.errormsg = "Error: Empty model!";
+          this.$.toast01.show();
+          this.hideLoading = true;
+        }else{
+          var change = false;
+          var changeUrl = "";
+          $.each(nodes, function(name, values) {
+            if(values.type == "VLE Instance"){
+              $.each(values.attributes, function(aname, avalue) {
+                if(avalue.name=="Addr"){
+                  if(this.url!=avalue.value.value)
+                  {
+                    console.log(avalue.value.value)
+                    changeUrl = avalue.value.value;
+                    change = true;
+                  }
+                }
+              });
+            }
+          });
+          if(change) {
+            this.url = changeUrl;
+          }
+          this.$.initModel.generateRequest();
+        }
       }
 
     }

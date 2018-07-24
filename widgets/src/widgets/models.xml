@@ -26,7 +26,7 @@
              <title>Method Browser</title>
 
 <script src="http://127.0.0.1:8081/methodselector/src/js/loginscript.js"></script>
-<script src="http://127.0.0.1:8081/methodselector/src/js/lib/vendor/webcomponentsjs/webcomponents-lite.js"></script>
+<script src="http://127.0.0.1:8081/methodselector/src/elements/webcomponentsjs/webcomponents-lite.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/loginscript.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/lib/vendor/yjs/y.js"></script>
 <script src="http://127.0.0.1:8081/methodselector/src/js/lib/vendor/y-array/y-array.js"></script>
@@ -170,7 +170,7 @@
              </head>
              <body style="background-color:rgb(250, 250, 250);">
              
-             <model-selector id="loadedModel"></model-selector>
+             <model-selector id="loadedModel" onclick="this.setUrl(x.share.data.get('model'));"></model-selector>
              <div id="buttons">
             <paper-button raised class="green" onclick="loadModel()">Load</paper-button>
             <paper-button raised class="blue" onclick="saveModel()">Save</paper-button>
