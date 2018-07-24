@@ -107,11 +107,11 @@ RUN git clone https://github.com/rwth-acis/mobsos-success-modeling.git && \
 	cd ..
 # Noracle
 RUN git clone https://github.com/Distributed-Noracle/Distributed-Noracle-Backend.git && \
-	cd Distributed-Noracle-Backend && git checkout SocialBotFramework && \
+	cd Distributed-Noracle-Backend && \
 	ant jar && \
 	cd ..
 RUN git clone https://github.com/Distributed-Noracle/Distributed-Noracle-Frontend.git && \
-	cd Distributed-Noracle-Frontend && git checkout SocialBotFramework && \
+	cd Distributed-Noracle-Frontend && \
 	npm install && \
 	cd .. 
 #SBF
