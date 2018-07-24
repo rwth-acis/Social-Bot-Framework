@@ -435,7 +435,7 @@
             "attributes": {}
         },
         "65628d51fa8dd6d87170cf4b": {
-            "label": "Same Action Paramater as",
+            "label": "Same Action Parameter as",
             "shape": {
                 "arrow": "bidirassociation",
                 "shape": "straight",
@@ -447,8 +447,7 @@
             "relations": [
                 {
                     "sourceTypes": [
-                        "Action Parameter",
-                        "Action Result"
+                        "Action Parameter"
                     ],
                     "targetTypes": [
                         "Action Parameter",
@@ -459,7 +458,7 @@
             "attributes": {}
         },
         "22d4842d9f5332500642bada": {
-            "label": "Generator has Input Parameter",
+            "label": "Action Parameter is Generator Input",
             "shape": {
                 "arrow": "unidirassociation",
                 "shape": "straight",
@@ -471,12 +470,12 @@
             "relations": [
                 {
                     "sourceTypes": [
-                        "Classifier",
-                        "TextToText"
+                        "Action Parameter"
                     ],
                     "targetTypes": [
-                        "Action Parameter",
-                        "Action Result"
+                        "Action Result",
+                        "Classifier",
+                        "TextToText"
                     ]
                 }
             ],
@@ -505,30 +504,8 @@
             ],
             "attributes": {}
         },
-        "3d54be390d06939422521741": {
-            "label": "and",
-            "shape": {
-                "arrow": "unidirassociation",
-                "shape": "straight",
-                "color": "",
-                "overlay": "",
-                "overlayPosition": "hidden",
-                "overlayRotate": true
-            },
-            "relations": [
-                {
-                    "sourceTypes": [
-                        "If"
-                    ],
-                    "targetTypes": [
-                        "If"
-                    ]
-                }
-            ],
-            "attributes": {}
-        },
         "81bb400d956a571213ffc276": {
-            "label": "ifThen",
+            "label": "If Then",
             "shape": {
                 "arrow": "unidirassociation",
                 "shape": "straight",
@@ -551,7 +528,7 @@
             "attributes": {}
         },
         "b2627c9323700bf98d8bb353": {
-            "label": "if Input",
+            "label": "is If Input",
             "shape": {
                 "arrow": "unidirassociation",
                 "shape": "straight",
@@ -564,7 +541,8 @@
                 {
                     "sourceTypes": [
                         "Action Parameter",
-                        "Action Result"
+                        "Action Result",
+                        "If"
                     ],
                     "targetTypes": [
                         "If"
@@ -574,7 +552,7 @@
             "attributes": {}
         },
         "9f2e581ba6437bd5218d6bd9": {
-            "label": "then output",
+            "label": "Then has Output",
             "shape": {
                 "arrow": "unidirassociation",
                 "shape": "straight",
@@ -589,7 +567,8 @@
                         "Then"
                     ],
                     "targetTypes": [
-                        "Action Parameter"
+                        "Action Parameter",
+                        "Then"
                     ]
                 }
             ],
