@@ -1,18 +1,22 @@
 # Social-Bot-Framework
 
-### Core Components:
+
+Core Components
+--------
 * [las2peer-Social-Bot-Manager-Service](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service)
 * [las2peer-TensorFlow-TextToText-Service](https://github.com/rwth-acis/las2peer-TensorFlow-TextToText-Service)
 * [las2peer-TensorFlow-Classifier-Service](https://github.com/rwth-acis/las2peer-TensorFlow-Classifier-Service)
 
-### External Dependencies:
+External Dependencies
+--------
 * [ROLE-SDK](https://github.com/rwth-acis/ROLE-SDK)
 * [y-websockets-server](https://github.com/y-js/y-websockets-server)
 * [SyncMeta](https://github.com/rwth-acis/syncmeta)
 * [MobSOS Data-Processing](https://github.com/rwth-acis/mobsos-data-processing)
 * [MobSOS Success-Modeling](https://github.com/rwth-acis/mobsos-success-modeling)
 
-### Docker
+Docker
+--------
 This repository provides a dockerfile with an example setup. The external dependencies and the core components are included. [Noracle](https://github.com/Distributed-Noracle) is used as an example service.
 The docker container is built automatically and can be obtained with the following command:
 ```
@@ -22,8 +26,8 @@ To start the container it is important that some ports are opened:
 ```
 docker run -it --rm -p 1234:1234 -p 8073:8073 -p 8080:8080 -p 3000:3000 -p 9011:9011 -p 4200:4200 -p 8081:8081 --name sbf rwthacis/social-bot-framework
 ```
-### Manual Setup
-
+Manual Setup
+--------
 First of all, the external dependencies must be running. 
 To model the bot you need a ROLE space on which the SyncMeta widgets run. 
 With the debug widget you can then load the [vls](MetaModel/vls.json). 
@@ -32,7 +36,8 @@ To use the widgets, the urls have to be adapted and the bower dependencies have 
 It is important that the location of the ROLE space is set in the Access-Control-Allow-Origin header.
 The core components must run on the same network as the MobSOS services. 
 
-### Frontend Integration
+Frontend Integration
+--------
 Within the service frontend two links must be provided to use the framework. 
 1. Post request to add the bot to a unit 
 
@@ -67,3 +72,31 @@ If the service has no unit separation you can add the following attribut to the 
 <a href="{{urlToWidget}}/train.html?unit={{unit}}">Train Bot</a>
 ```
 You have to adjust the `urlToWidget` and the `unit`. If the service has no unit separation the unit query parameter can then be omitted. 
+
+Backend Integration
+--------
+### Trigger
+For the bot to be triggered, the service must send an appropriate [monitoring message](https://github.com/rwth-acis/mobsos-data-processing/wiki/Manual#2-monitor-a-service).
+```json
+{
+    "serviceAlias": "",
+    "functionName": "",
+    "attributes":{}
+}
+```
+The `serviceAlias` attribute should contain the alias given by the @ServicePath annotation. 
+The `functionName`attribute should contain the name of the function. 
+Any type of attributes (@PathParam/@QueryParam/@BodyParam) should be listed in the `attributes` attribute.
+If the service uses [PoJo's](https://en.wikipedia.org/wiki/Plain_old_Java_object) the developer can make use of the [Gson library](https://github.com/google/gson). 
+### Training data
+Training data can be collected using [MobSOS](https://github.com/rwth-acis/mobsos-data-processing/wiki/Manual#2-monitor-a-service). A monitoring message has the following form:
+```json
+{  
+   "unit":"",
+   "from":"",
+   "to":""
+}
+```
+The attribute `unit` contains an id to assign the training data to the respective domain.
+The `from` attribute contains the initial text. 
+The `to`attribute contains the expected output. For classification it is of the type Integer and for text generation it is of the type String.
