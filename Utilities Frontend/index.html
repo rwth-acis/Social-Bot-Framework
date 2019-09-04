@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Social Bot Framework Utilities</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- SimpleMDE markdown editor -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+        <style>
+            .CodeMirror {
+                height: 512px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">SBF Utilities</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">NLU Model Training Helper<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/model-uploader.html">SBF Model Uploader<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="container" style="margin-top: 76px">
+            <div class="jumbotron">
+                <h1>NLU Model Training Helper</h1>
+                <p class="lead">With this tool, you can edit the training data for an NLU model and send it to a Rasa NLU server for training.</p>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Model Training Data</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="rasaEndpoint">Rasa NLU Endpoint</label>
+                        <input type="text" class="form-control" id="rasaEndpoint" placeholder="" value="http://10.97.81.17:5005"> <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
+                    </div>
+                    <div class="form-group">
+                        <label for="sbfManagerEndpoint">SBF Manager Endpoint</label>
+                        <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager">
+                    </div>
+                    <button type="button" class="btn btn-lg btn-secondary" onclick="resetForm()">Reload example config</button>
+                    <button type="button" class="btn btn-lg btn-secondary" onclick="retrieveStatus()">Check training status</button>
+                    <button type="button" class="btn btn-lg btn-primary" onclick="submitForm()">Submit</button>
+                    <big id="trainingStatus" class="form-text text-muted"></big>
+                </form>
+            </div>
+        </main>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script src="nlu.md.js"></script>
+        <script>
+            var simplemde = new SimpleMDE({
+                initialValue: exampleconfig,
+                hideIcons: ["fullscreen", "side-by-side"],
+                autosave: {
+                    enabled: true,
+                    uniqueId: "modelEditor",
+                },
+                shortcuts: {
+                    "toggleSideBySide": null,
+                    "toggleFullScreen": null,
+                }
+            });
+
+            function resetForm() {
+                if (confirm("Reset textarea to example config?")) {
+                    simplemde.value(exampleconfig);
+                }
+            }
+
+            function submitForm() {
+                $("#trainingStatus").text("Starting training...");
+                $.ajax({
+                    type: "POST",
+                    url: $("#sbfManagerEndpoint").val() + "/trainAndLoad/",
+                    data: JSON.stringify({
+                        url: $("#rasaEndpoint").val(),
+                        config: 'language: en\npipeline: "pretrained_embeddings_spacy"',
+                        markdownTrainingData: simplemde.value(),
+                    }),
+                    contentType: "application/json",
+                    success: function(data, textStatus, jqXHR) {
+                        $("#trainingStatus").text(data);
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        $("#trainingStatus").text(textStatus + " - " + errorThrown);
+                    }
+                });
+            }
+
+            function retrieveStatus() {
+                $("#trainingStatus").text("Checking status...");
+                $.ajax({
+                    type: "GET",
+                    url: $("#sbfManagerEndpoint").val() + "/trainAndLoadStatus/",
+                    contentType: "text/plain",
+                    success: function(data, textStatus, jqXHR) {
+                        $("#trainingStatus").text(data);
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        $("#trainingStatus").text(textStatus + " - " + errorThrown);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
