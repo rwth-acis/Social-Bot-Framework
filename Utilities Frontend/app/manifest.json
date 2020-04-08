@@ -1,0 +1,7 @@
+{
+  "name": "SocialBotFramework",
+  "short_name": "SBF",
+  "description": "Frontend of Social Bot Framework",
+  "start_url": "/",
+  "display": "standalone"
+}

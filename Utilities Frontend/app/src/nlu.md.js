@@ -1,6 +1,6 @@
 // Based on https://github.com/RasaHQ/rasa/blob/c51bda7c8e32c012f24f80ef19c08121b924a1a3/examples/moodbot/data/nlu.md
 
-var exampleconfig = `## intent:greet
+export default `## intent:greet
 - hey
 - hello
 - hi
