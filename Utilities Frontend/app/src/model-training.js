@@ -87,7 +87,7 @@ class ModelTraining extends PolymerElement {
             url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/trainAndLoad/",
             data: JSON.stringify({
                 url: $(_this.htmlQuery("#rasaEndpoint")).val(),
-                config: 'language: en\npipeline: "pretrained_embeddings_spacy"',
+                config: 'language: de\npipeline: "pretrained_embeddings_spacy"',
                 markdownTrainingData: _this.editor.getText(),
             }),
             contentType: "application/json",
