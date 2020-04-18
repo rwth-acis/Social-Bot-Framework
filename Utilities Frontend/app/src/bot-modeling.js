@@ -121,6 +121,7 @@ class BotModeling extends PolymerElement {
           this.cleanStatus();
         });
         xhr.open('POST', endpoint + '/bots');
+        xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(model));
       });
   }
