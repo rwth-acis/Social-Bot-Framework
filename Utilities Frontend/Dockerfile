@@ -20,7 +20,7 @@ RUN git clone https://github.com/rwth-acis/syncmeta.git
 
 # TODO: Use master branch
 WORKDIR /usr/src/app/syncmeta
-RUN git checkout develop && cd widgets && rm package-lock.json && npm install && bower install --allow-root
+RUN git checkout chat-assessments && cd widgets && rm package-lock.json && npm install && bower install --allow-root
 
 WORKDIR /usr/src/app
 COPY docker/docker-entrypoint.sh docker-entrypoint.sh
