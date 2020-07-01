@@ -303,8 +303,8 @@
                     "value": "Action Parameter"
                 }
             },
-            "left": 5266.555555555556,
-            "top": 5007.777777777777,
+            "left": 5278.555555555556,
+            "top": 4874.777777777777,
             "width": 192,
             "height": 142,
             "zIndex": 16006,
@@ -343,6 +343,20 @@
                                 "value": "boolean"
                             }
                         },
+                        "8ad8cf5a0cde8fb403d82595": {
+                            "id": "8ad8cf5a0cde8fb403d82595",
+                            "name": "8ad8cf5a0cde8fb403d82595",
+                            "key": {
+                                "id": "8ad8cf5a0cde8fb403d82595[key]",
+                                "name": "",
+                                "value": "Content"
+                            },
+                            "value": {
+                                "id": "8ad8cf5a0cde8fb403d82595[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
                         "32c6ddb923168e92ed48779c": {
                             "id": "32c6ddb923168e92ed48779c",
                             "name": "32c6ddb923168e92ed48779c",
@@ -355,20 +369,6 @@
                                 "id": "32c6ddb923168e92ed48779c[value]",
                                 "name": "",
                                 "value": "string"
-                            }
-                        },
-                        "3075f84f4a03c7af24a5a117": {
-                            "id": "3075f84f4a03c7af24a5a117",
-                            "name": "3075f84f4a03c7af24a5a117",
-                            "key": {
-                                "id": "3075f84f4a03c7af24a5a117[key]",
-                                "name": "",
-                                "value": "Content"
-                            },
-                            "value": {
-                                "id": "3075f84f4a03c7af24a5a117[value]",
-                                "name": "",
-                                "value": "quiz"
                             }
                         }
                     }
@@ -385,8 +385,8 @@
                     "value": "Classifier"
                 }
             },
-            "left": 5721.888888888889,
-            "top": 5307.777777777777,
+            "left": 5684.888888888889,
+            "top": 4860.777777777777,
             "width": 150,
             "height": 100,
             "zIndex": 16007,
@@ -410,8 +410,8 @@
                     "value": "TextToText"
                 }
             },
-            "left": 5959.444444444444,
-            "top": 5412.111111111111,
+            "left": 5691.444444444444,
+            "top": 5047.111111111111,
             "width": 150,
             "height": 100,
             "zIndex": 16008,
@@ -617,7 +617,7 @@
             "left": 4366.333333333333,
             "top": 4596.333333333333,
             "width": 150,
-            "height": 81,
+            "height": 100,
             "zIndex": 16016,
             "type": "Relation",
             "attributes": {}
@@ -736,8 +736,8 @@
                     "value": "ActionHasParameter"
                 }
             },
-            "left": 4614.999999999999,
-            "top": 4539.857142857142,
+            "left": 4950.999999999999,
+            "top": 4721.857142857142,
             "width": 150,
             "height": 107,
             "zIndex": 16023,
@@ -815,8 +815,8 @@
                     "value": "DataGenerator"
                 }
             },
-            "left": 5676.428571428571,
-            "top": 5452.571428571428,
+            "left": 5496.428571428571,
+            "top": 4962.571428571428,
             "width": 150,
             "height": 100,
             "zIndex": 16027,
@@ -883,8 +883,8 @@
                     "value": "DataGeneratorGeneratesParameter"
                 }
             },
-            "left": 5557.285714285714,
-            "top": 5179.428571428571,
+            "left": 5979.285714285714,
+            "top": 4659.428571428571,
             "width": 150,
             "height": 100,
             "zIndex": 16030,
@@ -1255,8 +1255,8 @@
                     "value": "cType"
                 }
             },
-            "left": 5213.666666666664,
-            "top": 4654.333333333331,
+            "left": 5181.666666666664,
+            "top": 4720.333333333331,
             "width": 156,
             "height": 105,
             "zIndex": 16037,
@@ -1309,7 +1309,7 @@
                 }
             },
             "left": 5381.666666666664,
-            "top": 4685.666666666664,
+            "top": 4686.666666666664,
             "width": 164,
             "height": 107,
             "zIndex": 16038,
@@ -1509,8 +1509,8 @@
                     "value": "ParameterShape"
                 }
             },
-            "left": 5000.999999999997,
-            "top": 4860.33333333333,
+            "left": 5087.999999999997,
+            "top": 4921.33333333333,
             "width": 150,
             "height": 150,
             "zIndex": 16042,
@@ -1657,8 +1657,8 @@
                     "value": "BotShape"
                 }
             },
-            "left": 3595.6666666666633,
-            "top": 4982.33333333333,
+            "left": 3664.6666666666633,
+            "top": 5036.33333333333,
             "width": 150,
             "height": 150,
             "zIndex": 16044,
@@ -1731,8 +1731,8 @@
                     "value": "DataGeneratorShape"
                 }
             },
-            "left": 6274.666666666663,
-            "top": 5200.666666666664,
+            "left": 5931.666666666663,
+            "top": 4931.666666666664,
             "width": 150,
             "height": 150,
             "zIndex": 16045,
@@ -2231,8 +2231,8 @@
                     "value": "triggersShape"
                 }
             },
-            "left": 4497.999999999999,
-            "top": 5003.999999999999,
+            "left": 4618.999999999999,
+            "top": 5056.999999999999,
             "width": 150,
             "height": 150,
             "zIndex": 16052,
@@ -2343,6 +2343,20 @@
                             },
                             "value": {
                                 "id": "4d07dc2fa7f97c4ef5834078[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "f7efda10fb976eff66861b7d": {
+                            "id": "f7efda10fb976eff66861b7d",
+                            "name": "f7efda10fb976eff66861b7d",
+                            "key": {
+                                "id": "f7efda10fb976eff66861b7d[key]",
+                                "name": "",
+                                "value": "Rasa NLU URL"
+                            },
+                            "value": {
+                                "id": "f7efda10fb976eff66861b7d[value]",
                                 "name": "",
                                 "value": "string"
                             }
@@ -2511,20 +2525,6 @@
                             },
                             "value": {
                                 "id": "869849f65db9be737e99bd24[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "e7d374a1e2d32c5e67bc68cc": {
-                            "id": "e7d374a1e2d32c5e67bc68cc",
-                            "name": "e7d374a1e2d32c5e67bc68cc",
-                            "key": {
-                                "id": "e7d374a1e2d32c5e67bc68cc[key]",
-                                "name": "",
-                                "value": "NLU ID"
-                            },
-                            "value": {
-                                "id": "e7d374a1e2d32c5e67bc68cc[value]",
                                 "name": "",
                                 "value": "string"
                             }
@@ -2918,7 +2918,7 @@
                     "list": {
                         "a5844a8bde0637231a942b69": {
                             "id": "a5844a8bde0637231a942b69",
-                            "name": "a5844a8bde0637231a942b69",
+                            "name": "Attribute",
                             "key": {
                                 "id": "a5844a8bde0637231a942b69[key]",
                                 "name": "",
@@ -2930,166 +2930,6 @@
                                 "value": "string"
                             }
                         }
-                    }
-                }
-            }
-        },
-        "005c2246e41c3fc7dcb5e988": {
-            "label": {
-                "id": "005c2246e41c3fc7dcb5e988[label]",
-                "name": "Label",
-                "value": {
-                    "id": "005c2246e41c3fc7dcb5e988[label]",
-                    "name": "Label",
-                    "value": "NLU Knowledge"
-                }
-            },
-            "left": 3384.5,
-            "top": 5210.75,
-            "width": 150,
-            "height": 100,
-            "zIndex": 16072,
-            "type": "Object",
-            "attributes": {
-                "[attributes]": {
-                    "id": "[attributes]",
-                    "name": "Attributes",
-                    "type": "KeySelectionValueListAttribute",
-                    "list": {
-                        "dbcf8b46f8cd76f445b9dea4": {
-                            "id": "dbcf8b46f8cd76f445b9dea4",
-                            "name": "dbcf8b46f8cd76f445b9dea4",
-                            "key": {
-                                "id": "dbcf8b46f8cd76f445b9dea4[key]",
-                                "name": "",
-                                "value": "Name"
-                            },
-                            "value": {
-                                "id": "dbcf8b46f8cd76f445b9dea4[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "19df132ba486480d8860a040": {
-                            "id": "19df132ba486480d8860a040",
-                            "name": "19df132ba486480d8860a040",
-                            "key": {
-                                "id": "19df132ba486480d8860a040[key]",
-                                "name": "",
-                                "value": "ID"
-                            },
-                            "value": {
-                                "id": "19df132ba486480d8860a040[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "c051de6af456e91e52c0c465": {
-                            "id": "c051de6af456e91e52c0c465",
-                            "name": "c051de6af456e91e52c0c465",
-                            "key": {
-                                "id": "c051de6af456e91e52c0c465[key]",
-                                "name": "",
-                                "value": "URL"
-                            },
-                            "value": {
-                                "id": "c051de6af456e91e52c0c465[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "660c6026e83dc4ee669e6e01": {
-            "label": {
-                "id": "660c6026e83dc4ee669e6e01[label]",
-                "name": "Label",
-                "value": {
-                    "id": "660c6026e83dc4ee669e6e01[label]",
-                    "name": "Label",
-                    "value": "HasNLUKnowledge"
-                }
-            },
-            "left": 3636.25,
-            "top": 5274.25,
-            "width": 157.08333333333337,
-            "height": 76.25,
-            "zIndex": 16073,
-            "type": "Relation",
-            "attributes": {}
-        },
-        "e71e9666a87df738cd09425a": {
-            "label": {
-                "id": "e71e9666a87df738cd09425a[label]",
-                "name": "Label",
-                "value": {
-                    "id": "e71e9666a87df738cd09425a[label]",
-                    "name": "Label",
-                    "value": "NLUKnowledgeShape"
-                }
-            },
-            "left": 3450.7142857142853,
-            "top": 5376.428571428571,
-            "width": 150,
-            "height": 150,
-            "zIndex": 16074,
-            "type": "Node Shape",
-            "attributes": {
-                "e71e9666a87df738cd09425a[shape]": {
-                    "id": "e71e9666a87df738cd09425a[shape]",
-                    "name": "Shape",
-                    "value": {
-                        "id": "e71e9666a87df738cd09425a[shape]",
-                        "name": "Shape",
-                        "value": "rectangle"
-                    },
-                    "option": "Rectangle"
-                },
-                "e71e9666a87df738cd09425a[color]": {
-                    "id": "e71e9666a87df738cd09425a[color]",
-                    "name": "Color",
-                    "value": {
-                        "id": "e71e9666a87df738cd09425a[color]",
-                        "name": "Color",
-                        "value": ""
-                    }
-                },
-                "e71e9666a87df738cd09425a[defaultWidth]": {
-                    "id": "e71e9666a87df738cd09425a[defaultWidth]",
-                    "name": "Default Width",
-                    "value": {
-                        "id": "e71e9666a87df738cd09425a[defaultWidth]",
-                        "name": "Default Width",
-                        "value": 47
-                    }
-                },
-                "e71e9666a87df738cd09425a[defaultHeight]": {
-                    "id": "e71e9666a87df738cd09425a[defaultHeight]",
-                    "name": "Default Height",
-                    "value": {
-                        "id": "e71e9666a87df738cd09425a[defaultHeight]",
-                        "name": "Default Height",
-                        "value": 48
-                    }
-                },
-                "e71e9666a87df738cd09425a[customShape]": {
-                    "id": "e71e9666a87df738cd09425a[customShape]",
-                    "name": "Custom Shape",
-                    "value": {
-                        "id": "e71e9666a87df738cd09425a[customShape]",
-                        "name": "Custom Shape",
-                        "value": ""
-                    }
-                },
-                "e71e9666a87df738cd09425a[customAnchors]": {
-                    "id": "e71e9666a87df738cd09425a[customAnchors]",
-                    "name": "Custom Anchors",
-                    "value": {
-                        "id": "e71e9666a87df738cd09425a[customAnchors]",
-                        "name": "Custom Anchors",
-                        "value": ""
                     }
                 }
             }
@@ -4353,66 +4193,6 @@
             },
             "source": "dd34599cb11fbaa06554d5ea",
             "target": "44eb2dd6f047125fede2e6a3",
-            "attributes": {},
-            "type": "Bi-Dir-Association"
-        },
-        "0796a4af7acd4a4067b63e7d": {
-            "label": {
-                "id": "0796a4af7acd4a4067b63e7d[label]",
-                "name": "Label",
-                "value": {
-                    "id": "0796a4af7acd4a4067b63e7d[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "d0be8bdbbd28e75ae4356cba",
-            "target": "660c6026e83dc4ee669e6e01",
-            "attributes": {},
-            "type": "Uni-Dir-Association"
-        },
-        "f7b1dbf899e1b8d020897539": {
-            "label": {
-                "id": "f7b1dbf899e1b8d020897539[label]",
-                "name": "Label",
-                "value": {
-                    "id": "f7b1dbf899e1b8d020897539[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "660c6026e83dc4ee669e6e01",
-            "target": "1fba2bd12ab4893da3774b27",
-            "attributes": {},
-            "type": "Generalisation"
-        },
-        "cd3120643f899da9495a5145": {
-            "label": {
-                "id": "cd3120643f899da9495a5145[label]",
-                "name": "Label",
-                "value": {
-                    "id": "cd3120643f899da9495a5145[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "660c6026e83dc4ee669e6e01",
-            "target": "005c2246e41c3fc7dcb5e988",
-            "attributes": {},
-            "type": "Uni-Dir-Association"
-        },
-        "c57eb387063bcacc1c5bee76": {
-            "label": {
-                "id": "c57eb387063bcacc1c5bee76[label]",
-                "name": "Label",
-                "value": {
-                    "id": "c57eb387063bcacc1c5bee76[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "005c2246e41c3fc7dcb5e988",
-            "target": "e71e9666a87df738cd09425a",
             "attributes": {},
             "type": "Bi-Dir-Association"
         }
