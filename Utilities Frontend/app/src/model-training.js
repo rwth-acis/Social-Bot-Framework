@@ -1,4 +1,4 @@
-import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import NLUConfig from './nlu.md.js';
 import ModelOps from './model-ops.js';
 
@@ -7,9 +7,9 @@ import ModelOps from './model-ops.js';
  * @polymer
  */
 class ModelTraining extends PolymerElement {
-  
-  static get template() {
-    return html`
+
+    static get template() {
+        return html`
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +17,9 @@ class ModelTraining extends PolymerElement {
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-        <link href="/src/quill/quill.snow.css" rel="stylesheet">
+        
+<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
         <style>
             #editor {
                 height: 512px;
@@ -49,23 +51,29 @@ class ModelTraining extends PolymerElement {
         </div>
     </main>
     `;
-  }
+    }
 
-  static get properties() {}
+    static get properties() { }
 
     ready() {
         super.ready();
         this.editor = new Quill(this.$.editor, {
             modules: {
-              toolbar: [
-                [{ header: [1, 2, false] }],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
-              ]
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline']
+                ]
             },
+            formats: [
+                "bold",
+                "color",
+                "font",
+                "italic",
+                "underline"
+            ],
             placeholder: 'Compose an epic...',
             theme: 'snow'  // or 'bubble'
-          });
+        });
         ModelOps.getY(true).then(y => y.share.training.bindQuill(this.editor));
     }
 
@@ -91,10 +99,10 @@ class ModelTraining extends PolymerElement {
                 markdownTrainingData: _this.editor.getText(),
             }),
             contentType: "application/json",
-            success: function(data, textStatus, jqXHR) {
+            success: function (data, textStatus, jqXHR) {
                 $(_this.htmlQuery("#trainingStatus")).text(data);
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, errorThrown) {
                 $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);
             }
         });
@@ -107,10 +115,10 @@ class ModelTraining extends PolymerElement {
             type: "GET",
             url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/trainAndLoadStatus/",
             contentType: "text/plain",
-            success: function(data, textStatus, jqXHR) {
+            success: function (data, textStatus, jqXHR) {
                 $(_this.htmlQuery("#trainingStatus")).text(data);
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, errorThrown) {
                 $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);
             }
         });
