@@ -95,7 +95,7 @@ class ModelTraining extends PolymerElement {
             url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/trainAndLoad/",
             data: JSON.stringify({
                 url: $(_this.htmlQuery("#rasaEndpoint")).val(),
-                config: 'language: de\npipeline: "pretrained_embeddings_spacy"',
+                config: 'language: "de"\npipeline:\n - name: WhitespaceTokenizer\n - name: RegexFeaturizer\n - name: CRFEntityExtractor\n - name: EntitySynonymMapper\n - name: CountVectorsFeaturizer\n - name: DIETClassifier\npolicies:\n - name: MemoizationPolicy\n - name: KerasPolicy\n - name: MappingPolicy\n - name: FormPolicy\n',
                 markdownTrainingData: _this.editor.getText(),
             }),
             contentType: "application/json",
