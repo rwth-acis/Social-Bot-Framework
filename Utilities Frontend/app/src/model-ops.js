@@ -41,7 +41,9 @@ class ModelOps {
     uploadMetaModel() {
         return this.getY(false).then(y => {
             return new Promise((resolve, reject) => {
-                y.share.data.set('metamodel', vls);
+            // For some reason, even if their already is a metamodel in the space, once another user joins, the default vls will be loaded, thus being annoying.
+            // Removing this line will fix the problem, but this does not seem to be the optimal solution?.
+              //  y.share.data.set('metamodel', vls);
                 resolve();
             });
         });
