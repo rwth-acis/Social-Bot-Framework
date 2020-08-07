@@ -12,7 +12,7 @@ class BotModeling extends PolymerElement {
   static get template() {
     return html`
       <style>
-        #yjsroomcontainer, #modeluploader {
+        #yjsroomcontainer, #modeluploader, #modelstorer, #modelfetcher {
           display: flex;
           margin: 5px;
           flex: 1;
@@ -70,7 +70,7 @@ class BotModeling extends PolymerElement {
       </style>
 
       <div>
-        <p><span style="font-weight: bold;">Model Uploader</span></p>
+        <p><span style="font-weight: bold;">Model Operations</span></p>
         <div id="modeluploader">
           <paper-input id="sbfManagerEndpointInput" style="width:100%;" always-float-label label="SBF Manager Endpoint" value="http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager"></paper-input>
           <paper-button on-click="_onSubmitButtonClicked">Submit</paper-button>
@@ -83,7 +83,7 @@ class BotModeling extends PolymerElement {
         </div>
         <div id="modelfetcher">
           <paper-input id="fetchNameInput" style="width:100%;" always-float-label label="Bot Model Name" value="model"></paper-input>
-          <paper-button on-click="_onStoreButtonClicked">Store</paper-button>
+          <paper-button on-click="_onStoreButtonClicked">Load</paper-button>
           <big id="storeStatus" class="form-text text-muted"></big> 
         </div>
       </div>
