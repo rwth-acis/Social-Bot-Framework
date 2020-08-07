@@ -35,3 +35,26 @@ Following environment variables have default values however they can be changed 
 
 [yjs-github]: https://github.com/yjs/yjs
 [y-websocket-server]: https://github.com/y-js/y-websockets-server
+
+
+# Bot-modeling Guide
+
+### Create communication state with service
+There is the possiblity to let users communicate and send messages to a specific triggered service for a certain period of time, depending on the service.
+During this communication state the service will receive every user message and also have the possibility to communicate with the user. 
+To model this you need to do the following:
+- Have an incoming message object trigger a chat response object
+- The chat response object will contain no message 
+- The chat response object will be connect to a bot action object with the "uses" relation
+- The bot action will now be the service with which the user will communicate
+
+The service will need to respond to the request with a json file containing the following data: 
+```json
+{
+    "text": "",
+    "closeContext": ""
+}
+```
+The `text` attribute represents the service's response to the user.
+
+The `closeContext` attribute is a boolean value which informs the Social Bot Manager if the communication state is to be maintained or stopped. (Note that, if no closeContext attribute is found, the communication state will automatically be stopped.)
