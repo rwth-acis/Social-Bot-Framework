@@ -75,7 +75,17 @@ class BotModeling extends PolymerElement {
           <paper-input id="sbfManagerEndpointInput" style="width:100%;" always-float-label label="SBF Manager Endpoint" value="http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager"></paper-input>
           <paper-button on-click="_onSubmitButtonClicked">Submit</paper-button>
           <big id="sendStatus" class="form-text text-muted"></big> 
-          </div>
+        </div>
+        <div id="modelstorer">
+          <paper-input id="storeNameInput" style="width:100%;" always-float-label label="Bot Model Name" value="model"></paper-input>
+          <paper-button on-click="_onStoreButtonClicked">Store</paper-button>
+          <big id="storeStatus" class="form-text text-muted"></big> 
+        </div>
+        <div id="modelfetcher">
+          <paper-input id="fetchNameInput" style="width:100%;" always-float-label label="Bot Model Name" value="model"></paper-input>
+          <paper-button on-click="_onStoreButtonClicked">Store</paper-button>
+          <big id="storeStatus" class="form-text text-muted"></big> 
+        </div>
       </div>
 
       <div class="maincontainer">
@@ -124,6 +134,30 @@ class BotModeling extends PolymerElement {
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(model));
       });
+  }
+
+  _onStoreButtonClicked() {
+    var storeStatus = this.shadowRoot.querySelector('#storeStatus');
+    var sbfManagerEndpointInput = this.shadowRoot.querySelector('#sbfManagerEndpointInput');
+    var modelNameInput = this.shadowRoot.querySelector('#storeNameInput');
+    $(storeStatus).text("Storing...");
+    ModelOps.getModel()
+      .then(model => {
+        var xhr = new XMLHttpRequest();
+        var endpoint = sbfManagerEndpointInput.value;
+        var name = modelNameInput.value;
+        xhr.addEventListener("load", () => {
+          $(storeStatus).text("Successfully stored.");
+          this.cleanStatus();
+        })
+        xhr.addEventListener("error", () => {
+          $(storeStatus).text("Storing failed.");
+          this.cleanStatus();
+        });
+        xhr.open('POST', endpoint + '/bots/' + name);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(model));
+      });  
   }
 
   cleanStatus() {
