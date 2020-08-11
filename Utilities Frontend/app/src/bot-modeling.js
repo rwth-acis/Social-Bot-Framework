@@ -12,7 +12,7 @@ class BotModeling extends PolymerElement {
   static get template() {
     return html`
       <style>
-        #yjsroomcontainer, #modeluploader, #modelstorer, #modelfetcher {
+        #yjsroomcontainer, #modeluploader, #modelstorer, #modelloader {
           display: flex;
           margin: 5px;
           flex: 1;
@@ -77,14 +77,14 @@ class BotModeling extends PolymerElement {
           <big id="sendStatus" class="form-text text-muted"></big> 
         </div>
         <div id="modelstorer">
-          <paper-input id="storeNameInput" style="width:100%;" always-float-label label="Bot Model Name" value="model"></paper-input>
+          <paper-input id="storeNameInput" style="width:100%;" always-float-label label="Bot Model Name" value=""></paper-input>
           <paper-button on-click="_onStoreButtonClicked">Store</paper-button>
           <big id="storeStatus" class="form-text text-muted"></big> 
         </div>
-        <div id="modelfetcher">
-          <paper-input id="fetchNameInput" style="width:100%;" always-float-label label="Bot Model Name" value="model"></paper-input>
-          <paper-button on-click="_onStoreButtonClicked">Load</paper-button>
-          <big id="storeStatus" class="form-text text-muted"></big> 
+        <div id="modelloader">
+          <paper-input id="loadNameInput" style="width:100%;" always-float-label label="Bot Model Name" value=""></paper-input>
+          <paper-button on-click="_onLoadButtonClicked">Load</paper-button>
+          <big id="loadStatus" class="form-text text-muted"></big> 
         </div>
       </div>
 
@@ -158,6 +158,31 @@ class BotModeling extends PolymerElement {
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(model));
       });  
+  }
+
+  _onLoadButtonClicked() {
+    var loadStatus = this.shadowRoot.querySelector('#loadStatus');
+    var sbfManagerEndpointInput = this.shadowRoot.querySelector('#sbfManagerEndpointInput');
+    var modelNameInput = this.shadowRoot.querySelector('#loadNameInput');
+    $(loadStatus).text("Loading...");
+    var xhr = new XMLHttpRequest();
+    var endpoint = sbfManagerEndpointInput.value;
+    var name = modelNameInput.value;
+    xhr.addEventListener("load", () => {
+      $(loadStatus).text("Successfully loaded.");
+      this.cleanStatus();
+    })
+    xhr.addEventListener("error", () => {
+      $(loadStatus).text("Loading failed.");
+      this.cleanStatus();
+    });
+    xhr.open('GET', endpoint + '/bots/' + name);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send("");
+    var model = xhr.response;
+    xhr.open('POST', endpoint + '/bots');
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(model));  
   }
 
   cleanStatus() {
