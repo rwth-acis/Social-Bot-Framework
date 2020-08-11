@@ -14,11 +14,18 @@ check_if_exists "$YJS" "YJS"
 check_if_exists "$PORT" "PORT"
 check_if_exists "$OIDC_CLIENT_ID" "OIDC_CLIENT_ID"
 check_if_exists "$YJS_RESOURCE_PATH" "YJS_RESOURCE_PATH"
+check_if_exists "$RASA_NLU" "RASA_NLU"
+check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
 
 if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
     echo "Missing environment variables, exiting..."
     exit 1
 fi
+
+#### Replace SBF Manager and Rasa-NLU URLs ####
+sed -i "s=http://10.97.81.17:5005=$RASA_NLU=g" app/src/model-training.js 
+sed -i "s=http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager=$SBF_MANAGER=g" app/src/model-training.js
+sed -i "s=http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager=$SBF_MANAGER=g" app/src/bot-modeling.js
 
 #### Syncmeta ####
 cd syncmeta/widgets
@@ -26,6 +33,7 @@ cp .localGruntConfig.json.sample .localGruntConfig.json
 sed -i "s=http://localhost:8081=$WEBHOST/syncmeta=g" .localGruntConfig.json
 sed -i "s=http://localhost:1234=$YJS=g" .localGruntConfig.json
 sed -i "s=/socket.io=$YJS_RESOURCE_PATH=g" .localGruntConfig.json
+
 grunt build
 cd ../..
 
