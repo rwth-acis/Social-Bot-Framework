@@ -154,7 +154,7 @@ class BotModeling extends PolymerElement {
           $(storeStatus).text("Storing failed.");
           this.cleanStatus();
         });
-        xhr.open('POST', endpoint + '/bots/' + name);
+        xhr.open('POST', endpoint + '/models/' + name);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(model));
       });  
@@ -176,7 +176,7 @@ class BotModeling extends PolymerElement {
       $(loadStatus).text("Loading failed.");
       this.cleanStatus();
     });
-    xhr.open('GET', endpoint + '/bots/' + name);
+    xhr.open('GET', endpoint + '/models/' + name);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send("");
     var model = xhr.response;
