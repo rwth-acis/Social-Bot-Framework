@@ -14,13 +14,28 @@ check_if_exists "$YJS" "YJS"
 check_if_exists "$PORT" "PORT"
 check_if_exists "$OIDC_CLIENT_ID" "OIDC_CLIENT_ID"
 check_if_exists "$YJS_RESOURCE_PATH" "YJS_RESOURCE_PATH"
-check_if_exists "$RASA_NLU" "RASA_NLU"
-check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
+
 
 if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
     echo "Missing environment variables, exiting..."
     exit 1
 fi
+
+check_if_exists "$RASA_NLU" "RASA_NLU"
+
+if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
+    "$RASA_NLU = """
+    
+fi
+
+ENV_VARIABLE_NOT_SET=false;
+
+check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
+
+if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
+    "$SBF_MANAGER = """
+fi
+
 
 #### Replace SBF Manager and Rasa-NLU URLs ####
 sed -i "s=http://10.97.81.17:5005=$RASA_NLU=g" app/src/model-training.js 
