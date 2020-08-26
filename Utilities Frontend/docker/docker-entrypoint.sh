@@ -23,9 +23,9 @@ if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
 fi
 
 #### Replace SBF Manager and Rasa-NLU URLs ####
-sed -i "s=http://10.97.81.17:5005=$RASA_NLU=g" app/src/model-training.js 
-sed -i "s=http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager=$SBF_MANAGER=g" app/src/model-training.js
-sed -i "s=http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager=$SBF_MANAGER=g" app/src/bot-modeling.js 
+sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js 
+sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" app/src/model-training.js
+sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" syncmeta/widgets/src/js/bot_widget.js
 
 #### Syncmeta ####
 cd syncmeta/widgets

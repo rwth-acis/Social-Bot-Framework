@@ -60,12 +60,6 @@ class ModelOps {
             y.share.training.observe(e => cb(e.value));
         });
     }
-
-    updateTrainingData(data) {
-        this.getY(true).then(y => {
-            y.share.training.set('data', data);
-        });
-    }
 }
 
 const instance = new ModelOps();

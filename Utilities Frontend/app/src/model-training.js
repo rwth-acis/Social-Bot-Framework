@@ -37,11 +37,11 @@ class ModelTraining extends PolymerElement {
                 </div>
                 <div class="form-group">
                     <label for="rasaEndpoint">Rasa NLU Endpoint</label>
-                    <input type="text" class="form-control" id="rasaEndpoint" placeholder="" value="http://10.97.81.17:5005"> <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
+                    <input type="text" class="form-control" id="rasaEndpoint" placeholder="" value="{RASA_NLU}"> <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
                 </div>
                 <div class="form-group">
                     <label for="sbfManagerEndpoint">SBF Manager Endpoint</label>
-                    <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager">
+                    <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="{SBF_MANAGER}">
                 </div>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="resetForm">Reload example config</button>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="retrieveStatus">Check training status</button>
