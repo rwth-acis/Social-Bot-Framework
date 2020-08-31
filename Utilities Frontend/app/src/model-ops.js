@@ -26,7 +26,9 @@ class ModelOps {
                     },
                     share: { // specify the shared content
                         data: 'Map',
-                        training: 'Richtext'
+                        training: 'Richtext',
+                        rasa: 'Text',
+                        sbfManager: 'Text'
                     },
                     type:["Text","Map"],
                     sourceDir: '/bower_components'

@@ -37,11 +37,11 @@ class ModelTraining extends PolymerElement {
                 </div>
                 <div class="form-group">
                     <label for="rasaEndpoint">Rasa NLU Endpoint</label>
-                    <input type="text" class="form-control" id="rasaEndpoint" placeholder="" value="{RASA_NLU}"> <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
+                    <input type="text" class="form-control" id="rasaEndpoint" placeholder="" value=""> <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
                 </div>
                 <div class="form-group">
                     <label for="sbfManagerEndpoint">SBF Manager Endpoint</label>
-                    <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="{SBF_MANAGER}">
+                    <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="">
                 </div>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="resetForm">Reload example config</button>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="retrieveStatus">Check training status</button>
@@ -57,6 +57,8 @@ class ModelTraining extends PolymerElement {
 
     ready() {
         super.ready();
+        this.rasaEndpoint = this.htmlQuery("#rasaEndpoint");
+        this.sbmEndpoint = this.htmlQuery("#sbfManagerEndpoint");
         this.editor = new Quill(this.$.editor, {
             modules: {
                 toolbar: [
@@ -75,6 +77,19 @@ class ModelTraining extends PolymerElement {
             theme: 'snow'  // or 'bubble'
         });
         ModelOps.getY(true).then(y => y.share.training.bindQuill(this.editor));
+        ModelOps.getY(true).then(y => y.share.rasa.bind(this.rasaEndpoint));
+        ModelOps.getY(true).then(y => y.share.sbfManager.bind(this.sbmEndpoint));
+
+        ModelOps.getY(true).then(y => y.share.rasa.toString()).then(x => {
+            if (!x) {
+                ModelOps.getY(true).then(z => z.share.rasa.insert(0, '{RASA_NLU}'));
+            }
+        })
+        ModelOps.getY(true).then(y => y.share.sbfManager.toString()).then(x => {
+            if (!x) {
+                ModelOps.getY(true).then(z => z.share.sbfManager.insert(0, '{SBF_MANAGER}'));
+            }
+        })
     }
 
     htmlQuery(query) {
