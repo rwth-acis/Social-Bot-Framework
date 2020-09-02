@@ -25,7 +25,7 @@ check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
 
 #### Replace SBF Manager and Rasa-NLU URLs ####
 sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js
-=======
+
 #### Replace SBF Manager and Rasa-NLU URLs ####
 sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js 
 
