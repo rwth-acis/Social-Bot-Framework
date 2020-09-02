@@ -1,0 +1,6 @@
+.git
+**/node_modules
+**/bower_components
+**/package-lock.json
+**/build
+**/dist
