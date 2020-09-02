@@ -23,18 +23,13 @@ fi
 
 check_if_exists "$RASA_NLU" "RASA_NLU"
 
-if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
-    "$RASA_NLU = """
-    
-fi
+
 
 ENV_VARIABLE_NOT_SET=false;
 
 check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
 
-if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
-    "$SBF_MANAGER = """
-fi
+
 
 
 #### Replace SBF Manager and Rasa-NLU URLs ####
