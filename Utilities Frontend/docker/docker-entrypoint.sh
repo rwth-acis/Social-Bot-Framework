@@ -15,25 +15,20 @@ check_if_exists "$PORT" "PORT"
 check_if_exists "$OIDC_CLIENT_ID" "OIDC_CLIENT_ID"
 check_if_exists "$YJS_RESOURCE_PATH" "YJS_RESOURCE_PATH"
 
-
 if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
     echo "Missing environment variables, exiting..."
     exit 1
 fi
-
+#### RASA_NLU and SBF_MANAGER are optional ####
 check_if_exists "$RASA_NLU" "RASA_NLU"
-
-
-
-ENV_VARIABLE_NOT_SET=false;
-
 check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
-
-
-
 
 #### Replace SBF Manager and Rasa-NLU URLs ####
 sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js
+=======
+#### Replace SBF Manager and Rasa-NLU URLs ####
+sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js 
+
 sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" app/src/model-training.js
 sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" syncmeta/widgets/src/js/bot_widget.js
 
@@ -61,6 +56,7 @@ cd ..
 cp docker/nginx.conf /etc/nginx/conf.d/default.conf
 sed -i "s=<port>=$PORT=g" /etc/nginx/conf.d/default.conf
 /etc/init.d/nginx start
+
 
 #### Supervisor ####
 /usr/bin/supervisord -n

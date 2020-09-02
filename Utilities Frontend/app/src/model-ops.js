@@ -26,7 +26,9 @@ class ModelOps {
                     },
                     share: { // specify the shared content
                         data: 'Map',
-                        training: 'Richtext'
+                        training: 'Richtext',
+                        rasa: 'Text',
+                        sbfManager: 'Text'
                     },
                     type:["Text","Map"],
                     sourceDir: '/bower_components'
@@ -60,12 +62,6 @@ class ModelOps {
     observeTraininingData(cb) {
         return this.getY(true).then(y => {
             y.share.training.observe(e => cb(e.value));
-        });
-    }
-
-    updateTrainingData(data) {
-        this.getY(true).then(y => {
-            y.share.training.set('data', data);
         });
     }
 }
