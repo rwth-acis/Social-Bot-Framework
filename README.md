@@ -4,74 +4,14 @@
 Core Components
 --------
 * [las2peer-Social-Bot-Manager-Service](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service)
-* [las2peer-TensorFlow-TextToText-Service](https://github.com/rwth-acis/las2peer-TensorFlow-TextToText-Service)
-* [las2peer-TensorFlow-Classifier-Service](https://github.com/rwth-acis/las2peer-TensorFlow-Classifier-Service)
 
 External Dependencies
 --------
-* [ROLE-SDK](https://github.com/rwth-acis/ROLE-SDK)
 * [y-websockets-server](https://github.com/y-js/y-websockets-server)
 * [SyncMeta](https://github.com/rwth-acis/syncmeta)
 * [MobSOS Data-Processing](https://github.com/rwth-acis/mobsos-data-processing)
 * [MobSOS Success-Modeling](https://github.com/rwth-acis/mobsos-success-modeling)
-
-Docker
---------
-This repository provides a dockerfile with an example setup. The external dependencies and the core components are included. [Noracle](https://github.com/Distributed-Noracle) is used as an example service.
-The docker container is built automatically and can be obtained with the following command:
-```
-docker pull rwthacis/social-bot-framework
-```
-To start the container it is important that some ports are opened: 
-```
-docker run -it --rm -p 1234:1234 -p 8073:8073 -p 8080:8080 -p 3000:3000 -p 9011:9011 -p 4200:4200 -p 8081:8081 --name sbf rwthacis/social-bot-framework
-```
-Manual Setup
---------
-First of all, the external dependencies must be running. 
-To model the bot you need a ROLE space on which the SyncMeta widgets run. 
-With the debug widget you can then load the [vls](MetaModel/vls.json). 
-To load the model into the network, the [model selector widget](widgets/src/widgets/models.xml) must be added. The [method browser](widgets/src/widgets/methods.xml) can be used as an assistant. 
-To use the widgets, the urls have to be adapted and the bower dependencies have to be installed. 
-It is important that the location of the ROLE space is set in the Access-Control-Allow-Origin header.
-The core components must run on the same network as the MobSOS services. 
-
-Frontend Integration
---------
-Within the service frontend two links must be provided to use the framework. 
-1. Post request to add the bot to a unit 
-
-JavaScript
-```JavaScript
-function addToUnit(){
-    var xhr = new XMLHttpRequest();
-    var webConnectorEndpoint = "http://localhost:8080/";
-    var url = webConnectorEndpoint + "SBFManager/join";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("Bot added");
-        }
-    };
-    var data = JSON.stringify({basePath: webConnectorEndpoint + "serviceAlias", joinPath:"serviceFunctionPath"});
-    xhr.send(data);
-}
-```
-HTML
-```html
-<a onclick="addToUnit()">Add Bot to Unit</a>
-```
-You have to adjust the `webConnectorEndpoint`, the `serviceAlias` and the `serviceFunctionPath`. If the service needs any further parameters they can be added to the body of the post request.
-If the service has no unit separation you can add the following attribut to the body: 
-```json
-"directJoin": true
-```
-2. Url for the training area
-```html
-<a href="{{urlToWidget}}/train.html?unit={{unit}}">Train Bot</a>
-```
-You have to adjust the `urlToWidget` and the `unit`. If the service has no unit separation the unit query parameter can then be omitted. 
+* [Rasa](https://github.com/RasaHQ/rasa.git)
 
 Backend Integration
 --------
@@ -88,15 +28,75 @@ The `serviceAlias` attribute should contain the alias given by the @ServicePath 
 The `functionName`attribute should contain the name of the function. 
 Any type of attributes (@PathParam/@QueryParam/@BodyParam) should be listed in the `attributes` attribute.
 If the service uses [PoJo's](https://en.wikipedia.org/wiki/Plain_old_Java_object) the developer can make use of the [Gson library](https://github.com/google/gson). 
-### Training data
-Training data can be collected using [MobSOS](https://github.com/rwth-acis/mobsos-data-processing/wiki/Manual#2-monitor-a-service). A monitoring message has the following form:
+
+
+
+# SBF Utilities Frontend
+
+This application provides helpers to interact with the Social Bot Manager service.
+
+This frontend consists of the Bot Modeling and the NLU Model Training Helper. 
+
+## Build and Run the Frontend
+First build the Docker image
+```
+$ docker build -t rwthacis/sbf-utils .
+```
+
+Then you can start the container like this:
+```
+$ docker run -p 8070:8070 -e WEBHOST=<host_address> -e YJS=<yjs_address> -e OIDC_CLIENT_ID=<oidc_client_id> -e RASA_NLU=<rasa_server> -e SBF_MANAGER=<sbfmanager_address> -d rwthacis/sbf-utils
+```
+After container started to run, application will be accessible via http://127.0.0.1:8070
+
+Application is using [YJS][yjs-github] for interwidget communication, therefore it needs [y-websocket-server][y-websocket-server] instance. 
+It can be started with following command:
+```
+docker run -p 1234:1234  -d rwthacis/y-websockets-server
+```
+Then, address of y-websockets-server instance need to be passed to Docker container during initialization with `YJS` environment variable. If websocket server is started with previous command, its address will be `127.0.0.1:1234` and this value need to be passed to Docker container during initialization.
+
+
+Following environment variables are needed to be passed to container during initialization:
+
+* `WEBHOST`: Url address of application
+* `YJS`: Root url address of Yjs websocket server. If it is running behind reverse proxy, relative path need to be provided with the `YJS_RESOURCE_PATH` env variable.
+* `OIDC_CLIENT_ID`: OIDC client id which is used for authentication purpose. Client id can be acquired from Learning Layers after client registration
+
+Following environment variables have default values however they can be changed during initialization:
+
+* `PORT`: Port which Nginx server is listening locally. This port need to be made accessible to outside with port mapping during initialization. Default value is `8070`.
+* `YJS_RESOURCE_PATH`: Resource path of Yjs websocker server. If websocket server running behind reverse proxy and `/yjs` path is redirected to websocket server, this env variable need to be `/yjs/socket.io`. Default value is `/socket.io`.
+* `SBF_MANAGER`: Address of a running SBFManager Instance. If not empty, the given address will be written in the "SBFManager Endpoint" fields of the frontend.
+* `RASA_NLU`: Address of a server hosting the NLU Model. If not empty, the given address will be written in the "Rasa NLU Endpoint" field of the NLU Model Training Helper.
+
+[yjs-github]: https://github.com/yjs/yjs
+[y-websocket-server]: https://github.com/y-js/y-websockets-server
+
+# Deploying a Bot
+After creating a bot model on the frontend, you will be able to upload the bot to the SBFManager by using the "Model Uploader" on the "Bot Modeling" page. For this to work, you will need a running instance of the [SBFManager](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service) and adjust the "SBFManager Endpoint" accordingly. 
+
+When creating chatbots you will also need to provide a [Rasa server](https://github.com/RasaHQ/rasa.git) hosting a NLU Model. You can also use the "NLU Model Training Helper" to create your own NLU Model and upload that model by adjusting the "SBFManager Endpoint" and "Rasa NLU Endpoint" accordingly.
+
+# Bot-modeling Guide
+
+### Create communication state with service
+There is the possiblity to let users communicate and send messages to a specific triggered service for a certain period of time, depending on the service.
+During this communication state the service will receive every user message and also have the possibility to communicate with the user. 
+To model this you need to do the following:
+- Have an incoming message object trigger a chat response object
+- The chat response object will contain no message 
+- The chat response object will be connect to a bot action object with the "uses" relation
+- The bot action will now be the service with which the user will communicate
+
+The service will need to respond to the request with a json file containing the following data: 
 ```json
-{  
-   "unit":"",
-   "from":"",
-   "to":""
+{
+    "text": "",
+    "closeContext": ""
 }
 ```
-The attribute `unit` contains an id to assign the training data to the respective domain.
-The `from` attribute contains the initial text. 
-The `to`attribute contains the expected output. For classification it is of the type Integer and for text generation it is of the type String.
+The `text` attribute represents the service's response to the user.
+
+The `closeContext` attribute is a boolean value which informs the Social Bot Manager if the communication state is to be maintained or stopped. (Note that, if no closeContext attribute is found, the communication state will automatically be stopped.)
+

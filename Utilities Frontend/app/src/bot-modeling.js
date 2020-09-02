@@ -51,6 +51,9 @@ class BotModeling extends PolymerElement {
             flex-flow: column;
         }
         .innercontainer:nth-of-type(2) {
+            
+        }
+        .innercontainer:nth-of-type(3) {
             flex: 2;
             display: flex;
             flex-flow: column;
@@ -65,11 +68,11 @@ class BotModeling extends PolymerElement {
           <iframe id="Canvas" src="{WEBHOST}/syncmeta/widget.html"> </iframe>
         </div>
         <div class="innercontainer">
-          <iframe id="Property Browser" src="{WEBHOST}/syncmeta/attribute.html"> </iframe>
-          <iframe id="Import Tool" src="{WEBHOST}/syncmeta/debug.html"> </iframe>
+          <iframe id="Palette" src="{WEBHOST}/syncmeta/palette.html"> </iframe>
         </div>
         <div class="innercontainer">
-          <iframe id="Palette" src="{WEBHOST}/syncmeta/palette.html"> </iframe>
+          <iframe id="Property Browser" src="{WEBHOST}/syncmeta/attribute.html"> </iframe>
+          <iframe id="Import Tool" src="{WEBHOST}/syncmeta/debug.html"> </iframe>
         </div>
         <div class="innercontainer">
           <iframe id="User Activity" src="{WEBHOST}/syncmeta/activity.html"> </iframe>
