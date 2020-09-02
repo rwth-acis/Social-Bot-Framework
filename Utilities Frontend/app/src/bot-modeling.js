@@ -12,7 +12,7 @@ class BotModeling extends PolymerElement {
   static get template() {
     return html`
       <style>
-        #yjsroomcontainer, #modeluploader {
+        #yjsroomcontainer {
           display: flex;
           margin: 5px;
           flex: 1;
@@ -30,18 +30,6 @@ class BotModeling extends PolymerElement {
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
-        }
-        paper-input {
-          max-width: 300px;    
-        }
-        paper-button{
-          color: rgb(240,248,255);
-          background: rgb(30,144,255);
-          max-height: 30px;
-        }
-        paper-button:hover{
-          color: rgb(240,248,255);
-          background: rgb(65,105,225);
         }
         iframe {
             width: 100%;
@@ -70,14 +58,8 @@ class BotModeling extends PolymerElement {
       </style>
 
       <div>
-        <p><span style="font-weight: bold;">Model Uploader</span></p>
-        <div id="modeluploader">
-          <paper-input id="sbfManagerEndpointInput" style="width:100%;" always-float-label label="SBF Manager Endpoint" value="http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager"></paper-input>
-          <paper-button on-click="_onSubmitButtonClicked">Submit</paper-button>
-          <big id="sendStatus" class="form-text text-muted"></big> 
-          </div>
+          <iframe id="Bot" src="{WEBHOST}/syncmeta/bot.html"> </iframe>
       </div>
-
       <div class="maincontainer">
         <div class="innercontainer">
           <iframe id="Canvas" src="{WEBHOST}/syncmeta/widget.html"> </iframe>
@@ -102,35 +84,6 @@ class BotModeling extends PolymerElement {
     super.ready();
     parent.caeFrames = this.shadowRoot.querySelectorAll("iframe");
     Common.setSpace("bot-modeling");
-  }
-
-  _onSubmitButtonClicked() {
-    var sendStatus = this.shadowRoot.querySelector('#sendStatus');
-    var sbfManagerEndpointInput = this.shadowRoot.querySelector('#sbfManagerEndpointInput');
-    $(sendStatus).text("Sending...");
-    ModelOps.getModel()
-      .then(model => {
-        var xhr = new XMLHttpRequest();
-        var endpoint = sbfManagerEndpointInput.value;
-        xhr.addEventListener("load", () => { 
-          $(sendStatus).text("Successfully sent.");
-          this.cleanStatus();
-        });
-        xhr.addEventListener("error", () => {
-          $(sendStatus).text("Sending failed.");
-          this.cleanStatus();
-        });
-        xhr.open('POST', endpoint + '/bots');
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(model));
-      });
-  }
-
-  cleanStatus() {
-    setTimeout(_ => {
-      var sendStatus = this.shadowRoot.querySelector('#sendStatus')
-      $(sendStatus).text("");
-    }, 7000);
   }
 }
 
