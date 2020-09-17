@@ -43,9 +43,25 @@ class ModelTraining extends PolymerElement {
                     <label for="sbfManagerEndpoint">SBF Manager Endpoint</label>
                     <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="">
                 </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="dataName">Dataset Name</label>
+                            <input type="text" class="form-control" id="dataName" placeholder="" value="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="loadNameInput">Load Dataset</label>
+                            <select id="loadNameInput" class="browser-default custom-select"></select>
+                        </div>
+                    </div>
+                </div>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="resetForm">Reload example config</button>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="retrieveStatus">Check training status</button>
                 <button type="button" class="btn btn-lg btn-primary" on-click="submitForm">Submit</button>
+                <button type="button" class="btn btn-lg btn-primary" on-click="storeData">Store</button>
+                <button type="button" class="btn btn-lg btn-primary" on-click="loadData">Load</button>
                 <big id="trainingStatus" class="form-text text-muted"></big>
             </form>
         </div>
@@ -59,6 +75,9 @@ class ModelTraining extends PolymerElement {
         super.ready();
         this.rasaEndpoint = this.htmlQuery("#rasaEndpoint");
         this.sbmEndpoint = this.htmlQuery("#sbfManagerEndpoint");
+        this.dataName = this.htmlQuery("#dataName");
+        this.loadName = this.htmlQuery("#loadNameInput");
+        this.curModels = [];
         this.editor = new Quill(this.$.editor, {
             modules: {
                 toolbar: [
@@ -78,7 +97,12 @@ class ModelTraining extends PolymerElement {
         });
         ModelOps.getY(true).then(y => y.share.training.bindQuill(this.editor));
         ModelOps.getY(true).then(y => y.share.rasa.bind(this.rasaEndpoint));
-        ModelOps.getY(true).then(y => y.share.sbfManager.bind(this.sbmEndpoint));
+        ModelOps.getY(true).then(y =>  {
+            y.share.sbfManager.bind(this.sbmEndpoint)
+            this.updateMenu(this);
+            setInterval(this.updateMenu, 10000, this);
+        });
+        ModelOps.getY(true).then(y => y.share.dataName.bind(this.dataName));
 
         ModelOps.getY(true).then(y => y.share.rasa.toString()).then(x => {
             if (!x) {
@@ -90,6 +114,7 @@ class ModelTraining extends PolymerElement {
                 ModelOps.getY(true).then(z => z.share.sbfManager.insert(0, '{SBF_MANAGER}'));
             }
         })
+        
     }
 
     htmlQuery(query) {
@@ -135,6 +160,64 @@ class ModelTraining extends PolymerElement {
             },
             error: function (xhr, textStatus, errorThrown) {
                 $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);
+            }
+        });
+    }
+
+    storeData() {
+        var _this = this;
+        $(_this.htmlQuery("#trainingStatus")).text("Storing...");
+        var name = $(_this.htmlQuery("#dataName")).val();
+        var trainingData = _this.editor.getText();
+
+        $.ajax({
+            type: "POST",
+            url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/" + name,
+            data: trainingData,
+            contentType: "text/plain",
+            success: function (data, textStatus, jqXHR) {
+                $(_this.htmlQuery("#trainingStatus")).text("Data stored.");
+                _this.updateMenu(_this);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);
+            }
+        });
+    }
+
+    loadData() {
+        var _this = this;
+        $(_this.htmlQuery("#trainingStatus")).text("Loading...");
+        var name = $(_this.htmlQuery("#loadNameInput")).val();
+
+        $.ajax({
+            type: "GET",
+            url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/" + name,
+            contentType: "text/plain",
+            success: function (data, textStatus, jqXHR) {
+                $(_this.htmlQuery("#trainingStatus")).text("Data loaded.");
+                _this.editor.setText(data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);
+            }
+        });
+    }
+
+    updateMenu(_this) {
+        $.ajax({
+            type: "GET",
+            url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/" ,
+            contentType: "application/json",
+            success: function (data, textStatus, jqXHR) {
+                $.each(data, function(index, name) {
+                    if (!_this.curModels.includes(name)) {
+                        var template = document.createElement('template');
+                        template.innerHTML = "<option>" + name + "</option>";
+                        _this.loadName.append(template.content.firstChild);
+                        _this.curModels.push(name);
+                    }
+                });
             }
         });
     }

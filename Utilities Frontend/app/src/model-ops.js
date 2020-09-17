@@ -28,7 +28,8 @@ class ModelOps {
                         data: 'Map',
                         training: 'Richtext',
                         rasa: 'Text',
-                        sbfManager: 'Text'
+                        sbfManager: 'Text',
+                        dataName: 'Text'
                     },
                     type:["Text","Map"],
                     sourceDir: '/bower_components'

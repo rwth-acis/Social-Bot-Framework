@@ -7,7 +7,9 @@
           flex: 1;
           align-items: center;
         }
-        
+        #loadNameInput {
+          width: 200px;
+        }
 </style>
 
 <div>
@@ -37,7 +39,7 @@
       <i>Load model: </i>
     </div>
     <div>
-      <input id="loadNameInput" value=""></input>
+      <select id="loadNameInput"></select>
       <button id="load-model">Load</button>
       <big id="loadStatus" class="form-text text-muted"></big> 
     </div>
