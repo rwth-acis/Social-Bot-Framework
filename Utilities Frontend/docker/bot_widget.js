@@ -6,7 +6,8 @@ requirejs(['jqueryui', 'lodash', 'lib/yjs-sync','promise!Guidancemodel'],
 
             var $submitModel = $("#submit-model"),
                 $storeModel = $("#store-model"),
-                $loadModel = $("#load-model");
+                $loadModel = $("#load-model"),
+                $loadNameInput = $("#loadNameInput");
             
             var sbfManagerEndpointInput = document.querySelector("#sbfManagerEndpointInput");
             if (!y.share.sbfManager.toString()) {
@@ -15,9 +16,10 @@ requirejs(['jqueryui', 'lodash', 'lib/yjs-sync','promise!Guidancemodel'],
             y.share.sbfManager.bindTextarea(sbfManagerEndpointInput);
             
             storeNameInput = document.querySelector("#storeNameInput");
-            loadNameInput = document.querySelector("#loadNameInput");
             y.share.storeName.bindTextarea(storeNameInput);
-            y.share.loadName.bindTextarea(loadNameInput);
+            var curModels = [];
+            updateMenu();
+            setInterval(updateMenu, 10000);
 
             $submitModel.click(function () {
                 var sendStatus = $('#sendStatus');
@@ -52,6 +54,7 @@ requirejs(['jqueryui', 'lodash', 'lib/yjs-sync','promise!Guidancemodel'],
                     xhr.onload = function() {
                         if (xhr.status == 200) {
                             storeStatus.text("Successfully stored.");
+                            updateMenu();
                         } else {
                             storeStatus.text("Storing failed.");
                         }
@@ -59,7 +62,7 @@ requirejs(['jqueryui', 'lodash', 'lib/yjs-sync','promise!Guidancemodel'],
                     };
                     xhr.open('POST', endpoint + '/models/' + name);
                     xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.send(JSON.stringify(model)); 
+                    xhr.send(JSON.stringify(model));
                 } else {
                     if (!name) {
                         storeStatus.text("Invalid model name.");
@@ -67,12 +70,11 @@ requirejs(['jqueryui', 'lodash', 'lib/yjs-sync','promise!Guidancemodel'],
                         storeStatus.text("Model is empty.");
                     }
                     cleanStatus('storeStatus');
-                    
                 }
             });
 
             $loadModel.click(function () {
-                var name = y.share.loadName.toString();
+                var name = $loadNameInput.val();
                 var endpoint = y.share.sbfManager.toString();
                 var loadStatus = $('#loadStatus');
                 $(loadStatus).text("Loading...");
@@ -164,6 +166,25 @@ requirejs(['jqueryui', 'lodash', 'lib/yjs-sync','promise!Guidancemodel'],
                   var status = document.querySelector('#' + field);
                   $(status).text("");
                 }, 7000);
+            }
+
+            function updateMenu() {
+                var xhr = new XMLHttpRequest();
+                var endpoint = y.share.sbfManager.toString();
+                xhr.open('GET', endpoint + '/models/');
+                xhr.onload = function() {
+                    if (xhr.status == 200) {
+                        var models = JSON.parse(xhr.response);
+                        $.each(models, function(index, model) {
+                            if (!curModels.includes(model)) {
+                                $loadNameInput.append("<option>" + model + "</option>");
+                                curModels.push(model);
+                            }
+                            
+                        });
+                    }
+                }
+                xhr.send(null)
             }
         });
     });
