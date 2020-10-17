@@ -147,8 +147,13 @@ class StaticApp extends PolymerElement {
     var roomName = this.shadowRoot.querySelector('#yjsRoomInput').value;
     Common.setYjsRoomName(roomName);
     this.changeVisibility("#roomEnterLoader", true);
-
     ModelOps.uploadMetaModel()
+      .then(_ => new Promise((resolve, reject) => {
+        // wait for data become active
+        setTimeout(_ => resolve(), 2000);
+      }))
+      .then(_ => location.reload());
+      ModelOps.uploadBotModel()
       .then(_ => new Promise((resolve, reject) => {
         // wait for data become active
         setTimeout(_ => resolve(), 2000);
