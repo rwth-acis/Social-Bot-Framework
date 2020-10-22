@@ -310,10 +310,6 @@
                 "4d07dc2fa7f97c4ef5834078": {
                     "key": "Authentication Token",
                     "value": "string"
-                },
-                "f7efda10fb976eff66861b7d": {
-                    "key": "Rasa NLU URL",
-                    "value": "string"
                 }
             },
             "shape": {
@@ -330,6 +326,10 @@
             "attributes": {
                 "869849f65db9be737e99bd24": {
                     "key": "Intent Keyword",
+                    "value": "string"
+                },
+                "e7d374a1e2d32c5e67bc68cc": {
+                    "key": "NLU ID",
                     "value": "string"
                 }
             },
@@ -614,7 +614,7 @@
                 "color": "",
                 "overlay": "leadsTo",
                 "overlayPosition": "center",
-                "overlayRotate": false
+                "overlayRotate": true
             },
             "relations": [
                 {
