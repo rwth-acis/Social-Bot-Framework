@@ -14,14 +14,17 @@ ARG srx="Utilities Frontend"
 COPY ${src} /etc/supervisor/conf.d
 
 RUN git clone https://github.com/rwth-acis/syncmeta.git
-
+WORKDIR /usr/src/app/syncmeta
+RUN git checkout chat-assessments
 # TODO: Use master branch
 COPY ${srx}/docker/_bot_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
 COPY ${srx}/docker/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
+COPY ${srx}/docker/_userManagement_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
+COPY ${srx}/docker/userManagement_widget.js /usr/src/app/syncmeta/widgets/src/js/
 COPY ${srx}/docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
-#COPY ${srx}/docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
+COPY ${srx}/docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
 WORKDIR /usr/src/app/syncmeta
-RUN git checkout chat-assessments && cd widgets && rm package-lock.json && npm install && bower install --allow-root
+RUN cd widgets && rm package-lock.json && npm install && bower install --allow-root
 
 WORKDIR /usr/src/app
 COPY ${srx} .
