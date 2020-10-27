@@ -561,7 +561,7 @@
                         "Chat Response"
                     ],
                     "targetTypes": [
-                        "Action Parameter"
+                        "Bot Action"
                     ]
                 }
             ],
