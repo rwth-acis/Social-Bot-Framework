@@ -96,6 +96,16 @@ At the beginning of a conversation, the bot will wait for the user's message. Af
 An additional option is to let the bot use multiple Chat Response elements for one Incoming Message element. This would simply lead to the bot randomly choosing one of the available Chat Responses to give to the user, making the bot a bit more interactive.  
 ![MultipleMessageModelling](READMEImages/MultipleMessageModelling.png)  
 
+Adding an Incoming Message with the Intent attribute set to "default" would lead to the bot giving out a default answer if it does not understand a message (i.e. having a low confidence when extracting the Intent).
+
+### Modelling Chatbot-User Interaction: Creating a Conversation Path
+After a first chat-interaction with the bot, there also is the possibility to create a conversation path, which will make the bot wait for specific Intents and trigger Chat Responses which could be triggered in this conversation path and not from the initial state of the conversation. To create a conversation path, the "leadsTo" relation can be used between Incoming Message elements, where the "label" attribute of the "leadsTo" relation must contain the follow up Intent.     
+
+![communicationstate](READMEImages/leadsToModelling.png) 
+
+The Intent attribute of the follow up Incoming Message elements can remain empty as the leadsTo relation will take care of forwarding the state. For these messages to be reachable from the initial state, the Messenger will again need to connect to these elements using the "generates" relation and the elements will also need to have the Intent attribute set. Once there is no follow up message the conversation path will be quit and the conversation will go back to the initial state. If no fitting Intent is recognized, the bot will simply send the default message.   
+Continuing the previous greeting example, the user could have changed the bot's initial message to "Hello :), how was your day?". To model a fitting response, the user added the Intents "positiv" & "negativ", added new Incoming Message elements with the leadsTo relation and added Chat Responses with fitting answers. The bot would now, after asking the user about their day, expect a positiv or negativ answer and respond accordingly. 
+
 ### Create communication state with service
 There is the possiblity to let users communicate and send messages to a specific triggered service for a certain period of time, depending on the service.
 During this communication state the service will receive every user message and also have the possibility to communicate with the user. 
