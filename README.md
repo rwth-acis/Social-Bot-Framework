@@ -89,6 +89,8 @@ To model this you need to do the following:
 - The chat response object will be connect to a bot action object with the "uses" relation
 - The bot action will now be the service with which the user will communicate
 
+![communicationstate](READMEImages/communiocationstate.png)
+
 The service will need to respond to the request with a json file containing the following data: 
 ```json
 {
