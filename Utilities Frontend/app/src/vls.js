@@ -268,9 +268,9 @@
                         "Hour": "Hour",
                         "Day": "Day",
                         "Month": "Month",
-                        "Working days": "Working days",
-                        "Weekend": "Weekend",
-                        "Every day": "Every day"
+                        "Working days": "Working days (hh:mm)",
+                        "Weekend": "Weekend (hh:mm)",
+                        "Every day": "Every day (hh:mm)"
                     }
                 },
                 "262b8ee5a858d6d1b7a428bf": {
