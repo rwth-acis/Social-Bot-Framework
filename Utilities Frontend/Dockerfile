@@ -11,15 +11,16 @@ RUN npm_config_user=root npm install -g bower grunt-cli grunt polymer-cli gulp
 
 COPY docker/supervisorConfigs /etc/supervisor/conf.d
 
-RUN git clone https://github.com/rwth-acis/syncmeta.git
-
 # TODO: Use master branch
+RUN git clone https://github.com/rwth-acis/syncmeta.git
+WORKDIR /usr/src/app/syncmeta
+RUN git checkout chat-assessments
 COPY docker/_bot_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
 COPY docker/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
 COPY docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
-#COPY docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
+COPY docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
 WORKDIR /usr/src/app/syncmeta
-RUN git checkout chat-assessments && cd widgets && rm package-lock.json && npm install && bower install --allow-root
+RUN cd widgets && rm package-lock.json && npm install && bower install --allow-root
 
 WORKDIR /usr/src/app
 COPY . .
