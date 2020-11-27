@@ -331,6 +331,10 @@
                 "e7d374a1e2d32c5e67bc68cc": {
                     "key": "NLU ID",
                     "value": "string"
+                },
+                "3e8bfec67da28c354a969b46": {
+                    "key": "IsFile",
+                    "value": "boolean"
                 }
             },
             "shape": {
