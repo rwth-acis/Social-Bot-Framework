@@ -1,0 +1,1514 @@
+{
+    "attributes": {
+        "label": {
+            "id": "modelAttributes[label]",
+            "name": "Label",
+            "value": {
+                "id": "modelAttributes[label]",
+                "name": "Label",
+                "value": "Model Attributes"
+            }
+        },
+        "left": 0,
+        "top": 0,
+        "width": 0,
+        "height": 0,
+        "zIndex": 0,
+        "type": "ModelAttributesNode",
+        "attributes": {}
+    },
+    "nodes": {
+        "ca3089aa1233e22e07c30980": {
+            "label": {
+                "id": "ca3089aa1233e22e07c30980[name]",
+                "name": "Name",
+                "value": {
+                    "id": "ca3089aa1233e22e07c30980[name]",
+                    "name": "Name",
+                    "value": "VLECreation"
+                }
+            },
+            "left": 4171,
+            "top": 4289,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16001,
+            "type": "Instance",
+            "attributes": {
+                "4bfaada53679f7e979bcc1e6": {
+                    "id": "ca3089aa1233e22e07c30980[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "ca3089aa1233e22e07c30980[name]",
+                        "name": "Name",
+                        "value": "VLECreation"
+                    }
+                },
+                "a7c8d03fd57a143943da1f48": {
+                    "id": "ca3089aa1233e22e07c30980[address]",
+                    "name": "Address",
+                    "value": {
+                        "id": "ca3089aa1233e22e07c30980[address]",
+                        "name": "Address",
+                        "value": "http://127.0.0.1:8080"
+                    }
+                },
+                "3640924305c3d50b3a2de10d": {
+                    "id": "ca3089aa1233e22e07c30980[environment separator]",
+                    "name": "Environment Separator",
+                    "value": {
+                        "id": "ca3089aa1233e22e07c30980[environment separator]",
+                        "name": "Environment Separator",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "ac346e82a96e98a58ab37afc": {
+            "label": {
+                "id": "ac346e82a96e98a58ab37afc[name]",
+                "name": "Name",
+                "value": {
+                    "id": "ac346e82a96e98a58ab37afc[name]",
+                    "name": "Name",
+                    "value": "CreationBot"
+                }
+            },
+            "left": 4317,
+            "top": 4340,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16002,
+            "type": "Bot",
+            "attributes": {
+                "80f33463988c54141b8c4dd8": {
+                    "id": "ac346e82a96e98a58ab37afc[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "ac346e82a96e98a58ab37afc[name]",
+                        "name": "Name",
+                        "value": "CreationBot"
+                    }
+                },
+                "567bf6800fb85cf28b824379": {
+                    "id": "ac346e82a96e98a58ab37afc[description]",
+                    "name": "Description",
+                    "value": {
+                        "id": "ac346e82a96e98a58ab37afc[description]",
+                        "name": "Description",
+                        "value": "I would like to help you to create bots"
+                    }
+                }
+            }
+        },
+        "282e73cd7106553a6caaacb8": {
+            "label": {
+                "id": "282e73cd7106553a6caaacb8[name]",
+                "name": "Name",
+                "value": {
+                    "id": "282e73cd7106553a6caaacb8[name]",
+                    "name": "Name",
+                    "value": "CreationNLU"
+                }
+            },
+            "left": 4164,
+            "top": 4459,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16003,
+            "type": "Knowledge",
+            "attributes": {
+                "69e4efca72f32b65d1da3612": {
+                    "id": "282e73cd7106553a6caaacb8[type]",
+                    "name": "Type",
+                    "value": {
+                        "id": "282e73cd7106553a6caaacb8[type]",
+                        "name": "Type",
+                        "value": "Understanding"
+                    },
+                    "option": "Understanding"
+                },
+                "dbcf8b46f8cd76f445b9dea4": {
+                    "id": "282e73cd7106553a6caaacb8[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "282e73cd7106553a6caaacb8[name]",
+                        "name": "Name",
+                        "value": "CreationNLU"
+                    }
+                },
+                "19df132ba486480d8860a040": {
+                    "id": "282e73cd7106553a6caaacb8[id]",
+                    "name": "ID",
+                    "value": {
+                        "id": "282e73cd7106553a6caaacb8[id]",
+                        "name": "ID",
+                        "value": ""
+                    }
+                },
+                "c051de6af456e91e52c0c465": {
+                    "id": "282e73cd7106553a6caaacb8[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "282e73cd7106553a6caaacb8[url]",
+                        "name": "URL",
+                        "value": "http://localhost:5005"
+                    }
+                }
+            }
+        },
+        "b41c114647e649c9a537525a": {
+            "label": {
+                "id": "b41c114647e649c9a537525a[name]",
+                "name": "name",
+                "value": {
+                    "id": "b41c114647e649c9a537525a[name]",
+                    "name": "name",
+                    "value": "createbot"
+                }
+            },
+            "left": 4551,
+            "top": 4455,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16004,
+            "type": "Frame",
+            "attributes": {
+                "37f906be663f9c0b23ffdb43": {
+                    "id": "b41c114647e649c9a537525a[name]",
+                    "name": "name",
+                    "value": {
+                        "id": "b41c114647e649c9a537525a[name]",
+                        "name": "name",
+                        "value": "createbot"
+                    }
+                },
+                "479044e86182aad50f1ad086": {
+                    "id": "b41c114647e649c9a537525a[intent]",
+                    "name": "intent",
+                    "value": {
+                        "id": "b41c114647e649c9a537525a[intent]",
+                        "name": "intent",
+                        "value": "createbot"
+                    }
+                },
+                "6d109dd3edd809143553ed38": {
+                    "id": "b41c114647e649c9a537525a[message]",
+                    "name": "message",
+                    "value": {
+                        "id": "b41c114647e649c9a537525a[message]",
+                        "name": "message",
+                        "value": "Creates a new bot"
+                    }
+                },
+                "66419c40734bdf81206ede36": {
+                    "id": "b41c114647e649c9a537525a[response]",
+                    "name": "response",
+                    "value": {
+                        "id": "b41c114647e649c9a537525a[response]",
+                        "name": "response",
+                        "value": "response"
+                    }
+                },
+                "e85f9504c1ab589d3cfd6794": {
+                    "id": "b41c114647e649c9a537525a[file]",
+                    "name": "file",
+                    "value": {
+                        "id": "b41c114647e649c9a537525a[file]",
+                        "name": "file",
+                        "value": "bot.json"
+                    }
+                },
+                "8666cfad61a1dfb071bec7b2": {
+                    "id": "b41c114647e649c9a537525a[error]",
+                    "name": "error",
+                    "value": {
+                        "id": "b41c114647e649c9a537525a[error]",
+                        "name": "error",
+                        "value": "Bot creation failed"
+                    }
+                }
+            }
+        },
+        "4e66c49b77cffd3ae10ae065": {
+            "label": {
+                "id": "4e66c49b77cffd3ae10ae065[name]",
+                "name": "Name",
+                "value": {
+                    "id": "4e66c49b77cffd3ae10ae065[name]",
+                    "name": "Name",
+                    "value": "BCTelegram"
+                }
+            },
+            "left": 4360,
+            "top": 4479,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16005,
+            "type": "Messenger",
+            "attributes": {
+                "646c1466c4bf34e8267c4f26": {
+                    "id": "4e66c49b77cffd3ae10ae065[messenger type]",
+                    "name": "Messenger Type",
+                    "value": {
+                        "id": "4e66c49b77cffd3ae10ae065[messenger type]",
+                        "name": "Messenger Type",
+                        "value": "Telegram"
+                    },
+                    "option": "Telegram"
+                },
+                "fac7a2b850919e041f655919": {
+                    "id": "4e66c49b77cffd3ae10ae065[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "4e66c49b77cffd3ae10ae065[name]",
+                        "name": "Name",
+                        "value": "BCTelegram"
+                    }
+                },
+                "4d07dc2fa7f97c4ef5834078": {
+                    "id": "4e66c49b77cffd3ae10ae065[authentication token]",
+                    "name": "Authentication Token",
+                    "value": {
+                        "id": "4e66c49b77cffd3ae10ae065[authentication token]",
+                        "name": "Authentication Token",
+                        "value": "1262627086:AAGIhsj3CfS3zJ_mj_09K5-GL7ltGq3ARcM"
+                    }
+                }
+            }
+        },
+        "73924235b8f0621fc69b631e": {
+            "label": {
+                "id": "73924235b8f0621fc69b631e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "73924235b8f0621fc69b631e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4944,
+            "top": 4228,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16006,
+            "type": "Service",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "73924235b8f0621fc69b631e[type]",
+                    "name": "Type",
+                    "value": {
+                        "id": "73924235b8f0621fc69b631e[type]",
+                        "name": "Type",
+                        "value": "OpenAPI"
+                    },
+                    "option": "OpenAPI"
+                },
+                "9b95993c79968d1357102ef1": {
+                    "id": "73924235b8f0621fc69b631e[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "73924235b8f0621fc69b631e[service alias]",
+                        "name": "Service Alias",
+                        "value": "SBFManager"
+                    }
+                },
+                "1c519dfe55de0b242684809b": {
+                    "id": "73924235b8f0621fc69b631e[service url]",
+                    "name": "Service URL",
+                    "value": {
+                        "id": "73924235b8f0621fc69b631e[service url]",
+                        "name": "Service URL",
+                        "value": "http://127.0.0.1:8080/sbfmanager"
+                    }
+                },
+                "f9e3121adf7569d3794b275b": {
+                    "id": "73924235b8f0621fc69b631e[swagger url]",
+                    "name": "Swagger URL",
+                    "value": {
+                        "id": "73924235b8f0621fc69b631e[swagger url]",
+                        "name": "Swagger URL",
+                        "value": "http://127.0.0.1:8080/sbfmanager/swagger.json"
+                    }
+                }
+            }
+        },
+        "1edcfd230c9a343e89e61277": {
+            "label": {
+                "id": "1edcfd230c9a343e89e61277[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1edcfd230c9a343e89e61277[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4753,
+            "top": 4351,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16007,
+            "type": "Bot Action",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "1edcfd230c9a343e89e61277[action type]",
+                    "name": "Action Type",
+                    "value": {
+                        "id": "1edcfd230c9a343e89e61277[action type]",
+                        "name": "Action Type",
+                        "value": "OpenAPI"
+                    },
+                    "option": "OpenAPI"
+                },
+                "c436dc0e764a63371820e857": {
+                    "id": "1edcfd230c9a343e89e61277[function name]",
+                    "name": "Function Name",
+                    "value": {
+                        "id": "1edcfd230c9a343e89e61277[function name]",
+                        "name": "Function Name",
+                        "value": "createBot"
+                    }
+                },
+                "bc1335cdf59dedb856e635be": {
+                    "id": "1edcfd230c9a343e89e61277[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "1edcfd230c9a343e89e61277[service alias]",
+                        "name": "Service Alias",
+                        "value": ""
+                    }
+                },
+                "d9bdd693920ce4875f43779a": {
+                    "id": "1edcfd230c9a343e89e61277[deprecated]",
+                    "name": "deprecated",
+                    "value": {
+                        "id": "1edcfd230c9a343e89e61277[deprecated]",
+                        "name": "deprecated",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "18f217d7d9e282ab62b10428": {
+            "label": {
+                "id": "18f217d7d9e282ab62b10428[name]",
+                "name": "Name",
+                "value": {
+                    "id": "18f217d7d9e282ab62b10428[name]",
+                    "name": "Name",
+                    "value": "Bot_nluModule"
+                }
+            },
+            "left": 4683.222222222222,
+            "top": 4237.111111111111,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16008,
+            "type": "Action Parameter",
+            "attributes": {
+                "6e073c9bf8f0abf332c13bc6": {
+                    "id": "18f217d7d9e282ab62b10428[content type]",
+                    "name": "Content Type",
+                    "value": {
+                        "id": "18f217d7d9e282ab62b10428[content type]",
+                        "name": "Content Type",
+                        "value": "String"
+                    },
+                    "option": "String"
+                },
+                "f1339223d445e80497de3852": {
+                    "id": "18f217d7d9e282ab62b10428[parameter type]",
+                    "name": "Parameter Type",
+                    "value": {
+                        "id": "18f217d7d9e282ab62b10428[parameter type]",
+                        "name": "Parameter Type",
+                        "value": "body"
+                    },
+                    "option": "body"
+                },
+                "68f226ab6d61c452f8834cae": {
+                    "id": "18f217d7d9e282ab62b10428[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "18f217d7d9e282ab62b10428[name]",
+                        "name": "Name",
+                        "value": "Bot_nluModule"
+                    }
+                },
+                "6f5ac2636ffa905db3593907": {
+                    "id": "18f217d7d9e282ab62b10428[static]",
+                    "name": "Static",
+                    "value": {
+                        "id": "18f217d7d9e282ab62b10428[static]",
+                        "name": "Static",
+                        "value": false
+                    }
+                },
+                "32c6ddb923168e92ed48779c": {
+                    "id": "18f217d7d9e282ab62b10428[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "18f217d7d9e282ab62b10428[url]",
+                        "name": "URL",
+                        "value": ""
+                    }
+                },
+                "3075f84f4a03c7af24a5a117": {
+                    "id": "18f217d7d9e282ab62b10428[content]",
+                    "name": "Content",
+                    "value": {
+                        "id": "18f217d7d9e282ab62b10428[content]",
+                        "name": "Content",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "f39622557463383b6db4caae": {
+            "label": {
+                "id": "f39622557463383b6db4caae[name]",
+                "name": "name",
+                "value": {
+                    "id": "f39622557463383b6db4caae[name]",
+                    "name": "name",
+                    "value": "trainSuccess"
+                }
+            },
+            "left": 4854.111111111111,
+            "top": 4430.555555555556,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16009,
+            "type": "Service Event",
+            "attributes": {
+                "d5bc350ca6ca25685a02c612": {
+                    "id": "f39622557463383b6db4caae[name]",
+                    "name": "name",
+                    "value": {
+                        "id": "f39622557463383b6db4caae[name]",
+                        "name": "name",
+                        "value": "trainSuccess"
+                    }
+                }
+            }
+        },
+        "8b0a2aa95cd46dddbf7f03b3": {
+            "label": {
+                "id": "8b0a2aa95cd46dddbf7f03b3[name]",
+                "name": "name",
+                "value": {
+                    "id": "8b0a2aa95cd46dddbf7f03b3[name]",
+                    "name": "name",
+                    "value": "trainError"
+                }
+            },
+            "left": 4926,
+            "top": 4511.555555555556,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16010,
+            "type": "Service Event",
+            "attributes": {
+                "d5bc350ca6ca25685a02c612": {
+                    "id": "8b0a2aa95cd46dddbf7f03b3[name]",
+                    "name": "name",
+                    "value": {
+                        "id": "8b0a2aa95cd46dddbf7f03b3[name]",
+                        "name": "name",
+                        "value": "trainError"
+                    }
+                }
+            }
+        },
+        "b0fd9f69f1355cc269b9b987": {
+            "label": {
+                "id": "b0fd9f69f1355cc269b9b987[label]",
+                "name": "Label",
+                "value": {
+                    "id": "b0fd9f69f1355cc269b9b987[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 5117.555555555556,
+            "top": 4632.333333333333,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16011,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "b0fd9f69f1355cc269b9b987[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "b0fd9f69f1355cc269b9b987[message]",
+                        "name": "Message",
+                        "value": "The training didn't worked out 😅"
+                    }
+                }
+            }
+        },
+        "195ec9fb5b75a79613ff5455": {
+            "label": {
+                "id": "195ec9fb5b75a79613ff5455[label]",
+                "name": "Label",
+                "value": {
+                    "id": "195ec9fb5b75a79613ff5455[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4881.111111111111,
+            "top": 4705.444444444444,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16012,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "195ec9fb5b75a79613ff5455[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "195ec9fb5b75a79613ff5455[message]",
+                        "name": "Message",
+                        "value": "training was successfull 👌"
+                    }
+                }
+            }
+        },
+        "99db4d7cba34b15d912eef22": {
+            "label": {
+                "id": "99db4d7cba34b15d912eef22[label]",
+                "name": "Label",
+                "value": {
+                    "id": "99db4d7cba34b15d912eef22[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4550,
+            "top": 4113,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16013,
+            "type": "Bot Action",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "99db4d7cba34b15d912eef22[action type]",
+                    "name": "Action Type",
+                    "value": {
+                        "id": "99db4d7cba34b15d912eef22[action type]",
+                        "name": "Action Type",
+                        "value": "OpenAPI"
+                    },
+                    "option": "OpenAPI"
+                },
+                "c436dc0e764a63371820e857": {
+                    "id": "99db4d7cba34b15d912eef22[function name]",
+                    "name": "Function Name",
+                    "value": {
+                        "id": "99db4d7cba34b15d912eef22[function name]",
+                        "name": "Function Name",
+                        "value": "getNLUModels"
+                    }
+                },
+                "bc1335cdf59dedb856e635be": {
+                    "id": "99db4d7cba34b15d912eef22[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "99db4d7cba34b15d912eef22[service alias]",
+                        "name": "Service Alias",
+                        "value": "http://127.0.0.1:8080/sbfmanager"
+                    }
+                },
+                "d9bdd693920ce4875f43779a": {
+                    "id": "99db4d7cba34b15d912eef22[deprecated]",
+                    "name": "deprecated",
+                    "value": {
+                        "id": "99db4d7cba34b15d912eef22[deprecated]",
+                        "name": "deprecated",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "529f5ecba1f781f10abef5ac": {
+            "label": {
+                "id": "529f5ecba1f781f10abef5ac[name]",
+                "name": "name",
+                "value": {
+                    "id": "529f5ecba1f781f10abef5ac[name]",
+                    "name": "name",
+                    "value": "trainnlu"
+                }
+            },
+            "left": 4553.222222222222,
+            "top": 4579.888888888889,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16014,
+            "type": "Frame",
+            "attributes": {
+                "37f906be663f9c0b23ffdb43": {
+                    "id": "529f5ecba1f781f10abef5ac[name]",
+                    "name": "name",
+                    "value": {
+                        "id": "529f5ecba1f781f10abef5ac[name]",
+                        "name": "name",
+                        "value": "trainnlu"
+                    }
+                },
+                "479044e86182aad50f1ad086": {
+                    "id": "529f5ecba1f781f10abef5ac[intent]",
+                    "name": "intent",
+                    "value": {
+                        "id": "529f5ecba1f781f10abef5ac[intent]",
+                        "name": "intent",
+                        "value": "trainnlu"
+                    }
+                },
+                "6d109dd3edd809143553ed38": {
+                    "id": "529f5ecba1f781f10abef5ac[message]",
+                    "name": "message",
+                    "value": {
+                        "id": "529f5ecba1f781f10abef5ac[message]",
+                        "name": "message",
+                        "value": "Trains a NLU module"
+                    }
+                },
+                "66419c40734bdf81206ede36": {
+                    "id": "529f5ecba1f781f10abef5ac[response]",
+                    "name": "response",
+                    "value": {
+                        "id": "529f5ecba1f781f10abef5ac[response]",
+                        "name": "response",
+                        "value": ""
+                    }
+                },
+                "e85f9504c1ab589d3cfd6794": {
+                    "id": "529f5ecba1f781f10abef5ac[file]",
+                    "name": "file",
+                    "value": {
+                        "id": "529f5ecba1f781f10abef5ac[file]",
+                        "name": "file",
+                        "value": ""
+                    }
+                },
+                "8666cfad61a1dfb071bec7b2": {
+                    "id": "529f5ecba1f781f10abef5ac[error]",
+                    "name": "error",
+                    "value": {
+                        "id": "529f5ecba1f781f10abef5ac[error]",
+                        "name": "error",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "1bee5d71e275edf9bf123e07": {
+            "label": {
+                "id": "1bee5d71e275edf9bf123e07[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1bee5d71e275edf9bf123e07[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 49,
+            "top": 10,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16015,
+            "type": "Bot Action",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "1bee5d71e275edf9bf123e07[action type]",
+                    "name": "Action Type",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[action type]",
+                        "name": "Action Type",
+                        "value": "Service"
+                    },
+                    "option": "Service"
+                },
+                "c436dc0e764a63371820e857": {
+                    "id": "1bee5d71e275edf9bf123e07[function name]",
+                    "name": "Function Name",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[function name]",
+                        "name": "Function Name",
+                        "value": ""
+                    }
+                },
+                "bc1335cdf59dedb856e635be": {
+                    "id": "1bee5d71e275edf9bf123e07[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[service alias]",
+                        "name": "Service Alias",
+                        "value": ""
+                    }
+                },
+                "d9bdd693920ce4875f43779a": {
+                    "id": "1bee5d71e275edf9bf123e07[deprecated]",
+                    "name": "deprecated",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[deprecated]",
+                        "name": "deprecated",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "1135bd6d416cfd245dd1481e": {
+            "label": {
+                "id": "1135bd6d416cfd245dd1481e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1135bd6d416cfd245dd1481e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4739,
+            "top": 4617,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16016,
+            "type": "Bot Action",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "1135bd6d416cfd245dd1481e[action type]",
+                    "name": "Action Type",
+                    "value": {
+                        "id": "1135bd6d416cfd245dd1481e[action type]",
+                        "name": "Action Type",
+                        "value": "OpenAPI"
+                    },
+                    "option": "OpenAPI"
+                },
+                "c436dc0e764a63371820e857": {
+                    "id": "1135bd6d416cfd245dd1481e[function name]",
+                    "name": "Function Name",
+                    "value": {
+                        "id": "1135bd6d416cfd245dd1481e[function name]",
+                        "name": "Function Name",
+                        "value": "trainNLU"
+                    }
+                },
+                "bc1335cdf59dedb856e635be": {
+                    "id": "1135bd6d416cfd245dd1481e[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "1135bd6d416cfd245dd1481e[service alias]",
+                        "name": "Service Alias",
+                        "value": ""
+                    }
+                },
+                "d9bdd693920ce4875f43779a": {
+                    "id": "1135bd6d416cfd245dd1481e[deprecated]",
+                    "name": "deprecated",
+                    "value": {
+                        "id": "1135bd6d416cfd245dd1481e[deprecated]",
+                        "name": "deprecated",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "d8d417f3422ea417e1bbca07": {
+            "label": {
+                "id": "d8d417f3422ea417e1bbca07[name]",
+                "name": "Name",
+                "value": {
+                    "id": "d8d417f3422ea417e1bbca07[name]",
+                    "name": "Name",
+                    "value": "TrainingData_nluName"
+                }
+            },
+            "left": 4572,
+            "top": 4278,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16017,
+            "type": "Action Parameter",
+            "attributes": {
+                "6e073c9bf8f0abf332c13bc6": {
+                    "id": "d8d417f3422ea417e1bbca07[content type]",
+                    "name": "Content Type",
+                    "value": {
+                        "id": "d8d417f3422ea417e1bbca07[content type]",
+                        "name": "Content Type",
+                        "value": "String"
+                    },
+                    "option": "String"
+                },
+                "f1339223d445e80497de3852": {
+                    "id": "d8d417f3422ea417e1bbca07[parameter type]",
+                    "name": "Parameter Type",
+                    "value": {
+                        "id": "d8d417f3422ea417e1bbca07[parameter type]",
+                        "name": "Parameter Type",
+                        "value": "body"
+                    },
+                    "option": "body"
+                },
+                "68f226ab6d61c452f8834cae": {
+                    "id": "d8d417f3422ea417e1bbca07[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "d8d417f3422ea417e1bbca07[name]",
+                        "name": "Name",
+                        "value": "TrainingData_nluName"
+                    }
+                },
+                "6f5ac2636ffa905db3593907": {
+                    "id": "d8d417f3422ea417e1bbca07[static]",
+                    "name": "Static",
+                    "value": {
+                        "id": "d8d417f3422ea417e1bbca07[static]",
+                        "name": "Static",
+                        "value": false
+                    }
+                },
+                "32c6ddb923168e92ed48779c": {
+                    "id": "d8d417f3422ea417e1bbca07[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "d8d417f3422ea417e1bbca07[url]",
+                        "name": "URL",
+                        "value": ""
+                    }
+                },
+                "3075f84f4a03c7af24a5a117": {
+                    "id": "d8d417f3422ea417e1bbca07[content]",
+                    "name": "Content",
+                    "value": {
+                        "id": "d8d417f3422ea417e1bbca07[content]",
+                        "name": "Content",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "278ab857fb6f3ad5d6c25088": {
+            "label": {
+                "id": "278ab857fb6f3ad5d6c25088[name]",
+                "name": "Name",
+                "value": {
+                    "id": "278ab857fb6f3ad5d6c25088[name]",
+                    "name": "Name",
+                    "value": "NLUModule"
+                }
+            },
+            "left": 4241,
+            "top": 4593,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16018,
+            "type": "Knowledge",
+            "attributes": {
+                "69e4efca72f32b65d1da3612": {
+                    "id": "278ab857fb6f3ad5d6c25088[type]",
+                    "name": "Type",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[type]",
+                        "name": "Type",
+                        "value": "Understanding"
+                    },
+                    "option": "Understanding"
+                },
+                "dbcf8b46f8cd76f445b9dea4": {
+                    "id": "278ab857fb6f3ad5d6c25088[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[name]",
+                        "name": "Name",
+                        "value": "NLUModule"
+                    }
+                },
+                "19df132ba486480d8860a040": {
+                    "id": "278ab857fb6f3ad5d6c25088[id]",
+                    "name": "ID",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[id]",
+                        "name": "ID",
+                        "value": ""
+                    }
+                },
+                "c051de6af456e91e52c0c465": {
+                    "id": "278ab857fb6f3ad5d6c25088[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[url]",
+                        "name": "URL",
+                        "value": "http://localhost:5004"
+                    }
+                }
+            }
+        },
+        "85de30db362ca26af17a437e": {
+            "label": {
+                "id": "85de30db362ca26af17a437e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "85de30db362ca26af17a437e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 5040.444444444444,
+            "top": 4670.444444444444,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16019,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "85de30db362ca26af17a437e[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "85de30db362ca26af17a437e[message]",
+                        "name": "Message",
+                        "value": "The training failed 😅"
+                    }
+                }
+            }
+        },
+        "e39ec42ecce12a7354ceae77": {
+            "label": {
+                "id": "e39ec42ecce12a7354ceae77[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e39ec42ecce12a7354ceae77[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4787.111111111111,
+            "top": 4707.111111111111,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16020,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "e39ec42ecce12a7354ceae77[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "e39ec42ecce12a7354ceae77[message]",
+                        "name": "Message",
+                        "value": "successful trained 😊"
+                    }
+                }
+            }
+        },
+        "541674784b8c6b3986cba7db": {
+            "label": {
+                "id": "541674784b8c6b3986cba7db[name]",
+                "name": "name",
+                "value": {
+                    "id": "541674784b8c6b3986cba7db[name]",
+                    "name": "name",
+                    "value": "createnlu"
+                }
+            },
+            "left": 4543,
+            "top": 4716,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16021,
+            "type": "Frame",
+            "attributes": {
+                "37f906be663f9c0b23ffdb43": {
+                    "id": "541674784b8c6b3986cba7db[name]",
+                    "name": "name",
+                    "value": {
+                        "id": "541674784b8c6b3986cba7db[name]",
+                        "name": "name",
+                        "value": "createnlu"
+                    }
+                },
+                "479044e86182aad50f1ad086": {
+                    "id": "541674784b8c6b3986cba7db[intent]",
+                    "name": "intent",
+                    "value": {
+                        "id": "541674784b8c6b3986cba7db[intent]",
+                        "name": "intent",
+                        "value": "createnlu"
+                    }
+                },
+                "6d109dd3edd809143553ed38": {
+                    "id": "541674784b8c6b3986cba7db[message]",
+                    "name": "message",
+                    "value": {
+                        "id": "541674784b8c6b3986cba7db[message]",
+                        "name": "message",
+                        "value": "Creates a nlu module"
+                    }
+                },
+                "66419c40734bdf81206ede36": {
+                    "id": "541674784b8c6b3986cba7db[response]",
+                    "name": "response",
+                    "value": {
+                        "id": "541674784b8c6b3986cba7db[response]",
+                        "name": "response",
+                        "value": ""
+                    }
+                },
+                "e85f9504c1ab589d3cfd6794": {
+                    "id": "541674784b8c6b3986cba7db[file]",
+                    "name": "file",
+                    "value": {
+                        "id": "541674784b8c6b3986cba7db[file]",
+                        "name": "file",
+                        "value": ""
+                    }
+                },
+                "8666cfad61a1dfb071bec7b2": {
+                    "id": "541674784b8c6b3986cba7db[error]",
+                    "name": "error",
+                    "value": {
+                        "id": "541674784b8c6b3986cba7db[error]",
+                        "name": "error",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "0cefd792b76ff470d43133d9": {
+            "label": {
+                "id": "0cefd792b76ff470d43133d9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "0cefd792b76ff470d43133d9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4700,
+            "top": 4811,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16022,
+            "type": "Bot Action",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "0cefd792b76ff470d43133d9[action type]",
+                    "name": "Action Type",
+                    "value": {
+                        "id": "0cefd792b76ff470d43133d9[action type]",
+                        "name": "Action Type",
+                        "value": "OpenAPI"
+                    },
+                    "option": "OpenAPI"
+                },
+                "c436dc0e764a63371820e857": {
+                    "id": "0cefd792b76ff470d43133d9[function name]",
+                    "name": "Function Name",
+                    "value": {
+                        "id": "0cefd792b76ff470d43133d9[function name]",
+                        "name": "Function Name",
+                        "value": "createNLU"
+                    }
+                },
+                "bc1335cdf59dedb856e635be": {
+                    "id": "0cefd792b76ff470d43133d9[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "0cefd792b76ff470d43133d9[service alias]",
+                        "name": "Service Alias",
+                        "value": ""
+                    }
+                },
+                "d9bdd693920ce4875f43779a": {
+                    "id": "0cefd792b76ff470d43133d9[deprecated]",
+                    "name": "deprecated",
+                    "value": {
+                        "id": "0cefd792b76ff470d43133d9[deprecated]",
+                        "name": "deprecated",
+                        "value": ""
+                    }
+                }
+            }
+        }
+    },
+    "edges": {
+        "32a5512e51cda30e3ea01f9b": {
+            "label": {
+                "id": "32a5512e51cda30e3ea01f9b[label]",
+                "name": "Label",
+                "value": {
+                    "id": "32a5512e51cda30e3ea01f9b[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ca3089aa1233e22e07c30980",
+            "target": "ac346e82a96e98a58ab37afc",
+            "attributes": {},
+            "type": "has"
+        },
+        "3357ad36f2b2adbdcdd59c1d": {
+            "label": {
+                "id": "3357ad36f2b2adbdcdd59c1d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "3357ad36f2b2adbdcdd59c1d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ac346e82a96e98a58ab37afc",
+            "target": "282e73cd7106553a6caaacb8",
+            "attributes": {},
+            "type": "has"
+        },
+        "cc60ba7e918a361ed0aa2871": {
+            "label": {
+                "id": "cc60ba7e918a361ed0aa2871[label]",
+                "name": "Label",
+                "value": {
+                    "id": "cc60ba7e918a361ed0aa2871[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ac346e82a96e98a58ab37afc",
+            "target": "4e66c49b77cffd3ae10ae065",
+            "attributes": {},
+            "type": "has"
+        },
+        "59ef51248d3f1446b3c37b6a": {
+            "label": {
+                "id": "59ef51248d3f1446b3c37b6a[label]",
+                "name": "Label",
+                "value": {
+                    "id": "59ef51248d3f1446b3c37b6a[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "4e66c49b77cffd3ae10ae065",
+            "target": "b41c114647e649c9a537525a",
+            "attributes": {},
+            "type": "generates"
+        },
+        "f3dab18600a054df29f01e0a": {
+            "label": {
+                "id": "f3dab18600a054df29f01e0a[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f3dab18600a054df29f01e0a[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "73924235b8f0621fc69b631e",
+            "target": "1edcfd230c9a343e89e61277",
+            "attributes": {},
+            "type": "has"
+        },
+        "e1b7e5df6ab73e255ec27b32": {
+            "label": {
+                "id": "e1b7e5df6ab73e255ec27b32[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e1b7e5df6ab73e255ec27b32[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "b41c114647e649c9a537525a",
+            "target": "1edcfd230c9a343e89e61277",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "0bb44b2046f1c81d3c932b2f": {
+            "label": {
+                "id": "0bb44b2046f1c81d3c932b2f[label]",
+                "name": "Label",
+                "value": {
+                    "id": "0bb44b2046f1c81d3c932b2f[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "1edcfd230c9a343e89e61277",
+            "target": "18f217d7d9e282ab62b10428",
+            "attributes": {},
+            "type": "has"
+        },
+        "dcfa52092c3ea94edad9e2b6": {
+            "label": {
+                "id": "dcfa52092c3ea94edad9e2b6[label]",
+                "name": "Label",
+                "value": {
+                    "id": "dcfa52092c3ea94edad9e2b6[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "73924235b8f0621fc69b631e",
+            "target": "f39622557463383b6db4caae",
+            "attributes": {},
+            "type": "has"
+        },
+        "9aeb22f576ac1b34be26574d": {
+            "label": {
+                "id": "9aeb22f576ac1b34be26574d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9aeb22f576ac1b34be26574d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "73924235b8f0621fc69b631e",
+            "target": "8b0a2aa95cd46dddbf7f03b3",
+            "attributes": {},
+            "type": "has"
+        },
+        "d0da34e2131c8af5830b1004": {
+            "label": {
+                "id": "d0da34e2131c8af5830b1004[label]",
+                "name": "Label",
+                "value": {
+                    "id": "d0da34e2131c8af5830b1004[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "8b0a2aa95cd46dddbf7f03b3",
+            "target": "b0fd9f69f1355cc269b9b987",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "fa4cb4b9001c9b856578caa5": {
+            "label": {
+                "id": "fa4cb4b9001c9b856578caa5[label]",
+                "name": "Label",
+                "value": {
+                    "id": "fa4cb4b9001c9b856578caa5[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f39622557463383b6db4caae",
+            "target": "195ec9fb5b75a79613ff5455",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "8d0141d23ea2c364937e0b19": {
+            "label": {
+                "id": "8d0141d23ea2c364937e0b19[label]",
+                "name": "Label",
+                "value": {
+                    "id": "8d0141d23ea2c364937e0b19[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "99db4d7cba34b15d912eef22",
+            "target": "18f217d7d9e282ab62b10428",
+            "attributes": {},
+            "type": "generates"
+        },
+        "e2b231c3d2bf60d2f245802e": {
+            "label": {
+                "id": "e2b231c3d2bf60d2f245802e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e2b231c3d2bf60d2f245802e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "4e66c49b77cffd3ae10ae065",
+            "target": "529f5ecba1f781f10abef5ac",
+            "attributes": {},
+            "type": "generates"
+        },
+        "4789aa450e3177c1bada120d": {
+            "label": {
+                "id": "4789aa450e3177c1bada120d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "4789aa450e3177c1bada120d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "529f5ecba1f781f10abef5ac",
+            "target": "1135bd6d416cfd245dd1481e",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "c3bfcd8aaf6b0e5f979177e2": {
+            "label": {
+                "id": "c3bfcd8aaf6b0e5f979177e2[label]",
+                "name": "Label",
+                "value": {
+                    "id": "c3bfcd8aaf6b0e5f979177e2[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "1135bd6d416cfd245dd1481e",
+            "target": "d8d417f3422ea417e1bbca07",
+            "attributes": {},
+            "type": "has"
+        },
+        "acf85aa68444d959c327f79a": {
+            "label": {
+                "id": "acf85aa68444d959c327f79a[label]",
+                "name": "Label",
+                "value": {
+                    "id": "acf85aa68444d959c327f79a[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "99db4d7cba34b15d912eef22",
+            "target": "d8d417f3422ea417e1bbca07",
+            "attributes": {},
+            "type": "generates"
+        },
+        "6727aba0c2d90f95943dc18a": {
+            "label": {
+                "id": "6727aba0c2d90f95943dc18a[label]",
+                "name": "Label",
+                "value": {
+                    "id": "6727aba0c2d90f95943dc18a[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "529f5ecba1f781f10abef5ac",
+            "target": "f39622557463383b6db4caae",
+            "attributes": {},
+            "type": "generates"
+        },
+        "ba84ea9a491f6b2309212b10": {
+            "label": {
+                "id": "ba84ea9a491f6b2309212b10[label]",
+                "name": "Label",
+                "value": {
+                    "id": "ba84ea9a491f6b2309212b10[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "529f5ecba1f781f10abef5ac",
+            "target": "8b0a2aa95cd46dddbf7f03b3",
+            "attributes": {},
+            "type": "generates"
+        },
+        "c5a1d89c02b22419484000f5": {
+            "label": {
+                "id": "c5a1d89c02b22419484000f5[label]",
+                "name": "Label",
+                "value": {
+                    "id": "c5a1d89c02b22419484000f5[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "73924235b8f0621fc69b631e",
+            "target": "1135bd6d416cfd245dd1481e",
+            "attributes": {},
+            "type": "has"
+        },
+        "9bef2c261a16756ffc798cb9": {
+            "label": {
+                "id": "9bef2c261a16756ffc798cb9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9bef2c261a16756ffc798cb9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ac346e82a96e98a58ab37afc",
+            "target": "278ab857fb6f3ad5d6c25088",
+            "attributes": {},
+            "type": "has"
+        },
+        "a84b59fa31157d4db47f9caf": {
+            "label": {
+                "id": "a84b59fa31157d4db47f9caf[label]",
+                "name": "Label",
+                "value": {
+                    "id": "a84b59fa31157d4db47f9caf[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f39622557463383b6db4caae",
+            "target": "e39ec42ecce12a7354ceae77",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "5d146a4e1ab95e0b1376c749": {
+            "label": {
+                "id": "5d146a4e1ab95e0b1376c749[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5d146a4e1ab95e0b1376c749[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "8b0a2aa95cd46dddbf7f03b3",
+            "target": "85de30db362ca26af17a437e",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "207851dd2cf9b14edd9bd2fe": {
+            "label": {
+                "id": "207851dd2cf9b14edd9bd2fe[label]",
+                "name": "Label",
+                "value": {
+                    "id": "207851dd2cf9b14edd9bd2fe[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "541674784b8c6b3986cba7db",
+            "target": "0cefd792b76ff470d43133d9",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "0e3858d2ec165a3ee1bd6970": {
+            "label": {
+                "id": "0e3858d2ec165a3ee1bd6970[label]",
+                "name": "Label",
+                "value": {
+                    "id": "0e3858d2ec165a3ee1bd6970[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "4e66c49b77cffd3ae10ae065",
+            "target": "541674784b8c6b3986cba7db",
+            "attributes": {},
+            "type": "generates"
+        },
+        "8e1709e0a0aaf8e53bf9757e": {
+            "label": {
+                "id": "8e1709e0a0aaf8e53bf9757e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "8e1709e0a0aaf8e53bf9757e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "73924235b8f0621fc69b631e",
+            "target": "0cefd792b76ff470d43133d9",
+            "attributes": {},
+            "type": "has"
+        }
+    }
+}

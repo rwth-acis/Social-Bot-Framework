@@ -180,6 +180,20 @@
                                 "name": "",
                                 "value": "string"
                             }
+                        },
+                        "567bf6800fb85cf28b824379": {
+                            "id": "567bf6800fb85cf28b824379",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "567bf6800fb85cf28b824379[key]",
+                                "name": "",
+                                "value": "Description"
+                            },
+                            "value": {
+                                "id": "567bf6800fb85cf28b824379[value]",
+                                "name": "",
+                                "value": "string"
+                            }
                         }
                     }
                 }
@@ -252,7 +266,7 @@
             "left": 4656.5,
             "top": 5169.5,
             "width": 209,
-            "height": 133.66666666666669,
+            "height": 132.00000000000003,
             "zIndex": 16005,
             "type": "Object",
             "attributes": {
@@ -291,11 +305,11 @@
                         },
                         "d9bdd693920ce4875f43779a": {
                             "id": "d9bdd693920ce4875f43779a",
-                            "name": "Attribute",
+                            "name": "d9bdd693920ce4875f43779a",
                             "key": {
                                 "id": "d9bdd693920ce4875f43779a[key]",
                                 "name": "",
-                                "value": "Swagger"
+                                "value": "deprecated"
                             },
                             "value": {
                                 "id": "d9bdd693920ce4875f43779a[value]",
@@ -707,8 +721,8 @@
                     "value": "triggers"
                 }
             },
-            "left": 4355.333333333333,
-            "top": 4841.666666666666,
+            "left": 4296.333333333333,
+            "top": 4956.666666666666,
             "width": 150,
             "height": 100,
             "zIndex": 16021,
@@ -750,8 +764,8 @@
                     "value": "ActionHasParameter"
                 }
             },
-            "left": 4603.999999999999,
-            "top": 4511.857142857142,
+            "left": 4620.999999999999,
+            "top": 4484.857142857142,
             "width": 150,
             "height": 107,
             "zIndex": 16023,
@@ -1222,13 +1236,13 @@
                 "value": {
                     "id": "5529bde8544426cd5580efc1[label]",
                     "name": "Label",
-                    "value": "aType"
+                    "value": ""
                 }
             },
-            "left": 4402.999999999998,
-            "top": 5362.499999999998,
-            "width": 228.33333333333337,
-            "height": 110,
+            "left": 4387.999999999998,
+            "top": 5374.499999999998,
+            "width": 205,
+            "height": 100,
             "zIndex": 16036,
             "type": "Enumeration",
             "attributes": {
@@ -1237,15 +1251,6 @@
                     "name": "Attributes",
                     "type": "SingleValueListAttribute",
                     "list": {
-                        "71ef481cd4ed2cadf85e1f87[value]": {
-                            "id": "71ef481cd4ed2cadf85e1f87[value]",
-                            "name": "71ef481cd4ed2cadf85e1f87[value]",
-                            "value": {
-                                "id": "71ef481cd4ed2cadf85e1f87[value]",
-                                "name": "71ef481cd4ed2cadf85e1f87[value]",
-                                "value": "SendMessage"
-                            }
-                        },
                         "6222c7567acccbc4e5fa92ea[value]": {
                             "id": "6222c7567acccbc4e5fa92ea[value]",
                             "name": "6222c7567acccbc4e5fa92ea[value]",
@@ -2973,13 +2978,13 @@
                 "value": {
                     "id": "005c2246e41c3fc7dcb5e988[label]",
                     "name": "Label",
-                    "value": "NLU Knowledge"
+                    "value": "Knowledge"
                 }
             },
-            "left": 3384.5,
-            "top": 5210.75,
+            "left": 3372.5,
+            "top": 5208.75,
             "width": 150,
-            "height": 100,
+            "height": 126,
             "zIndex": 16072,
             "type": "Object",
             "attributes": {
@@ -3062,8 +3067,8 @@
                     "value": "NLUKnowledgeShape"
                 }
             },
-            "left": 3450.7142857142853,
-            "top": 5376.428571428571,
+            "left": 3447.7142857142853,
+            "top": 5381.428571428571,
             "width": 150,
             "height": 150,
             "zIndex": 16074,
@@ -3136,8 +3141,8 @@
                     "value": "ReceivesInputFrom"
                 }
             },
-            "left": 4286.571428571428,
-            "top": 5761.571428571428,
+            "left": 4533.571428571428,
+            "top": 5887.571428571428,
             "width": 150,
             "height": 100,
             "zIndex": 16075,
@@ -3157,7 +3162,7 @@
             "left": 5960.285714285714,
             "top": 4608.142857142857,
             "width": 150,
-            "height": 152.5,
+            "height": 160.83333333333334,
             "zIndex": 16076,
             "type": "Object",
             "attributes": {
@@ -3235,6 +3240,20 @@
                                 "name": "",
                                 "value": "string"
                             }
+                        },
+                        "8666cfad61a1dfb071bec7b2": {
+                            "id": "8666cfad61a1dfb071bec7b2",
+                            "name": "8666cfad61a1dfb071bec7b2",
+                            "key": {
+                                "id": "8666cfad61a1dfb071bec7b2[key]",
+                                "name": "",
+                                "value": "error"
+                            },
+                            "value": {
+                                "id": "8666cfad61a1dfb071bec7b2[value]",
+                                "name": "",
+                                "value": "string"
+                            }
                         }
                     }
                 }
@@ -3250,8 +3269,8 @@
                     "value": "Slot"
                 }
             },
-            "left": 5957.857142857142,
-            "top": 4830,
+            "left": 6126.857142857142,
+            "top": 4867,
             "width": 150,
             "height": 100,
             "zIndex": 16077,
@@ -3492,8 +3511,8 @@
                     "value": ""
                 }
             },
-            "left": 6213.142857142857,
-            "top": 4887.714285714285,
+            "left": 6332.142857142857,
+            "top": 4834.714285714285,
             "width": 150,
             "height": 150,
             "zIndex": 16083,
@@ -3752,8 +3771,8 @@
                     "value": "SlotUsesAction"
                 }
             },
-            "left": 5965.333333333332,
-            "top": 5024.666666666666,
+            "left": 6132.333333333332,
+            "top": 5031.666666666666,
             "width": 150,
             "height": 100,
             "zIndex": 16090,
@@ -3941,6 +3960,414 @@
             "zIndex": 16096,
             "type": "Relation",
             "attributes": {}
+        },
+        "f96d2f54b422b3889d5475e7": {
+            "label": {
+                "id": "f96d2f54b422b3889d5475e7[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f96d2f54b422b3889d5475e7[label]",
+                    "name": "Label",
+                    "value": "Service"
+                }
+            },
+            "left": 4098.333333333333,
+            "top": 5585.999999999999,
+            "width": 158.33333333333331,
+            "height": 131.66666666666669,
+            "zIndex": 16097,
+            "type": "Object",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueListAttribute",
+                    "list": {
+                        "9b95993c79968d1357102ef1": {
+                            "id": "9b95993c79968d1357102ef1",
+                            "name": "9b95993c79968d1357102ef1",
+                            "key": {
+                                "id": "9b95993c79968d1357102ef1[key]",
+                                "name": "",
+                                "value": "Service Alias"
+                            },
+                            "value": {
+                                "id": "9b95993c79968d1357102ef1[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "1c519dfe55de0b242684809b": {
+                            "id": "1c519dfe55de0b242684809b",
+                            "name": "1c519dfe55de0b242684809b",
+                            "key": {
+                                "id": "1c519dfe55de0b242684809b[key]",
+                                "name": "",
+                                "value": "Service URL"
+                            },
+                            "value": {
+                                "id": "1c519dfe55de0b242684809b[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "f9e3121adf7569d3794b275b": {
+                            "id": "f9e3121adf7569d3794b275b",
+                            "name": "f9e3121adf7569d3794b275b",
+                            "key": {
+                                "id": "f9e3121adf7569d3794b275b[key]",
+                                "name": "",
+                                "value": "Swagger URL"
+                            },
+                            "value": {
+                                "id": "f9e3121adf7569d3794b275b[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "74e932bb239ee6443166baf3": {
+            "label": {
+                "id": "74e932bb239ee6443166baf3[label]",
+                "name": "Label",
+                "value": {
+                    "id": "74e932bb239ee6443166baf3[label]",
+                    "name": "Label",
+                    "value": "ServiceHasAction"
+                }
+            },
+            "left": 4411.333333333333,
+            "top": 5597.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16098,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "d34f477ef236efaaaf8218b9": {
+            "label": {
+                "id": "d34f477ef236efaaaf8218b9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "d34f477ef236efaaaf8218b9[label]",
+                    "name": "Label",
+                    "value": "Service Event"
+                }
+            },
+            "left": 4050.857142857142,
+            "top": 6019.142857142857,
+            "width": 137.1428571428571,
+            "height": 125.71428571428572,
+            "zIndex": 16099,
+            "type": "Object",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueListAttribute",
+                    "list": {
+                        "d5bc350ca6ca25685a02c612": {
+                            "id": "d5bc350ca6ca25685a02c612",
+                            "name": "d5bc350ca6ca25685a02c612",
+                            "key": {
+                                "id": "d5bc350ca6ca25685a02c612[key]",
+                                "name": "",
+                                "value": "name"
+                            },
+                            "value": {
+                                "id": "d5bc350ca6ca25685a02c612[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "f3b822742733d89d901cd8dd": {
+            "label": {
+                "id": "f3b822742733d89d901cd8dd[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f3b822742733d89d901cd8dd[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 3850.428571428571,
+            "top": 5610.428571428571,
+            "width": 150,
+            "height": 150,
+            "zIndex": 16100,
+            "type": "Node Shape",
+            "attributes": {
+                "f3b822742733d89d901cd8dd[shape]": {
+                    "id": "f3b822742733d89d901cd8dd[shape]",
+                    "name": "Shape",
+                    "value": {
+                        "id": "f3b822742733d89d901cd8dd[shape]",
+                        "name": "Shape",
+                        "value": "rectangle"
+                    },
+                    "option": "Rectangle"
+                },
+                "f3b822742733d89d901cd8dd[color]": {
+                    "id": "f3b822742733d89d901cd8dd[color]",
+                    "name": "Color",
+                    "value": {
+                        "id": "f3b822742733d89d901cd8dd[color]",
+                        "name": "Color",
+                        "value": "#000000"
+                    }
+                },
+                "f3b822742733d89d901cd8dd[defaultWidth]": {
+                    "id": "f3b822742733d89d901cd8dd[defaultWidth]",
+                    "name": "Default Width",
+                    "value": {
+                        "id": "f3b822742733d89d901cd8dd[defaultWidth]",
+                        "name": "Default Width",
+                        "value": 48
+                    }
+                },
+                "f3b822742733d89d901cd8dd[defaultHeight]": {
+                    "id": "f3b822742733d89d901cd8dd[defaultHeight]",
+                    "name": "Default Height",
+                    "value": {
+                        "id": "f3b822742733d89d901cd8dd[defaultHeight]",
+                        "name": "Default Height",
+                        "value": 48
+                    }
+                },
+                "f3b822742733d89d901cd8dd[customShape]": {
+                    "id": "f3b822742733d89d901cd8dd[customShape]",
+                    "name": "Custom Shape",
+                    "value": {
+                        "id": "f3b822742733d89d901cd8dd[customShape]",
+                        "name": "Custom Shape",
+                        "value": ""
+                    }
+                },
+                "f3b822742733d89d901cd8dd[customAnchors]": {
+                    "id": "f3b822742733d89d901cd8dd[customAnchors]",
+                    "name": "Custom Anchors",
+                    "value": {
+                        "id": "f3b822742733d89d901cd8dd[customAnchors]",
+                        "name": "Custom Anchors",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "ee91b938ed58da10184aad0d": {
+            "label": {
+                "id": "ee91b938ed58da10184aad0d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "ee91b938ed58da10184aad0d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4064.857142857143,
+            "top": 6223.857142857142,
+            "width": 150,
+            "height": 150,
+            "zIndex": 16101,
+            "type": "Node Shape",
+            "attributes": {
+                "ee91b938ed58da10184aad0d[shape]": {
+                    "id": "ee91b938ed58da10184aad0d[shape]",
+                    "name": "Shape",
+                    "value": {
+                        "id": "ee91b938ed58da10184aad0d[shape]",
+                        "name": "Shape",
+                        "value": "rounded_rectangle"
+                    },
+                    "option": "Rounded Rectangle"
+                },
+                "ee91b938ed58da10184aad0d[color]": {
+                    "id": "ee91b938ed58da10184aad0d[color]",
+                    "name": "Color",
+                    "value": {
+                        "id": "ee91b938ed58da10184aad0d[color]",
+                        "name": "Color",
+                        "value": "#000000"
+                    }
+                },
+                "ee91b938ed58da10184aad0d[defaultWidth]": {
+                    "id": "ee91b938ed58da10184aad0d[defaultWidth]",
+                    "name": "Default Width",
+                    "value": {
+                        "id": "ee91b938ed58da10184aad0d[defaultWidth]",
+                        "name": "Default Width",
+                        "value": 48
+                    }
+                },
+                "ee91b938ed58da10184aad0d[defaultHeight]": {
+                    "id": "ee91b938ed58da10184aad0d[defaultHeight]",
+                    "name": "Default Height",
+                    "value": {
+                        "id": "ee91b938ed58da10184aad0d[defaultHeight]",
+                        "name": "Default Height",
+                        "value": 48
+                    }
+                },
+                "ee91b938ed58da10184aad0d[customShape]": {
+                    "id": "ee91b938ed58da10184aad0d[customShape]",
+                    "name": "Custom Shape",
+                    "value": {
+                        "id": "ee91b938ed58da10184aad0d[customShape]",
+                        "name": "Custom Shape",
+                        "value": ""
+                    }
+                },
+                "ee91b938ed58da10184aad0d[customAnchors]": {
+                    "id": "ee91b938ed58da10184aad0d[customAnchors]",
+                    "name": "Custom Anchors",
+                    "value": {
+                        "id": "ee91b938ed58da10184aad0d[customAnchors]",
+                        "name": "Custom Anchors",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "9362c570580d4ef63dec8b2d": {
+            "label": {
+                "id": "9362c570580d4ef63dec8b2d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9362c570580d4ef63dec8b2d[label]",
+                    "name": "Label",
+                    "value": "ServiceHasEvent"
+                }
+            },
+            "left": 4015.7142857142853,
+            "top": 5795.571428571428,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16103,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "1a84ac15d7dbff97eb4a29b5": {
+            "label": {
+                "id": "1a84ac15d7dbff97eb4a29b5[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1a84ac15d7dbff97eb4a29b5[label]",
+                    "name": "Label",
+                    "value": "EventTriggersMessage"
+                }
+            },
+            "left": 3833.5714285714284,
+            "top": 6053.285714285714,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16104,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "81d9b2b4b549c43f162c7632": {
+            "label": {
+                "id": "81d9b2b4b549c43f162c7632[label]",
+                "name": "Label",
+                "value": {
+                    "id": "81d9b2b4b549c43f162c7632[label]",
+                    "name": "Label",
+                    "value": "EventTriggersAction"
+                }
+            },
+            "left": 4267.571428571428,
+            "top": 6010.142857142857,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16105,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "d4af5ca0162d6b0b5e7328fb": {
+            "label": {
+                "id": "d4af5ca0162d6b0b5e7328fb[label]",
+                "name": "Label",
+                "value": {
+                    "id": "d4af5ca0162d6b0b5e7328fb[label]",
+                    "name": "Label",
+                    "value": "KnowledgeHasMessage"
+                }
+            },
+            "left": 2885.333333333333,
+            "top": 5343.666666666666,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16108,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "69e4efca72f32b65d1da3612": {
+            "label": {
+                "id": "69e4efca72f32b65d1da3612[label]",
+                "name": "Label",
+                "value": {
+                    "id": "69e4efca72f32b65d1da3612[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 3147.428571428571,
+            "top": 5088.142857142857,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16109,
+            "type": "Enumeration",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "SingleValueListAttribute",
+                    "list": {
+                        "6b4bb030f18c485a03e1b1f3[value]": {
+                            "id": "6b4bb030f18c485a03e1b1f3[value]",
+                            "name": "6b4bb030f18c485a03e1b1f3[value]",
+                            "value": {
+                                "id": "6b4bb030f18c485a03e1b1f3[value]",
+                                "name": "6b4bb030f18c485a03e1b1f3[value]",
+                                "value": "Understanding"
+                            }
+                        },
+                        "6531e3e19cd7fd27f0be0a93[value]": {
+                            "id": "6531e3e19cd7fd27f0be0a93[value]",
+                            "name": "6531e3e19cd7fd27f0be0a93[value]",
+                            "value": {
+                                "id": "6531e3e19cd7fd27f0be0a93[value]",
+                                "name": "6531e3e19cd7fd27f0be0a93[value]",
+                                "value": "Generation"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "def3a10ff9f487aefb149caf": {
+            "label": {
+                "id": "def3a10ff9f487aefb149caf[label]",
+                "name": "Label",
+                "value": {
+                    "id": "def3a10ff9f487aefb149caf[label]",
+                    "name": "Label",
+                    "value": "FrameGeneratesEvent"
+                }
+            },
+            "left": 5913.571428571428,
+            "top": 4839.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16110,
+            "type": "Relation",
+            "attributes": {}
         }
     },
     "edges": {
@@ -4044,8 +4471,8 @@
                     "value": ""
                 }
             },
-            "source": "df1ea12ac9e7e6ebcd4e4fd4",
-            "target": "ab97a135e2b083007f06c671",
+            "source": "ab97a135e2b083007f06c671",
+            "target": "df1ea12ac9e7e6ebcd4e4fd4",
             "attributes": {},
             "type": "Uni-Dir-Association"
         },
@@ -5908,6 +6335,336 @@
             "target": "cb315df7651221da2f45143d",
             "attributes": {},
             "type": "Generalisation"
+        },
+        "2b83edea3960a2a2b7bdf86b": {
+            "label": {
+                "id": "2b83edea3960a2a2b7bdf86b[label]",
+                "name": "Label",
+                "value": {
+                    "id": "2b83edea3960a2a2b7bdf86b[label]",
+                    "name": "Label",
+                    "value": "Type"
+                }
+            },
+            "source": "f96d2f54b422b3889d5475e7",
+            "target": "5529bde8544426cd5580efc1",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "cab079738f31a2084ba9ce6c": {
+            "label": {
+                "id": "cab079738f31a2084ba9ce6c[label]",
+                "name": "Label",
+                "value": {
+                    "id": "cab079738f31a2084ba9ce6c[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f96d2f54b422b3889d5475e7",
+            "target": "74e932bb239ee6443166baf3",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "909c478ed1ba5151f888f332": {
+            "label": {
+                "id": "909c478ed1ba5151f888f332[label]",
+                "name": "Label",
+                "value": {
+                    "id": "909c478ed1ba5151f888f332[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "74e932bb239ee6443166baf3",
+            "target": "ab97a135e2b083007f06c671",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "eb740416fccb83489821360a": {
+            "label": {
+                "id": "eb740416fccb83489821360a[label]",
+                "name": "Label",
+                "value": {
+                    "id": "eb740416fccb83489821360a[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "74e932bb239ee6443166baf3",
+            "target": "1fba2bd12ab4893da3774b27",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "fdab1860b82526624d2ca3be": {
+            "label": {
+                "id": "fdab1860b82526624d2ca3be[label]",
+                "name": "Label",
+                "value": {
+                    "id": "fdab1860b82526624d2ca3be[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f96d2f54b422b3889d5475e7",
+            "target": "f3b822742733d89d901cd8dd",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "49054e488cd3d63ec5240e72": {
+            "label": {
+                "id": "49054e488cd3d63ec5240e72[label]",
+                "name": "Label",
+                "value": {
+                    "id": "49054e488cd3d63ec5240e72[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ee91b938ed58da10184aad0d",
+            "target": "d34f477ef236efaaaf8218b9",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "2c8e29c350c8890bdd5b8734": {
+            "label": {
+                "id": "2c8e29c350c8890bdd5b8734[label]",
+                "name": "Label",
+                "value": {
+                    "id": "2c8e29c350c8890bdd5b8734[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f96d2f54b422b3889d5475e7",
+            "target": "9362c570580d4ef63dec8b2d",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "9ed416d3e24e262798e68da4": {
+            "label": {
+                "id": "9ed416d3e24e262798e68da4[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9ed416d3e24e262798e68da4[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "9362c570580d4ef63dec8b2d",
+            "target": "d34f477ef236efaaaf8218b9",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "5c35fc43eb3466ba961c30fb": {
+            "label": {
+                "id": "5c35fc43eb3466ba961c30fb[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5c35fc43eb3466ba961c30fb[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "9362c570580d4ef63dec8b2d",
+            "target": "1fba2bd12ab4893da3774b27",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "93377c815c505269329c029e": {
+            "label": {
+                "id": "93377c815c505269329c029e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "93377c815c505269329c029e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d34f477ef236efaaaf8218b9",
+            "target": "81d9b2b4b549c43f162c7632",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "250180b0fbb3a28098df923c": {
+            "label": {
+                "id": "250180b0fbb3a28098df923c[label]",
+                "name": "Label",
+                "value": {
+                    "id": "250180b0fbb3a28098df923c[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d34f477ef236efaaaf8218b9",
+            "target": "1a84ac15d7dbff97eb4a29b5",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "5f6d94ea02739cbb366f14d5": {
+            "label": {
+                "id": "5f6d94ea02739cbb366f14d5[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5f6d94ea02739cbb366f14d5[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "81d9b2b4b549c43f162c7632",
+            "target": "ab97a135e2b083007f06c671",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "27ab51a9a8dd88c1f3575c81": {
+            "label": {
+                "id": "27ab51a9a8dd88c1f3575c81[label]",
+                "name": "Label",
+                "value": {
+                    "id": "27ab51a9a8dd88c1f3575c81[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "1a84ac15d7dbff97eb4a29b5",
+            "target": "dd34599cb11fbaa06554d5ea",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "2092bec1755eb4cb9df0ecb2": {
+            "label": {
+                "id": "2092bec1755eb4cb9df0ecb2[label]",
+                "name": "Label",
+                "value": {
+                    "id": "2092bec1755eb4cb9df0ecb2[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "005c2246e41c3fc7dcb5e988",
+            "target": "d4af5ca0162d6b0b5e7328fb",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "12d85b1bc413cd8b15421a32": {
+            "label": {
+                "id": "12d85b1bc413cd8b15421a32[label]",
+                "name": "Label",
+                "value": {
+                    "id": "12d85b1bc413cd8b15421a32[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d4af5ca0162d6b0b5e7328fb",
+            "target": "64fc584ccce53ec8457a5fb4",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "d6fa40d71dc853684045e719": {
+            "label": {
+                "id": "d6fa40d71dc853684045e719[label]",
+                "name": "Label",
+                "value": {
+                    "id": "d6fa40d71dc853684045e719[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d4af5ca0162d6b0b5e7328fb",
+            "target": "1fba2bd12ab4893da3774b27",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "af8bba18fd3027f9f1494168": {
+            "label": {
+                "id": "af8bba18fd3027f9f1494168[label]",
+                "name": "Label",
+                "value": {
+                    "id": "af8bba18fd3027f9f1494168[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "81d9b2b4b549c43f162c7632",
+            "target": "986a57bb01365cb57c7dfe35",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "ffffd7d918e0e8d2b3f1d99f": {
+            "label": {
+                "id": "ffffd7d918e0e8d2b3f1d99f[label]",
+                "name": "Label",
+                "value": {
+                    "id": "ffffd7d918e0e8d2b3f1d99f[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "1a84ac15d7dbff97eb4a29b5",
+            "target": "986a57bb01365cb57c7dfe35",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "6cf517096ee51ef8b334fcb7": {
+            "label": {
+                "id": "6cf517096ee51ef8b334fcb7[label]",
+                "name": "Label",
+                "value": {
+                    "id": "6cf517096ee51ef8b334fcb7[label]",
+                    "name": "Label",
+                    "value": "Type"
+                }
+            },
+            "source": "005c2246e41c3fc7dcb5e988",
+            "target": "69e4efca72f32b65d1da3612",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "c38d63980ae8b917517582c9": {
+            "label": {
+                "id": "c38d63980ae8b917517582c9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "c38d63980ae8b917517582c9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "236c54663deccc13258b2a55",
+            "target": "def3a10ff9f487aefb149caf",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "894fea3d4d9c6948a2a081b4": {
+            "label": {
+                "id": "894fea3d4d9c6948a2a081b4[label]",
+                "name": "Label",
+                "value": {
+                    "id": "894fea3d4d9c6948a2a081b4[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "def3a10ff9f487aefb149caf",
+            "target": "cb315df7651221da2f45143d",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "4c5e78a40e77b11d8f88bbec": {
+            "label": {
+                "id": "4c5e78a40e77b11d8f88bbec[label]",
+                "name": "Label",
+                "value": {
+                    "id": "4c5e78a40e77b11d8f88bbec[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "def3a10ff9f487aefb149caf",
+            "target": "d34f477ef236efaaaf8218b9",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
         }
     }
 }
