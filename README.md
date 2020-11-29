@@ -103,7 +103,7 @@ After a first chat-interaction with the bot, there also is the possibility to cr
 
 ![communicationstate](READMEImages/leadsToModelling.png) 
 
-The Intent attribute of the follow up Incoming Message elements can remain empty as the leadsTo relation will take care of forwarding the state. For these messages to be reachable from the initial state, the Messenger will again need to connect to these elements using the "generates" relation and the elements will also need to have the Intent attribute set. Once there is no follow up message the conversation path will be quit and the conversation will go back to the initial state. If no fitting Intent is recognized, the bot will simply send the default message.   
+The Intent attribute of the follow up Incoming Message elements can remain empty as the leadsTo relation will take care of forwarding the state. For these messages to be reachable from the initial state, the Messenger will again need to connect to these elements using the "generates" relation and the elements will also need to have the Intent attribute set. Once there is no follow up message the conversation path will be quit and the conversation will go back to the initial state. If no fitting Intent is recognized, the bot will simply send the default message. If one of the leadsTo relation is empty, this path will be taken if no fitting Intent was found while in a conversation.   
 Continuing the previous greeting example, the user could have changed the bot's initial message to "Hello :), how was your day?". To model a fitting response, the user added the Intents "positiv" & "negativ", added new Incoming Message elements with the leadsTo relation and added Chat Responses with fitting answers. The bot would now, after asking the user about their day, expect a positiv or negativ answer and respond accordingly. 
 
 ### Create communication state with service
@@ -127,4 +127,26 @@ The service will need to respond to the request with a json file containing the 
 The `text` attribute represents the service's response to the user.
 
 The `closeContext` attribute is a boolean value which informs the Social Bot Manager if the communication state is to be maintained or stopped. (Note that, if no closeContext attribute is found, the communication state will automatically be stopped.)
+
+### Sending Files to a Service
+When modelling the conversation between bot and user, there is also the possibility to let the bot expect files from a user. To be precise, a user could trigger a service by sending a file, which would get forwarded to the service for further processing. Lets take our communication state from before and presume that the Bot Action Element is a service which expects a file:
+
+![communicationstate](READMEImages/communicationState.png)
+
+In this case, we would like the service to be triggered only if a file was sent. To do this, we have the "IsFile" bool attribute in the Incoming Message Element. If the IsFile attribute is checked and no Intent is given, then the Bot Action will be triggered regardless of the file's name (given that a file was sent). If an Intent is given, then Intent extraction will be done on the file's name and see if the extracted Intent corresponds to the Intent given as attribute in the Incoming Message Element. This for example allows the bot to understand specific file name formats, such as the following:
+
+![communicationstate](READMEImages/AssignmentIntentExamples.png)
+
+
+If a file is sent to a triggered service, it will first be encoded into base64 encoding. Afterwards, the JSON body sent to the triggered service will contain following attributes: 
+
+```json
+{
+    "fileBody": "String of base64 encoding",
+    "fileName": "String",
+    "fileType": "String"
+}
+```
+
+Note that if a service wants to send a file to a user, it will also need to encode the file in base64 encoding and the response will additionally need to contain the 3 just shown attributes. 
 
