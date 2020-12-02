@@ -1,6 +1,7 @@
 import vls from './vls.js';
 import Common from './common.js';
 import Static from './static.js';
+import botModel from './botModel.js';
 
 class ModelOps {
 
@@ -44,8 +45,12 @@ class ModelOps {
     uploadMetaModel() {
         return this.getY(false).then(y => {
             return new Promise((resolve, reject) => {
+                // check whether there already is a metamodel or not
+            if(y.share.data.get('metamodel')!= null){
+                resolve(); 
+            } else {console.log("Apparently empty");
                 y.share.data.set('metamodel', vls);
-                resolve();
+                resolve();}
             });
         });
     }
@@ -54,6 +59,20 @@ class ModelOps {
         return this.getY(true).then(y => {
             return new Promise((resolve, reject) => {
                 resolve(y.share.data.get('model'));
+            });
+        });
+    }
+
+    uploadBotModel() {
+        return this.getY(false).then(y => {
+            return new Promise((resolve, reject) => {
+                if(y.share.data.get('model') != null) {
+                    resolve(y.share.data.get('model'));
+                } else {
+                    y.share.data.set('model', botModel);
+                    resolve(y.share.data.get('model'));
+                }
+                
             });
         });
     }

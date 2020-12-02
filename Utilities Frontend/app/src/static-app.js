@@ -123,9 +123,30 @@ class StaticApp extends PolymerElement {
 
   /* this pagechanged triggers for simple onserver written in page properties written above */
   _pageChanged(currentPage, oldPage){
+        // Opera 8.0+
+    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+    // Firefox 1.0+
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+
+    // Safari 3.0+ "[object HTMLElementConstructor]" 
+    var isSafari =/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+    // Internet Explor+er 6-11
+    var isIE =  false || !!document.documentMode;
+
+    // Chrome 1 - 79
+    var isChrome = !!window.chrome;
+
     switch(currentPage){
       case 'bot-modeling':
-        import('./bot-modeling.js').then()
+        if(isChrome || isIE || isOpera || isSafari){
+          import('./bot-modelingChrome.js').then()
+          break;  
+        } else if(isFirefox){
+          import('./bot-modeling.js').then()
+          break;
+        }  
         break;
       case 'model-training':
         import('./model-training.js').then()
@@ -147,8 +168,13 @@ class StaticApp extends PolymerElement {
     var roomName = this.shadowRoot.querySelector('#yjsRoomInput').value;
     Common.setYjsRoomName(roomName);
     this.changeVisibility("#roomEnterLoader", true);
-
     ModelOps.uploadMetaModel()
+      .then(_ => new Promise((resolve, reject) => {
+        // wait for data become active
+        setTimeout(_ => resolve(), 2000);
+      }))
+      .then(_ => location.reload());
+      ModelOps.uploadBotModel()
       .then(_ => new Promise((resolve, reject) => {
         // wait for data become active
         setTimeout(_ => resolve(), 2000);

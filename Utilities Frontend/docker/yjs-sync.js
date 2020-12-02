@@ -36,6 +36,7 @@ define(['jquery', 'Util'], function($, Util) {
                 activity:'Map',
                 globalId: 'Array',
                 text:"Text",
+                widgetConfig: 'Map',
                 metamodelStatus: 'Map',
                 rasa: 'Text',
                 sbfManager: 'Text',
