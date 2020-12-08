@@ -12,7 +12,7 @@
     "@polymer/app-route": "^3.0.0-pre.15",
     "@polymer/iron-pages": "^3.0.0-pre.15",
     "@polymer/polymer": "^3.0.0",
-    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.2.1",
+    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.0",
     "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.2.1",
     "merge-stream": "^2.0.0"
   },

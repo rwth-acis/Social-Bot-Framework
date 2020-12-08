@@ -65,6 +65,7 @@ class StaticApp extends PolymerElement {
         oidcpopupsignouturl="/src/callbacks/popup-signout-callback.html"
         oidcsilentsigninturl="/src/callbacks/silent-callback.html"
         oidcclientid="{OIDC_CLIENT_ID}"
+        subtitle="{STATUSBAR_SUBTITLE}"
         autoAppendWidget=true
       ></las2peer-frontend-statusbar>    
 
