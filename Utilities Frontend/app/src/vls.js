@@ -300,7 +300,9 @@
                     "options": {
                         "Rocket.Chat": "Rocket.Chat",
                         "Slack": "Slack",
-                        "Telegram": "Telegram"
+                        "Telegram": "Telegram",
+                        "Moodle Forum": "Moodle Forum",
+                        "Moodle Chat": "Moodle Chat"
                     }
                 },
                 "fac7a2b850919e041f655919": {
