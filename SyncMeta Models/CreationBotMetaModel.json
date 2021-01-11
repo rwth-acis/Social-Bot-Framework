@@ -706,8 +706,8 @@
                     "value": "performs"
                 }
             },
-            "left": 4146.999999999999,
-            "top": 4799.999999999999,
+            "left": 4115.999999999999,
+            "top": 4517.999999999999,
             "width": 150,
             "height": 100,
             "zIndex": 16018,
@@ -749,8 +749,8 @@
                     "value": "triggers"
                 }
             },
-            "left": 4296.333333333333,
-            "top": 4956.666666666666,
+            "left": 4294.333333333333,
+            "top": 4767.666666666666,
             "width": 150,
             "height": 100,
             "zIndex": 16021,
@@ -846,8 +846,8 @@
                     "value": "uses"
                 }
             },
-            "left": 5243.285714285714,
-            "top": 5777.999999999999,
+            "left": 5106.285714285714,
+            "top": 5797.999999999999,
             "width": 150,
             "height": 100,
             "zIndex": 16026,
@@ -2153,8 +2153,8 @@
                     "value": "usesShape"
                 }
             },
-            "left": 5250.999999999999,
-            "top": 5897.999999999999,
+            "left": 5122.999999999999,
+            "top": 5940.999999999999,
             "width": 150,
             "height": 150,
             "zIndex": 16050,
@@ -2453,8 +2453,8 @@
                     "value": "MessengerShape"
                 }
             },
-            "left": 2427,
-            "top": 5034.5,
+            "left": 2424,
+            "top": 5030.5,
             "width": 150,
             "height": 150,
             "zIndex": 16055,
@@ -2563,10 +2563,10 @@
                     "value": "Incoming Message"
                 }
             },
-            "left": 3246.333333333333,
-            "top": 5628.333333333332,
+            "left": 3253.333333333333,
+            "top": 5613.333333333332,
             "width": 150,
-            "height": 100,
+            "height": 128.33333333333334,
             "zIndex": 16059,
             "type": "Object",
             "attributes": {
@@ -2595,10 +2595,24 @@
                             "key": {
                                 "id": "e7d374a1e2d32c5e67bc68cc[key]",
                                 "name": "",
-                                "value": "NLU ID"
+                                "value": "Response Message"
                             },
                             "value": {
                                 "id": "e7d374a1e2d32c5e67bc68cc[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "698ef7b4664ffdb9010833d0": {
+                            "id": "698ef7b4664ffdb9010833d0",
+                            "name": "698ef7b4664ffdb9010833d0",
+                            "key": {
+                                "id": "698ef7b4664ffdb9010833d0[key]",
+                                "name": "",
+                                "value": "NLU ID"
+                            },
+                            "value": {
+                                "id": "698ef7b4664ffdb9010833d0[value]",
                                 "name": "",
                                 "value": "string"
                             }
@@ -2978,8 +2992,8 @@
                     "value": "Chat Response"
                 }
             },
-            "left": 3253.333333333333,
-            "top": 5943.333333333332,
+            "left": 3255.333333333333,
+            "top": 5961.333333333332,
             "width": 150,
             "height": 100,
             "zIndex": 16071,
@@ -3199,7 +3213,7 @@
             "left": 5960.285714285714,
             "top": 4608.142857142857,
             "width": 150,
-            "height": 160.83333333333334,
+            "height": 192.5,
             "zIndex": 16076,
             "type": "Object",
             "attributes": {
@@ -3214,7 +3228,7 @@
                             "key": {
                                 "id": "37f906be663f9c0b23ffdb43[key]",
                                 "name": "",
-                                "value": "name"
+                                "value": "Intent Keyword"
                             },
                             "value": {
                                 "id": "37f906be663f9c0b23ffdb43[value]",
@@ -3228,7 +3242,7 @@
                             "key": {
                                 "id": "479044e86182aad50f1ad086[key]",
                                 "name": "",
-                                "value": "intent"
+                                "value": "Operation Name"
                             },
                             "value": {
                                 "id": "479044e86182aad50f1ad086[value]",
@@ -3242,7 +3256,7 @@
                             "key": {
                                 "id": "6d109dd3edd809143553ed38[key]",
                                 "name": "",
-                                "value": "message"
+                                "value": "Operation Description"
                             },
                             "value": {
                                 "id": "6d109dd3edd809143553ed38[value]",
@@ -3256,7 +3270,7 @@
                             "key": {
                                 "id": "66419c40734bdf81206ede36[key]",
                                 "name": "",
-                                "value": "response"
+                                "value": "Success Response"
                             },
                             "value": {
                                 "id": "66419c40734bdf81206ede36[value]",
@@ -3270,7 +3284,7 @@
                             "key": {
                                 "id": "e85f9504c1ab589d3cfd6794[key]",
                                 "name": "",
-                                "value": "file"
+                                "value": "Error Response"
                             },
                             "value": {
                                 "id": "e85f9504c1ab589d3cfd6794[value]",
@@ -3284,7 +3298,7 @@
                             "key": {
                                 "id": "8666cfad61a1dfb071bec7b2[key]",
                                 "name": "",
-                                "value": "error"
+                                "value": "FIle Response"
                             },
                             "value": {
                                 "id": "8666cfad61a1dfb071bec7b2[value]",
@@ -3658,10 +3672,24 @@
                             "key": {
                                 "id": "c08b7f2db472d1b781514ac0[key]",
                                 "name": "",
-                                "value": "Intent"
+                                "value": "Name"
                             },
                             "value": {
                                 "id": "c08b7f2db472d1b781514ac0[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "0282a497142ff470a275c00b": {
+                            "id": "0282a497142ff470a275c00b",
+                            "name": "0282a497142ff470a275c00b",
+                            "key": {
+                                "id": "0282a497142ff470a275c00b[key]",
+                                "name": "",
+                                "value": "Descriptionn"
+                            },
+                            "value": {
+                                "id": "0282a497142ff470a275c00b[value]",
                                 "name": "",
                                 "value": "string"
                             }
@@ -3762,24 +3790,6 @@
                 }
             }
         },
-        "a1058f7b30d26a21e6efc1bd": {
-            "label": {
-                "id": "a1058f7b30d26a21e6efc1bd[label]",
-                "name": "Label",
-                "value": {
-                    "id": "a1058f7b30d26a21e6efc1bd[label]",
-                    "name": "Label",
-                    "value": "DomainHasFrame"
-                }
-            },
-            "left": 2956.428571428571,
-            "top": 4440,
-            "width": 150,
-            "height": 100,
-            "zIndex": 16088,
-            "type": "Relation",
-            "attributes": {}
-        },
         "e95478bf849fd4db56776bf6": {
             "label": {
                 "id": "e95478bf849fd4db56776bf6[label]",
@@ -3787,11 +3797,11 @@
                 "value": {
                     "id": "e95478bf849fd4db56776bf6[label]",
                     "name": "Label",
-                    "value": "DomainHasMessage"
+                    "value": "DomainHasElement"
                 }
             },
-            "left": 2749.285714285714,
-            "top": 4404.285714285714,
+            "left": 2799.285714285714,
+            "top": 4393.285714285714,
             "width": 150,
             "height": 100,
             "zIndex": 16089,
@@ -4483,6 +4493,363 @@
             "width": 150,
             "height": 100,
             "zIndex": 16113,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "f72256b641645c3cc84df87e": {
+            "label": {
+                "id": "f72256b641645c3cc84df87e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f72256b641645c3cc84df87e[label]",
+                    "name": "Label",
+                    "value": "Selection"
+                }
+            },
+            "left": 2394.142857142857,
+            "top": 4325.714285714285,
+            "width": 150,
+            "height": 170.47619047619048,
+            "zIndex": 16114,
+            "type": "Object",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueListAttribute",
+                    "list": {
+                        "024ce4bcd779da1632216ec4": {
+                            "id": "024ce4bcd779da1632216ec4",
+                            "name": "024ce4bcd779da1632216ec4",
+                            "key": {
+                                "id": "024ce4bcd779da1632216ec4[key]",
+                                "name": "",
+                                "value": "Intent Keyword"
+                            },
+                            "value": {
+                                "id": "024ce4bcd779da1632216ec4[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "ba34acb429ff04afc5d86d7c": {
+                            "id": "ba34acb429ff04afc5d86d7c",
+                            "name": "ba34acb429ff04afc5d86d7c",
+                            "key": {
+                                "id": "ba34acb429ff04afc5d86d7c[key]",
+                                "name": "",
+                                "value": "Response Message"
+                            },
+                            "value": {
+                                "id": "ba34acb429ff04afc5d86d7c[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "15776c1165e9603373cd4d0d": {
+                            "id": "15776c1165e9603373cd4d0d",
+                            "name": "15776c1165e9603373cd4d0d",
+                            "key": {
+                                "id": "15776c1165e9603373cd4d0d[key]",
+                                "name": "",
+                                "value": "Show Operation"
+                            },
+                            "value": {
+                                "id": "15776c1165e9603373cd4d0d[value]",
+                                "name": "",
+                                "value": "boolean"
+                            }
+                        },
+                        "2bcb5a12e3055b99391baac0": {
+                            "id": "2bcb5a12e3055b99391baac0",
+                            "name": "2bcb5a12e3055b99391baac0",
+                            "key": {
+                                "id": "2bcb5a12e3055b99391baac0[key]",
+                                "name": "",
+                                "value": "Operation Name"
+                            },
+                            "value": {
+                                "id": "2bcb5a12e3055b99391baac0[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "bb41d398e12762e6dc83368c": {
+                            "id": "bb41d398e12762e6dc83368c",
+                            "name": "bb41d398e12762e6dc83368c",
+                            "key": {
+                                "id": "bb41d398e12762e6dc83368c[key]",
+                                "name": "",
+                                "value": "Operation Description"
+                            },
+                            "value": {
+                                "id": "bb41d398e12762e6dc83368c[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "f1e9a646eb7dd1b0c1f9c355": {
+            "label": {
+                "id": "f1e9a646eb7dd1b0c1f9c355[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f1e9a646eb7dd1b0c1f9c355[label]",
+                    "name": "Label",
+                    "value": "SelectionShape"
+                }
+            },
+            "left": 2135.7142857142853,
+            "top": 4327.428571428571,
+            "width": 150,
+            "height": 150,
+            "zIndex": 16115,
+            "type": "Node Shape",
+            "attributes": {
+                "f1e9a646eb7dd1b0c1f9c355[shape]": {
+                    "id": "f1e9a646eb7dd1b0c1f9c355[shape]",
+                    "name": "Shape",
+                    "value": {
+                        "id": "f1e9a646eb7dd1b0c1f9c355[shape]",
+                        "name": "Shape",
+                        "value": "triangle"
+                    },
+                    "option": "Triangle"
+                },
+                "f1e9a646eb7dd1b0c1f9c355[color]": {
+                    "id": "f1e9a646eb7dd1b0c1f9c355[color]",
+                    "name": "Color",
+                    "value": {
+                        "id": "f1e9a646eb7dd1b0c1f9c355[color]",
+                        "name": "Color",
+                        "value": "#000000"
+                    }
+                },
+                "f1e9a646eb7dd1b0c1f9c355[defaultWidth]": {
+                    "id": "f1e9a646eb7dd1b0c1f9c355[defaultWidth]",
+                    "name": "Default Width",
+                    "value": {
+                        "id": "f1e9a646eb7dd1b0c1f9c355[defaultWidth]",
+                        "name": "Default Width",
+                        "value": 48
+                    }
+                },
+                "f1e9a646eb7dd1b0c1f9c355[defaultHeight]": {
+                    "id": "f1e9a646eb7dd1b0c1f9c355[defaultHeight]",
+                    "name": "Default Height",
+                    "value": {
+                        "id": "f1e9a646eb7dd1b0c1f9c355[defaultHeight]",
+                        "name": "Default Height",
+                        "value": 48
+                    }
+                },
+                "f1e9a646eb7dd1b0c1f9c355[customShape]": {
+                    "id": "f1e9a646eb7dd1b0c1f9c355[customShape]",
+                    "name": "Custom Shape",
+                    "value": {
+                        "id": "f1e9a646eb7dd1b0c1f9c355[customShape]",
+                        "name": "Custom Shape",
+                        "value": ""
+                    }
+                },
+                "f1e9a646eb7dd1b0c1f9c355[customAnchors]": {
+                    "id": "f1e9a646eb7dd1b0c1f9c355[customAnchors]",
+                    "name": "Custom Anchors",
+                    "value": {
+                        "id": "f1e9a646eb7dd1b0c1f9c355[customAnchors]",
+                        "name": "Custom Anchors",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "fa0c87a6c8f33a5352e384c6": {
+            "label": {
+                "id": "fa0c87a6c8f33a5352e384c6[label]",
+                "name": "Label",
+                "value": {
+                    "id": "fa0c87a6c8f33a5352e384c6[label]",
+                    "name": "Label",
+                    "value": "MessengerGeneratesSelection"
+                }
+            },
+            "left": 2347.9999999999995,
+            "top": 4593.571428571428,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16116,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "7cc4e0171008293b47a76f75": {
+            "label": {
+                "id": "7cc4e0171008293b47a76f75[label]",
+                "name": "Label",
+                "value": {
+                    "id": "7cc4e0171008293b47a76f75[label]",
+                    "name": "Label",
+                    "value": "SelectionTriggersFrame"
+                }
+            },
+            "left": 2686.7142857142853,
+            "top": 4098,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16118,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "910412a59854785d19793b80": {
+            "label": {
+                "id": "910412a59854785d19793b80[label]",
+                "name": "Label",
+                "value": {
+                    "id": "910412a59854785d19793b80[label]",
+                    "name": "Label",
+                    "value": "SelectionTriggersChatResponse"
+                }
+            },
+            "left": 2432.9999999999995,
+            "top": 4103.285714285714,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16119,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "46bcf1f57aaa161396fae089": {
+            "label": {
+                "id": "46bcf1f57aaa161396fae089[label]",
+                "name": "Label",
+                "value": {
+                    "id": "46bcf1f57aaa161396fae089[label]",
+                    "name": "Label",
+                    "value": "Messenger Element"
+                }
+            },
+            "left": 1928.333333333333,
+            "top": 4626.666666666666,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16120,
+            "type": "Abstract Class",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueListAttribute",
+                    "list": {}
+                }
+            }
+        },
+        "b49306f633678e38bfddbbdb": {
+            "label": {
+                "id": "b49306f633678e38bfddbbdb[label]",
+                "name": "Label",
+                "value": {
+                    "id": "b49306f633678e38bfddbbdb[label]",
+                    "name": "Label",
+                    "value": "SelectionPrecSelection"
+                }
+            },
+            "left": 2257.142857142857,
+            "top": 4733.857142857142,
+            "width": 160,
+            "height": 100,
+            "zIndex": 16121,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "18983003911655650c6eab9c": {
+            "label": {
+                "id": "18983003911655650c6eab9c[label]",
+                "name": "Label",
+                "value": {
+                    "id": "18983003911655650c6eab9c[label]",
+                    "name": "Label",
+                    "value": "SelectionTriggerMessage"
+                }
+            },
+            "left": 2208.6666666666665,
+            "top": 4106.333333333333,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16122,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "08eac7f7397fd1b4a86d2982": {
+            "label": {
+                "id": "08eac7f7397fd1b4a86d2982[label]",
+                "name": "Label",
+                "value": {
+                    "id": "08eac7f7397fd1b4a86d2982[label]",
+                    "name": "Label",
+                    "value": "SelectionUsesEntity"
+                }
+            },
+            "left": 2015.5,
+            "top": 4116.25,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16123,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "67ddcb522efd616423158fac": {
+            "label": {
+                "id": "67ddcb522efd616423158fac[label]",
+                "name": "Label",
+                "value": {
+                    "id": "67ddcb522efd616423158fac[label]",
+                    "name": "Label",
+                    "value": "SelectionUsesAction"
+                }
+            },
+            "left": 1841,
+            "top": 4249,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16124,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "552e15c3ecf4ff057f9d1799": {
+            "label": {
+                "id": "552e15c3ecf4ff057f9d1799[label]",
+                "name": "Label",
+                "value": {
+                    "id": "552e15c3ecf4ff057f9d1799[label]",
+                    "name": "Label",
+                    "value": "SelectionGeneratesParameter"
+                }
+            },
+            "left": 1744.25,
+            "top": 4424.75,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16125,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "8984a38d30b7d41105c3fcb3": {
+            "label": {
+                "id": "8984a38d30b7d41105c3fcb3[label]",
+                "name": "Label",
+                "value": {
+                    "id": "8984a38d30b7d41105c3fcb3[label]",
+                    "name": "Label",
+                    "value": "ActionGeneratesEntity"
+                }
+            },
+            "left": 2947.9999999999995,
+            "top": 6236.999999999998,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16126,
             "type": "Relation",
             "attributes": {}
         }
@@ -6168,66 +6535,6 @@
             "attributes": {},
             "type": "Bi-Dir-Association"
         },
-        "cc827bb4e3f9ae511a98beab": {
-            "label": {
-                "id": "cc827bb4e3f9ae511a98beab[label]",
-                "name": "Label",
-                "value": {
-                    "id": "cc827bb4e3f9ae511a98beab[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "a1058f7b30d26a21e6efc1bd",
-            "target": "1fba2bd12ab4893da3774b27",
-            "attributes": {},
-            "type": "Generalisation"
-        },
-        "df455db8a88523319fbfdbfd": {
-            "label": {
-                "id": "df455db8a88523319fbfdbfd[label]",
-                "name": "Label",
-                "value": {
-                    "id": "df455db8a88523319fbfdbfd[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "f031a6dc94bfc9f675362749",
-            "target": "a1058f7b30d26a21e6efc1bd",
-            "attributes": {},
-            "type": "Uni-Dir-Association"
-        },
-        "943a1a8d39e203434d106f56": {
-            "label": {
-                "id": "943a1a8d39e203434d106f56[label]",
-                "name": "Label",
-                "value": {
-                    "id": "943a1a8d39e203434d106f56[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "a1058f7b30d26a21e6efc1bd",
-            "target": "236c54663deccc13258b2a55",
-            "attributes": {},
-            "type": "Uni-Dir-Association"
-        },
-        "8b64e858560a68200c26e46a": {
-            "label": {
-                "id": "8b64e858560a68200c26e46a[label]",
-                "name": "Label",
-                "value": {
-                    "id": "8b64e858560a68200c26e46a[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "e95478bf849fd4db56776bf6",
-            "target": "1fba2bd12ab4893da3774b27",
-            "attributes": {},
-            "type": "Generalisation"
-        },
         "5ae8413e9dd1cc2d722ac4fd": {
             "label": {
                 "id": "5ae8413e9dd1cc2d722ac4fd[label]",
@@ -6240,21 +6547,6 @@
             },
             "source": "f031a6dc94bfc9f675362749",
             "target": "e95478bf849fd4db56776bf6",
-            "attributes": {},
-            "type": "Uni-Dir-Association"
-        },
-        "09927cf2d74db5a67d3dff34": {
-            "label": {
-                "id": "09927cf2d74db5a67d3dff34[label]",
-                "name": "Label",
-                "value": {
-                    "id": "09927cf2d74db5a67d3dff34[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "e95478bf849fd4db56776bf6",
-            "target": "64fc584ccce53ec8457a5fb4",
             "attributes": {},
             "type": "Uni-Dir-Association"
         },
@@ -6885,6 +7177,486 @@
             },
             "source": "ddc42a8482123673201dcf38",
             "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "8cada6ae70364038d1bce833": {
+            "label": {
+                "id": "8cada6ae70364038d1bce833[label]",
+                "name": "Label",
+                "value": {
+                    "id": "8cada6ae70364038d1bce833[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "f1e9a646eb7dd1b0c1f9c355",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "4cc9a2660c95da96a8bccb03": {
+            "label": {
+                "id": "4cc9a2660c95da96a8bccb03[label]",
+                "name": "Label",
+                "value": {
+                    "id": "4cc9a2660c95da96a8bccb03[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "fa0c87a6c8f33a5352e384c6",
+            "target": "f72256b641645c3cc84df87e",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "83775e707cdc489f9003fa11": {
+            "label": {
+                "id": "83775e707cdc489f9003fa11[label]",
+                "name": "Label",
+                "value": {
+                    "id": "83775e707cdc489f9003fa11[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "910412a59854785d19793b80",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "310068175062b6da80ea2586": {
+            "label": {
+                "id": "310068175062b6da80ea2586[label]",
+                "name": "Label",
+                "value": {
+                    "id": "310068175062b6da80ea2586[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "7cc4e0171008293b47a76f75",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "f51e2f785e36e71e76ecd480": {
+            "label": {
+                "id": "f51e2f785e36e71e76ecd480[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f51e2f785e36e71e76ecd480[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "fa0c87a6c8f33a5352e384c6",
+            "target": "cb315df7651221da2f45143d",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "de4ef2b2407f53882718c48d": {
+            "label": {
+                "id": "de4ef2b2407f53882718c48d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "de4ef2b2407f53882718c48d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "7cc4e0171008293b47a76f75",
+            "target": "236c54663deccc13258b2a55",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "adeb581031ff56970991733d": {
+            "label": {
+                "id": "adeb581031ff56970991733d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "adeb581031ff56970991733d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "9b506ae998f7743a6a0e7470",
+            "target": "fa0c87a6c8f33a5352e384c6",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "f389dcf0060d6d8811efe8ef": {
+            "label": {
+                "id": "f389dcf0060d6d8811efe8ef[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f389dcf0060d6d8811efe8ef[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "e95478bf849fd4db56776bf6",
+            "target": "1fba2bd12ab4893da3774b27",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "f37062ac55b570cd55bc87b6": {
+            "label": {
+                "id": "f37062ac55b570cd55bc87b6[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f37062ac55b570cd55bc87b6[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "7cc4e0171008293b47a76f75",
+            "target": "986a57bb01365cb57c7dfe35",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "1aed74f5619a470e6a80a503": {
+            "label": {
+                "id": "1aed74f5619a470e6a80a503[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1aed74f5619a470e6a80a503[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "910412a59854785d19793b80",
+            "target": "986a57bb01365cb57c7dfe35",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "979da5bbecb451bd672163f6": {
+            "label": {
+                "id": "979da5bbecb451bd672163f6[label]",
+                "name": "Label",
+                "value": {
+                    "id": "979da5bbecb451bd672163f6[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "910412a59854785d19793b80",
+            "target": "dd34599cb11fbaa06554d5ea",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "502d25aa4067eefcc01e5e62": {
+            "label": {
+                "id": "502d25aa4067eefcc01e5e62[label]",
+                "name": "Label",
+                "value": {
+                    "id": "502d25aa4067eefcc01e5e62[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "46bcf1f57aaa161396fae089",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "895a46e04bed09209fc07e77": {
+            "label": {
+                "id": "895a46e04bed09209fc07e77[label]",
+                "name": "Label",
+                "value": {
+                    "id": "895a46e04bed09209fc07e77[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "64fc584ccce53ec8457a5fb4",
+            "target": "46bcf1f57aaa161396fae089",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "11ae5a913f0615a339f9bdea": {
+            "label": {
+                "id": "11ae5a913f0615a339f9bdea[label]",
+                "name": "Label",
+                "value": {
+                    "id": "11ae5a913f0615a339f9bdea[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "236c54663deccc13258b2a55",
+            "target": "46bcf1f57aaa161396fae089",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "89c8878554b75ad6b746bef3": {
+            "label": {
+                "id": "89c8878554b75ad6b746bef3[label]",
+                "name": "Label",
+                "value": {
+                    "id": "89c8878554b75ad6b746bef3[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "e95478bf849fd4db56776bf6",
+            "target": "46bcf1f57aaa161396fae089",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "cd9083e40a37f8003c20d9b8": {
+            "label": {
+                "id": "cd9083e40a37f8003c20d9b8[label]",
+                "name": "Label",
+                "value": {
+                    "id": "cd9083e40a37f8003c20d9b8[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "b49306f633678e38bfddbbdb",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "a75bbd691713200724dbc1d4": {
+            "label": {
+                "id": "a75bbd691713200724dbc1d4[label]",
+                "name": "Label",
+                "value": {
+                    "id": "a75bbd691713200724dbc1d4[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "b49306f633678e38bfddbbdb",
+            "target": "fdc66e8e6f1f726e3600ca30",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "1fcd10acf58435422d60e9d5": {
+            "label": {
+                "id": "1fcd10acf58435422d60e9d5[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1fcd10acf58435422d60e9d5[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "18983003911655650c6eab9c",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "638c09eff92f764920ad9c40": {
+            "label": {
+                "id": "638c09eff92f764920ad9c40[label]",
+                "name": "Label",
+                "value": {
+                    "id": "638c09eff92f764920ad9c40[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "18983003911655650c6eab9c",
+            "target": "64fc584ccce53ec8457a5fb4",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "a27096a47c35e241ceacff7f": {
+            "label": {
+                "id": "a27096a47c35e241ceacff7f[label]",
+                "name": "Label",
+                "value": {
+                    "id": "a27096a47c35e241ceacff7f[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "18983003911655650c6eab9c",
+            "target": "986a57bb01365cb57c7dfe35",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "b3179bb08cfdfe47be0293cc": {
+            "label": {
+                "id": "b3179bb08cfdfe47be0293cc[label]",
+                "name": "Label",
+                "value": {
+                    "id": "b3179bb08cfdfe47be0293cc[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "08eac7f7397fd1b4a86d2982",
+            "target": "937c7595348d4a33f762f08b",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "5adb7bb05b93197f6ad212e1": {
+            "label": {
+                "id": "5adb7bb05b93197f6ad212e1[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5adb7bb05b93197f6ad212e1[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "67ddcb522efd616423158fac",
+            "target": "937c7595348d4a33f762f08b",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "e8ec74003e5292141dd81524": {
+            "label": {
+                "id": "e8ec74003e5292141dd81524[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e8ec74003e5292141dd81524[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "552e15c3ecf4ff057f9d1799",
+            "target": "cb315df7651221da2f45143d",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "23dc5fe0a56cf05d98b7187d": {
+            "label": {
+                "id": "23dc5fe0a56cf05d98b7187d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "23dc5fe0a56cf05d98b7187d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "08eac7f7397fd1b4a86d2982",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "e51fce195b2abd7f3551f86e": {
+            "label": {
+                "id": "e51fce195b2abd7f3551f86e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e51fce195b2abd7f3551f86e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "67ddcb522efd616423158fac",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "aa1d7aff7fdc4e2893cddc5d": {
+            "label": {
+                "id": "aa1d7aff7fdc4e2893cddc5d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "aa1d7aff7fdc4e2893cddc5d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "552e15c3ecf4ff057f9d1799",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "270254be93077ef173e75376": {
+            "label": {
+                "id": "270254be93077ef173e75376[label]",
+                "name": "Label",
+                "value": {
+                    "id": "270254be93077ef173e75376[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "08eac7f7397fd1b4a86d2982",
+            "target": "b83e9aba4da3b09d9884d2e1",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "9233099fbae39856b066731f": {
+            "label": {
+                "id": "9233099fbae39856b066731f[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9233099fbae39856b066731f[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "67ddcb522efd616423158fac",
+            "target": "ab97a135e2b083007f06c671",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "16745e3d31510d9fcd3aa098": {
+            "label": {
+                "id": "16745e3d31510d9fcd3aa098[label]",
+                "name": "Label",
+                "value": {
+                    "id": "16745e3d31510d9fcd3aa098[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "552e15c3ecf4ff057f9d1799",
+            "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "b911e897db882d13cc2bb359": {
+            "label": {
+                "id": "b911e897db882d13cc2bb359[label]",
+                "name": "Label",
+                "value": {
+                    "id": "b911e897db882d13cc2bb359[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "8984a38d30b7d41105c3fcb3",
+            "target": "b83e9aba4da3b09d9884d2e1",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "85638a7b200ebbc41f079f7e": {
+            "label": {
+                "id": "85638a7b200ebbc41f079f7e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "85638a7b200ebbc41f079f7e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "8984a38d30b7d41105c3fcb3",
+            "target": "cb315df7651221da2f45143d",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "760db7113ae9a11ff1e47948": {
+            "label": {
+                "id": "760db7113ae9a11ff1e47948[label]",
+                "name": "Label",
+                "value": {
+                    "id": "760db7113ae9a11ff1e47948[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ab97a135e2b083007f06c671",
+            "target": "8984a38d30b7d41105c3fcb3",
             "attributes": {},
             "type": "Uni-Dir-Association"
         }

@@ -1,0 +1,396 @@
+{
+    "attributes": {
+        "label": {
+            "id": "modelAttributes[label]",
+            "name": "Label",
+            "value": {
+                "id": "modelAttributes[label]",
+                "name": "Label",
+                "value": "Model Attributes"
+            }
+        },
+        "left": 0,
+        "top": 0,
+        "width": 0,
+        "height": 0,
+        "zIndex": 0,
+        "type": "ModelAttributesNode",
+        "attributes": {}
+    },
+    "nodes": {
+        "ca3089aa1233e22e07c30980": {
+            "label": {
+                "id": "ca3089aa1233e22e07c30980[name]",
+                "name": "Name",
+                "value": {
+                    "id": "ca3089aa1233e22e07c30980[name]",
+                    "name": "Name",
+                    "value": "ExampleVLE"
+                }
+            },
+            "left": 4194,
+            "top": 4298,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16001,
+            "type": "Instance",
+            "attributes": {
+                "4bfaada53679f7e979bcc1e6": {
+                    "id": "ca3089aa1233e22e07c30980[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "ca3089aa1233e22e07c30980[name]",
+                        "name": "Name",
+                        "value": "ExampleVLE"
+                    }
+                },
+                "a7c8d03fd57a143943da1f48": {
+                    "id": "ca3089aa1233e22e07c30980[address]",
+                    "name": "Address",
+                    "value": {
+                        "id": "ca3089aa1233e22e07c30980[address]",
+                        "name": "Address",
+                        "value": "http://127.0.0.1:8080"
+                    }
+                },
+                "3640924305c3d50b3a2de10d": {
+                    "id": "ca3089aa1233e22e07c30980[environment separator]",
+                    "name": "Environment Separator",
+                    "value": {
+                        "id": "ca3089aa1233e22e07c30980[environment separator]",
+                        "name": "Environment Separator",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "ac346e82a96e98a58ab37afc": {
+            "label": {
+                "id": "ac346e82a96e98a58ab37afc[name]",
+                "name": "Name",
+                "value": {
+                    "id": "ac346e82a96e98a58ab37afc[name]",
+                    "name": "Name",
+                    "value": "ExampleBot"
+                }
+            },
+            "left": 4404,
+            "top": 4317,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16002,
+            "type": "Bot",
+            "attributes": {
+                "73cc0ed2e1537be2f965973a": {
+                    "id": "ac346e82a96e98a58ab37afc[language]",
+                    "name": "Language",
+                    "value": {
+                        "id": "ac346e82a96e98a58ab37afc[language]",
+                        "name": "Language",
+                        "value": "English"
+                    },
+                    "option": "English"
+                },
+                "80f33463988c54141b8c4dd8": {
+                    "id": "ac346e82a96e98a58ab37afc[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "ac346e82a96e98a58ab37afc[name]",
+                        "name": "Name",
+                        "value": "ExampleBot"
+                    }
+                },
+                "567bf6800fb85cf28b824379": {
+                    "id": "ac346e82a96e98a58ab37afc[description]",
+                    "name": "Description",
+                    "value": {
+                        "id": "ac346e82a96e98a58ab37afc[description]",
+                        "name": "Description",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "4e66c49b77cffd3ae10ae065": {
+            "label": {
+                "id": "4e66c49b77cffd3ae10ae065[name]",
+                "name": "Name",
+                "value": {
+                    "id": "4e66c49b77cffd3ae10ae065[name]",
+                    "name": "Name",
+                    "value": "ExampleMessenger"
+                }
+            },
+            "left": 4401,
+            "top": 4485,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16005,
+            "type": "Messenger",
+            "attributes": {
+                "646c1466c4bf34e8267c4f26": {
+                    "id": "4e66c49b77cffd3ae10ae065[messenger type]",
+                    "name": "Messenger Type",
+                    "value": {
+                        "id": "4e66c49b77cffd3ae10ae065[messenger type]",
+                        "name": "Messenger Type",
+                        "value": "Telegram"
+                    },
+                    "option": "Telegram"
+                },
+                "fac7a2b850919e041f655919": {
+                    "id": "4e66c49b77cffd3ae10ae065[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "4e66c49b77cffd3ae10ae065[name]",
+                        "name": "Name",
+                        "value": "ExampleMessenger"
+                    }
+                },
+                "4d07dc2fa7f97c4ef5834078": {
+                    "id": "4e66c49b77cffd3ae10ae065[authentication token]",
+                    "name": "Authentication Token",
+                    "value": {
+                        "id": "4e66c49b77cffd3ae10ae065[authentication token]",
+                        "name": "Authentication Token",
+                        "value": "1262627086:AAGIhsj3CfS3zJ_mj_09K5-GL7ltGq3ARcM"
+                    }
+                }
+            }
+        },
+        "1bee5d71e275edf9bf123e07": {
+            "label": {
+                "id": "1bee5d71e275edf9bf123e07[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1bee5d71e275edf9bf123e07[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 49,
+            "top": 10,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16015,
+            "type": "Bot Action",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "1bee5d71e275edf9bf123e07[action type]",
+                    "name": "Action Type",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[action type]",
+                        "name": "Action Type",
+                        "value": "Service"
+                    },
+                    "option": "Service"
+                },
+                "c436dc0e764a63371820e857": {
+                    "id": "1bee5d71e275edf9bf123e07[function name]",
+                    "name": "Function Name",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[function name]",
+                        "name": "Function Name",
+                        "value": ""
+                    }
+                },
+                "bc1335cdf59dedb856e635be": {
+                    "id": "1bee5d71e275edf9bf123e07[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[service alias]",
+                        "name": "Service Alias",
+                        "value": ""
+                    }
+                },
+                "d9bdd693920ce4875f43779a": {
+                    "id": "1bee5d71e275edf9bf123e07[deprecated]",
+                    "name": "deprecated",
+                    "value": {
+                        "id": "1bee5d71e275edf9bf123e07[deprecated]",
+                        "name": "deprecated",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "278ab857fb6f3ad5d6c25088": {
+            "label": {
+                "id": "278ab857fb6f3ad5d6c25088[name]",
+                "name": "Name",
+                "value": {
+                    "id": "278ab857fb6f3ad5d6c25088[name]",
+                    "name": "Name",
+                    "value": "ExampleNLU"
+                }
+            },
+            "left": 4191,
+            "top": 4475,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16018,
+            "type": "Knowledge",
+            "attributes": {
+                "69e4efca72f32b65d1da3612": {
+                    "id": "278ab857fb6f3ad5d6c25088[type]",
+                    "name": "Type",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[type]",
+                        "name": "Type",
+                        "value": "Understanding"
+                    },
+                    "option": "Understanding"
+                },
+                "dbcf8b46f8cd76f445b9dea4": {
+                    "id": "278ab857fb6f3ad5d6c25088[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[name]",
+                        "name": "Name",
+                        "value": "ExampleNLU"
+                    }
+                },
+                "19df132ba486480d8860a040": {
+                    "id": "278ab857fb6f3ad5d6c25088[id]",
+                    "name": "ID",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[id]",
+                        "name": "ID",
+                        "value": ""
+                    }
+                },
+                "c051de6af456e91e52c0c465": {
+                    "id": "278ab857fb6f3ad5d6c25088[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "278ab857fb6f3ad5d6c25088[url]",
+                        "name": "URL",
+                        "value": "http://localhost:5005"
+                    }
+                }
+            }
+        },
+        "21372d6fb9208440eff88491": {
+            "label": {
+                "id": "21372d6fb9208440eff88491[label]",
+                "name": "Label",
+                "value": {
+                    "id": "21372d6fb9208440eff88491[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 7,
+            "top": 13,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16055,
+            "type": "IfThen",
+            "attributes": {
+                "9d0462db54739a7f5a31c4cc": {
+                    "id": "21372d6fb9208440eff88491[condition type]",
+                    "name": "Condition Type",
+                    "value": {
+                        "id": "21372d6fb9208440eff88491[condition type]",
+                        "name": "Condition Type",
+                        "value": "Equals"
+                    },
+                    "option": "Equals"
+                },
+                "16311c25fc308f5a3c484e5c": {
+                    "id": "21372d6fb9208440eff88491[statement type]",
+                    "name": "Statement Type",
+                    "value": {
+                        "id": "21372d6fb9208440eff88491[statement type]",
+                        "name": "Statement Type",
+                        "value": "Return"
+                    },
+                    "option": "Return"
+                },
+                "c367f6348ca0fc45e2017262": {
+                    "id": "21372d6fb9208440eff88491[condition a]",
+                    "name": "Condition A",
+                    "value": {
+                        "id": "21372d6fb9208440eff88491[condition a]",
+                        "name": "Condition A",
+                        "value": ""
+                    }
+                },
+                "a4dba5dbabca20c985c2a5a5": {
+                    "id": "21372d6fb9208440eff88491[condition b]",
+                    "name": "Condition B",
+                    "value": {
+                        "id": "21372d6fb9208440eff88491[condition b]",
+                        "name": "Condition B",
+                        "value": ""
+                    }
+                },
+                "5780867cb1aa3c29cadc2d47": {
+                    "id": "21372d6fb9208440eff88491[statement a]",
+                    "name": "Statement A",
+                    "value": {
+                        "id": "21372d6fb9208440eff88491[statement a]",
+                        "name": "Statement A",
+                        "value": ""
+                    }
+                },
+                "fc1171e531ab34715c17f05d": {
+                    "id": "21372d6fb9208440eff88491[statement b]",
+                    "name": "Statement B",
+                    "value": {
+                        "id": "21372d6fb9208440eff88491[statement b]",
+                        "name": "Statement B",
+                        "value": ""
+                    }
+                }
+            }
+        }
+    },
+    "edges": {
+        "32a5512e51cda30e3ea01f9b": {
+            "label": {
+                "id": "32a5512e51cda30e3ea01f9b[label]",
+                "name": "Label",
+                "value": {
+                    "id": "32a5512e51cda30e3ea01f9b[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ca3089aa1233e22e07c30980",
+            "target": "ac346e82a96e98a58ab37afc",
+            "attributes": {},
+            "type": "has"
+        },
+        "cc60ba7e918a361ed0aa2871": {
+            "label": {
+                "id": "cc60ba7e918a361ed0aa2871[label]",
+                "name": "Label",
+                "value": {
+                    "id": "cc60ba7e918a361ed0aa2871[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ac346e82a96e98a58ab37afc",
+            "target": "4e66c49b77cffd3ae10ae065",
+            "attributes": {},
+            "type": "has"
+        },
+        "9bef2c261a16756ffc798cb9": {
+            "label": {
+                "id": "9bef2c261a16756ffc798cb9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9bef2c261a16756ffc798cb9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ac346e82a96e98a58ab37afc",
+            "target": "278ab857fb6f3ad5d6c25088",
+            "attributes": {},
+            "type": "has"
+        }
+    }
+}
