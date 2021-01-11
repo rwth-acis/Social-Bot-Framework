@@ -37,15 +37,21 @@ class ModelTraining extends PolymerElement {
                 </div>
                 <div class="form-group">
                     <label for="rasaEndpoint">Rasa NLU Endpoint</label>
-                    <input type="text" class="form-control" id="rasaEndpoint" placeholder="" value="http://10.97.81.17:5005"> <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
+                    <input type="text" class="form-control" id="rasaEndpoint" placeholder="" value=""> <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
                 </div>
                 <div class="form-group">
                     <label for="sbfManagerEndpoint">SBF Manager Endpoint</label>
-                    <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager">
+                    <input type="text" class="form-control" id="sbfManagerEndpoint" placeholder="" value="">
+                </div>
+                <div class="form-group">
+                    <label for="dataName">Dataset Name</label>
+                    <input type="text" class="form-control" id="dataName" placeholder="" value="">
                 </div>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="resetForm">Reload example config</button>
                 <button type="button" class="btn btn-lg btn-secondary" on-click="retrieveStatus">Check training status</button>
                 <button type="button" class="btn btn-lg btn-primary" on-click="submitForm">Submit</button>
+                <button type="button" class="btn btn-lg btn-primary" on-click="storeData">Store</button>
+                <button type="button" class="btn btn-lg btn-primary" on-click="loadData">Load</button>
                 <big id="trainingStatus" class="form-text text-muted"></big>
             </form>
         </div>
@@ -57,6 +63,9 @@ class ModelTraining extends PolymerElement {
 
     ready() {
         super.ready();
+        this.rasaEndpoint = this.htmlQuery("#rasaEndpoint");
+        this.sbmEndpoint = this.htmlQuery("#sbfManagerEndpoint");
+        this.dataName = this.htmlQuery("#dataName");
         this.editor = new Quill(this.$.editor, {
             modules: {
                 toolbar: [
@@ -75,6 +84,20 @@ class ModelTraining extends PolymerElement {
             theme: 'snow'  // or 'bubble'
         });
         ModelOps.getY(true).then(y => y.share.training.bindQuill(this.editor));
+        ModelOps.getY(true).then(y => y.share.rasa.bind(this.rasaEndpoint));
+        ModelOps.getY(true).then(y => y.share.sbfManager.bind(this.sbmEndpoint));
+        ModelOps.getY(true).then(y => y.share.dataName.bind(this.dataName));
+
+        ModelOps.getY(true).then(y => y.share.rasa.toString()).then(x => {
+            if (!x) {
+                ModelOps.getY(true).then(z => z.share.rasa.insert(0, '{RASA_NLU}'));
+            }
+        })
+        ModelOps.getY(true).then(y => y.share.sbfManager.toString()).then(x => {
+            if (!x) {
+                ModelOps.getY(true).then(z => z.share.sbfManager.insert(0, '{SBF_MANAGER}'));
+            }
+        })
     }
 
     htmlQuery(query) {
@@ -117,6 +140,46 @@ class ModelTraining extends PolymerElement {
             contentType: "text/plain",
             success: function (data, textStatus, jqXHR) {
                 $(_this.htmlQuery("#trainingStatus")).text(data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);
+            }
+        });
+    }
+
+    storeData() {
+        var _this = this;
+        $(_this.htmlQuery("#trainingStatus")).text("Storing...");
+        var name = $(_this.htmlQuery("#dataName")).val();
+        var trainingData = _this.editor.getText();
+
+        $.ajax({
+            type: "POST",
+            url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/" + name,
+            data: trainingData,
+            contentType: "text/plain",
+            success: function (data, textStatus, jqXHR) {
+                $(_this.htmlQuery("#trainingStatus")).text("Data stored.");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);
+            }
+        });
+    }
+
+    loadData() {
+        var _this = this;
+        $(_this.htmlQuery("#trainingStatus")).text("Loading...");
+        var name = $(_this.htmlQuery("#dataName")).val();
+
+        $.ajax({
+            type: "GET",
+            url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/" + name,
+            contentType: "text/plain",
+            success: function (data, textStatus, jqXHR) {
+                $(_this.htmlQuery("#trainingStatus")).text("Data loaded.");
+                console.log(data)
+                _this.editor.setText(data);
             },
             error: function (xhr, textStatus, errorThrown) {
                 $(_this.htmlQuery("#trainingStatus")).text(textStatus + " - " + errorThrown);

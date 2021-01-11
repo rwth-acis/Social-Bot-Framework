@@ -14,8 +14,6 @@ check_if_exists "$YJS" "YJS"
 check_if_exists "$PORT" "PORT"
 check_if_exists "$OIDC_CLIENT_ID" "OIDC_CLIENT_ID"
 check_if_exists "$YJS_RESOURCE_PATH" "YJS_RESOURCE_PATH"
-check_if_exists "$RASA_NLU" "RASA_NLU"
-check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
 
 
 if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
@@ -23,7 +21,6 @@ if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
     exit 1
 fi
 
-<<<<<<< HEAD
 check_if_exists "$RASA_NLU" "RASA_NLU"
 
 if [ "$ENV_VARIABLE_NOT_SET" = true ] ; then
@@ -44,12 +41,6 @@ fi
 sed -i "s=http://10.97.81.17:5005=$RASA_NLU=g" app/src/model-training.js 
 sed -i "s=http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager=$SBF_MANAGER=g" app/src/model-training.js
 sed -i "s=http://tech4comp.dbis.rwth-aachen.de:30013/SBFManager=$SBF_MANAGER=g" app/src/bot-modeling.js
-=======
-#### Replace SBF Manager and Rasa-NLU URLs ####
-sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js 
-sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" app/src/model-training.js
-sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" syncmeta/widgets/src/js/bot_widget.js
->>>>>>> master
 
 #### Syncmeta ####
 cd syncmeta/widgets
@@ -75,7 +66,6 @@ cd ..
 cp docker/nginx.conf /etc/nginx/conf.d/default.conf
 sed -i "s=<port>=$PORT=g" /etc/nginx/conf.d/default.conf
 /etc/init.d/nginx start
-
 
 #### Supervisor ####
 /usr/bin/supervisord -n
