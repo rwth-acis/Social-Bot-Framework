@@ -263,8 +263,8 @@
                     "value": "Bot Action"
                 }
             },
-            "left": 4656.5,
-            "top": 5169.5,
+            "left": 4626.5,
+            "top": 5209.5,
             "width": 209,
             "height": 132.00000000000003,
             "zIndex": 16005,
@@ -441,8 +441,8 @@
                     "value": "Classifier"
                 }
             },
-            "left": 5721.888888888889,
-            "top": 5307.777777777777,
+            "left": 5951.888888888889,
+            "top": 5259.777777777777,
             "width": 150,
             "height": 100,
             "zIndex": 16007,
@@ -466,8 +466,8 @@
                     "value": "TextToText"
                 }
             },
-            "left": 5959.444444444444,
-            "top": 5412.111111111111,
+            "left": 6057.444444444444,
+            "top": 5398.111111111111,
             "width": 150,
             "height": 100,
             "zIndex": 16008,
@@ -645,8 +645,8 @@
                     "value": "has"
                 }
             },
-            "left": 3522.666666666666,
-            "top": 4612.999999999999,
+            "left": 3457.666666666666,
+            "top": 4592.999999999999,
             "width": 150,
             "height": 100,
             "zIndex": 16013,
@@ -749,8 +749,8 @@
                     "value": "triggers"
                 }
             },
-            "left": 4294.333333333333,
-            "top": 4767.666666666666,
+            "left": 4302.333333333333,
+            "top": 4807.666666666666,
             "width": 150,
             "height": 100,
             "zIndex": 16021,
@@ -846,8 +846,8 @@
                     "value": "uses"
                 }
             },
-            "left": 5106.285714285714,
-            "top": 5797.999999999999,
+            "left": 5130.285714285714,
+            "top": 5697.999999999999,
             "width": 150,
             "height": 100,
             "zIndex": 16026,
@@ -871,8 +871,8 @@
                     "value": "DataGenerator"
                 }
             },
-            "left": 5676.428571428571,
-            "top": 5452.571428571428,
+            "left": 5778.428571428571,
+            "top": 5436.571428571428,
             "width": 150,
             "height": 100,
             "zIndex": 16027,
@@ -1419,6 +1419,15 @@
                                 "id": "39c93b956d1cd3ffa80a3249[value]",
                                 "name": "39c93b956d1cd3ffa80a3249[value]",
                                 "value": "child"
+                            }
+                        },
+                        "1dd8dfa55fa95cfec1341fb3[value]": {
+                            "id": "1dd8dfa55fa95cfec1341fb3[value]",
+                            "name": "Attribute",
+                            "value": {
+                                "id": "1dd8dfa55fa95cfec1341fb3[value]",
+                                "name": "Attribute",
+                                "value": "query"
                             }
                         }
                     }
@@ -2153,8 +2162,8 @@
                     "value": "usesShape"
                 }
             },
-            "left": 5122.999999999999,
-            "top": 5940.999999999999,
+            "left": 5186.999999999999,
+            "top": 5856.999999999999,
             "width": 150,
             "height": 150,
             "zIndex": 16050,
@@ -2750,8 +2759,8 @@
                     "value": "Intent Entity"
                 }
             },
-            "left": 2927.499999999999,
-            "top": 5916.999999999998,
+            "left": 2943.499999999999,
+            "top": 5950.999999999998,
             "width": 150,
             "height": 100,
             "zIndex": 16063,
@@ -2790,8 +2799,8 @@
                     "value": "IntentHasEntity"
                 }
             },
-            "left": 2926.999999999999,
-            "top": 5790.999999999999,
+            "left": 2936.999999999999,
+            "top": 5783.999999999999,
             "width": 150,
             "height": 100,
             "zIndex": 16064,
@@ -3192,8 +3201,8 @@
                     "value": "ReceivesInputFrom"
                 }
             },
-            "left": 4533.571428571428,
-            "top": 5887.571428571428,
+            "left": 4531.571428571428,
+            "top": 5787.571428571428,
             "width": 150,
             "height": 100,
             "zIndex": 16075,
@@ -3210,8 +3219,8 @@
                     "value": "Frame"
                 }
             },
-            "left": 5960.285714285714,
-            "top": 4608.142857142857,
+            "left": 5925.285714285714,
+            "top": 4543.142857142857,
             "width": 150,
             "height": 192.5,
             "zIndex": 16076,
@@ -4727,11 +4736,11 @@
                 "value": {
                     "id": "46bcf1f57aaa161396fae089[label]",
                     "name": "Label",
-                    "value": "Messenger Element"
+                    "value": "Dialogue Element"
                 }
             },
-            "left": 1928.333333333333,
-            "top": 4626.666666666666,
+            "left": 2087.333333333333,
+            "top": 5832.666666666666,
             "width": 150,
             "height": 100,
             "zIndex": 16120,
@@ -4850,6 +4859,474 @@
             "width": 150,
             "height": 100,
             "zIndex": 16126,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "4971c4e6134fed55de692044": {
+            "label": {
+                "id": "4971c4e6134fed55de692044[label]",
+                "name": "Label",
+                "value": {
+                    "id": "4971c4e6134fed55de692044[label]",
+                    "name": "Label",
+                    "value": "fills"
+                }
+            },
+            "left": 2026.9999999999995,
+            "top": 5309.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16127,
+            "type": "Relationship",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueSelectionValueListAttribute",
+                    "list": {
+                        "b30dadf8598e5f6228918de2": {
+                            "id": "b30dadf8598e5f6228918de2",
+                            "name": "b30dadf8598e5f6228918de2",
+                            "key": {
+                                "id": "b30dadf8598e5f6228918de2[key]",
+                                "name": "",
+                                "value": "priority"
+                            },
+                            "value": {
+                                "id": "b30dadf8598e5f6228918de2[value]",
+                                "name": "",
+                                "value": "string"
+                            },
+                            "value2": {
+                                "id": "b30dadf8598e5f6228918de2[value2]",
+                                "name": "",
+                                "value": "hidden"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "d6e07d2ef9a43bf4004e86d8": {
+            "label": {
+                "id": "d6e07d2ef9a43bf4004e86d8[label]",
+                "name": "Label",
+                "value": {
+                    "id": "d6e07d2ef9a43bf4004e86d8[label]",
+                    "name": "Label",
+                    "value": "ActionFillsParameter"
+                }
+            },
+            "left": 2007.9999999999995,
+            "top": 5124.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16128,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "8b793e5ec07e41942120d987": {
+            "label": {
+                "id": "8b793e5ec07e41942120d987[label]",
+                "name": "Label",
+                "value": {
+                    "id": "8b793e5ec07e41942120d987[label]",
+                    "name": "Label",
+                    "value": "FrameFillsParameter"
+                }
+            },
+            "left": 2246.9999999999995,
+            "top": 5303.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16129,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "0d852543f0de6cd9f2bc88ce": {
+            "label": {
+                "id": "0d852543f0de6cd9f2bc88ce[label]",
+                "name": "Label",
+                "value": {
+                    "id": "0d852543f0de6cd9f2bc88ce[label]",
+                    "name": "Label",
+                    "value": "SelectionFillsParameter"
+                }
+            },
+            "left": 2013.9999999999995,
+            "top": 5502.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16130,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "bba4f02d56a5b2ad8a519557": {
+            "label": {
+                "id": "bba4f02d56a5b2ad8a519557[label]",
+                "name": "Label",
+                "value": {
+                    "id": "bba4f02d56a5b2ad8a519557[label]",
+                    "name": "Label",
+                    "value": "fillsShape"
+                }
+            },
+            "left": 1815.5,
+            "top": 5291,
+            "width": 150,
+            "height": 150,
+            "zIndex": 16131,
+            "type": "Edge Shape",
+            "attributes": {
+                "bba4f02d56a5b2ad8a519557[arrow]": {
+                    "id": "bba4f02d56a5b2ad8a519557[arrow]",
+                    "name": "Arrow",
+                    "value": {
+                        "id": "bba4f02d56a5b2ad8a519557[arrow]",
+                        "name": "Arrow",
+                        "value": "unidirassociation"
+                    },
+                    "option": "-->"
+                },
+                "bba4f02d56a5b2ad8a519557[shape]": {
+                    "id": "bba4f02d56a5b2ad8a519557[shape]",
+                    "name": "Shape",
+                    "value": {
+                        "id": "bba4f02d56a5b2ad8a519557[shape]",
+                        "name": "Shape",
+                        "value": "straight"
+                    },
+                    "option": "Straight"
+                },
+                "bba4f02d56a5b2ad8a519557[color]": {
+                    "id": "bba4f02d56a5b2ad8a519557[color]",
+                    "name": "Color",
+                    "value": {
+                        "id": "bba4f02d56a5b2ad8a519557[color]",
+                        "name": "Color",
+                        "value": ""
+                    }
+                },
+                "bba4f02d56a5b2ad8a519557[overlay]": {
+                    "id": "bba4f02d56a5b2ad8a519557[overlay]",
+                    "name": "Overlay Text",
+                    "value": {
+                        "id": "bba4f02d56a5b2ad8a519557[overlay]",
+                        "name": "Overlay Text",
+                        "value": "fills"
+                    }
+                },
+                "bba4f02d56a5b2ad8a519557[overlayPosition]": {
+                    "id": "bba4f02d56a5b2ad8a519557[overlayPosition]",
+                    "name": "Overlay Position",
+                    "value": {
+                        "id": "bba4f02d56a5b2ad8a519557[overlayPosition]",
+                        "name": "Overlay Position",
+                        "value": "center"
+                    },
+                    "option": "Center"
+                },
+                "bba4f02d56a5b2ad8a519557[overlayRotate]": {
+                    "id": "bba4f02d56a5b2ad8a519557[overlayRotate]",
+                    "name": "Autoflip Overlay",
+                    "value": {
+                        "id": "bba4f02d56a5b2ad8a519557[overlayRotate]",
+                        "name": "Autoflip Overlay",
+                        "value": false
+                    }
+                }
+            }
+        },
+        "10dfb2729e47b6fd97285568": {
+            "label": {
+                "id": "10dfb2729e47b6fd97285568[label]",
+                "name": "Label",
+                "value": {
+                    "id": "10dfb2729e47b6fd97285568[label]",
+                    "name": "Label",
+                    "value": "ServiceAccess"
+                }
+            },
+            "left": 5088.999999999999,
+            "top": 6308.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16132,
+            "type": "Abstract Class",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueListAttribute",
+                    "list": {}
+                }
+            }
+        },
+        "5bba2729d5e98b8fb2545050": {
+            "label": {
+                "id": "5bba2729d5e98b8fb2545050[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5bba2729d5e98b8fb2545050[label]",
+                    "name": "Label",
+                    "value": "Info Function"
+                }
+            },
+            "left": 4820.999999999999,
+            "top": 6404.999999999998,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16133,
+            "type": "Object",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueListAttribute",
+                    "list": {
+                        "08afeb5fa4b337978702eeac": {
+                            "id": "08afeb5fa4b337978702eeac",
+                            "name": "08afeb5fa4b337978702eeac",
+                            "key": {
+                                "id": "08afeb5fa4b337978702eeac[key]",
+                                "name": "",
+                                "value": "Function Name"
+                            },
+                            "value": {
+                                "id": "08afeb5fa4b337978702eeac[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "58ec732b29c6dbe86a564eec": {
+                            "id": "58ec732b29c6dbe86a564eec",
+                            "name": "58ec732b29c6dbe86a564eec",
+                            "key": {
+                                "id": "58ec732b29c6dbe86a564eec[key]",
+                                "name": "",
+                                "value": "Service Alias"
+                            },
+                            "value": {
+                                "id": "58ec732b29c6dbe86a564eec[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "2ee466ea455ec9adde761721": {
+                            "id": "2ee466ea455ec9adde761721",
+                            "name": "2ee466ea455ec9adde761721",
+                            "key": {
+                                "id": "2ee466ea455ec9adde761721[key]",
+                                "name": "",
+                                "value": "deprecated"
+                            },
+                            "value": {
+                                "id": "2ee466ea455ec9adde761721[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "507513ef45005778b46c3159": {
+            "label": {
+                "id": "507513ef45005778b46c3159[label]",
+                "name": "Label",
+                "value": {
+                    "id": "507513ef45005778b46c3159[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4852.999999999999,
+            "top": 6652.999999999998,
+            "width": 150,
+            "height": 150,
+            "zIndex": 16134,
+            "type": "Node Shape",
+            "attributes": {
+                "507513ef45005778b46c3159[shape]": {
+                    "id": "507513ef45005778b46c3159[shape]",
+                    "name": "Shape",
+                    "value": {
+                        "id": "507513ef45005778b46c3159[shape]",
+                        "name": "Shape",
+                        "value": "circle"
+                    },
+                    "option": "Circle"
+                },
+                "507513ef45005778b46c3159[color]": {
+                    "id": "507513ef45005778b46c3159[color]",
+                    "name": "Color",
+                    "value": {
+                        "id": "507513ef45005778b46c3159[color]",
+                        "name": "Color",
+                        "value": ""
+                    }
+                },
+                "507513ef45005778b46c3159[defaultWidth]": {
+                    "id": "507513ef45005778b46c3159[defaultWidth]",
+                    "name": "Default Width",
+                    "value": {
+                        "id": "507513ef45005778b46c3159[defaultWidth]",
+                        "name": "Default Width",
+                        "value": 48
+                    }
+                },
+                "507513ef45005778b46c3159[defaultHeight]": {
+                    "id": "507513ef45005778b46c3159[defaultHeight]",
+                    "name": "Default Height",
+                    "value": {
+                        "id": "507513ef45005778b46c3159[defaultHeight]",
+                        "name": "Default Height",
+                        "value": 48
+                    }
+                },
+                "507513ef45005778b46c3159[customShape]": {
+                    "id": "507513ef45005778b46c3159[customShape]",
+                    "name": "Custom Shape",
+                    "value": {
+                        "id": "507513ef45005778b46c3159[customShape]",
+                        "name": "Custom Shape",
+                        "value": "<svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 330 330\" style=\"enable-background:new 0 0 330 330;\" xml:space=\"preserve\">\n<g>\n\t<path d=\"M165,0C74.019,0,0,74.02,0,165.001C0,255.982,74.019,330,165,330s165-74.018,165-164.999C330,74.02,255.981,0,165,0z\n\t\t M165,300c-74.44,0-135-60.56-135-134.999C30,90.562,90.56,30,165,30s135,60.562,135,135.001C300,239.44,239.439,300,165,300z\"/>\n\t<path d=\"M164.998,70c-11.026,0-19.996,8.976-19.996,20.009c0,11.023,8.97,19.991,19.996,19.991\n\t\tc11.026,0,19.996-8.968,19.996-19.991C184.994,78.976,176.024,70,164.998,70z\"/>\n\t<path d=\"M165,140c-8.284,0-15,6.716-15,15v90c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15v-90C180,146.716,173.284,140,165,140z\n\t\t\"/>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg>\n"
+                    }
+                },
+                "507513ef45005778b46c3159[customAnchors]": {
+                    "id": "507513ef45005778b46c3159[customAnchors]",
+                    "name": "Custom Anchors",
+                    "value": {
+                        "id": "507513ef45005778b46c3159[customAnchors]",
+                        "name": "Custom Anchors",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "f6939ffebcd5f4ce32a3fe53": {
+            "label": {
+                "id": "f6939ffebcd5f4ce32a3fe53[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f6939ffebcd5f4ce32a3fe53[label]",
+                    "name": "Label",
+                    "value": "ServiceHasAccessFunction"
+                }
+            },
+            "left": 4600.999999999999,
+            "top": 6011.999999999999,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16135,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "445bd50a5ad31a2defe7ab22": {
+            "label": {
+                "id": "445bd50a5ad31a2defe7ab22[label]",
+                "name": "Label",
+                "value": {
+                    "id": "445bd50a5ad31a2defe7ab22[label]",
+                    "name": "Label",
+                    "value": "GeneratesDialogueElement"
+                }
+            },
+            "left": 4530.75,
+            "top": 6377.75,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16136,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "33d7a635188b533a85eb3f98": {
+            "label": {
+                "id": "33d7a635188b533a85eb3f98[label]",
+                "name": "Label",
+                "value": {
+                    "id": "33d7a635188b533a85eb3f98[label]",
+                    "name": "Label",
+                    "value": "FillsParameter"
+                }
+            },
+            "left": 4546.5,
+            "top": 6681,
+            "width": 152.5,
+            "height": 100,
+            "zIndex": 16137,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "727ecb6be95725f13646d314": {
+            "label": {
+                "id": "727ecb6be95725f13646d314[label]",
+                "name": "Label",
+                "value": {
+                    "id": "727ecb6be95725f13646d314[label]",
+                    "name": "Label",
+                    "value": "GeneratesEntity"
+                }
+            },
+            "left": 4539.5,
+            "top": 6526.5,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16138,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "82f526f2fdd345f5f62c2e8b": {
+            "label": {
+                "id": "82f526f2fdd345f5f62c2e8b[label]",
+                "name": "Label",
+                "value": {
+                    "id": "82f526f2fdd345f5f62c2e8b[label]",
+                    "name": "Label",
+                    "value": "SelectionTriggersAction"
+                }
+            },
+            "left": 2330.2857142857138,
+            "top": 3946,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16139,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "5dca5d8f1b2f743ec759d7d2": {
+            "label": {
+                "id": "5dca5d8f1b2f743ec759d7d2[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5dca5d8f1b2f743ec759d7d2[label]",
+                    "name": "Label",
+                    "value": "InfohasAttribute"
+                }
+            },
+            "left": 4595.25,
+            "top": 6235.25,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16140,
+            "type": "Relation",
+            "attributes": {}
+        },
+        "ffeecd72fa96ebd130846ae7": {
+            "label": {
+                "id": "ffeecd72fa96ebd130846ae7[label]",
+                "name": "Label",
+                "value": {
+                    "id": "ffeecd72fa96ebd130846ae7[label]",
+                    "name": "Label",
+                    "value": "InfoGeneratesAttribute"
+                }
+            },
+            "left": 4807.285714285714,
+            "top": 6212.857142857142,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16141,
             "type": "Relation",
             "attributes": {}
         }
@@ -7659,6 +8136,531 @@
             "target": "8984a38d30b7d41105c3fcb3",
             "attributes": {},
             "type": "Uni-Dir-Association"
+        },
+        "f1209118edb898c5fe433bd3": {
+            "label": {
+                "id": "f1209118edb898c5fe433bd3[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f1209118edb898c5fe433bd3[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d6e07d2ef9a43bf4004e86d8",
+            "target": "4971c4e6134fed55de692044",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "96e877b62de11f97aff56059": {
+            "label": {
+                "id": "96e877b62de11f97aff56059[label]",
+                "name": "Label",
+                "value": {
+                    "id": "96e877b62de11f97aff56059[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "8b793e5ec07e41942120d987",
+            "target": "4971c4e6134fed55de692044",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "5e10ac8da1537850891a3a74": {
+            "label": {
+                "id": "5e10ac8da1537850891a3a74[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5e10ac8da1537850891a3a74[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "0d852543f0de6cd9f2bc88ce",
+            "target": "4971c4e6134fed55de692044",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "b648c7ecf9818180cfb64939": {
+            "label": {
+                "id": "b648c7ecf9818180cfb64939[label]",
+                "name": "Label",
+                "value": {
+                    "id": "b648c7ecf9818180cfb64939[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d6e07d2ef9a43bf4004e86d8",
+            "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "69214aecae2c2f6d1c8ec926": {
+            "label": {
+                "id": "69214aecae2c2f6d1c8ec926[label]",
+                "name": "Label",
+                "value": {
+                    "id": "69214aecae2c2f6d1c8ec926[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "8b793e5ec07e41942120d987",
+            "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "f7d9c93ee57f2cbcfa51f2f5": {
+            "label": {
+                "id": "f7d9c93ee57f2cbcfa51f2f5[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f7d9c93ee57f2cbcfa51f2f5[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "0d852543f0de6cd9f2bc88ce",
+            "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "9616d3b878f081960cc3a7a9": {
+            "label": {
+                "id": "9616d3b878f081960cc3a7a9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9616d3b878f081960cc3a7a9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "0d852543f0de6cd9f2bc88ce",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "55fafb6c60e93d02dbed7761": {
+            "label": {
+                "id": "55fafb6c60e93d02dbed7761[label]",
+                "name": "Label",
+                "value": {
+                    "id": "55fafb6c60e93d02dbed7761[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "236c54663deccc13258b2a55",
+            "target": "8b793e5ec07e41942120d987",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "4ccac31d5a400d9e9ce2ed84": {
+            "label": {
+                "id": "4ccac31d5a400d9e9ce2ed84[label]",
+                "name": "Label",
+                "value": {
+                    "id": "4ccac31d5a400d9e9ce2ed84[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ab97a135e2b083007f06c671",
+            "target": "d6e07d2ef9a43bf4004e86d8",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "ed6f96fafdae7f0a06596ca1": {
+            "label": {
+                "id": "ed6f96fafdae7f0a06596ca1[label]",
+                "name": "Label",
+                "value": {
+                    "id": "ed6f96fafdae7f0a06596ca1[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "4971c4e6134fed55de692044",
+            "target": "bba4f02d56a5b2ad8a519557",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "9264fff6c70c53131d11411f": {
+            "label": {
+                "id": "9264fff6c70c53131d11411f[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9264fff6c70c53131d11411f[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ab97a135e2b083007f06c671",
+            "target": "10dfb2729e47b6fd97285568",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "1aa32e7424ace4954b1f3bbd": {
+            "label": {
+                "id": "1aa32e7424ace4954b1f3bbd[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1aa32e7424ace4954b1f3bbd[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "cab621900861442260e8608a",
+            "target": "10dfb2729e47b6fd97285568",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "9c1f629d9997507ab9dd1b49": {
+            "label": {
+                "id": "9c1f629d9997507ab9dd1b49[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9c1f629d9997507ab9dd1b49[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5bba2729d5e98b8fb2545050",
+            "target": "507513ef45005778b46c3159",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "564106c919ba7de8f96fc2a9": {
+            "label": {
+                "id": "564106c919ba7de8f96fc2a9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "564106c919ba7de8f96fc2a9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5bba2729d5e98b8fb2545050",
+            "target": "10dfb2729e47b6fd97285568",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "fe36c09501c9c454c481c64b": {
+            "label": {
+                "id": "fe36c09501c9c454c481c64b[label]",
+                "name": "Label",
+                "value": {
+                    "id": "fe36c09501c9c454c481c64b[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f96d2f54b422b3889d5475e7",
+            "target": "f6939ffebcd5f4ce32a3fe53",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "7b99a2838baa65a9df7a4dcb": {
+            "label": {
+                "id": "7b99a2838baa65a9df7a4dcb[label]",
+                "name": "Label",
+                "value": {
+                    "id": "7b99a2838baa65a9df7a4dcb[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f6939ffebcd5f4ce32a3fe53",
+            "target": "1fba2bd12ab4893da3774b27",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "c3f254817ce72baddc45797e": {
+            "label": {
+                "id": "c3f254817ce72baddc45797e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "c3f254817ce72baddc45797e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f6939ffebcd5f4ce32a3fe53",
+            "target": "10dfb2729e47b6fd97285568",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "256962ce26c9b1f75e7951fb": {
+            "label": {
+                "id": "256962ce26c9b1f75e7951fb[label]",
+                "name": "Label",
+                "value": {
+                    "id": "256962ce26c9b1f75e7951fb[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5bba2729d5e98b8fb2545050",
+            "target": "445bd50a5ad31a2defe7ab22",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "0e46419cabed04240cb35caa": {
+            "label": {
+                "id": "0e46419cabed04240cb35caa[label]",
+                "name": "Label",
+                "value": {
+                    "id": "0e46419cabed04240cb35caa[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5bba2729d5e98b8fb2545050",
+            "target": "33d7a635188b533a85eb3f98",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "f4c57b1c92291ac46bd9a50f": {
+            "label": {
+                "id": "f4c57b1c92291ac46bd9a50f[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f4c57b1c92291ac46bd9a50f[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5bba2729d5e98b8fb2545050",
+            "target": "727ecb6be95725f13646d314",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "945a727f89faf7eea6273399": {
+            "label": {
+                "id": "945a727f89faf7eea6273399[label]",
+                "name": "Label",
+                "value": {
+                    "id": "945a727f89faf7eea6273399[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "445bd50a5ad31a2defe7ab22",
+            "target": "cb315df7651221da2f45143d",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "7036e788dd536584d1e13232": {
+            "label": {
+                "id": "7036e788dd536584d1e13232[label]",
+                "name": "Label",
+                "value": {
+                    "id": "7036e788dd536584d1e13232[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "727ecb6be95725f13646d314",
+            "target": "cb315df7651221da2f45143d",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "6b6afc9bca3113ca5711e329": {
+            "label": {
+                "id": "6b6afc9bca3113ca5711e329[label]",
+                "name": "Label",
+                "value": {
+                    "id": "6b6afc9bca3113ca5711e329[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "727ecb6be95725f13646d314",
+            "target": "b83e9aba4da3b09d9884d2e1",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "4824edc8148ad4eabbcb6598": {
+            "label": {
+                "id": "4824edc8148ad4eabbcb6598[label]",
+                "name": "Label",
+                "value": {
+                    "id": "4824edc8148ad4eabbcb6598[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "33d7a635188b533a85eb3f98",
+            "target": "4971c4e6134fed55de692044",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "3ac6ebb35b5fe0a0f7d872be": {
+            "label": {
+                "id": "3ac6ebb35b5fe0a0f7d872be[label]",
+                "name": "Label",
+                "value": {
+                    "id": "3ac6ebb35b5fe0a0f7d872be[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "33d7a635188b533a85eb3f98",
+            "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "2b8c060598eb6da7b00c4eda": {
+            "label": {
+                "id": "2b8c060598eb6da7b00c4eda[label]",
+                "name": "Label",
+                "value": {
+                    "id": "2b8c060598eb6da7b00c4eda[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "445bd50a5ad31a2defe7ab22",
+            "target": "46bcf1f57aaa161396fae089",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "584d3e8a686609f1993bf6fc": {
+            "label": {
+                "id": "584d3e8a686609f1993bf6fc[label]",
+                "name": "Label",
+                "value": {
+                    "id": "584d3e8a686609f1993bf6fc[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f72256b641645c3cc84df87e",
+            "target": "82f526f2fdd345f5f62c2e8b",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "bbce7bed18fe9fb56a53ea92": {
+            "label": {
+                "id": "bbce7bed18fe9fb56a53ea92[label]",
+                "name": "Label",
+                "value": {
+                    "id": "bbce7bed18fe9fb56a53ea92[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "82f526f2fdd345f5f62c2e8b",
+            "target": "986a57bb01365cb57c7dfe35",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "e70748cc5b7fabb86de34103": {
+            "label": {
+                "id": "e70748cc5b7fabb86de34103[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e70748cc5b7fabb86de34103[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "82f526f2fdd345f5f62c2e8b",
+            "target": "ab97a135e2b083007f06c671",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "67ed1b9a0955243271a6d0c1": {
+            "label": {
+                "id": "67ed1b9a0955243271a6d0c1[label]",
+                "name": "Label",
+                "value": {
+                    "id": "67ed1b9a0955243271a6d0c1[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5bba2729d5e98b8fb2545050",
+            "target": "5dca5d8f1b2f743ec759d7d2",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "5514df84fb4503d081dac033": {
+            "label": {
+                "id": "5514df84fb4503d081dac033[label]",
+                "name": "Label",
+                "value": {
+                    "id": "5514df84fb4503d081dac033[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5dca5d8f1b2f743ec759d7d2",
+            "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "44edc0f6bf996176464d75d6": {
+            "label": {
+                "id": "44edc0f6bf996176464d75d6[label]",
+                "name": "Label",
+                "value": {
+                    "id": "44edc0f6bf996176464d75d6[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5dca5d8f1b2f743ec759d7d2",
+            "target": "1fba2bd12ab4893da3774b27",
+            "attributes": {},
+            "type": "Generalisation"
+        },
+        "cfc8eeb4c39983bfe08098d8": {
+            "label": {
+                "id": "cfc8eeb4c39983bfe08098d8[label]",
+                "name": "Label",
+                "value": {
+                    "id": "cfc8eeb4c39983bfe08098d8[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "5bba2729d5e98b8fb2545050",
+            "target": "ffeecd72fa96ebd130846ae7",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "9723df567737d8342719d1f9": {
+            "label": {
+                "id": "9723df567737d8342719d1f9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9723df567737d8342719d1f9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ffeecd72fa96ebd130846ae7",
+            "target": "d550c4413a3a05e894fa7960",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "81decf2fdb2feb9cd0241067": {
+            "label": {
+                "id": "81decf2fdb2feb9cd0241067[label]",
+                "name": "Label",
+                "value": {
+                    "id": "81decf2fdb2feb9cd0241067[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ffeecd72fa96ebd130846ae7",
+            "target": "cb315df7651221da2f45143d",
+            "attributes": {},
+            "type": "Generalisation"
         }
     }
 }
