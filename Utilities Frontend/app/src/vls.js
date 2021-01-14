@@ -369,6 +369,14 @@
                 "a5844a8bde0637231a942b69": {
                     "key": "Message",
                     "value": "string"
+                },
+                "5f2b4ee11564428b5dc3fe28": {
+                    "key": "FileURL",
+                    "value": "string"
+                },
+                "4c9be5afd81d19bdc0b219cb": {
+                    "key": "ErrorMessage",
+                    "value": "string"
                 }
             },
             "shape": {
