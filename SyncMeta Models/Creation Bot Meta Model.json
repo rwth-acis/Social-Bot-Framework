@@ -426,6 +426,20 @@
                                 "name": "",
                                 "value": "string"
                             }
+                        },
+                        "f73b1e74957ac92455bd56de": {
+                            "id": "f73b1e74957ac92455bd56de",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "f73b1e74957ac92455bd56de[key]",
+                                "name": "",
+                                "value": "Format"
+                            },
+                            "value": {
+                                "id": "f73b1e74957ac92455bd56de[value]",
+                                "name": "",
+                                "value": "string"
+                            }
                         }
                     }
                 }
@@ -1423,10 +1437,10 @@
                         },
                         "1dd8dfa55fa95cfec1341fb3[value]": {
                             "id": "1dd8dfa55fa95cfec1341fb3[value]",
-                            "name": "Attribute",
+                            "name": "1dd8dfa55fa95cfec1341fb3[value]",
                             "value": {
                                 "id": "1dd8dfa55fa95cfec1341fb3[value]",
-                                "name": "Attribute",
+                                "name": "1dd8dfa55fa95cfec1341fb3[value]",
                                 "value": "query"
                             }
                         }
@@ -4875,7 +4889,7 @@
             "left": 2026.9999999999995,
             "top": 5309.999999999999,
             "width": 150,
-            "height": 100,
+            "height": 121.66666666666669,
             "zIndex": 16127,
             "type": "Relationship",
             "attributes": {
@@ -4890,7 +4904,7 @@
                             "key": {
                                 "id": "b30dadf8598e5f6228918de2[key]",
                                 "name": "",
-                                "value": "priority"
+                                "value": "content"
                             },
                             "value": {
                                 "id": "b30dadf8598e5f6228918de2[value]",
@@ -4899,6 +4913,44 @@
                             },
                             "value2": {
                                 "id": "b30dadf8598e5f6228918de2[value2]",
+                                "name": "",
+                                "value": "hidden"
+                            }
+                        },
+                        "5bb0cbfe8191ba62c3c5adaa": {
+                            "id": "5bb0cbfe8191ba62c3c5adaa",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "5bb0cbfe8191ba62c3c5adaa[key]",
+                                "name": "",
+                                "value": "format"
+                            },
+                            "value": {
+                                "id": "5bb0cbfe8191ba62c3c5adaa[value]",
+                                "name": "",
+                                "value": "string"
+                            },
+                            "value2": {
+                                "id": "5bb0cbfe8191ba62c3c5adaa[value2]",
+                                "name": "",
+                                "value": "hidden"
+                            }
+                        },
+                        "60378c8ebfb819746ed7c594": {
+                            "id": "60378c8ebfb819746ed7c594",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "60378c8ebfb819746ed7c594[key]",
+                                "name": "",
+                                "value": "options"
+                            },
+                            "value": {
+                                "id": "60378c8ebfb819746ed7c594[value]",
+                                "name": "",
+                                "value": "string"
+                            },
+                            "value2": {
+                                "id": "60378c8ebfb819746ed7c594[value2]",
                                 "name": "",
                                 "value": "hidden"
                             }
@@ -4953,8 +5005,8 @@
                     "value": "SelectionFillsParameter"
                 }
             },
-            "left": 2013.9999999999995,
-            "top": 5502.999999999999,
+            "left": 2015.9999999999995,
+            "top": 5559.999999999999,
             "width": 150,
             "height": 100,
             "zIndex": 16130,
