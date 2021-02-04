@@ -107,6 +107,9 @@ The Intent attribute of the follow up Incoming Message elements can remain empty
 Continuing the previous greeting example, the user could have changed the bot's initial message to "Hello :), how was your day?". To model a fitting response, the user added the Intents "positiv" & "negativ", added new Incoming Message elements with the leadsTo relation and added Chat Responses with fitting answers. The bot would now, after asking the user about their day, expect a positiv or negativ answer and respond accordingly. 
 
 ### Create communication state with service
+In addition to modelling simple textual responses, it is also possible to let the bot send a file to the user as a response. For that purpose, the Chat Response Element contains two additional attributes called "FileURL" and "ErrorMessage". FileURL should simply contain the URL to the file's download page. ErrorMessage should simply contain a message, which will be sent to the user in case an error occurs when retrieving the file. 
+Currently, the placeholder "menteeEmail" is available for the FileURL attribute. If "menteeEmail" is contained in the FileURL, it will be replaced by the user's email address.   
+### Create communication state with service
 There is the possiblity to let users communicate and send messages to a specific triggered service for a certain period of time, depending on the service.
 During this communication state the service will receive every user message and also have the possibility to communicate with the user. 
 To model this you need to do the following:
