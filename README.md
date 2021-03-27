@@ -129,11 +129,242 @@ The `text` attribute represents the service's response to the user.
 The `closeContext` attribute is a boolean value which informs the Social Bot Manager if the communication state is to be maintained or stopped. (Note that, if no closeContext attribute is found, the communication state will automatically be stopped.)
 
 
-### Start Menu
+# Bot Menu
 
-We have three basic dialogue elements that can be combined to model a dialogue. The Incoming Message that assigns chat responses to user intents, the Selection that gives the user responses to choose from, the Frame that generates an information collecting sub dialogue related to an action.
+At the beginning of a dialogue, the bot will introduce himself. Therefore the bot will generate a list of possible commands given by the frames and selections that are connected to the messenger or a domain. To use this the command name has to be defined in the element, otherwise, the element is ignored.
 
-In the beginning of a dialogue the bot will introduce himself. Therefore the bot will generate a list of possible commands given by the frames and selections that are connected to the messenger or a domain. To use this the command name have to be defined in the element, otherwise the element is ignored.
+We have three basic dialogue elements that can be combined to model a dialogue. The Incoming Message assigns chat responses to user intents, the Selection that gives the user responses to choose from, the Frame that generates an information collecting sub dialogue related to an action.
+
+# Modelling Elements
+
+## Instance
+VLE Instance
+ - **Name**: (optional)
+ - **Address**: URL address 
+
+## Bot
+
+ - **Name**: Name of your bot. Used to identify your bot inside social bot manager service.
+ - **Description**: Description of your bot (optional). Used to generate the Bot Menu.
+
+## Knowledge
+ 
+The Knowledge element registers external NLU Modules. / Defines the internal NLG Module.
+
+ ### Attributes
+ 
+ - **Type**: Defines if Knowledge refers to Language Understanding or Language Generation. Default: Understanding
+ - **Name**: Name of the NLU Module 
+ -  **ID**: Identification of the Knowledge Module (optional)
+ -  **URL**: URL Address of the external server.
+ ### Associations
+
+- ***triggers***: Incoming Message
+
+## Incoming Message
+ 
+ The Incoming Message can Trigger 
+
+ ### Attributes
+ 
+ - **Intent Keyword**: Related to NLU Module. Triggers Dialogue.
+ - **Response Message**: Message that the Bot answers after the Intent Keyword is identified.
+
+ ### Associations
+
+- ***triggers***: Chat Response
+
+## Frame
+
+An element that triggers a Bot Action. Enables automatic parameter filling. Shown in the Bot Menu.
+
+ ### Attributes
+
+ - **Intent Keyword**: Related to NLU Module. Triggers Dialogue.
+ - **Success Response**: Message that the Bot answers if the Service Access is successful (optional). Default: The Service Access Response.
+ - **Error Response**: Message that the Bot answers if the Service Access is not successful (optional). Default: The Service Access Response.
+
+ - **Operation Name**: Command Name (optional). Displayed in the Bot Menu. Default: Intent Keyword.
+ - **Operation Description**: Command Description (optional). Displayed in the Bot Menu.
+
+ ### Associations
+
+- ***triggers***: Bot Action
+-  ***fills***: Action Parameter
+
+## Selection
+
+The Selection allows offering answer possibilities.
+
+ ### Attributes
+
+ - **Intent Keyword**: Related to NLU Module. Triggers Dialogue.
+- **Response Message**: Message that the Bot answers after the Intent Keyword is identified.
+
+ - **Operation Name**: Command Name (optional). Displayed in the Bot Menu. Default: Intent Keyword.
+ - **Operation Description**: Command Description (optional). Displayed in the Bot Menu.
+
+ ### Associations
+
+- ***triggers***: Incoming Message
+- ***triggers***: Chat Response
+- ***triggers***: Frame
+-  ***precedes***: Selection
+- ***fills***: Action Parameter
+- **uses***: Intent Entity
+
+
+## Bot Action
+ 
+Action the Bot should perform.
+
+ ### Attributes
+ 
+ - **Type**: The Type of Bot Action:
+	 - Service: Access las2peer Service
+	 - OpenAPI: Access OpenAPI documented Service
+ - **Function Name**: Operation Name corresponding to OpenAPI documentation.
+ - **Service Alias**: Service Alias of las2peer service / service URL of OpenAPI service.
+
+ ### Associations
+
+- ***has***: Action Parameter
+
+## Action Parameter
+ 
+Parameter of a Service Function
+
+ ### Attributes
+  
+ - **ParameterType**: Type of Parameter
+	 - Path: Path Parameter
+	 - Query: Query Parameter
+	 - Body: Body Parameter
+	 - Child: Sub Paramter of Body Parameter
+ -  **Name**: Name of Parameter. Refers to OpenAPI Documentation. Used to identify parameter when merging.
+ - **ContentType**: Content Type that the Parameter accepts
+ - **Content**: (optional) Static value to fill this parameter
+ - **Format**: (optional) Format that this parameter accepts
+ - **URL**: (optional) URL address to receive information about this parameter.
+ - **URL Key**: (optional) Keyword to identify values in a JSON response.
+ - **Key Fill**: (optional) Fill parameter
+
+## Info Function
+ 
+Service Access to receive Information
+
+ ### Attributes
+ 
+ - **Type**: The Type of Bot Action:
+	 - Service: Access las2peer Service
+	 - OpenAPI: Access OpenAPI documented Service
+ - **Function Name**: Operation Name corresponding to OpenAPI documentation.
+ - **Service Alias**: Service Alias of las2peer service / service URL of OpenAPI service.
+
+ ### Associations
+
+- ***has***: Action Parameter
+- ***generates***: Selection
+- ***generates***: Incoming Message
+- ***generates***: Intent Entity
+
+
+## Domain
+ 
+Domain to group Dialogue Elements
+
+ ### Attributes
+ 
+ - **Name**: Name of Domain. Used in Bot Menu.
+ - **Description**: (optional) Description of Domain. Used in Bot Menu.
+
+ ### Associations
+
+- ***has***: Incoming Message
+- ***has***: Selection
+- ***has***: Frame
+- 
+## Service
+
+This Element defines a Web Service
+
+ ### Attributes
+ 
+ - **Type**: Related to NLU Module. Triggers Dialogue.
+ - **Service Alias**: Message that the Bot answers after the Intent Keyword is identified.
+ - **Service URL**: Message that the Bot answers after the Intent Keyword is identified.
+ - **Swagger URL**: Message that the Bot answers after the Intent Keyword is identified.
+
+ ### Associations
+
+- ***has***: Bot Action
+- ***has***: Info Function
+- ***has***: Service Event
+
+## Service Event
+ 
+An event that is triggered by a service
+
+ ### Attributes
+ 
+ - **Name**: Name of Event
+ 
+ ### Associations
+
+- ***triggers***: Chat Response
+- 
+## Intent Entity
+ 
+Intent Entity 
+
+ ### Attributes
+ 
+ - **Name**: Name of Entity
+ - 
+## File
+ 
+Represents a File
+
+ ### Attributes
+ 
+ - **Name**: Name of File
+ -  **Type**: Type of File 
+ 
+ ### Associations
+
+- ***generates***: Action Parameter
+
+# Design Pattern
+
+## Service Access Function
+
+### Auto Generated
+
+For a basic Service Access Action, a **Frame** needs to **trigger** a **Bot Action**. If a frame triggers a bot action it automatically recognizes its parameters (also non modeled parameters, if open API documentation is available). and creates a dialogue that tries to ask the user for the values of the parameters. 
+
+### With Custom Parameter Information
+
+To give additional information about the Parameters a **Bot Action** can **has** one or multiple **Action Parameter**. The modeled parameters can be used to give further instructions to the dialogue generation. The System will use the Action Parameter Name to identify the corresponding parameter in the OpenAPI specification. If such a parameter can be identified, the parameter information from the model is merged into the parameter information received from the OpenAPI Specification. 
+
+#### Static Content
+
+if the Content Attribute is filled with a value, the Bot Action is always performed with this exact value. As a Consequence, the Bot does not ask for this parameter during the filling dialogue.
+
+#### Dynamic Enums
+You can define a set of Values that is applicable for the parameter that is received from a Service Function. For this, you can either use the URL and URL Key Attribute. Or **Info Function** **generates** the **Action Parameter**. If a parameter is generated by an info function, the frame interprets the result of the info function as a list of possible values (like a selection). The label of the generates association defines the key to interpret the JSON response. 
+
+#### Dynamic Enums  With Parameters
+
+The info function may have also parameters that need to be filled. If this is the case the Frame will by default include them in the dialogue. Often the required parameter is also part of the Bot Actions parameters. If this is the case you can link both parameters by modeling **Frame** **fills** the **Action Parameter**.  As the Label of the fill Association, you have to choose the parameter name of the Bot Action. Alternative a **Selection** may fill the **Action Parameter**.
+
+One common design pattern would be to use the Info function to receive existing objects and use them in the bot action to alter one of these objects. Another design pattern would be to get the existing objects and use them as a filter in the request of another bot action. The info function may have
+
+#### Dynamic Format
+
+To override the Format in the OpenAPI Specification you can use the Format Attribute. You can also define a dynamic format that is received by an Info Function.
+
+
+
 
 ### Frames 
 
