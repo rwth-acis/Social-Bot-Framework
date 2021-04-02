@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:12
 
 ENV YJS_RESOURCE_PATH "/socket.io"
 ENV PORT 8070
@@ -15,7 +15,7 @@ COPY ${src} /etc/supervisor/conf.d
 
 
 WORKDIR /usr/src/app
-COPY syncmeta syncmeta
+COPY ${srx}/syncmeta syncmeta
 
 
 WORKDIR /usr/src/app/syncmeta
@@ -32,6 +32,7 @@ RUN cd widgets && npm install
 WORKDIR /usr/src/app
 COPY ${srx} .
 WORKDIR /usr/src/app/app
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN npm install
 
 WORKDIR /usr/src/app

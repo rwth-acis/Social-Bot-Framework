@@ -12,12 +12,15 @@ RUN npm_config_user=root npm install -g bower grunt-cli grunt polymer-cli gulp
 COPY docker/supervisorConfigs /etc/supervisor/conf.d
 
 WORKDIR /usr/src/app
-COPY syncmeta syncmeta
+COPY /syncmeta syncmeta
 
 WORKDIR /usr/src/app/syncmeta
 RUN npm install
 
 WORKDIR /usr/src/app/syncmeta
+RUN npm install
+RUN cp -a node_modules/@rwth-acis/syncmeta-widgets/. widgets/
+RUN cp -a node_modules/. widgets/node_modules/
 COPY docker/_bot_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
 COPY docker/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
 COPY docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
