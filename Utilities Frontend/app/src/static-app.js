@@ -5,7 +5,8 @@ import '@polymer/app-route/app-route.js';
 import '@polymer/iron-pages/iron-pages.js';
 import Common from './common.js';
 import ModelOps from './model-ops.js';
-
+import Auth from "las2peer-project-widget/util/auth";
+import Common2 from "las2peer-project-widget/util/common";
 /**
  * @customElement
  * @polymer
@@ -64,13 +65,16 @@ class StaticApp extends PolymerElement {
         oidcpopupsigninurl="/src/callbacks/popup-signin-callback.html"
         oidcpopupsignouturl="/src/callbacks/popup-signout-callback.html"
         oidcsilentsigninturl="/src/callbacks/silent-callback.html"
-        oidcclientid="{OIDC_CLIENT_ID}"
+        oidcclientid="d8e6c0d3-fb09-49cc-9a6d-f1763d39a0a7"
         autoAppendWidget=true
       ></las2peer-frontend-statusbar>    
 
       <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
           <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="/project-management">Project Management<span class="sr-only"></span></a>
+                  </li>
                   <li class="nav-item">
                       <a class="nav-link" href="/bot-modeling">Bot Modeling<span class="sr-only"></span></a>
                   </li>
@@ -83,16 +87,13 @@ class StaticApp extends PolymerElement {
 
       <div>
         <p id="currentRoom">Current Space: Test</p>
-        <div id="yjsroomcontainer">
-          <paper-input id="yjsRoomInput" always-float-label label="Space"></paper-input>
-          <paper-button on-click="_onChangeButtonClicked">Enter</paper-button>
-          <div class="loader" id="roomEnterLoader"></div> 
-        </div>
+        <div class="loader" id="roomEnterLoader"></div> 
       </div>
 
       <app-location route="{{route}}"></app-location>
       <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
       <iron-pages selected="[[page]]" attr-for-selected="name" selected-attribute="visible" fallback-selection="404">
+      <project-management name="project-management"></project-management>
         <bot-modeling name="bot-modeling"></bot-modeling>
         <model-training name="model-training"></model-training>
       </iron-pages>  
@@ -151,23 +152,52 @@ class StaticApp extends PolymerElement {
       case 'model-training':
         import('./model-training.js').then()
         break;
+      case 'project-management':
+        import('./project-management.js').then()
+        break;
       default:
         this.page = 'sbf';
     }
   }
+  
 
   ready() {
     super.ready();
     const statusBar = this.shadowRoot.querySelector("#statusBar");
     statusBar.addEventListener('signed-in', this.handleLogin);
     statusBar.addEventListener('signed-out', this.handleLogout);
+    window.addEventListener('room-changed', this._changeRoom.bind(this));
     this.displayCurrentRoomName();
+  }
+
+
+  _changeRoom(event){
+    var roomName = event.detail.name;
+    Common.setYjsRoomName(roomName);
+    this.changeVisibility("#roomEnterLoader", true);
+    ModelOps.uploadMetaModel()
+      .then(_ => new Promise((resolve, reject) => {
+        // wait for data become active
+        setTimeout(_ => resolve(), 2000);
+      }))
+      .then(_ => location.reload());
+      ModelOps.uploadBotModel()
+      .then(_ => new Promise((resolve, reject) => {
+        // wait for data become active
+        setTimeout(_ => resolve(), 2000);
+      }))
+      .then(_ => location.reload());
   }
 
   _onChangeButtonClicked() {
     var roomName = this.shadowRoot.querySelector('#yjsRoomInput').value;
+    console.log(roomName);
     Common.setYjsRoomName(roomName);
+ //   setTimeout(function(){ alert("Hello"); }, 4000);
+    console.log(this);
     this.changeVisibility("#roomEnterLoader", true);
+    console.log("Modelops");
+    console.log(ModelOps);
     ModelOps.uploadMetaModel()
       .then(_ => new Promise((resolve, reject) => {
         // wait for data become active
@@ -202,14 +232,29 @@ class StaticApp extends PolymerElement {
   } 
 
   handleLogin(event) {
+    console.log("logging in now in handlelogin");
     localStorage.setItem("access_token", event.detail.access_token);
     localStorage.setItem("userinfo_endpoint", "https://api.learning-layers.eu/o/oauth2/userinfo");
-    location.reload();
+    Auth.setAuthDataToLocalStorage(event.detail.access_token);
+    var url = localStorage.userinfo_endpoint + '?access_token=' + localStorage.access_token;
+    console.log(url);
+    fetch(url, {method: "GET"}).then(response => {
+      if(response.ok) {
+        return response.json();
+      }
+    }).then(data => {
+      console.log(data.name);
+     // const userInfo = Common.getUserInfo();
+      //userInfo.sub = data.sub;
+      Common2.storeUserInfo(data);
+      //location.reload();
+    });
   }
 
   handleLogout() {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("userinfo_endpoint");
+   console.log("why are we logging out now?");
+   localStorage.removeItem("access_token");
+   localStorage.removeItem("userinfo_endpoint");
   }
 }
 
