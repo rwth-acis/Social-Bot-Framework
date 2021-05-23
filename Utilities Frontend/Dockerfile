@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:8
 
 ENV YJS_RESOURCE_PATH "/socket.io"
 ENV PORT 8070
