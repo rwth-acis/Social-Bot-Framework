@@ -1,9 +1,9 @@
 {
   "name": "sbf-frontend-syncmeta-widgets",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This package is used to get the SyncMeta widgets from npm.",
   "dependencies": {
-    "@rwth-acis/syncmeta-widgets": "1.0.1",
+    "@rwth-acis/syncmeta-widgets": "1.0.2",
     "nan": "^2.8.0",
     "utf-8-validate": "1.2.0"
   }
