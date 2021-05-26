@@ -172,7 +172,7 @@
                 },
                 "8ad8cf5a0cde8fb403d82595": {
                     "key": "Content",
-                    "value": "quiz"
+                    "value": "string"
                 }
             },
             "shape": {
