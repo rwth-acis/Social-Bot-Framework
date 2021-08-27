@@ -57,7 +57,7 @@ class BotModeling extends PolymerElement {
             flex: 2;
             display: flex;
             flex-flow: column;
-            height: 48%;
+            height: 100%;
         }
       </style>
 

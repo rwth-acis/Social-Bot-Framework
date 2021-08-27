@@ -300,7 +300,9 @@
                     "options": {
                         "Rocket.Chat": "Rocket.Chat",
                         "Slack": "Slack",
-                        "Telegram": "Telegram"
+                        "Telegram": "Telegram",
+                        "Moodle Forum": "Moodle Forum",
+                        "Moodle Chat": "Moodle Chat"
                     }
                 },
                 "fac7a2b850919e041f655919": {
@@ -309,6 +311,10 @@
                 },
                 "4d07dc2fa7f97c4ef5834078": {
                     "key": "Authentication Token",
+                    "value": "string"
+                },
+                "4d07dc2fa7f97c4ef5834079": {
+                    "key": "Manager URL",
                     "value": "string"
                 }
             },
@@ -331,6 +337,10 @@
                 "e7d374a1e2d32c5e67bc68cc": {
                     "key": "NLU ID",
                     "value": "string"
+                },
+                "3e8bfec67da28c354a969b46": {
+                    "key": "IsFile",
+                    "value": "boolean"
                 }
             },
             "shape": {
@@ -364,6 +374,14 @@
             "attributes": {
                 "a5844a8bde0637231a942b69": {
                     "key": "Message",
+                    "value": "string"
+                },
+                "5f2b4ee11564428b5dc3fe28": {
+                    "key": "FileURL",
+                    "value": "string"
+                },
+                "4c9be5afd81d19bdc0b219cb": {
+                    "key": "ErrorMessage",
                     "value": "string"
                 }
             },

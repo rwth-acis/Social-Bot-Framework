@@ -134,7 +134,7 @@ export default {
                     "value": {
                         "id": "d085128abaeecff90eb95376[authentication token]",
                         "name": "Authentication Token",
-                        "value": "techbot:ZbAq4PagevAaoacQk"
+                        "value": ""
                     }
                 }
             }

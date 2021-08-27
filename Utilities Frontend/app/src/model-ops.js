@@ -33,7 +33,7 @@ class ModelOps {
                         dataName: 'Text'
                     },
                     type:["Text","Map"],
-                    sourceDir: '/bower_components'
+                    sourceDir: '/node_modules'
                 }).then(y => {
                     _this.y = y;
                     resolve(y);

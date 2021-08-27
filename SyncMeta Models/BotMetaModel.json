@@ -185,6 +185,74 @@
                 }
             }
         },
+        "005c2246e41c3fc7dcb5e988": {
+            "label": {
+                "id": "005c2246e41c3fc7dcb5e988[label]",
+                "name": "Label",
+                "value": {
+                    "id": "005c2246e41c3fc7dcb5e988[label]",
+                    "name": "Label",
+                    "value": "NLU Knowledge"
+                }
+            },
+            "left": 3384.5,
+            "top": 5210.75,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16072,
+            "type": "Object",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "KeySelectionValueListAttribute",
+                    "list": {
+                        "dbcf8b46f8cd76f445b9dea4": {
+                            "id": "dbcf8b46f8cd76f445b9dea4",
+                            "name": "dbcf8b46f8cd76f445b9dea4",
+                            "key": {
+                                "id": "dbcf8b46f8cd76f445b9dea4[key]",
+                                "name": "",
+                                "value": "Name"
+                            },
+                            "value": {
+                                "id": "dbcf8b46f8cd76f445b9dea4[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "19df132ba486480d8860a040": {
+                            "id": "19df132ba486480d8860a040",
+                            "name": "19df132ba486480d8860a040",
+                            "key": {
+                                "id": "19df132ba486480d8860a040[key]",
+                                "name": "",
+                                "value": "ID"
+                            },
+                            "value": {
+                                "id": "19df132ba486480d8860a040[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "c051de6af456e91e52c0c465": {
+                            "id": "c051de6af456e91e52c0c465",
+                            "name": "c051de6af456e91e52c0c465",
+                            "key": {
+                                "id": "c051de6af456e91e52c0c465[key]",
+                                "name": "",
+                                "value": "URL"
+                            },
+                            "value": {
+                                "id": "c051de6af456e91e52c0c465[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "cab621900861442260e8608a": {
             "label": {
                 "id": "cab621900861442260e8608a[label]",
@@ -1069,7 +1137,7 @@
                     "value": "IntervalEnum"
                 }
             },
-            "left": 5034.999999999999,
+            "left": 5036.999999999999,
             "top": 4135.999999999999,
             "width": 150,
             "height": 100,
@@ -1123,7 +1191,7 @@
                             "value": {
                                 "id": "ee7b017842ed2dd45e825b49[value]",
                                 "name": "ee7b017842ed2dd45e825b49[value]",
-                                "value": "Working days"
+                                "value": "Working days (hh:mm)"
                             }
                         },
                         "df1b1aeaee2259612138da9b[value]": {
@@ -1132,7 +1200,7 @@
                             "value": {
                                 "id": "df1b1aeaee2259612138da9b[value]",
                                 "name": "df1b1aeaee2259612138da9b[value]",
-                                "value": "Weekend"
+                                "value": "Weekend (hh:mm)"
                             }
                         },
                         "0f99296631305211148bad7c[value]": {
@@ -1141,7 +1209,7 @@
                             "value": {
                                 "id": "0f99296631305211148bad7c[value]",
                                 "name": "0f99296631305211148bad7c[value]",
-                                "value": "Every day"
+                                "value": "Every day (hh:mm)"
                             }
                         }
                     }
@@ -2537,6 +2605,20 @@
                                 "name": "",
                                 "value": "string"
                             }
+                        },
+                        "3e8bfec67da28c354a969b46": {
+                            "id": "3e8bfec67da28c354a969b46",
+                            "name": "3e8bfec67da28c354a969b46",
+                            "key": {
+                                "id": "3e8bfec67da28c354a969b46[key]",
+                                "name": "",
+                                "value": "IsFile"
+                            },
+                            "value": {
+                                "id": "3e8bfec67da28c354a969b46[value]",
+                                "name": "",
+                                "value": "boolean"
+                            }
                         }
                     }
                 }
@@ -2711,8 +2793,8 @@
                     "value": "IntentHasEntity"
                 }
             },
-            "left": 2926.999999999999,
-            "top": 5790.999999999999,
+            "left": 2950.999999999999,
+            "top": 5757.999999999999,
             "width": 150,
             "height": 100,
             "zIndex": 16064,
@@ -2803,8 +2885,8 @@
                     "value": "IncomingMessageShape"
                 }
             },
-            "left": 3444.7500000000023,
-            "top": 5723.500000000004,
+            "left": 3583.7500000000023,
+            "top": 5727.500000000004,
             "width": 217.5,
             "height": 188.75,
             "zIndex": 16067,
@@ -2913,8 +2995,8 @@
                     "value": "Chat Response"
                 }
             },
-            "left": 3253.333333333333,
-            "top": 5943.333333333332,
+            "left": 3350.333333333333,
+            "top": 5936.333333333332,
             "width": 150,
             "height": 100,
             "zIndex": 16071,
@@ -2938,71 +3020,31 @@
                                 "name": "",
                                 "value": "string"
                             }
-                        }
-                    }
-                }
-            }
-        },
-        "005c2246e41c3fc7dcb5e988": {
-            "label": {
-                "id": "005c2246e41c3fc7dcb5e988[label]",
-                "name": "Label",
-                "value": {
-                    "id": "005c2246e41c3fc7dcb5e988[label]",
-                    "name": "Label",
-                    "value": "NLU Knowledge"
-                }
-            },
-            "left": 3384.5,
-            "top": 5210.75,
-            "width": 150,
-            "height": 100,
-            "zIndex": 16072,
-            "type": "Object",
-            "attributes": {
-                "[attributes]": {
-                    "id": "[attributes]",
-                    "name": "Attributes",
-                    "type": "KeySelectionValueListAttribute",
-                    "list": {
-                        "dbcf8b46f8cd76f445b9dea4": {
-                            "id": "dbcf8b46f8cd76f445b9dea4",
-                            "name": "dbcf8b46f8cd76f445b9dea4",
+                        },
+                        "5f2b4ee11564428b5dc3fe28": {
+                            "id": "5f2b4ee11564428b5dc3fe28",
+                            "name": "Attribute",
                             "key": {
-                                "id": "dbcf8b46f8cd76f445b9dea4[key]",
+                                "id": "5f2b4ee11564428b5dc3fe28[key]",
                                 "name": "",
-                                "value": "Name"
+                                "value": "FileURL"
                             },
                             "value": {
-                                "id": "dbcf8b46f8cd76f445b9dea4[value]",
+                                "id": "5f2b4ee11564428b5dc3fe28[value]",
                                 "name": "",
                                 "value": "string"
                             }
                         },
-                        "19df132ba486480d8860a040": {
-                            "id": "19df132ba486480d8860a040",
-                            "name": "19df132ba486480d8860a040",
+                        "4c9be5afd81d19bdc0b219cb": {
+                            "id": "4c9be5afd81d19bdc0b219cb",
+                            "name": "Attribute",
                             "key": {
-                                "id": "19df132ba486480d8860a040[key]",
+                                "id": "4c9be5afd81d19bdc0b219cb[key]",
                                 "name": "",
-                                "value": "ID"
+                                "value": "ErrorMessage"
                             },
                             "value": {
-                                "id": "19df132ba486480d8860a040[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "c051de6af456e91e52c0c465": {
-                            "id": "c051de6af456e91e52c0c465",
-                            "name": "c051de6af456e91e52c0c465",
-                            "key": {
-                                "id": "c051de6af456e91e52c0c465[key]",
-                                "name": "",
-                                "value": "URL"
-                            },
-                            "value": {
-                                "id": "c051de6af456e91e52c0c465[value]",
+                                "id": "4c9be5afd81d19bdc0b219cb[value]",
                                 "name": "",
                                 "value": "string"
                             }
@@ -3120,6 +3162,80 @@
             "zIndex": 16075,
             "type": "Relation",
             "attributes": {}
+        },
+        "3c9f14560d096f9103d37bcb": {
+            "label": {
+                "id": "3c9f14560d096f9103d37bcb[label]",
+                "name": "Label",
+                "value": {
+                    "id": "3c9f14560d096f9103d37bcb[label]",
+                    "name": "Label",
+                    "value": "ChatResponseShape"
+                }
+            },
+            "left": 3492.142857142857,
+            "top": 6083.5714285714275,
+            "width": 150,
+            "height": 150,
+            "zIndex": 16076,
+            "type": "Node Shape",
+            "attributes": {
+                "3c9f14560d096f9103d37bcb[shape]": {
+                    "id": "3c9f14560d096f9103d37bcb[shape]",
+                    "name": "Shape",
+                    "value": {
+                        "id": "3c9f14560d096f9103d37bcb[shape]",
+                        "name": "Shape",
+                        "value": "circle"
+                    },
+                    "option": "Circle"
+                },
+                "3c9f14560d096f9103d37bcb[color]": {
+                    "id": "3c9f14560d096f9103d37bcb[color]",
+                    "name": "Color",
+                    "value": {
+                        "id": "3c9f14560d096f9103d37bcb[color]",
+                        "name": "Color",
+                        "value": ""
+                    }
+                },
+                "3c9f14560d096f9103d37bcb[defaultWidth]": {
+                    "id": "3c9f14560d096f9103d37bcb[defaultWidth]",
+                    "name": "Default Width",
+                    "value": {
+                        "id": "3c9f14560d096f9103d37bcb[defaultWidth]",
+                        "name": "Default Width",
+                        "value": 48
+                    }
+                },
+                "3c9f14560d096f9103d37bcb[defaultHeight]": {
+                    "id": "3c9f14560d096f9103d37bcb[defaultHeight]",
+                    "name": "Default Height",
+                    "value": {
+                        "id": "3c9f14560d096f9103d37bcb[defaultHeight]",
+                        "name": "Default Height",
+                        "value": 48
+                    }
+                },
+                "3c9f14560d096f9103d37bcb[customShape]": {
+                    "id": "3c9f14560d096f9103d37bcb[customShape]",
+                    "name": "Custom Shape",
+                    "value": {
+                        "id": "3c9f14560d096f9103d37bcb[customShape]",
+                        "name": "Custom Shape",
+                        "value": "<div class=\"custom_node\">    <div class=\"type\"><%= type %></div>\n<svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"100%\" height=\"100%\"\n\t viewBox=\"0 0 502.707 502.707\" style=\"enable-background:new 0 0 502.707 502.707;\" xml:space=\"preserve\">\n<g>\n\t<g>\n\t\t<g>\n\t\t\t<path style=\"fill:#010002;\" d=\"M502.707,313.229c0-23.793-17.257-45.924-47.111-64.842V22.002H0V323.95h417.395\n\t\t\t\tc-18.68,29.617-79.726,48.815-152.678,63.548l-10.98-53.043L147.048,436.679l136.91,44.026l-9.836-47.607\n\t\t\t\tC406.588,416.596,502.707,369.529,502.707,313.229z M401.605,53.474C356.953,83.716,238.4,163.981,227.766,171.186\n\t\t\t\tc-10.548-7.205-129.058-87.47-173.753-117.712H401.605z M23.879,61.887L227.787,199.94L431.674,61.887v173.429\n\t\t\t\tc-38.137-18.421-89.281-32.766-148.278-40.941c67.819,21.269,134.645,68.725,139.541,105.783H23.879\n\t\t\t\tC23.879,300.157,23.879,61.887,23.879,61.887z\"/>\n\t\t</g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n\t<g>\n\t</g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg><div class=\"fill_parent\">        <div style=\"position: absolute; left: 50%; top: 50%; -webkit-transform: translateY(-50%) translateX(-50%)\" class=\"name\"></div>    </div></div>\n"
+                    }
+                },
+                "3c9f14560d096f9103d37bcb[customAnchors]": {
+                    "id": "3c9f14560d096f9103d37bcb[customAnchors]",
+                    "name": "Custom Anchors",
+                    "value": {
+                        "id": "3c9f14560d096f9103d37bcb[customAnchors]",
+                        "name": "Custom Anchors",
+                        "value": ""
+                    }
+                }
+            }
         }
     },
     "edges": {
@@ -4368,21 +4484,6 @@
             "attributes": {},
             "type": "Uni-Dir-Association"
         },
-        "478d8de4bb2482bc1d85acda": {
-            "label": {
-                "id": "478d8de4bb2482bc1d85acda[label]",
-                "name": "Label",
-                "value": {
-                    "id": "478d8de4bb2482bc1d85acda[label]",
-                    "name": "Label",
-                    "value": ""
-                }
-            },
-            "source": "dd34599cb11fbaa06554d5ea",
-            "target": "44eb2dd6f047125fede2e6a3",
-            "attributes": {},
-            "type": "Bi-Dir-Association"
-        },
         "0796a4af7acd4a4067b63e7d": {
             "label": {
                 "id": "0796a4af7acd4a4067b63e7d[label]",
@@ -4487,6 +4588,21 @@
             "target": "ab97a135e2b083007f06c671",
             "attributes": {},
             "type": "Uni-Dir-Association"
+        },
+        "325f24803a01af2c0eb045ff": {
+            "label": {
+                "id": "325f24803a01af2c0eb045ff[label]",
+                "name": "Label",
+                "value": {
+                    "id": "325f24803a01af2c0eb045ff[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "dd34599cb11fbaa06554d5ea",
+            "target": "3c9f14560d096f9103d37bcb",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
         }
     }
 }

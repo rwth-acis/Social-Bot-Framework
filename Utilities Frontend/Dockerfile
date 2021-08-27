@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:10
 
 ENV YJS_RESOURCE_PATH "/socket.io"
 ENV PORT 8070
@@ -11,21 +11,27 @@ RUN npm_config_user=root npm install -g bower grunt-cli grunt polymer-cli gulp
 
 COPY docker/supervisorConfigs /etc/supervisor/conf.d
 
-# TODO: Use master branch
-RUN git clone https://github.com/rwth-acis/syncmeta.git
+WORKDIR /usr/src/app
+COPY /syncmeta syncmeta
+
 WORKDIR /usr/src/app/syncmeta
-RUN git checkout chat-assessments
+RUN npm install
+
+WORKDIR /usr/src/app/syncmeta
+RUN npm install
+RUN cp -a node_modules/@rwth-acis/syncmeta-widgets/. widgets/
+RUN cp -a node_modules/. widgets/node_modules/
 COPY docker/_bot_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
 COPY docker/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
 COPY docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
 COPY docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
 WORKDIR /usr/src/app/syncmeta
-RUN cd widgets && rm package-lock.json && npm install && bower install --allow-root
+RUN cd widgets && npm install
 
 WORKDIR /usr/src/app
 COPY . .
 WORKDIR /usr/src/app/app
-RUN npm install && bower install --allow-root
+RUN npm install 
 
 WORKDIR /usr/src/app
 
