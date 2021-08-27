@@ -1,5 +1,6 @@
 {
   "name": "SocialBotFramework",
+  "version": "1.0.2",
   "description": "Frontend of Social Bot Framework",
   "scripts": {
     "start": "polymer serve --port 8082 dist",
