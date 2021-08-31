@@ -102,8 +102,10 @@ Now that we have a bot that is ready to be deployed, we still need to model the 
 First things first, the user will need to model the bot's NLU Model in the "NLU Model Training Helper" part of the SBF frontend. The Markdown format is used for creating the NLU Models and a precise tutorial can be found at [Rasa's official documentation](https://legacy-docs-v1.rasa.com/nlu/training-data-format/). Overall, here the user will define the Intents the bot will be able to recognize based on given examples. To upload the NLU Model, the SBF Manager endpoint and the Rasa NLU Endpoint need to be adjusted accordingly. The model will first be trained and thus not be immediately available. One can check the training's state by pressing the "Check Training Status" button.
 The Incoming Message and Chat Response elements are used for modeling the conversation.  
  ![MessageModelling](READMEImages/MessageModelling.png)  
-At the beginning of a conversation, the bot will wait for the user's message. After the bot receives a message on the chat platform, it will attempt to extract an Intent from the received message. The Incoming Message element will represent the user's messages and has an Intent attribute, which will contain the expected Intent. If the bot recognizes this Intent, the bot will go to this Incoming Message element and trigger the corresponding Chat Response. The Chat Response element thus represents the bot's response to user messages for which the concrete response can be written in the "Message" attribute field of the element.
- For an easy example, let us say we modeled the bot to expect a greeting from the user and greet them back. For that cause, the "greeting" Intent was defined in the NLU Model. Additionally, the Intent attribute of the Incoming Message element will contain "greeting" and the Chat Response's "Message" attribute will contain the message "Hello :)". If the user now greets the bot, the bot will extract the "greeting" Intent and jump to the fitting Incoming Message element and then greet the user back with "Hello :)".
+
+At the beginning of a conversation, the bot will wait for the user's message. After the bot receives a message on the chat platform, it will attempt to extract an Intent from the received message. The Incoming Message element will represent the user's messages and has an Intent attribute, which will contain the expected Intent. If the bot recognizes this Intent, the bot will go to this Incoming Message element and trigger the corresponding Chat Response. The Chat Response element thus represents the bot's response to user messages for which the concrete response can be written in the "Message" attribute field of the element. If the response should be a text message, the "Type" attribute should be "Text Message".   
+ For an easy example, lets say we modelled the bot to expect a greeting from the user and great them back. For that cause, the "greeting" Intent was defined in the NLU Model. Additionally, the Intent attribute of the Incoming Message element will contain "greeting" and the Chat Response's "Message" attribute will contain the message "Hello :)". If the user now greets the bot, the bot will extract the "greeting" Intent and jump to the fitting Incoming Message element and then greet the user back with "Hello :)".
+
 An additional option is to let the bot use multiple Chat Response elements for one Incoming Message element. This would simply lead to the bot randomly choosing one of the available Chat Responses to give to the user, making the bot a bit more interactive.  
 ![MultipleMessageModelling](READMEImages/MultipleMessageModelling.png)  
 
@@ -149,6 +151,25 @@ The `text` attribute represents the service's response to the user.
 
 The `closeContext` attribute is a boolean value that informs the Social Bot Manager if the communication state is to be maintained or stopped. (Note that, if no closeContext attribute is found, the communication state will automatically be stopped.)
 
+The service can also respond to the request with a json file containing the following data:
+```json
+{
+    "blocks": "",
+    "closeContext": ""
+}
+```
+
+The `blocks` attribute represents the service's response to the user in form of an interactive message.
+The Slack block kit builder, to create an interactive message in Slack, can be found at https://app.slack.com/block-kit-builder
+
+Currently supported types of message components in Slack:
+
+- plain text (when using the blocks to encode text, it is formated)
+- action checkboxes, including their description
+- action buttons
+- action radio buttons
+- divider
+
 ### Sending Files to a Service
 
 When modeling the conversation between bot and user, there is also the possibility to let the bot expect files from a user. To be precise, a user could trigger a service by sending a file, which would get forwarded to the service for further processing. Let us take our communication state from before and presume that the Bot Action Element is a service that expects a file:
@@ -170,6 +191,27 @@ If a file is sent to a triggered service, it will first be encoded into base64 e
 ```
 
 Note that if a service wants to send a file to a user, it will also need to encode the file in base64 encoding and the response will additionally need to contain the 3 just shown attributes.
+
+### Sending Interactive Messages to Slack
+
+#### Definition in the frontend
+
+When modelling the conversation between bot and user, there is also the possibility to let the bot send an interactive message to a user. To do this, the Chat Response Object needs to be defined with the Type "Interactive Message". The Message field then needs to contain the code that parses the interactive message, only the content of the "blocks" jsonobject is needed.
+
+### Creating a Slack app
+
+When using the interactive messages in Slack, it is necessary to:
+
+1. Create a custom Slack app, since interactive messages are not usable with the "Bots" app that is available when clicking on the "Add apps" button on the bottom left.
+
+2. Activate interactive components in the Slack app settings (on the left side: Basic Information: Add features and functionality, Interactive Components. After activating this feature, a Request URL is needed. A Request URL is an address where notification about button clicks will be sent.)
+
+3. Configuring the Request URL. The ip address and port where Slack posts the request (the address from the SBFManager), Slack app token, the bot name from the frontend, the instance name from the frontend and the buttonIntent name are needed.
+   http://{ipAddress:port}/SBFManager/bots/{botName}/appRequestURL/{instanceName}/{buttonIntent}/{token}.
+
+4. Configuring a route that can be publicly accessed when hosting the SBFManager on a local system. This entails a TCP port sharing:
+- either by logging into your fritzbox, then go to the internet settings and then port sharing. When using the URL for the Request URL, the newly created public URL needs to be provided
+- by using the app called ngork
 
 ## References
 
