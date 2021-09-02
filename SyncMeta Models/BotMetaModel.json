@@ -2428,8 +2428,8 @@
                     "value": "Messenger"
                 }
             },
-            "left": 2587.333333333332,
-            "top": 5044.666666666666,
+            "left": 2588.333333333332,
+            "top": 5043.666666666666,
             "width": 203.33333333333331,
             "height": 113.33333333333331,
             "zIndex": 16053,
@@ -2464,6 +2464,20 @@
                             },
                             "value": {
                                 "id": "4d07dc2fa7f97c4ef5834078[value]",
+                                "name": "",
+                                "value": "string"
+                            }
+                        },
+                        "f9262721a7f897fbf25cfeec": {
+                            "id": "f9262721a7f897fbf25cfeec",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "f9262721a7f897fbf25cfeec[key]",
+                                "name": "",
+                                "value": "Manager URL"
+                            },
+                            "value": {
+                                "id": "f9262721a7f897fbf25cfeec[value]",
                                 "name": "",
                                 "value": "string"
                             }
@@ -3067,7 +3081,7 @@
                         },
                         "5f2b4ee11564428b5dc3fe28": {
                             "id": "5f2b4ee11564428b5dc3fe28",
-                            "name": "Attribute",
+                            "name": "5f2b4ee11564428b5dc3fe28",
                             "key": {
                                 "id": "5f2b4ee11564428b5dc3fe28[key]",
                                 "name": "",
@@ -3081,7 +3095,7 @@
                         },
                         "4c9be5afd81d19bdc0b219cb": {
                             "id": "4c9be5afd81d19bdc0b219cb",
-                            "name": "Attribute",
+                            "name": "4c9be5afd81d19bdc0b219cb",
                             "key": {
                                 "id": "4c9be5afd81d19bdc0b219cb[key]",
                                 "name": "",
