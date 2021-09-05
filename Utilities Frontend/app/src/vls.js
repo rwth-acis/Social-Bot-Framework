@@ -312,10 +312,6 @@
                 "4d07dc2fa7f97c4ef5834078": {
                     "key": "Authentication Token",
                     "value": "string"
-                },
-                "4d07dc2fa7f97c4ef5834079": {
-                    "key": "Manager URL",
-                    "value": "string"
                 }
             },
             "shape": {
