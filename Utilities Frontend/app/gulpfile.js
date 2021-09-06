@@ -26,6 +26,7 @@ gulp.task('copy:src', () => {
         .pipe(replace('{YJS_ADDRESS}', config.yjs_address))
         .pipe(replace('{YJS_RESOURCE_PATH}', config.yjs_resource_path))
         .pipe(replace('{STATUSBAR_SUBTITLE}', "v" + packageInfo.version))
+        .pipe(replace('{CONTACT_SERVICE_URL}', config.contact_service_url))
         .pipe(gulp.dest('dist/src'));
     const copyIndex = gulp.src('index.html')
         .pipe(gulp.dest('dist'));
