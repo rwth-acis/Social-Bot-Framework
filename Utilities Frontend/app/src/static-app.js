@@ -160,9 +160,11 @@ class StaticApp extends PolymerElement {
   ready() {
     super.ready();
     const statusBar = this.shadowRoot.querySelector("#statusBar");
-    statusBar.setAttribute("baseUrl", '{CONTACT_SERVICE_URL}');
-    statusBar.addEventListener('signed-in', this.handleLogin);
-    statusBar.addEventListener('signed-out', this.handleLogout);
+    console.log("{CONTACT_SERVICE_URL}");
+    console.log("{OIDC_CLIENT_ID}");
+    statusBar.setAttribute("baseUrl", {CONTACT_SERVICE_URL});
+    statusBar.addEventListener('signed-in',(event) => this.handleLogin(event));
+    statusBar.addEventListener('signed-out',(event) => this.handleLogout(event));
     this.displayCurrentRoomName();
   }
 
