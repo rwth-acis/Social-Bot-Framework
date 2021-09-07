@@ -368,6 +368,14 @@
         "dd34599cb11fbaa06554d5ea": {
             "label": "Chat Response",
             "attributes": {
+                "a5844a8bde0637231a942b70": {
+                    "key": "Type",
+                    "value": "crType",
+                    "options": {
+                    "Text":"Text",
+                    "Interactive Message":"Interactive Message"
+                    }
+                },
                 "a5844a8bde0637231a942b69": {
                     "key": "Message",
                     "value": "string"

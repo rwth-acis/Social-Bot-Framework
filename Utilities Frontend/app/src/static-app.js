@@ -65,6 +65,7 @@ class StaticApp extends PolymerElement {
         oidcpopupsignouturl="/src/callbacks/popup-signout-callback.html"
         oidcsilentsigninturl="/src/callbacks/silent-callback.html"
         oidcclientid="{OIDC_CLIENT_ID}"
+        subtitle="{STATUSBAR_SUBTITLE}"
         autoAppendWidget=true
       ></las2peer-frontend-statusbar>    
 
@@ -159,8 +160,11 @@ class StaticApp extends PolymerElement {
   ready() {
     super.ready();
     const statusBar = this.shadowRoot.querySelector("#statusBar");
-    statusBar.addEventListener('signed-in', this.handleLogin);
-    statusBar.addEventListener('signed-out', this.handleLogout);
+    console.log("{CONTACT_SERVICE_URL}");
+    console.log("{OIDC_CLIENT_ID}");
+    statusBar.setAttribute("baseUrl", {CONTACT_SERVICE_URL});
+    statusBar.addEventListener('signed-in',(event) => this.handleLogin(event));
+    statusBar.addEventListener('signed-out',(event) => this.handleLogout(event));
     this.displayCurrentRoomName();
   }
 
@@ -202,9 +206,12 @@ class StaticApp extends PolymerElement {
   } 
 
   handleLogin(event) {
-    localStorage.setItem("access_token", event.detail.access_token);
-    localStorage.setItem("userinfo_endpoint", "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo");
-    location.reload();
+    if(localStorage.getItem("access_token") == null){
+      localStorage.setItem("access_token", event.detail.access_token);
+      localStorage.setItem("userinfo_endpoint", "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo");
+      location.reload();
+    }
+
   }
 
   handleLogout() {

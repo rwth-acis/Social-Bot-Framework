@@ -18,11 +18,15 @@ gulp.task('copy:modules', () => {
 
 gulp.task('copy:src', () => {
     const config = JSON.parse(fs.readFileSync('./config.json'));
+    // choose the package.json file (edit this later)
+    const packageInfo = JSON.parse(fs.readFileSync('./package.json'));
     const copySrc = gulp.src('src/**')
         .pipe(replace('{WEBHOST}', config.webhost))
         .pipe(replace('{OIDC_CLIENT_ID}', config.oidc_client_id))
         .pipe(replace('{YJS_ADDRESS}', config.yjs_address))
         .pipe(replace('{YJS_RESOURCE_PATH}', config.yjs_resource_path))
+        .pipe(replace('{STATUSBAR_SUBTITLE}', "v" + packageInfo.version))
+        .pipe(replace('{CONTACT_SERVICE_URL}', config.contact_service_url))
         .pipe(gulp.dest('dist/src'));
     const copyIndex = gulp.src('index.html')
         .pipe(gulp.dest('dist'));

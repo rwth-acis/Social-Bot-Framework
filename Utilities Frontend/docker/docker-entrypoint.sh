@@ -22,6 +22,7 @@ fi
 #### RASA_NLU and SBF_MANAGER are optional ####
 check_if_exists "$RASA_NLU" "RASA_NLU"
 check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
+check_if_exists "$CONTACT_SERVICE_URL" "CONTACT_SERVICE_URL"
 
 #### Replace SBF Manager and Rasa-NLU URLs ####
 sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js
@@ -49,6 +50,7 @@ sed -i "s=<WEBHOST>=$WEBHOST=g" config.json
 sed -i "s=<OIDC_CLIENT_ID>=$OIDC_CLIENT_ID=g" config.json
 sed -i "s=<YJS_ADDRESS>=$YJS=g" config.json
 sed -i "s=<YJS_RESOURCE_PATH>=$YJS_RESOURCE_PATH=g" config.json
+sed -i "s=<CONTACT_SERVICE_URL>=$CONTACT_SERVICE_URL=g" config.json
 npm run build
 cd ..
 

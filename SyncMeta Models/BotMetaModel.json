@@ -1269,6 +1269,50 @@
                 }
             }
         },
+        "646c1466c4bf34e8267c4f27": {
+            "label": {
+                "id": "646c1466c4bf34e8267c4f27[label]",
+                "name": "Label",
+                "value": {
+                    "id": "646c1466c4bf34e8267c4f27[label]",
+                    "name": "Label",
+                    "value": "crType"
+                }
+            },
+            "left": 3295.999999999998,
+            "top": 6164.666666666664,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16035,
+            "type": "Enumeration",
+            "attributes": {
+                "[attributes]": {
+                    "id": "[attributes]",
+                    "name": "Attributes",
+                    "type": "SingleValueListAttribute",
+                    "list": {
+                        "c596b17505c1ab2465c91d3e[value]": {
+                            "id": "c596b17505c1ab2465c91d3e[value]",
+                            "name": "c596b17505c1ab2465c91d3e[value]",
+                            "value": {
+                                "id": "c596b17505c1ab2465c91d3e[value]",
+                                "name": "c596b17505c1ab2465c91d3e[value]",
+                                "value": "Text Message"
+                            }
+                        },
+                        "4a08265717bc14dec36db08e[value]": {
+                            "id": "4a08265717bc14dec36db08e[value]",
+                            "name": "4a08265717bc14dec36db08e[value]",
+                            "value": {
+                                "id": "4a08265717bc14dec36db08e[value]",
+                                "name": "4a08265717bc14dec36db08e[value]",
+                                "value": "Interactive Message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "5529bde8544426cd5580efc1": {
             "label": {
                 "id": "5529bde8544426cd5580efc1[label]",
@@ -4151,6 +4195,21 @@
             },
             "source": "9b506ae998f7743a6a0e7470",
             "target": "646c1466c4bf34e8267c4f26",
+            "attributes": {},
+            "type": "Bi-Dir-Association"
+        },
+        "a2fc139715fd3b1f4a3c1584": {
+            "label": {
+                "id": "a2fc139715fd3b1f4a3c1584[label]",
+                "name": "Label",
+                "value": {
+                    "id": "a2fc139715fd3b1f4a3c1584[label]",
+                    "name": "Label",
+                    "value": "Type"
+                }
+            },
+            "source": "dd34599cb11fbaa06554d5ea",
+            "target": "646c1466c4bf34e8267c4f27",
             "attributes": {},
             "type": "Bi-Dir-Association"
         },
