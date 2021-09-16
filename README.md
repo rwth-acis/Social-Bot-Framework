@@ -5,7 +5,7 @@
         <img src="https://img.shields.io/badge/version-1.0.2-blue" />
 </p>
 
-A Web-based, model-driven framework for creating social bots for RESTful web applications.
+A Web-based, model-driven framework for creating social bots for RESTful web applications. Check out the [wiki](https://github.com/rwth-acis/Social-Bot-Framework/wiki) for more information about the modeling language and tutorials on creating bots with the framework.
 
 ## Core Components
 
@@ -23,7 +23,7 @@ A Web-based, model-driven framework for creating social bots for RESTful web app
 
 This application provides helpers to interact with the Social Bot Manager service.
 
-This frontend consists of the Bot Modeling and the NLU Model Training Helper. 
+This frontend consists of the Bot Modeling and the NLU Model Training Helper.
 
 ### Build and Run the Frontend
 
