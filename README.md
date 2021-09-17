@@ -2,7 +2,12 @@
   <img src="Logos/sbf-logo.svg" width=400px/>
 </p>
 <p align="center">
-        <img src="https://img.shields.io/badge/version-1.0.2-blue" />
+        <a href="https://github.com/rwth-acis/Social-Bot-Framework/blob/master/LICENSE">
+            <img alt="GitHub" src="https://img.shields.io/github/license/rwth-acis/Social-Bot-Framework.svg?color=blue">
+        </a>
+        <a href="https://github.com/rwth-acis/Social-Bot-Framework/releases">
+        <img alt="GitHub release" src="https://img.shields.io/github/release/rwth-acis/Social-Bot-Framework.svg">
+    </a>
 </p>
 
 A Web-based, model-driven framework for creating social bots for RESTful web applications. Check out the [wiki](https://github.com/rwth-acis/Social-Bot-Framework/wiki) for more information about the modeling language and tutorials on creating bots with the framework.
@@ -66,6 +71,18 @@ Following environment variables have default values however they can be changed 
 
 [yjs-github]: https://github.com/yjs/yjs
 [y-websocket-server]: https://github.com/y-js/y-websockets-server
+
+## Examples
+| Bot            | Description | Application                                                                                                                                                | Demo |
+| -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| MensaBot       | todo        | [las2peer-Mensa-Service](https://github.com/rwth-acis/las2peer-Mensa-Service)                                                                              | Todo |
+| SurveyBot      | todo        | [Survey-Handler-Service](https://github.com/rwth-acis/Survey-Handler-Service), [MobSOS Surveys](https://github.com/rwth-acis/mobsos-surveys) or LimeSurvey | Todo |
+| FeedBot        | todo        | [las2peer-T-MITOCAR-Service](https://github.com/rwth-acis/las2peer-tmitocar-service)                                                                       | Todo |
+| ReaderbenchBot | todo        | [las2peer-readerbench](https://github.com/rwth-acis/las2peer-readerbench)                                                                                  | Todo |
+| LitBot         | todo        | [las2peer-akg](https://github.com/rwth-acis/las2peer-akg)                                                                                                  | Todo |
+| LA-Bot         | todo        | [learning-analytics-verification](https://github.com/rwth-acis/learning-analytics-verification)                                                            | Todo |
+| CitBot         | todo        | [Citation-Recommendation-Bot](https://github.com/rwth-acis/Citation-Recommendation-Bot)                                                                    | Todo |
+
 ## References
 
 1. Neumann, Alexander Tobias, Tamar Arndt, Laura Köbis, Roy Meissner, Anne
