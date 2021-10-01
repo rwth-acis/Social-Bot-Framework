@@ -1,0 +1,28 @@
+## intent: getThemeSuggestion
+- How can I [pay the semester fees](semesterFees)?
+- How much are the [semester fees](semesterFees)?
+- How can I [enroll in my course](enrolling)?
+- What is the [enrollment](enrolling) deadline?
+- What are the new [corona](corona) rules?
+- What are the new [corona](corona) guidelines?
+- What changes with the [corona](crona) pandemic?
+- Where can I get [counseling](counseling)?
+- Where can I get [help with my studies](counseling)?
+- How does the [library](library) work?
+- How do I [lend a book](library) from the [library](library)?
+- How can I make my [bluecard](blueCard)?
+- How can I make my [blue card](blueCard)?
+- When will I receive my [semester ticket](semesterTicket)?
+- Where can I find help with [housing](housing)?
+- What kinds of [health insurance](healthInsurance) are there?
+- [semester fees](semesterFees)
+- [enrolling](enrolling)
+- [corona guidelines](corona)
+- [counseling](counseling)
+- [university library](library)
+- [bluecard](blueCard)
+- [blue card](blueCard)
+- [semester ticket](semesterTicket)
+- [semesterticket](semesterTicket)
+- [housing](housing)
+- [health insurance](healthInsurance)
