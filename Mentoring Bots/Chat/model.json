@@ -1,0 +1,1057 @@
+{
+    "attributes": {
+        "label": {
+            "id": "modelAttributes[label]",
+            "name": "Label",
+            "value": {
+                "id": "modelAttributes[label]",
+                "name": "Label",
+                "value": "Model Attributes"
+            }
+        },
+        "left": 0,
+        "top": 0,
+        "width": 0,
+        "height": 0,
+        "zIndex": 0,
+        "type": "ModelAttributesNode",
+        "attributes": {}
+    },
+    "nodes": {
+        "f5c35598f04df4905a97c6db": {
+            "label": {
+                "id": "f5c35598f04df4905a97c6db[name]",
+                "name": "Name",
+                "value": {
+                    "id": "f5c35598f04df4905a97c6db[name]",
+                    "name": "Name",
+                    "value": "Moodle2"
+                }
+            },
+            "left": 4391,
+            "top": 4185,
+            "width": 48,
+            "height": 49,
+            "zIndex": 16001,
+            "type": "Instance",
+            "attributes": {
+                "4bfaada53679f7e979bcc1e6": {
+                    "id": "f5c35598f04df4905a97c6db[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "f5c35598f04df4905a97c6db[name]",
+                        "name": "Name",
+                        "value": "Moodle2"
+                    }
+                },
+                "a7c8d03fd57a143943da1f48": {
+                    "id": "f5c35598f04df4905a97c6db[address]",
+                    "name": "Address",
+                    "value": {
+                        "id": "f5c35598f04df4905a97c6db[address]",
+                        "name": "Address",
+                        "value": "http://las2peer:8080"
+                    }
+                },
+                "3640924305c3d50b3a2de10d": {
+                    "id": "f5c35598f04df4905a97c6db[environment separator]",
+                    "name": "Environment Separator",
+                    "value": {
+                        "id": "f5c35598f04df4905a97c6db[environment separator]",
+                        "name": "Environment Separator",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "960fcc299368c11690528afa": {
+            "label": {
+                "id": "960fcc299368c11690528afa[name]",
+                "name": "Name",
+                "value": {
+                    "id": "960fcc299368c11690528afa[name]",
+                    "name": "Name",
+                    "value": "askabot_uni2"
+                }
+            },
+            "left": 4392,
+            "top": 4279,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16002,
+            "type": "Bot",
+            "attributes": {
+                "80f33463988c54141b8c4dd8": {
+                    "id": "960fcc299368c11690528afa[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "960fcc299368c11690528afa[name]",
+                        "name": "Name",
+                        "value": "askabot_uni2"
+                    }
+                }
+            }
+        },
+        "d085128abaeecff90eb95376": {
+            "label": {
+                "id": "d085128abaeecff90eb95376[name]",
+                "name": "Name",
+                "value": {
+                    "id": "d085128abaeecff90eb95376[name]",
+                    "name": "Name",
+                    "value": "askabot_uni2"
+                }
+            },
+            "left": 4360,
+            "top": 4425,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16003,
+            "type": "Messenger",
+            "attributes": {
+                "646c1466c4bf34e8267c4f26": {
+                    "id": "d085128abaeecff90eb95376[messenger type]",
+                    "name": "Messenger Type",
+                    "value": {
+                        "id": "d085128abaeecff90eb95376[messenger type]",
+                        "name": "Messenger Type",
+                        "value": "Moodle Chat"
+                    },
+                    "option": "Moodle Chat"
+                },
+                "fac7a2b850919e041f655919": {
+                    "id": "d085128abaeecff90eb95376[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "d085128abaeecff90eb95376[name]",
+                        "name": "Name",
+                        "value": "askabot_uni2"
+                    }
+                },
+                "4d07dc2fa7f97c4ef5834078": {
+                    "id": "d085128abaeecff90eb95376[authentication token]",
+                    "name": "Authentication Token",
+                    "value": {
+                        "id": "d085128abaeecff90eb95376[authentication token]",
+                        "name": "Authentication Token",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "35ee8db6359b29efee8bb915": {
+            "label": {
+                "id": "35ee8db6359b29efee8bb915[name]",
+                "name": "Name",
+                "value": {
+                    "id": "35ee8db6359b29efee8bb915[name]",
+                    "name": "Name",
+                    "value": "NLU"
+                }
+            },
+            "left": 4279,
+            "top": 4256,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16017,
+            "type": "NLU Knowledge",
+            "attributes": {
+                "dbcf8b46f8cd76f445b9dea4": {
+                    "id": "35ee8db6359b29efee8bb915[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "35ee8db6359b29efee8bb915[name]",
+                        "name": "Name",
+                        "value": "NLU"
+                    }
+                },
+                "19df132ba486480d8860a040": {
+                    "id": "35ee8db6359b29efee8bb915[id]",
+                    "name": "ID",
+                    "value": {
+                        "id": "35ee8db6359b29efee8bb915[id]",
+                        "name": "ID",
+                        "value": "0"
+                    }
+                },
+                "c051de6af456e91e52c0c465": {
+                    "id": "35ee8db6359b29efee8bb915[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "35ee8db6359b29efee8bb915[url]",
+                        "name": "URL",
+                        "value": "http://rasa-nlu-5:5005"
+                    }
+                }
+            }
+        },
+        "21f4d33a2ef38def343c3aeb": {
+            "label": {
+                "id": "21f4d33a2ef38def343c3aeb[label]",
+                "name": "Label",
+                "value": {
+                    "id": "21f4d33a2ef38def343c3aeb[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4174,
+            "top": 4633.222222222222,
+            "width": 124,
+            "height": 52,
+            "zIndex": 16021,
+            "type": "Incoming Message",
+            "attributes": {
+                "869849f65db9be737e99bd24": {
+                    "id": "21f4d33a2ef38def343c3aeb[intent keyword]",
+                    "name": "Intent Keyword",
+                    "value": {
+                        "id": "21f4d33a2ef38def343c3aeb[intent keyword]",
+                        "name": "Intent Keyword",
+                        "value": "greetings"
+                    }
+                },
+                "e7d374a1e2d32c5e67bc68cc": {
+                    "id": "21f4d33a2ef38def343c3aeb[nlu id]",
+                    "name": "NLU ID",
+                    "value": {
+                        "id": "21f4d33a2ef38def343c3aeb[nlu id]",
+                        "name": "NLU ID",
+                        "value": "0"
+                    }
+                },
+                "3e8bfec67da28c354a969b46": {
+                    "id": "21f4d33a2ef38def343c3aeb[isfile]",
+                    "name": "IsFile",
+                    "value": {
+                        "id": "21f4d33a2ef38def343c3aeb[isfile]",
+                        "name": "IsFile",
+                        "value": false
+                    }
+                }
+            }
+        },
+        "49a1893c172b7d8ab9859be5": {
+            "label": {
+                "id": "49a1893c172b7d8ab9859be5[label]",
+                "name": "Label",
+                "value": {
+                    "id": "49a1893c172b7d8ab9859be5[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4201,
+            "top": 4812.444444444444,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16022,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "49a1893c172b7d8ab9859be5[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "49a1893c172b7d8ab9859be5[message]",
+                        "name": "Message",
+                        "value": "Hello, I'm Askabot! I was programmed to offer you suggestions that are tailored personally for you. Try asking me for a suggestion."
+                    }
+                },
+                "5f2b4ee11564428b5dc3fe28": {
+                    "id": "49a1893c172b7d8ab9859be5[fileurl]",
+                    "name": "FileURL",
+                    "value": {
+                        "id": "49a1893c172b7d8ab9859be5[fileurl]",
+                        "name": "FileURL",
+                        "value": ""
+                    }
+                },
+                "4c9be5afd81d19bdc0b219cb": {
+                    "id": "49a1893c172b7d8ab9859be5[errormessage]",
+                    "name": "ErrorMessage",
+                    "value": {
+                        "id": "49a1893c172b7d8ab9859be5[errormessage]",
+                        "name": "ErrorMessage",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "ad3251234a9168aa0c0abee2": {
+            "label": {
+                "id": "ad3251234a9168aa0c0abee2[label]",
+                "name": "Label",
+                "value": {
+                    "id": "ad3251234a9168aa0c0abee2[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4140,
+            "top": 4396,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16023,
+            "type": "Bot Action",
+            "attributes": {
+                "5529bde8544426cd5580efc1": {
+                    "id": "ad3251234a9168aa0c0abee2[action type]",
+                    "name": "Action Type",
+                    "value": {
+                        "id": "ad3251234a9168aa0c0abee2[action type]",
+                        "name": "Action Type",
+                        "value": "Service"
+                    },
+                    "option": "Service"
+                },
+                "c436dc0e764a63371820e857": {
+                    "id": "ad3251234a9168aa0c0abee2[function name]",
+                    "name": "Function Name",
+                    "value": {
+                        "id": "ad3251234a9168aa0c0abee2[function name]",
+                        "name": "Function Name",
+                        "value": "getSuggestion"
+                    }
+                },
+                "bc1335cdf59dedb856e635be": {
+                    "id": "ad3251234a9168aa0c0abee2[service alias]",
+                    "name": "Service Alias",
+                    "value": {
+                        "id": "ad3251234a9168aa0c0abee2[service alias]",
+                        "name": "Service Alias",
+                        "value": "mentoring"
+                    }
+                }
+            }
+        },
+        "381e81d4e6933c2ed6984282": {
+            "label": {
+                "id": "381e81d4e6933c2ed6984282[label]",
+                "name": "Label",
+                "value": {
+                    "id": "381e81d4e6933c2ed6984282[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4124,
+            "top": 4601,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16024,
+            "type": "Incoming Message",
+            "attributes": {
+                "869849f65db9be737e99bd24": {
+                    "id": "381e81d4e6933c2ed6984282[intent keyword]",
+                    "name": "Intent Keyword",
+                    "value": {
+                        "id": "381e81d4e6933c2ed6984282[intent keyword]",
+                        "name": "Intent Keyword",
+                        "value": "getPersonalizedSuggestion"
+                    }
+                },
+                "e7d374a1e2d32c5e67bc68cc": {
+                    "id": "381e81d4e6933c2ed6984282[nlu id]",
+                    "name": "NLU ID",
+                    "value": {
+                        "id": "381e81d4e6933c2ed6984282[nlu id]",
+                        "name": "NLU ID",
+                        "value": "0"
+                    }
+                },
+                "3e8bfec67da28c354a969b46": {
+                    "id": "381e81d4e6933c2ed6984282[isfile]",
+                    "name": "IsFile",
+                    "value": {
+                        "id": "381e81d4e6933c2ed6984282[isfile]",
+                        "name": "IsFile",
+                        "value": false
+                    }
+                }
+            }
+        },
+        "d3b47f6cc0a1ca2241b03e9c": {
+            "label": {
+                "id": "d3b47f6cc0a1ca2241b03e9c[name]",
+                "name": "Name",
+                "value": {
+                    "id": "d3b47f6cc0a1ca2241b03e9c[name]",
+                    "name": "Name",
+                    "value": "courseid"
+                }
+            },
+            "left": 4129,
+            "top": 4289,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16025,
+            "type": "Action Parameter",
+            "attributes": {
+                "6e073c9bf8f0abf332c13bc6": {
+                    "id": "d3b47f6cc0a1ca2241b03e9c[content type]",
+                    "name": "Content Type",
+                    "value": {
+                        "id": "d3b47f6cc0a1ca2241b03e9c[content type]",
+                        "name": "Content Type",
+                        "value": "String"
+                    },
+                    "option": "String"
+                },
+                "f1339223d445e80497de3852": {
+                    "id": "d3b47f6cc0a1ca2241b03e9c[parameter type]",
+                    "name": "Parameter Type",
+                    "value": {
+                        "id": "d3b47f6cc0a1ca2241b03e9c[parameter type]",
+                        "name": "Parameter Type",
+                        "value": "body"
+                    },
+                    "option": "body"
+                },
+                "68f226ab6d61c452f8834cae": {
+                    "id": "d3b47f6cc0a1ca2241b03e9c[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "d3b47f6cc0a1ca2241b03e9c[name]",
+                        "name": "Name",
+                        "value": "courseid"
+                    }
+                },
+                "6f5ac2636ffa905db3593907": {
+                    "id": "d3b47f6cc0a1ca2241b03e9c[static]",
+                    "name": "Static",
+                    "value": {
+                        "id": "d3b47f6cc0a1ca2241b03e9c[static]",
+                        "name": "Static",
+                        "value": "true"
+                    }
+                },
+                "32c6ddb923168e92ed48779c": {
+                    "id": "d3b47f6cc0a1ca2241b03e9c[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "d3b47f6cc0a1ca2241b03e9c[url]",
+                        "name": "URL",
+                        "value": ""
+                    }
+                },
+                "8ad8cf5a0cde8fb403d82595": {
+                    "id": "d3b47f6cc0a1ca2241b03e9c[content]",
+                    "name": "Content",
+                    "value": {
+                        "id": "d3b47f6cc0a1ca2241b03e9c[content]",
+                        "name": "Content",
+                        "value": "18"
+                    }
+                }
+            }
+        },
+        "36ef721095b7fb3a813290f9": {
+            "label": {
+                "id": "36ef721095b7fb3a813290f9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "36ef721095b7fb3a813290f9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4500,
+            "top": 4647,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16026,
+            "type": "Incoming Message",
+            "attributes": {
+                "869849f65db9be737e99bd24": {
+                    "id": "36ef721095b7fb3a813290f9[intent keyword]",
+                    "name": "Intent Keyword",
+                    "value": {
+                        "id": "36ef721095b7fb3a813290f9[intent keyword]",
+                        "name": "Intent Keyword",
+                        "value": "default"
+                    }
+                },
+                "e7d374a1e2d32c5e67bc68cc": {
+                    "id": "36ef721095b7fb3a813290f9[nlu id]",
+                    "name": "NLU ID",
+                    "value": {
+                        "id": "36ef721095b7fb3a813290f9[nlu id]",
+                        "name": "NLU ID",
+                        "value": "0"
+                    }
+                },
+                "3e8bfec67da28c354a969b46": {
+                    "id": "36ef721095b7fb3a813290f9[isfile]",
+                    "name": "IsFile",
+                    "value": {
+                        "id": "36ef721095b7fb3a813290f9[isfile]",
+                        "name": "IsFile",
+                        "value": false
+                    }
+                }
+            }
+        },
+        "c7009b1bc576a142770f9bbe": {
+            "label": {
+                "id": "c7009b1bc576a142770f9bbe[label]",
+                "name": "Label",
+                "value": {
+                    "id": "c7009b1bc576a142770f9bbe[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4506,
+            "top": 4821,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16027,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "c7009b1bc576a142770f9bbe[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "c7009b1bc576a142770f9bbe[message]",
+                        "name": "Message",
+                        "value": "Sorry, I couldn't understand your message. Try asking me for a suggestion."
+                    }
+                },
+                "5f2b4ee11564428b5dc3fe28": {
+                    "id": "c7009b1bc576a142770f9bbe[fileurl]",
+                    "name": "FileURL",
+                    "value": {
+                        "id": "c7009b1bc576a142770f9bbe[fileurl]",
+                        "name": "FileURL",
+                        "value": ""
+                    }
+                },
+                "4c9be5afd81d19bdc0b219cb": {
+                    "id": "c7009b1bc576a142770f9bbe[errormessage]",
+                    "name": "ErrorMessage",
+                    "value": {
+                        "id": "c7009b1bc576a142770f9bbe[errormessage]",
+                        "name": "ErrorMessage",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "63edb1fe3f7b5ff602897054": {
+            "label": {
+                "id": "63edb1fe3f7b5ff602897054[name]",
+                "name": "Name",
+                "value": {
+                    "id": "63edb1fe3f7b5ff602897054[name]",
+                    "name": "Name",
+                    "value": "numOfSuggestions"
+                }
+            },
+            "left": 4043.5,
+            "top": 4356,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16028,
+            "type": "Action Parameter",
+            "attributes": {
+                "6e073c9bf8f0abf332c13bc6": {
+                    "id": "63edb1fe3f7b5ff602897054[content type]",
+                    "name": "Content Type",
+                    "value": {
+                        "id": "63edb1fe3f7b5ff602897054[content type]",
+                        "name": "Content Type",
+                        "value": "Integer"
+                    },
+                    "option": "Integer"
+                },
+                "f1339223d445e80497de3852": {
+                    "id": "63edb1fe3f7b5ff602897054[parameter type]",
+                    "name": "Parameter Type",
+                    "value": {
+                        "id": "63edb1fe3f7b5ff602897054[parameter type]",
+                        "name": "Parameter Type",
+                        "value": "body"
+                    },
+                    "option": "body"
+                },
+                "68f226ab6d61c452f8834cae": {
+                    "id": "63edb1fe3f7b5ff602897054[name]",
+                    "name": "Name",
+                    "value": {
+                        "id": "63edb1fe3f7b5ff602897054[name]",
+                        "name": "Name",
+                        "value": "numOfSuggestions"
+                    }
+                },
+                "6f5ac2636ffa905db3593907": {
+                    "id": "63edb1fe3f7b5ff602897054[static]",
+                    "name": "Static",
+                    "value": {
+                        "id": "63edb1fe3f7b5ff602897054[static]",
+                        "name": "Static",
+                        "value": "true"
+                    }
+                },
+                "32c6ddb923168e92ed48779c": {
+                    "id": "63edb1fe3f7b5ff602897054[url]",
+                    "name": "URL",
+                    "value": {
+                        "id": "63edb1fe3f7b5ff602897054[url]",
+                        "name": "URL",
+                        "value": ""
+                    }
+                },
+                "8ad8cf5a0cde8fb403d82595": {
+                    "id": "63edb1fe3f7b5ff602897054[content]",
+                    "name": "Content",
+                    "value": {
+                        "id": "63edb1fe3f7b5ff602897054[content]",
+                        "name": "Content",
+                        "value": "2"
+                    }
+                }
+            }
+        },
+        "941e990f0743736103dfe976": {
+            "label": {
+                "id": "941e990f0743736103dfe976[label]",
+                "name": "Label",
+                "value": {
+                    "id": "941e990f0743736103dfe976[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4351,
+            "top": 4643.25,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16029,
+            "type": "Incoming Message",
+            "attributes": {
+                "869849f65db9be737e99bd24": {
+                    "id": "941e990f0743736103dfe976[intent keyword]",
+                    "name": "Intent Keyword",
+                    "value": {
+                        "id": "941e990f0743736103dfe976[intent keyword]",
+                        "name": "Intent Keyword",
+                        "value": "refuseSuggestion"
+                    }
+                },
+                "e7d374a1e2d32c5e67bc68cc": {
+                    "id": "941e990f0743736103dfe976[nlu id]",
+                    "name": "NLU ID",
+                    "value": {
+                        "id": "941e990f0743736103dfe976[nlu id]",
+                        "name": "NLU ID",
+                        "value": "0"
+                    }
+                },
+                "3e8bfec67da28c354a969b46": {
+                    "id": "941e990f0743736103dfe976[isfile]",
+                    "name": "IsFile",
+                    "value": {
+                        "id": "941e990f0743736103dfe976[isfile]",
+                        "name": "IsFile",
+                        "value": false
+                    }
+                }
+            }
+        },
+        "e0d08abd9226b48d19f8c282": {
+            "label": {
+                "id": "e0d08abd9226b48d19f8c282[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e0d08abd9226b48d19f8c282[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4347.25,
+            "top": 4798.5,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16030,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "e0d08abd9226b48d19f8c282[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "e0d08abd9226b48d19f8c282[message]",
+                        "name": "Message",
+                        "value": "Alright! You can ask me for suggestions at any time. Please consider evaluating my performance by clicking <a href=' https://limesurvey.tech4comp.dbis.rwth-aachen.de/index.php/136512?lang=en'>>>here<<</a>."
+                    }
+                },
+                "5f2b4ee11564428b5dc3fe28": {
+                    "id": "e0d08abd9226b48d19f8c282[fileurl]",
+                    "name": "FileURL",
+                    "value": {
+                        "id": "e0d08abd9226b48d19f8c282[fileurl]",
+                        "name": "FileURL",
+                        "value": ""
+                    }
+                },
+                "4c9be5afd81d19bdc0b219cb": {
+                    "id": "e0d08abd9226b48d19f8c282[errormessage]",
+                    "name": "ErrorMessage",
+                    "value": {
+                        "id": "e0d08abd9226b48d19f8c282[errormessage]",
+                        "name": "ErrorMessage",
+                        "value": ""
+                    }
+                }
+            }
+        },
+        "de5c71093fe311224d90b09c": {
+            "label": {
+                "id": "de5c71093fe311224d90b09c[label]",
+                "name": "Label",
+                "value": {
+                    "id": "de5c71093fe311224d90b09c[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4584.666666666667,
+            "top": 4526.333333333333,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16031,
+            "type": "Incoming Message",
+            "attributes": {
+                "869849f65db9be737e99bd24": {
+                    "id": "de5c71093fe311224d90b09c[intent keyword]",
+                    "name": "Intent Keyword",
+                    "value": {
+                        "id": "de5c71093fe311224d90b09c[intent keyword]",
+                        "name": "Intent Keyword",
+                        "value": "thank"
+                    }
+                },
+                "e7d374a1e2d32c5e67bc68cc": {
+                    "id": "de5c71093fe311224d90b09c[nlu id]",
+                    "name": "NLU ID",
+                    "value": {
+                        "id": "de5c71093fe311224d90b09c[nlu id]",
+                        "name": "NLU ID",
+                        "value": "0"
+                    }
+                },
+                "3e8bfec67da28c354a969b46": {
+                    "id": "de5c71093fe311224d90b09c[isfile]",
+                    "name": "IsFile",
+                    "value": {
+                        "id": "de5c71093fe311224d90b09c[isfile]",
+                        "name": "IsFile",
+                        "value": false
+                    }
+                }
+            }
+        },
+        "24b58363889e58edc4622b16": {
+            "label": {
+                "id": "24b58363889e58edc4622b16[label]",
+                "name": "Label",
+                "value": {
+                    "id": "24b58363889e58edc4622b16[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "left": 4675.888888888889,
+            "top": 4737.444444444444,
+            "width": 48,
+            "height": 48,
+            "zIndex": 16032,
+            "type": "Chat Response",
+            "attributes": {
+                "a5844a8bde0637231a942b69": {
+                    "id": "24b58363889e58edc4622b16[message]",
+                    "name": "Message",
+                    "value": {
+                        "id": "24b58363889e58edc4622b16[message]",
+                        "name": "Message",
+                        "value": "You're welcome! I will be here for more suggestions any time you need it. Please consider evaluating my performance by clicking <a href=' https://limesurvey.tech4comp.dbis.rwth-aachen.de/index.php/136512?lang=en'>>>here<<</a>."
+                    }
+                },
+                "5f2b4ee11564428b5dc3fe28": {
+                    "id": "24b58363889e58edc4622b16[fileurl]",
+                    "name": "FileURL",
+                    "value": {
+                        "id": "24b58363889e58edc4622b16[fileurl]",
+                        "name": "FileURL",
+                        "value": ""
+                    }
+                },
+                "4c9be5afd81d19bdc0b219cb": {
+                    "id": "24b58363889e58edc4622b16[errormessage]",
+                    "name": "ErrorMessage",
+                    "value": {
+                        "id": "24b58363889e58edc4622b16[errormessage]",
+                        "name": "ErrorMessage",
+                        "value": ""
+                    }
+                }
+            }
+        }
+    },
+    "edges": {
+        "6749057604ac51ade57ce02d": {
+            "label": {
+                "id": "6749057604ac51ade57ce02d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "6749057604ac51ade57ce02d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "f5c35598f04df4905a97c6db",
+            "target": "960fcc299368c11690528afa",
+            "attributes": {},
+            "type": "has"
+        },
+        "247dcb7b6fb157fa8008caef": {
+            "label": {
+                "id": "247dcb7b6fb157fa8008caef[label]",
+                "name": "Label",
+                "value": {
+                    "id": "247dcb7b6fb157fa8008caef[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "960fcc299368c11690528afa",
+            "target": "d085128abaeecff90eb95376",
+            "attributes": {},
+            "type": "has"
+        },
+        "c651a0490a0a0304ec0187e4": {
+            "label": {
+                "id": "c651a0490a0a0304ec0187e4[label]",
+                "name": "Label",
+                "value": {
+                    "id": "c651a0490a0a0304ec0187e4[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "960fcc299368c11690528afa",
+            "target": "35ee8db6359b29efee8bb915",
+            "attributes": {},
+            "type": "has"
+        },
+        "7ed819d4c364f037850eec2e": {
+            "label": {
+                "id": "7ed819d4c364f037850eec2e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "7ed819d4c364f037850eec2e[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d085128abaeecff90eb95376",
+            "target": "21f4d33a2ef38def343c3aeb",
+            "attributes": {},
+            "type": "generates"
+        },
+        "1c211ac5b6d0db421e1da982": {
+            "label": {
+                "id": "1c211ac5b6d0db421e1da982[label]",
+                "name": "Label",
+                "value": {
+                    "id": "1c211ac5b6d0db421e1da982[label]",
+                    "name": "Label",
+                    "value": "greetings"
+                }
+            },
+            "source": "21f4d33a2ef38def343c3aeb",
+            "target": "49a1893c172b7d8ab9859be5",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "b605e332f84b02f7a84c7d5d": {
+            "label": {
+                "id": "b605e332f84b02f7a84c7d5d[label]",
+                "name": "Label",
+                "value": {
+                    "id": "b605e332f84b02f7a84c7d5d[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ad3251234a9168aa0c0abee2",
+            "target": "d085128abaeecff90eb95376",
+            "attributes": {},
+            "type": "uses"
+        },
+        "b02126c144ff9fd88a795967": {
+            "label": {
+                "id": "b02126c144ff9fd88a795967[label]",
+                "name": "Label",
+                "value": {
+                    "id": "b02126c144ff9fd88a795967[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "960fcc299368c11690528afa",
+            "target": "ad3251234a9168aa0c0abee2",
+            "attributes": {},
+            "type": "performs"
+        },
+        "0adf0dac04460a744d4abe3e": {
+            "label": {
+                "id": "0adf0dac04460a744d4abe3e[label]",
+                "name": "Label",
+                "value": {
+                    "id": "0adf0dac04460a744d4abe3e[label]",
+                    "name": "Label",
+                    "value": "getPersonalizedSuggestion"
+                }
+            },
+            "source": "381e81d4e6933c2ed6984282",
+            "target": "ad3251234a9168aa0c0abee2",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "925dbeab748dc7c1b6798aca": {
+            "label": {
+                "id": "925dbeab748dc7c1b6798aca[label]",
+                "name": "Label",
+                "value": {
+                    "id": "925dbeab748dc7c1b6798aca[label]",
+                    "name": "Label",
+                    "value": "0"
+                }
+            },
+            "source": "d085128abaeecff90eb95376",
+            "target": "381e81d4e6933c2ed6984282",
+            "attributes": {},
+            "type": "generates"
+        },
+        "602e15b3e5bea6f1009cf7c0": {
+            "label": {
+                "id": "602e15b3e5bea6f1009cf7c0[label]",
+                "name": "Label",
+                "value": {
+                    "id": "602e15b3e5bea6f1009cf7c0[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ad3251234a9168aa0c0abee2",
+            "target": "d3b47f6cc0a1ca2241b03e9c",
+            "attributes": {},
+            "type": "has"
+        },
+        "267f55b8e5631e06c6c4a092": {
+            "label": {
+                "id": "267f55b8e5631e06c6c4a092[label]",
+                "name": "Label",
+                "value": {
+                    "id": "267f55b8e5631e06c6c4a092[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "36ef721095b7fb3a813290f9",
+            "target": "c7009b1bc576a142770f9bbe",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "f18564bbd44f3d5514c5da30": {
+            "label": {
+                "id": "f18564bbd44f3d5514c5da30[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f18564bbd44f3d5514c5da30[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d085128abaeecff90eb95376",
+            "target": "36ef721095b7fb3a813290f9",
+            "attributes": {},
+            "type": "generates"
+        },
+        "17503075864ebe8a75515132": {
+            "label": {
+                "id": "17503075864ebe8a75515132[label]",
+                "name": "Label",
+                "value": {
+                    "id": "17503075864ebe8a75515132[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ad3251234a9168aa0c0abee2",
+            "target": "63edb1fe3f7b5ff602897054",
+            "attributes": {},
+            "type": "has"
+        },
+        "0a72ab3ce35bc74bd7b81074": {
+            "label": {
+                "id": "0a72ab3ce35bc74bd7b81074[label]",
+                "name": "Label",
+                "value": {
+                    "id": "0a72ab3ce35bc74bd7b81074[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d085128abaeecff90eb95376",
+            "target": "941e990f0743736103dfe976",
+            "attributes": {},
+            "type": "generates"
+        },
+        "db5e6fd8e5dca9215304b010": {
+            "label": {
+                "id": "db5e6fd8e5dca9215304b010[label]",
+                "name": "Label",
+                "value": {
+                    "id": "db5e6fd8e5dca9215304b010[label]",
+                    "name": "Label",
+                    "value": "refuseSuggestion"
+                }
+            },
+            "source": "941e990f0743736103dfe976",
+            "target": "e0d08abd9226b48d19f8c282",
+            "attributes": {},
+            "type": "triggers"
+        },
+        "f192d50e5f1164ea575d0b56": {
+            "label": {
+                "id": "f192d50e5f1164ea575d0b56[label]",
+                "name": "Label",
+                "value": {
+                    "id": "f192d50e5f1164ea575d0b56[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "d085128abaeecff90eb95376",
+            "target": "de5c71093fe311224d90b09c",
+            "attributes": {},
+            "type": "generates"
+        },
+        "9d04d70f14c8fd4611c14145": {
+            "label": {
+                "id": "9d04d70f14c8fd4611c14145[label]",
+                "name": "Label",
+                "value": {
+                    "id": "9d04d70f14c8fd4611c14145[label]",
+                    "name": "Label",
+                    "value": "thank"
+                }
+            },
+            "source": "de5c71093fe311224d90b09c",
+            "target": "24b58363889e58edc4622b16",
+            "attributes": {},
+            "type": "triggers"
+        }
+    }
+}

@@ -72,6 +72,7 @@ Following environment variables have default values however they can be changed 
 [yjs-github]: https://github.com/yjs/yjs
 [y-websocket-server]: https://github.com/y-js/y-websockets-server
 
+
 ## Examples
 | Bot            | Description | Application                                                                                                                                                | Demo |
 | -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
@@ -82,6 +83,15 @@ Following environment variables have default values however they can be changed 
 | LitBot         | todo   | [las2peer-akg](https://github.com/rwth-acis/las2peer-akg)                                                                                                  | https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-LitBot |
 | LA-Bot         | todo        | [learning-analytics-verification](https://github.com/rwth-acis/learning-analytics-verification)                                                            | Todo |
 | CitBot         | todo        | [Citation-Recommendation-Bot](https://github.com/rwth-acis/Citation-Recommendation-Bot)                                                                    | Todo |
+
+## Deploying a Bot
+
+After creating a bot model on the frontend, you will be able to upload the bot to the SBFManager by using the "Model Uploader" on the "Bot Modeling" page. For this to work, you will need a running instance of the [SBFManager](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service) and adjust the "SBFManager Endpoint" accordingly. 
+
+When creating chatbots you will also need to provide a [Rasa server](https://github.com/RasaHQ/rasa.git) hosting an NLU Model. You can also use the "NLU Model Training Helper" to create your own NLU Model and upload that model by adjusting the "SBFManager Endpoint" and "Rasa NLU Endpoint" accordingly.
+
+To find out how to model bots, you can check the [SBF wiki](https://github.com/rwth-acis/Social-Bot-Framework/wiki). 
+
 
 ## References
 
