@@ -75,11 +75,11 @@ Following environment variables have default values however they can be changed 
 ## Examples
 | Bot            | Description | Application                                                                                                                                                | Demo |
 | -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
-| MensaBot       | todo        | [las2peer-Mensa-Service](https://github.com/rwth-acis/las2peer-Mensa-Service)                                                                              | Todo |
+| MensaBot       | Bot used to fetch and rate menu for canteens. | [las2peer-Mensa-Service](https://github.com/rwth-acis/las2peer-Mensa-Service)                                                                              | https://t.me/AcisMensaBot |
 | SurveyBot      | todo        | [Survey-Handler-Service](https://github.com/rwth-acis/Survey-Handler-Service), [MobSOS Surveys](https://github.com/rwth-acis/mobsos-surveys) or LimeSurvey | Todo |
-| FeedBot        | todo        | [las2peer-T-MITOCAR-Service](https://github.com/rwth-acis/las2peer-tmitocar-service)                                                                       | Todo |
+| FeedBot        | Gives out assignments to users, takes in their written solution and compares it with a master solution. Does not give a grade but returns a feedback file where the comparison is discussed. | [las2peer-T-MITOCAR-Service](https://github.com/rwth-acis/las2peer-tmitocar-service)                                                                       | https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-FeedBot |
 | ReaderbenchBot | todo        | [las2peer-readerbench](https://github.com/rwth-acis/las2peer-readerbench)                                                                                  | Todo |
-| LitBot         | todo        | [las2peer-akg](https://github.com/rwth-acis/las2peer-akg)                                                                                                  | Todo |
+| LitBot         | todo   | [las2peer-akg](https://github.com/rwth-acis/las2peer-akg)                                                                                                  | https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-LitBot |
 | LA-Bot         | todo        | [learning-analytics-verification](https://github.com/rwth-acis/learning-analytics-verification)                                                            | Todo |
 | CitBot         | todo        | [Citation-Recommendation-Bot](https://github.com/rwth-acis/Citation-Recommendation-Bot)                                                                    | Todo |
 
