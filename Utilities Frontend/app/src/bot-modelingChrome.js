@@ -78,8 +78,8 @@ class BotModeling extends LitElement {
         display: flex;
         flex-flow: column;
       }
-      .innercontainer:nth-of-type(2) {
-      }
+      /* .innercontainer:nth-of-type(2) {
+      } */
       .innercontainer:nth-of-type(3) {
         flex: 2;
         display: flex;

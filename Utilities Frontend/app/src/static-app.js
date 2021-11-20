@@ -79,7 +79,7 @@ class StaticApp extends LitElement {
         oidcsilentsigninturl="/src/callbacks/silent-callback.html"
         oidcclientid="{OIDC_CLIENT_ID}"
         subtitle="{STATUSBAR_SUBTITLE}"
-        autoAppendWidget="true"
+        ?autoappendwidget=${this.autoAppendWidget}
       ></las2peer-frontend-statusbar>
 
       <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
@@ -141,6 +141,10 @@ class StaticApp extends LitElement {
         type: String,
         value: "sbf",
         observer: "_pageChanged",
+      },
+      autoAppendWidget:{
+        type: Boolean,
+        value: true,
       },
     };
   }

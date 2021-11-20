@@ -34,11 +34,6 @@ class ModelTraining extends LitElement {
           href="//cdn.quilljs.com/1.3.6/quill.bubble.css"
           rel="stylesheet"
         />
-        <style>
-          #editor {
-            height: 512px;
-          }
-        </style>
       </head>
       <main role="main" class="container" style="margin-top: 76px">
         <div class="jumbotron">
@@ -135,6 +130,14 @@ class ModelTraining extends LitElement {
           </form>
         </div>
       </main>
+    `;
+  }
+
+  static get styles() {
+    return css`
+      #editor {
+        height: 512px;
+      }
     `;
   }
 
