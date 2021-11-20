@@ -1,0 +1,14 @@
+{
+  "version": "1.0.2",
+  "tags": [
+    {
+      "name": "Bot Modeling",
+      "path": "./src/bot-modeling.js",
+      "description": "Page used for modeling bots",
+      "attributes": [],
+      "properties": [],
+      "slots": [],
+      "cssParts": []
+    }
+  ]
+}
