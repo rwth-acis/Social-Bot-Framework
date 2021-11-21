@@ -26,51 +26,7 @@ class StaticApp extends LitElement {
           crossorigin="anonymous"
         />
       </head>
-      <style>
-        :root {
-          --statusbar-background: #808080;
-        }
-        :host {
-          display: block;
-        }
-        #yjsroomcontainer,
-        #modeluploader {
-          display: flex;
-          margin: 5px;
-          flex: 1;
-          align-items: center;
-        }
-        .loader {
-          border: 5px solid #f3f3f3; /* Light grey */
-          border-top: 5px solid #3498db; /* Blue */
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          animation: spin 2s linear infinite;
-          display: none;
-        }
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-        paper-input {
-          max-width: 300px;
-        }
-        paper-button {
-          color: rgb(240, 248, 255);
-          background: rgb(30, 144, 255);
-          max-height: 30px;
-        }
-        paper-button:hover {
-          color: rgb(240, 248, 255);
-          background: rgb(65, 105, 225);
-        }
-      </style>
-
+ 
       <las2peer-frontend-statusbar
         id="statusBar"
         service="Social Bot Framework"
@@ -147,6 +103,53 @@ class StaticApp extends LitElement {
         value: true,
       },
     };
+  }
+
+  static get styles() {
+    return css`
+      :root {
+        --statusbar-background: #808080;
+      }
+      :host {
+        display: block;
+      }
+      #yjsroomcontainer,
+      #modeluploader {
+        display: flex;
+        margin: 5px;
+        flex: 1;
+        align-items: center;
+      }
+      .loader {
+        border: 5px solid #f3f3f3; /* Light grey */
+        border-top: 5px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+        display: none;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      paper-input {
+        max-width: 300px;
+      }
+      paper-button {
+        color: rgb(240, 248, 255);
+        background: rgb(30, 144, 255);
+        max-height: 30px;
+      }
+      paper-button:hover {
+        color: rgb(240, 248, 255);
+        background: rgb(65, 105, 225);
+      }
+    `;
   }
 
   static get observers() {
