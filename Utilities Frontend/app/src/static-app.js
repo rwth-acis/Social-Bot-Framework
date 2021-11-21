@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
@@ -10,7 +10,72 @@ import ModelOps from "./model-ops.js";
  * @customElement
  */
 class StaticApp extends LitElement {
-  static get template() {
+  static properties() {
+    return {
+      prop1: {
+        type: String,
+        value: "static-app",
+      },
+      page: {
+        type: String,
+        value: "sbf",
+        observer: "_pageChanged",
+      },
+      autoAppendWidget: {
+        type: Boolean,
+        value: true,
+      },
+    };
+  }
+
+  static styles = css`
+    :root {
+      --statusbar-background: #808080;
+    }
+    :host {
+      display: block;
+    }
+    #yjsroomcontainer,
+    #modeluploader {
+      display: flex;
+      margin: 5px;
+      flex: 1;
+      align-items: center;
+    }
+    .loader {
+      border: 5px solid #f3f3f3; /* Light grey */
+      border-top: 5px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 2s linear infinite;
+      display: none;
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    paper-input {
+      max-width: 300px;
+    }
+    paper-button {
+      color: rgb(240, 248, 255);
+      background: rgb(30, 144, 255);
+      max-height: 30px;
+    }
+    paper-button:hover {
+      color: rgb(240, 248, 255);
+      background: rgb(65, 105, 225);
+    }
+  `;
+  constructor() {
+    super();
+  }
+  render() {
     return html`
       <head>
         <!-- Bootstrap core CSS -->
@@ -26,7 +91,7 @@ class StaticApp extends LitElement {
           crossorigin="anonymous"
         />
       </head>
- 
+
       <las2peer-frontend-statusbar
         id="statusBar"
         service="Social Bot Framework"
@@ -84,71 +149,6 @@ class StaticApp extends LitElement {
         <bot-modeling name="bot-modeling"></bot-modeling>
         <model-training name="model-training"></model-training>
       </iron-pages>
-    `;
-  }
-
-  static get properties() {
-    return {
-      prop1: {
-        type: String,
-        value: "static-app",
-      },
-      page: {
-        type: String,
-        value: "sbf",
-        observer: "_pageChanged",
-      },
-      autoAppendWidget: {
-        type: Boolean,
-        value: true,
-      },
-    };
-  }
-
-  static get styles() {
-    return css`
-      :root {
-        --statusbar-background: #808080;
-      }
-      :host {
-        display: block;
-      }
-      #yjsroomcontainer,
-      #modeluploader {
-        display: flex;
-        margin: 5px;
-        flex: 1;
-        align-items: center;
-      }
-      .loader {
-        border: 5px solid #f3f3f3; /* Light grey */
-        border-top: 5px solid #3498db; /* Blue */
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        animation: spin 2s linear infinite;
-        display: none;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      paper-input {
-        max-width: 300px;
-      }
-      paper-button {
-        color: rgb(240, 248, 255);
-        background: rgb(30, 144, 255);
-        max-height: 30px;
-      }
-      paper-button:hover {
-        color: rgb(240, 248, 255);
-        background: rgb(65, 105, 225);
-      }
     `;
   }
 

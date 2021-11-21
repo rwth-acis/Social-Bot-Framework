@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 import NLUConfig from "./nlu.md.js";
 import ModelOps from "./model-ops.js";
 
@@ -7,7 +7,13 @@ import ModelOps from "./model-ops.js";
  *
  */
 class ModelTraining extends LitElement {
-  static get template() {
+  static properties() {}
+  static styles = css`
+    #editor {
+      height: 512px;
+    }
+  `;
+  render() {
     return html`
       <head>
         <meta charset="utf-8" />
@@ -132,16 +138,6 @@ class ModelTraining extends LitElement {
       </main>
     `;
   }
-
-  static get styles() {
-    return css`
-      #editor {
-        height: 512px;
-      }
-    `;
-  }
-
-  static get properties() {}
 
   connectedCallback() {
     super.connectedCallback();

@@ -1,13 +1,71 @@
 import "@polymer/paper-button/paper-button.js";
 import Common from "./common.js";
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 
 /**
  * @customElement
  *
  */
 class BotModeling extends LitElement {
-  static get template() {
+  static properties() {}
+
+  static styles = css`
+    #yjsroomcontainer {
+      display: flex;
+      margin: 5px;
+      flex: 1;
+      align-items: center;
+    }
+    .loader {
+      border: 5px solid #f3f3f3; /* Light grey */
+      border-top: 5px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 2s linear infinite;
+      display: none;
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+    .maincontainer {
+      display: flex;
+      height: 600px;
+      flex-flow: row wrap;
+    }
+    .innercontainer {
+      padding: 5px;
+      margin: 5px;
+      flex: 1;
+    }
+    .innercontainer:nth-of-type(1) {
+      flex: 4;
+      display: flex;
+      flex-flow: column;
+    }
+    /* .innercontainer:nth-of-type(2) {
+      } */
+    .innercontainer:nth-of-type(3) {
+      flex: 2;
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+    }
+  `;
+  constructor() {
+    super();
+  }
+
+  render() {
     return html`
       <div>
         <iframe id="Bot" src="{WEBHOST}/syncmeta/bot.html"> </iframe>
@@ -32,63 +90,6 @@ class BotModeling extends LitElement {
       </div>
     `;
   }
-
-  static get styles() {
-    return css`
-      #yjsroomcontainer {
-        display: flex;
-        margin: 5px;
-        flex: 1;
-        align-items: center;
-      }
-      .loader {
-        border: 5px solid #f3f3f3; /* Light grey */
-        border-top: 5px solid #3498db; /* Blue */
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        animation: spin 2s linear infinite;
-        display: none;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      iframe {
-        width: 100%;
-        height: 100%;
-      }
-      .maincontainer {
-        display: flex;
-        height: 600px;
-        flex-flow: row wrap;
-      }
-      .innercontainer {
-        padding: 5px;
-        margin: 5px;
-        flex: 1;
-      }
-      .innercontainer:nth-of-type(1) {
-        flex: 4;
-        display: flex;
-        flex-flow: column;
-      }
-      /* .innercontainer:nth-of-type(2) {
-      } */
-      .innercontainer:nth-of-type(3) {
-        flex: 2;
-        display: flex;
-        flex-flow: column;
-        height: 100%;
-      }
-    `;
-  }
-
-  static get properties() {}
 
   connectedCallback() {
     super.connectedCallback();
