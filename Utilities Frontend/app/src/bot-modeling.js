@@ -1,6 +1,6 @@
 import "@polymer/paper-button/paper-button.js";
 import Common from "./common.js";
-import { LitElement, html } from "lit-element";
+import { LitElement, html } from "lit";
 
 /**
  * @customElement

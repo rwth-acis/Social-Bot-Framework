@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit-element";
+import { LitElement, html } from "lit";
 import NLUConfig from "./nlu.md.js";
 import ModelOps from "./model-ops.js";
 

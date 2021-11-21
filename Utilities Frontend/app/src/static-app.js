@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit-element";
+import { LitElement, html } from "lit";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 import "@polymer/app-route/app-location.js";
 import "@polymer/app-route/app-route.js";
@@ -142,7 +142,7 @@ class StaticApp extends LitElement {
         value: "sbf",
         observer: "_pageChanged",
       },
-      autoAppendWidget:{
+      autoAppendWidget: {
         type: Boolean,
         value: true,
       },

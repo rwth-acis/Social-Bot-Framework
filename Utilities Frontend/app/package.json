@@ -18,7 +18,7 @@
     "@polymer/iron-pages": "^3.0.0-pre.15",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.1",
     "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.3.0",
-    "lit-element": "2.5.1",
+    "lit": "^2.0.2",
     "merge-stream": "^2.0.0",
     "nan": "^2.8.0",
     "utf-8-validate": "1.2.0",
