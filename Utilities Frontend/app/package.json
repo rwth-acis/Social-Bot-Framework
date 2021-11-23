@@ -2,6 +2,7 @@
   "name": "SocialBotFramework",
   "version": "1.0.2",
   "description": "Frontend of Social Bot Framework",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/rwth-acis/Social-Bot-Framework"
