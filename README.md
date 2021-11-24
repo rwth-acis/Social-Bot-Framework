@@ -39,7 +39,7 @@ This frontend consists of the Bot Modeling and the NLU Model Training Helper.
 
 ### Build and Run the Frontend
 
-First, build the Docker image
+First, build the Docker image. Please note that the frontend can onyl be built using node versions <=11
 
 ```bash
 $ docker build -t rwthacis/sbf-utils .
