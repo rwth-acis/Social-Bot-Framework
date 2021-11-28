@@ -1,11 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"
+    />
 
     <title>Social Bot Framework</title>
-    <meta name="description" content="SocialBotFramework">
+    <meta name="description" content="SocialBotFramework" />
 
     <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="/node_modules/yjs/dist/y.js"></script>
@@ -16,9 +19,20 @@
     <script src="/node_modules/y-richtext/dist/y-richtext.js"></script>
     <script src="/node_modules/y-websockets-client/dist/y-websockets-client.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <!-- 
       Reason of using self-served version of Quill instead of using official version is that official version of Quill does not have support for WebComponents currently
       and a new pull request is opened to add WebComponent support(https://github.com/quilljs/quill/pull/2966) however it is not merged to master branch yet.
@@ -26,12 +40,18 @@
       If WebComponent suppport is added to Quill when you read this, feel free to change it with official version.
     -->
     <!-- Main Quill library -->
-<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-<!-- Theme included stylesheets -->
-<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- Theme included stylesheets -->
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rwth-acis/InterwidgetCommunication@develop/iwc.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/rwth-acis/InterwidgetCommunication@develop/iwc.js"
+    ></script>
     <script type="module" src="/src/static-app.js" crossorigin></script>
   </head>
   <body>
