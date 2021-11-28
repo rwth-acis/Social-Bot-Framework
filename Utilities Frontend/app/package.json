@@ -8,7 +8,7 @@
     "url": "https://github.com/rwth-acis/Social-Bot-Framework"
   },
   "scripts": {
-    "start": "polymer serve --port 8082 dist",
+    "start": "node server.js",
     "build": "gulp clean-build:full",
     "lint": "polymer lint",
     "test": "polymer test",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@polymer/app-route": "^3.0.0-pre.15",
     "@polymer/iron-pages": "^3.0.0-pre.15",
+    "express": "^4.17.1",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.1",
     "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.3.0",
     "lit": "^2.0.2",
