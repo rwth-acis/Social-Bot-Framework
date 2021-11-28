@@ -51,7 +51,7 @@ async function build() {
   }).then(async ({ options, warnings }) => {
     // "warnings" wraps the default `onwarn` handler passed by the CLI.
     // This prints all warnings up to this point:
-    console.log(`We currently have ${warnings.count} warnings`);
+    console.log(`${warnings.count} warnings while loading rollup.config.js`);
 
     // This prints all deferred warnings
     warnings.flush();
@@ -64,6 +64,6 @@ async function build() {
       const bundle = await rollup.rollup(optionsObj);
       await Promise.all(optionsObj.output.map(bundle.write));
     }
-    console.log("Build complete");
+
   });
 }
