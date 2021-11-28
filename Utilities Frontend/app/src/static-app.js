@@ -25,6 +25,7 @@ class StaticApp extends LitElement {
         type: Boolean,
         value: true,
       },
+      alert: {},
     };
   }
 
@@ -35,7 +36,7 @@ class StaticApp extends LitElement {
     :host {
       display: block;
     }
-    #yjsroomcontainer,
+
     #modeluploader {
       display: flex;
       margin: 5px;
@@ -50,6 +51,9 @@ class StaticApp extends LitElement {
       height: 30px;
       animation: spin 2s linear infinite;
       display: none;
+    }
+    #yjsRoomInput {
+      max-width: 300px;
     }
     @keyframes spin {
       0% {
@@ -74,6 +78,12 @@ class StaticApp extends LitElement {
   `;
   constructor() {
     super();
+    this.addEventListener("submit", (e) => {
+      alert("submit");
+      e.preventDefault();
+      console.log("HI");
+      // _onChangeButtonClicked();
+    });
   }
   render() {
     return html`
@@ -81,14 +91,27 @@ class StaticApp extends LitElement {
         <!-- Bootstrap core CSS -->
         <link
           rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous"
         />
         <link
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+          crossorigin="anonymous"
+        ></script>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
         />
       </head>
 
@@ -120,17 +143,30 @@ class StaticApp extends LitElement {
         </div>
       </nav>
 
-      <div>
-        <p id="currentRoom">Current Space: Test</p>
-        <div id="yjsroomcontainer">
-          <paper-input
-            id="yjsRoomInput"
-            always-float-label
-            label="Space"
-          ></paper-input>
-          <paper-button on-click="_onChangeButtonClicked">Enter</paper-button>
-          <div class="loader" id="roomEnterLoader"></div>
-        </div>
+      <div class="container">
+        <div id="liveAlertPlaceholder"></div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="${this._showAlert}"
+          id="liveAlertBtn"
+        >
+          Show live alert
+        </button>
+        <h2 id="currentRoom">Current Space: Test</h2>
+        <form id="spaceForm" onsubmit="_onChangeButtonClicked()">
+          <div class="mb-3" id="yjsroomcontainer">
+            <label for="yjsroom">Space</label>
+            <input
+              id="yjsRoomInput"
+              class="form-control"
+              type="text"
+              placeholder="Enter Space name"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-outline-primary">ENTER</button>
+        </form>
       </div>
 
       <app-location route="{{route}}"></app-location>
@@ -158,6 +194,43 @@ class StaticApp extends LitElement {
 
   _routerChanged(page) {
     this.page = page || "sbf";
+  }
+
+  _showAlert() {
+    let alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+
+    var wrapper = document.createElement("div");
+    this.alert = (
+      <div
+        class="alert alert-' +
+      type +
+      ' alert-dismissible"
+        role="alert"
+      >
+        ' + '<i class="bi bi-check-circle-fill"></i>' + message + '
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    );
+    wrapper.innerHTML =
+      '<div class="alert alert-' +
+      type +
+      ' alert-dismissible" role="alert">' +
+      '<i class="bi bi-check-circle-fill"></i>' +
+      message +
+      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+
+    alertPlaceholder.append(wrapper);
+  }
+
+  if(alertTrigger) {
+    alertTrigger.addEventListener("click", function () {
+      alert("Nice, you triggered this alert message!", "success");
+    });
   }
 
   /* this pagechanged triggers for simple onserver written in page properties written above */
