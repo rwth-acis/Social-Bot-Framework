@@ -78,12 +78,6 @@ class StaticApp extends LitElement {
   `;
   constructor() {
     super();
-    this.addEventListener("submit", (e) => {
-      alert("submit");
-      e.preventDefault();
-      console.log("HI");
-      // _onChangeButtonClicked();
-    });
   }
   render() {
     return html`
