@@ -78,6 +78,17 @@ class StaticApp extends LitElement {
   `;
   constructor() {
     super();
+    this.alert = html`
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        TEST
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    `;
   }
   render() {
     return html`
@@ -120,35 +131,66 @@ class StaticApp extends LitElement {
         ?autoappendwidget=${this.autoAppendWidget}
       ></las2peer-frontend-statusbar>
 
-      <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/bot-modeling"
-                >Bot Modeling<span class="sr-only"></span
-              ></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/model-training"
-                >NLU Model Training Helper<span class="sr-only"></span
-              ></a>
-            </li>
-          </ul>
-        </div>
+      <nav class="navbar navbar-light bg-primary">
+        <ul class="list-group list-group-horizontal navbar-nav mr-auto ">
+          <li class="nav-item me-4">
+            <a
+              class="nav-link d-flex flex-row bd-highlight "
+              href="/bot-modeling"
+            >
+              <div class="p-2 bd-highlight">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-robot"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062Zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135Z"
+                  />
+                  <path
+                    d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z"
+                  />
+                </svg>
+              </div>
+              <div class="p-2 bd-highlight">Bot Modeling</div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/model-training"
+              class="nav-link d-flex flex-row bd-highlight "
+            >
+              <div class="p-2 bd-highlight">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-book"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"
+                  />
+                </svg>
+              </div>
+              <div class="p-2 bd-highlight">NLU Model Training Helper</div>
+            </a>
+          </li>
+        </ul>
       </nav>
 
-      <div class="container">
-        <div id="liveAlertPlaceholder"></div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="${this._showAlert}"
-          id="liveAlertBtn"
-        >
-          Show live alert
-        </button>
+      <div >
+        <div class="container" >
+          ${this.alert}
+        </div>
+        
         <h2 id="currentRoom">Current Space: Test</h2>
-        <form id="spaceForm" onsubmit="_onChangeButtonClicked()">
+        <form id="spaceForm">
           <div class="mb-3" id="yjsroomcontainer">
             <label for="yjsroom">Space</label>
             <input
@@ -158,9 +200,9 @@ class StaticApp extends LitElement {
               placeholder="Enter Space name"
             />
           </div>
-
           <button type="submit" class="btn btn-outline-primary">ENTER</button>
         </form>
+        <div class="loader" id="roomEnterLoader"></div>
       </div>
 
       <app-location route="{{route}}"></app-location>
@@ -190,31 +232,10 @@ class StaticApp extends LitElement {
     this.page = page || "sbf";
   }
 
-  _showAlert() {
-    let alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+ 
 
-    var wrapper = document.createElement("div");
-    this.alert = `<div
-        class="alert alert-' +
-      type +
-      ' alert-dismissible"
-        role="alert"
-      >
-        ' + '<i class="bi bi-check-circle-fill"></i>' + message + '
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>`; 
-  }
 
-  if(alertTrigger) {
-    alertTrigger.addEventListener("click", function () {
-      alert("Nice, you triggered this alert message!", "success");
-    });
-  }
+
 
   /* this pagechanged triggers for simple onserver written in page properties written above */
   _pageChanged(currentPage, oldPage) {
@@ -261,16 +282,21 @@ class StaticApp extends LitElement {
     }
   }
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     const statusBar = this.shadowRoot.querySelector("#statusBar");
     console.log("{CONTACT_SERVICE_URL}");
     console.log("{OIDC_CLIENT_ID}");
-    statusBar.setAttribute("baseUrl", { CONTACT_SERVICE_URL });
+    statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));
     statusBar.addEventListener("signed-out", (event) =>
       this.handleLogout(event)
     );
+    this.shadowRoot
+      .querySelector("#spaceForm")
+      .addEventListener("submit", (e) => {
+        e.preventDefault();
+        this._onChangeButtonClicked();
+      });
     this.displayCurrentRoomName();
   }
 
