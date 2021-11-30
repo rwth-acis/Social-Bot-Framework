@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "gulp clean-build:full",
+    "build:watch": "gulp build:watch",
     "lint": "polymer lint",
     "test": "polymer test",
     "test:integration": "polymer build # test that psk builds without error with the CLI"
