@@ -43,17 +43,7 @@ gulp.task(
   gulp.series("clean:dist", "copy:modules", bundle, "replace config variables")
 );
 
-gulp.task(
-  "build:watch",
-  gulp.series("clean-build:full", () => {
-    console.log("Build done. Watching for changes...");
-    //full build then watch changes
-    gulp.watch(
-      "src/**",
-      gulp.series("clean:dist", bundle, "replace config variables")
-    );
-  })
-);
+gulp.task("build:watch", gulp.series("clean-build:full", watchChanges));
 
 gulp.task(
   "clean-build:src",
@@ -76,4 +66,12 @@ async function bundle() {
     const bundle = await rollup.rollup(optionsObj);
     await Promise.all(optionsObj.output.map(bundle.write));
   }
+}
+
+function watchChanges() {
+  console.log("Watching for changes...");
+  gulp.watch(
+    "src/**",
+    gulp.series("clean:dist", bundle, "replace config variables")
+  );
 }
