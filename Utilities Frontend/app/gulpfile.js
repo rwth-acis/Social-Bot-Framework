@@ -23,6 +23,7 @@ gulp.task("copy:modules", () => {
 
 gulp.task("copy:src", () => {
   const config = JSON.parse(fs.readFileSync("./config.json"));
+  
   // choose the package.json file (edit this later)
   const packageInfo = JSON.parse(fs.readFileSync("./package.json"));
   const copySrc = gulp
@@ -40,30 +41,31 @@ gulp.task("copy:src", () => {
 
 gulp.task(
   "clean-build:full",
-  gulp.series("clean:src", "copy:modules", "copy:src", build)
+  gulp.series("clean:src", "copy:modules", "copy:src", bundle)
+);
+
+gulp.task(
+  "build:watch",
+  gulp.series("clean-build:full", () => {
+    //full build then watch changes
+    gulp.watch("src/**", gulp.series("copy:src", bundle));
+  })
 );
 
 gulp.task("clean-build:src", gulp.series("clean:src", "copy:src"));
 
-async function build() {
+/**
+ * Bundles the app  and copies it to the dist folder
+ */
+async function bundle() {
   loadConfigFile(path.resolve(__dirname, "rollup.config.js"), {
     format: "es",
   }).then(async ({ options, warnings }) => {
-    // "warnings" wraps the default `onwarn` handler passed by the CLI.
-    // This prints all warnings up to this point:
     console.log(`${warnings.count} warnings while loading rollup.config.js`);
-
-    // This prints all deferred warnings
     warnings.flush();
-
-    // options is an array of "inputOptions" objects with an additional "output"
-    // property that contains an array of "outputOptions".
-    // The following will generate all outputs for all inputs, and write them to disk the same
-    // way the CLI does it:
     for (const optionsObj of options) {
       const bundle = await rollup.rollup(optionsObj);
       await Promise.all(optionsObj.output.map(bundle.write));
     }
-
   });
 }
