@@ -200,8 +200,7 @@ class StaticApp extends LitElement {
     let alertPlaceholder = document.getElementById("liveAlertPlaceholder");
 
     var wrapper = document.createElement("div");
-    this.alert = (
-      <div
+    this.alert = `<div
         class="alert alert-' +
       type +
       ' alert-dismissible"
@@ -214,17 +213,7 @@ class StaticApp extends LitElement {
           data-bs-dismiss="alert"
           aria-label="Close"
         ></button>
-      </div>
-    );
-    wrapper.innerHTML =
-      '<div class="alert alert-' +
-      type +
-      ' alert-dismissible" role="alert">' +
-      '<i class="bi bi-check-circle-fill"></i>' +
-      message +
-      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-
-    alertPlaceholder.append(wrapper);
+      </div>`; 
   }
 
   if(alertTrigger) {
