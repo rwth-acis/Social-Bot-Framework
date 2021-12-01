@@ -19,13 +19,21 @@ class StaticApp extends LitElement {
       page: {
         type: String,
         value: "sbf",
-        observer: "_pageChanged",
+        hasChanged(newVal, oldVal) {
+          alert("page has changed");
+          this._pageChanged(newVal, oldVal);
+        },
       },
+      route:{value:""},
+      routeData:{value:{}},
+      subroute:{value:""},
       autoAppendWidget: {
         type: Boolean,
         value: true,
       },
-      alert: {},
+      alertMessage: {
+        type: String,
+      },
     };
   }
 
@@ -78,26 +86,13 @@ class StaticApp extends LitElement {
   `;
   constructor() {
     super();
-    this.alert = html`
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        TEST
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-    `;
+    this.alertMessage = "Test. HI";
   }
   render() {
     return html`
       <head>
         <!-- Bootstrap core CSS -->
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-        />
+
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -116,7 +111,7 @@ class StaticApp extends LitElement {
         ></script>
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
         />
       </head>
 
@@ -131,7 +126,7 @@ class StaticApp extends LitElement {
         ?autoappendwidget=${this.autoAppendWidget}
       ></las2peer-frontend-statusbar>
 
-      <nav class="navbar navbar-light bg-primary">
+      <nav class="navbar navbar-light bg-light mb-2 p-0">
         <ul class="list-group list-group-horizontal navbar-nav mr-auto ">
           <li class="nav-item me-4">
             <a
@@ -139,21 +134,7 @@ class StaticApp extends LitElement {
               href="/bot-modeling"
             >
               <div class="p-2 bd-highlight">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-robot"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062Zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135Z"
-                  />
-                  <path
-                    d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z"
-                  />
-                </svg>
+                <i class="bi bi-robot"></i>
               </div>
               <div class="p-2 bd-highlight">Bot Modeling</div>
             </a>
@@ -165,18 +146,7 @@ class StaticApp extends LitElement {
               class="nav-link d-flex flex-row bd-highlight "
             >
               <div class="p-2 bd-highlight">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-book"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"
-                  />
-                </svg>
+                <i class="bi bi-book"></i>
               </div>
               <div class="p-2 bd-highlight">NLU Model Training Helper</div>
             </a>
@@ -184,15 +154,16 @@ class StaticApp extends LitElement {
         </ul>
       </nav>
 
-      <div >
-        <div class="container" >
-          ${this.alert}
-        </div>
+      <div class="mx-4">
+        ${this.alertTemplate()}
         
-        <h2 id="currentRoom">Current Space: Test</h2>
+        <h2>
+          Current Space: <span class="text-primary" id="currentRoom">Test</span>
+        </h2>
         <form id="spaceForm">
-          <div class="mb-3" id="yjsroomcontainer">
-            <label for="yjsroom">Space</label>
+          <div class="d-flex flex-row">
+            <div class="me-2">
+              <label for="yjsRoomInput">Space</label>
             <input
               id="yjsRoomInput"
               class="form-control"
@@ -200,20 +171,27 @@ class StaticApp extends LitElement {
               placeholder="Enter Space name"
             />
           </div>
-          <button type="submit" class="btn btn-outline-primary">ENTER</button>
-        </form>
+            <div class="mx-2 d-flex align-items-end">
+              <button type="submit" class="btn btn-outline-primary">
+                ENTER
+              </button>
+            </div>
+            <div class="mx-2 d-flex align-items-end">
         <div class="loader" id="roomEnterLoader"></div>
+            </div>
+          </div>
+        </form>
       </div>
 
-      <app-location route="{{route}}"></app-location>
+      <app-location .route="${this.route}"></app-location>
       <app-route
-        route="{{route}}"
+        .route="${this.route}"
         pattern="/:page"
-        data="{{routeData}}"
-        tail="{{subroute}}"
+        .data="${this.routeData}"
+        .tail="${this.subroute}"
       ></app-route>
       <iron-pages
-        selected="[[page]]"
+        .selected="${this.page}"
         attr-for-selected="name"
         selected-attribute="visible"
         fallback-selection="404"
@@ -229,16 +207,13 @@ class StaticApp extends LitElement {
   }
 
   _routerChanged(page) {
+    alert("_routerChanged");
     this.page = page || "sbf";
   }
 
- 
-
-
-
-
   /* this pagechanged triggers for simple onserver written in page properties written above */
   _pageChanged(currentPage, oldPage) {
+    alert(currentPage);
     // Opera 8.0+
     var isOpera =
       (!!window.opr && !!opr.addons) ||
@@ -300,8 +275,8 @@ class StaticApp extends LitElement {
     this.displayCurrentRoomName();
   }
 
-  _onChangeButtonClicked() {
-    var roomName = this.shadowRoot.querySelector("#yjsRoomInput").value;
+  async _onChangeButtonClicked() {
+    const roomName = this.shadowRoot.querySelector("#yjsRoomInput").value;
     Common.setYjsRoomName(roomName);
     this.changeVisibility("#roomEnterLoader", true);
     ModelOps.uploadMetaModel()
@@ -327,9 +302,9 @@ class StaticApp extends LitElement {
   displayCurrentRoomName() {
     var spaceHTML = "";
     if (Common.getYjsRoomName()) {
-      spaceHTML = `<span style="font-weight: bold;">Current Space:</span> ${Common.getYjsRoomName()}`;
+      spaceHTML = Common.getYjsRoomName();
     } else {
-      spaceHTML = "Please enter a space!";
+      spaceHTML = "No Space selected. Please enter a space!";
     }
     this.shadowRoot.querySelector("#currentRoom").innerHTML = spaceHTML;
   }
@@ -357,6 +332,23 @@ class StaticApp extends LitElement {
   handleLogout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("userinfo_endpoint");
+  }
+
+  alertTemplate(){
+    if (!this.alertMessage) {
+     return ;
+    }
+    return html`<div class="container">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        ${this.alertMessage}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div> `;
   }
 }
 
