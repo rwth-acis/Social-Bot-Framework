@@ -26,7 +26,7 @@ gulp.task("replace config variables", () => {
   const packageInfo = JSON.parse(fs.readFileSync("./package.json"));
 
   const result = gulp
-    .src("dist/**")
+    .src("dist/*.js")
     .pipe(replace("{WEBHOST}", config.webhost))
     .pipe(replace("{OIDC_CLIENT_ID}", config.oidc_client_id))
     .pipe(replace("{YJS_ADDRESS}", config.yjs_address))
@@ -72,6 +72,11 @@ function watchChanges() {
   console.log("Watching for changes...");
   gulp.watch(
     "src/**",
-    gulp.series("clean:dist", bundle, "replace config variables")
+    gulp.series("clean:dist", bundle, "replace config variables", success)
   );
+}
+
+async function success() {
+  console.log("Build successful");
+  return;
 }
