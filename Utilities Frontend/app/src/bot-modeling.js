@@ -68,7 +68,8 @@ class BotModeling extends LitElement {
   render() {
     return html`
       <div>
-        <iframe id="Bot" src="{WEBHOST}/syncmeta/bot.html"> </iframe>
+        <iframe id="Bot" src="{WEBHOST}/syncmeta/bot.html" frameborder="0">
+        </iframe>
       </div>
       <div class="maincontainer">
         <div class="innercontainer">

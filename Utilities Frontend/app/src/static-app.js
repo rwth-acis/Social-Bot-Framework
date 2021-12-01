@@ -5,7 +5,10 @@ import "@polymer/app-route/app-route.js";
 import "@polymer/iron-pages/iron-pages.js";
 import Common from "./common.js";
 import ModelOps from "./model-ops.js";
+import { Router } from "@vaadin/router";
 
+import "./bot-modeling.js";
+import "./model-training.js";
 /**
  * @customElement
  */
@@ -16,17 +19,7 @@ class StaticApp extends LitElement {
         type: String,
         value: "static-app",
       },
-      page: {
-        type: String,
-        value: "sbf",
-        hasChanged(newVal, oldVal) {
-          alert("page has changed");
-          this._pageChanged(newVal, oldVal);
-        },
-      },
-      route:{value:""},
-      routeData:{value:{}},
-      subroute:{value:""},
+
       autoAppendWidget: {
         type: Boolean,
         value: true,
@@ -156,7 +149,7 @@ class StaticApp extends LitElement {
 
       <div class="mx-4">
         ${this.alertTemplate()}
-        
+
         <h2>
           Current Space: <span class="text-primary" id="currentRoom">Test</span>
         </h2>
@@ -164,41 +157,25 @@ class StaticApp extends LitElement {
           <div class="d-flex flex-row">
             <div class="me-2">
               <label for="yjsRoomInput">Space</label>
-            <input
-              id="yjsRoomInput"
-              class="form-control"
-              type="text"
-              placeholder="Enter Space name"
-            />
-          </div>
+              <input
+                id="yjsRoomInput"
+                class="form-control"
+                type="text"
+                placeholder="Enter Space name"
+              />
+            </div>
             <div class="mx-2 d-flex align-items-end">
               <button type="submit" class="btn btn-outline-primary">
                 ENTER
               </button>
             </div>
             <div class="mx-2 d-flex align-items-end">
-        <div class="loader" id="roomEnterLoader"></div>
+              <div class="loader" id="roomEnterLoader"></div>
             </div>
           </div>
         </form>
       </div>
-
-      <app-location .route="${this.route}"></app-location>
-      <app-route
-        .route="${this.route}"
-        pattern="/:page"
-        .data="${this.routeData}"
-        .tail="${this.subroute}"
-      ></app-route>
-      <iron-pages
-        .selected="${this.page}"
-        attr-for-selected="name"
-        selected-attribute="visible"
-        fallback-selection="404"
-      >
-        <bot-modeling name="bot-modeling"></bot-modeling>
-        <model-training name="model-training"></model-training>
-      </iron-pages>
+      <div id="outlet" class="m-4"></div>
     `;
   }
 
@@ -214,39 +191,17 @@ class StaticApp extends LitElement {
   /* this pagechanged triggers for simple onserver written in page properties written above */
   _pageChanged(currentPage, oldPage) {
     alert(currentPage);
-    // Opera 8.0+
-    var isOpera =
-      (!!window.opr && !!opr.addons) ||
-      !!window.opera ||
-      navigator.userAgent.indexOf(" OPR/") >= 0;
-
     // Firefox 1.0+
-    var isFirefox = typeof InstallTrigger !== "undefined";
-
-    // Safari 3.0+ "[object HTMLElementConstructor]"
-    var isSafari =
-      /constructor/i.test(window.HTMLElement) ||
-      (function (p) {
-        return p.toString() === "[object SafariRemoteNotification]";
-      })(
-        !window["safari"] ||
-          (typeof safari !== "undefined" && safari.pushNotification)
-      );
-
-    // Internet Explor+er 6-11
-    var isIE = false || !!document.documentMode;
-
-    // Chrome 1 - 79
-    var isChrome = !!window.chrome;
+    const isFirefox = typeof InstallTrigger !== "undefined";
 
     switch (currentPage) {
       case "bot-modeling":
-        if (isChrome || isIE || isOpera || isSafari) {
-          import("./bot-modelingChrome.js").then();
-          break;
-        } else if (isFirefox) {
+        if (isFirefox) {
           import("./bot-modeling.js").then();
+
           break;
+        } else {
+          import("./bot-modelingChrome.js").then();
         }
         break;
       case "model-training":
@@ -259,8 +214,6 @@ class StaticApp extends LitElement {
 
   firstUpdated() {
     const statusBar = this.shadowRoot.querySelector("#statusBar");
-    console.log("{CONTACT_SERVICE_URL}");
-    console.log("{OIDC_CLIENT_ID}");
     statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));
     statusBar.addEventListener("signed-out", (event) =>
@@ -273,6 +226,14 @@ class StaticApp extends LitElement {
         this._onChangeButtonClicked();
       });
     this.displayCurrentRoomName();
+
+    const outlet = this.shadowRoot.getElementById("outlet");
+    const router = new Router(outlet);
+
+    router.setRoutes([
+      { path: "/bot-modeling", component: "bot-modeling" },
+      { path: "/model-training", component: "model-training" },
+    ]);
   }
 
   async _onChangeButtonClicked() {
@@ -334,14 +295,15 @@ class StaticApp extends LitElement {
     localStorage.removeItem("userinfo_endpoint");
   }
 
-  alertTemplate(){
+  alertTemplate() {
     if (!this.alertMessage) {
-     return ;
+      return;
     }
     return html`<div class="container">
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         ${this.alertMessage}
         <button
+          @click="${this.closeAlert}"
           type="button"
           class="btn-close"
           data-bs-dismiss="alert"
@@ -349,6 +311,10 @@ class StaticApp extends LitElement {
         ></button>
       </div>
     </div> `;
+  }
+
+  closeAlert() {
+    this.alertMessage = null;
   }
 }
 

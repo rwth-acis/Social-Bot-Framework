@@ -18,6 +18,7 @@
   "dependencies": {
     "@polymer/app-route": "^3.0.0-pre.15",
     "@polymer/iron-pages": "^3.0.0-pre.15",
+    "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.1",
     "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.3.0",
