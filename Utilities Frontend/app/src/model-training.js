@@ -7,7 +7,7 @@ import ModelOps from "./model-ops.js";
  *
  */
 class ModelTraining extends LitElement {
-  static properties() {}
+  static properties = {};
   static styles = css`
     #editor {
       height: 512px;

@@ -7,7 +7,7 @@ import { LitElement, html, css } from "lit";
  *
  */
 class BotModeling extends LitElement {
-  static properties() {}
+  static properties = {};
 
   static styles = css`
     #yjsroomcontainer {

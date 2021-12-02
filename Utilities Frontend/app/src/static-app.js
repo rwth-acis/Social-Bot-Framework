@@ -13,22 +13,23 @@ import "./model-training.js";
  * @customElement
  */
 class StaticApp extends LitElement {
-  static properties() {
-    return {
-      prop1: {
-        type: String,
-        value: "static-app",
-      },
+  static properties = {
+    prop1: {
+      type: String,
+      value: "static-app",
+    },
 
-      autoAppendWidget: {
-        type: Boolean,
-        value: true,
-      },
-      alertMessage: {
-        type: String,
-      },
-    };
-  }
+    autoAppendWidget: {
+      type: Boolean,
+      value: true,
+    },
+    alertMessage: {
+      type: String,
+    },
+    alertType: {
+      type: String,
+    },
+  };
 
   static styles = css`
     :root {
@@ -170,7 +171,6 @@ class StaticApp extends LitElement {
           </div>
         </form>
       </nav>
-
       <div class="container ">${this.alertTemplate()}</div>
       <h2 class="mx-2">
         Current Space: <span class="text-primary" id="currentRoom">Test</span>
@@ -295,13 +295,22 @@ class StaticApp extends LitElement {
     localStorage.removeItem("access_token");
     localStorage.removeItem("userinfo_endpoint");
   }
-
+  /**
+   * Template for alert messages
+   */
   alertTemplate() {
+    if (!this.alertType) {
+      this.alertType = "info";
+    }
     if (!this.alertMessage) {
       return;
     }
     return html`
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <div
+        class="alert alert-${this.alertType} alert-dismissible fade show"
+        role="alert"
+        id="alert"
+      >
         ${this.alertMessage}
         <button
           @click="${this.closeAlert}"
@@ -315,7 +324,7 @@ class StaticApp extends LitElement {
   }
 
   closeAlert() {
-    this.alertMessage = null;
+    this.alertMessage = "";
   }
 }
 
