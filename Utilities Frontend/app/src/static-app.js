@@ -145,21 +145,16 @@ class StaticApp extends LitElement {
             </a>
           </li>
         </ul>
-      </nav>
-
-      <div class="mx-4">
-        ${this.alertTemplate()}
-
-        <h2>
-          Current Space: <span class="text-primary" id="currentRoom">Test</span>
-        </h2>
-        <form id="spaceForm">
+        <form class="d-flex" id="spaceForm">
           <div class="d-flex flex-row">
+            <div class="me-2 align-self-center">
+              <label for="yjsRoomInput">Pick Space</label>
+            </div>
+
             <div class="me-2">
-              <label for="yjsRoomInput">Space</label>
               <input
                 id="yjsRoomInput"
-                class="form-control"
+                class="form-control me-2"
                 type="text"
                 placeholder="Enter Space name"
               />
@@ -174,7 +169,12 @@ class StaticApp extends LitElement {
             </div>
           </div>
         </form>
-      </div>
+      </nav>
+
+      <div class="container ">${this.alertTemplate()}</div>
+      <h2 class="mx-2">
+        Current Space: <span class="text-primary" id="currentRoom">Test</span>
+      </h2>
       <div id="outlet" class="m-4"></div>
     `;
   }
@@ -231,6 +231,7 @@ class StaticApp extends LitElement {
     const router = new Router(outlet);
 
     router.setRoutes([
+      { path: "/", component: "welcome-page" },
       { path: "/bot-modeling", component: "bot-modeling" },
       { path: "/model-training", component: "model-training" },
     ]);
@@ -299,7 +300,7 @@ class StaticApp extends LitElement {
     if (!this.alertMessage) {
       return;
     }
-    return html`<div class="container">
+    return html`
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         ${this.alertMessage}
         <button
@@ -310,7 +311,7 @@ class StaticApp extends LitElement {
           aria-label="Close"
         ></button>
       </div>
-    </div> `;
+    `;
   }
 
   closeAlert() {
