@@ -1264,6 +1264,24 @@
                                 "name": "f41ab5da1d430cf365fd4a76[value]",
                                 "value": "Telegram"
                             }
+                        },
+                        "2de52802aad57ba437f6447f[value]": {
+                            "id": "2de52802aad57ba437f6447f[value]",
+                            "name": "Attribute",
+                            "value": {
+                                "id": "2de52802aad57ba437f6447f[value]",
+                                "name": "Attribute",
+                                "value": "Moodle Forum"
+                            }
+                        },
+                        "8741b8725ffd0f1ec8295eb2[value]": {
+                            "id": "8741b8725ffd0f1ec8295eb2[value]",
+                            "name": "Attribute",
+                            "value": {
+                                "id": "8741b8725ffd0f1ec8295eb2[value]",
+                                "name": "Attribute",
+                                "value": "Moodle Chat"
+                            }
                         }
                     }
                 }
@@ -1351,6 +1369,15 @@
                                 "id": "6222c7567acccbc4e5fa92ea[value]",
                                 "name": "6222c7567acccbc4e5fa92ea[value]",
                                 "value": "Service"
+                            }
+                        },
+                        "736b8df1e93185bef01fb615[value]": {
+                            "id": "736b8df1e93185bef01fb615[value]",
+                            "name": "736b8df1e93185bef01fb615[value]",
+                            "value": {
+                                "id": "736b8df1e93185bef01fb615[value]",
+                                "name": "736b8df1e93185bef01fb615[value]",
+                                "value": "OpenAPI"
                             }
                         }
                     }

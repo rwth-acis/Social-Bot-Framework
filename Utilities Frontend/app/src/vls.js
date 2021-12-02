@@ -115,7 +115,8 @@
                     "value": "aType",
                     "options": {
                         "SendMessage": "SendMessage",
-                        "Service": "Service"
+                        "Service": "Service",
+                        "OpenAPI": "OpenAPI"
                     }
                 },
                 "c436dc0e764a63371820e857": {
