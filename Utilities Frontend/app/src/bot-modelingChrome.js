@@ -11,23 +11,31 @@ class BotModeling extends LitElement {
   static get template() {
     return html`
       <div>
-        <iframe id="Bot" src="{WEBHOST}/syncmeta/bot.html"> </iframe>
+        <iframe id="Bot" src="{SYNC_META_HOST}/syncmeta/bot.html"> </iframe>
       </div>
       <div class="maincontainer">
         <div class="innercontainer">
-          <iframe id="Canvas" src="{WEBHOST}/syncmeta/widget.html"> </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe id="Palette" src="{WEBHOST}/syncmeta/palette.html"> </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe id="Property Browser" src="{WEBHOST}/syncmeta/attribute.html">
-          </iframe>
-          <iframe id="Import Tool" src="{WEBHOST}/syncmeta/debug.html">
+          <iframe id="Canvas" src="{SYNC_META_HOST}/syncmeta/widget.html">
           </iframe>
         </div>
         <div class="innercontainer">
-          <iframe id="User Activity" src="{WEBHOST}/syncmeta/activity.html">
+          <iframe id="Palette" src="{SYNC_META_HOST}/syncmeta/palette.html">
+          </iframe>
+        </div>
+        <div class="innercontainer">
+          <iframe
+            id="Property Browser"
+            src="{SYNC_META_HOST}/syncmeta/attribute.html"
+          >
+          </iframe>
+          <iframe id="Import Tool" src="{SYNC_META_HOST}/syncmeta/debug.html">
+          </iframe>
+        </div>
+        <div class="innercontainer">
+          <iframe
+            id="User Activity"
+            src="{SYNC_META_HOST}/syncmeta/activity.html"
+          >
           </iframe>
         </div>
       </div>

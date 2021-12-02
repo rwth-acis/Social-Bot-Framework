@@ -48,7 +48,7 @@ $ docker build -t rwthacis/sbf-utils .
 Then you can start the container like this:
 
 ```bash
-$ docker run -p 8070:8070 -e WEBHOST=<host_address> -e YJS=<yjs_address> -e OIDC_CLIENT_ID=<oidc_client_id> -e RASA_NLU=<rasa_server> -e SBF_MANAGER=<sbfmanager_address> -d rwthacis/sbf-utils
+$ docker run -p 8070:8070 -e SYNC_META_HOST=<host_address> -e YJS=<yjs_address> -e OIDC_CLIENT_ID=<oidc_client_id> -e RASA_NLU=<rasa_server> -e SBF_MANAGER=<sbfmanager_address> -d rwthacis/sbf-utils
 ```
 
 After the container started to run, the application will be accessible via http://127.0.0.1:8070
@@ -65,7 +65,7 @@ Then, the address of y-websockets-server instance needs to be passed to Docker c
 
 Following environment variables are needed to be passed to the container during initialization:
 
-* `WEBHOST`: Url address of application
+* `SYNC_META_HOST`: Url address of application
 * `YJS`: Root URL address of Yjs WebSocket server. If it is running behind a reverse proxy, a relative path needs to be provided with the `YJS_RESOURCE_PATH` env variable.
 * `OIDC_CLIENT_ID`: OIDC client id which is used for authentication purposes. Client id can be acquired from Learning Layers after client registration
 

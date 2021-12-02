@@ -2,7 +2,7 @@ FROM node:10
 
 ENV YJS_RESOURCE_PATH "/yjs/socket.io"
 ENV PORT 8070
-ENV WEBHOST 127.0.0.1
+ENV SYNC_META_HOST http://127.0.0.1
 ENV YJS https://sbf.tech4comp.dbis.rwth-aachen.de
 ENV OIDC_CLIENT_ID a7ece4a9-0a43-4fda-a33b-9c24a5a0d8f2
 
