@@ -139,8 +139,7 @@ class ModelTraining extends LitElement {
     `;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.rasaEndpoint = this.htmlQuery("#rasaEndpoint");
     this.sbmEndpoint = this.htmlQuery("#sbfManagerEndpoint");
     this.dataName = this.htmlQuery("#dataName");
