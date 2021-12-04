@@ -68,15 +68,15 @@ async function bundle() {
   }
 }
 
-function watchChanges() {
-  console.log("Watching for changes...");
-  gulp.watch(
+async function watchChanges() {
+  const watcher = gulp.watch(
     "src/**",
-    gulp.series("clean:dist", bundle, "replace config variables", success)
+    gulp.series("clean:dist", bundle, "replace config variables")
   );
-}
-
-async function success() {
-  console.log("Build successful");
-  return;
+  watcher.on("change", () => {
+    console.log("\nRebuilding...\n");
+  });
+  watcher.on("ready", () => {
+    console.log("\nWatching for changes...\n");
+  });
 }
