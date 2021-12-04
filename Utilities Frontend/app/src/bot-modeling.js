@@ -43,7 +43,6 @@ class BotModeling extends LitElement {
       flex-flow: row wrap;
     }
     .innercontainer {
-      padding: 5px;
       margin: 5px;
       flex: 1;
     }
@@ -66,7 +65,20 @@ class BotModeling extends LitElement {
 
   render() {
     return html`
-      <div>
+      <head>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+          crossorigin="anonymous"
+        ></script>
+      </head>
+      <div class="card card-body shadow-sm mb-4">
         <iframe
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
@@ -76,21 +88,42 @@ class BotModeling extends LitElement {
       </div>
       <div class="maincontainer">
         <div class="innercontainer">
-          <iframe id="Canvas" src="{SYNC_META_HOST}/syncmeta/widget.html"> </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe id="Palette" src="{SYNC_META_HOST}/syncmeta/palette.html"> </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe id="Property Browser" src="{SYNC_META_HOST}/syncmeta/attribute.html">
-          </iframe>
-          <iframe id="Import Tool" src="{SYNC_META_HOST}/syncmeta/debug.html">
+          <iframe
+            id="Canvas"
+            src="{SYNC_META_HOST}/syncmeta/widget.html"
+            frameborder="0"
+          >
           </iframe>
         </div>
         <div class="innercontainer">
-          <iframe id="User Activity" src="{SYNC_META_HOST}/syncmeta/activity.html">
+          <iframe
+            id="Palette"
+            src="{SYNC_META_HOST}/syncmeta/palette.html"
+            frameborder="0"
+          >
           </iframe>
-          </div>
+        </div>
+        <div class="innercontainer">
+          <iframe
+            id="Property Browser"
+            src="{SYNC_META_HOST}/syncmeta/attribute.html"
+            frameborder="0"
+          >
+          </iframe>
+          <iframe
+            id="Import Tool"
+            src="{SYNC_META_HOST}/syncmeta/debug.html"
+            frameborder="0"
+          >
+          </iframe>
+        </div>
+        <div class="innercontainer">
+          <iframe
+            id="User Activity"
+            src="{SYNC_META_HOST}/syncmeta/activity.html"
+            frameborder="0"
+          >
+          </iframe>
         </div>
       </div>
     `;
