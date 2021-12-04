@@ -21,7 +21,10 @@ class ModelTraining extends LitElement {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+        />
         <!-- Bootstrap core CSS -->
         <link
           rel="stylesheet"
@@ -34,7 +37,9 @@ class ModelTraining extends LitElement {
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           crossorigin="anonymous"
         />
+        <script src="http://cdn.quilljs.com/1.3.6/quill.js"></script>
 
+        <!-- Theme included stylesheets -->
         <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
         <link
           href="//cdn.quilljs.com/1.3.6/quill.bubble.css"
@@ -51,7 +56,7 @@ class ModelTraining extends LitElement {
           <form>
             <div class="form-group">
               <label for="formControlTextArea">Model Training Data</label>
-              <div id="editor"></div>
+              <div id="editor" class=""></div>
             </div>
             <div class="form-group">
               <label for="rasaEndpoint">Rasa NLU Endpoint</label>
@@ -61,6 +66,7 @@ class ModelTraining extends LitElement {
                 id="rasaEndpoint"
                 placeholder=""
                 value=""
+                required
               />
               <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
             </div>
@@ -72,6 +78,7 @@ class ModelTraining extends LitElement {
                 id="sbfManagerEndpoint"
                 placeholder=""
                 value=""
+                required
               />
             </div>
             <div class="form-row">
@@ -97,46 +104,57 @@ class ModelTraining extends LitElement {
                 </div>
               </div>
             </div>
-            <button
-              type="button"
-              class="btn btn-lg btn-secondary"
-              on-click="resetForm"
-            >
-              Reload example config
-            </button>
-            <button
-              type="button"
-              class="btn btn-lg btn-secondary"
-              on-click="retrieveStatus"
-            >
-              Check training status
-            </button>
-            <button
-              type="button"
-              class="btn btn-lg btn-primary"
-              on-click="submitForm"
-            >
-              Submit
-            </button>
-            <button
-              type="button"
-              class="btn btn-lg btn-primary"
-              on-click="storeData"
-            >
-              Store
-            </button>
-            <button
-              type="button"
-              class="btn btn-lg btn-primary"
-              on-click="loadData"
-            >
-              Load
-            </button>
-            <big id="trainingStatus" class="form-text text-muted"></big>
+            <div class="d-flex flex-row mb-3 justify-content-between">
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-lg btn-info"
+                  on-click="storeData"
+                >
+                  <i class="bi bi-cloud-arrow-up"></i> Store
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-lg btn-info"
+                  @click="${this.loadData}"
+                >
+                  <i class="bi bi-cloud-arrow-down"></i> Load
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-lg btn-secondary"
+                  @click="${this.resetForm}"
+                >
+                  <i class="bi bi-arrow-clockwise"></i> Reload Example
+                </button>
+              </div>
+              <div>
+                <span id="trainingStatus" class="form-text text-muted"></span>
+                <button
+                  type="button"
+                  class="btn btn-lg btn-secondary"
+                  @click="${this.retrieveStatus}"
+                >
+                  <i class="bi bi-cpu"></i> Training Status
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-lg btn-primary"
+                  @click="${this.submitForm}"
+                >
+                  <i class="bi bi-upload"></i> Submit
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </main>
     `;
+  }
+
+  constructor() {
+    super();
   }
 
   firstUpdated() {
@@ -145,7 +163,8 @@ class ModelTraining extends LitElement {
     this.dataName = this.htmlQuery("#dataName");
     this.loadName = this.htmlQuery("#loadNameInput");
     this.curModels = [];
-    this.editor = new Quill(this.$.editor, {
+    const _editor = this.shadowRoot.getElementById("editor");
+    this.editor = new Quill(_editor, {
       modules: {
         toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"]],
       },
