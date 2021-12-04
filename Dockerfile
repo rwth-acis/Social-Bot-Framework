@@ -2,7 +2,7 @@ FROM node:10
 
 ENV YJS_RESOURCE_PATH "/yjs/socket.io"
 ENV PORT 8070
-ENV SYNC_META_HOST http://127.0.0.1
+ENV SYNC_META_HOST http://127.0.0.1:8070
 ENV YJS https://sbf.tech4comp.dbis.rwth-aachen.de
 ENV OIDC_CLIENT_ID a7ece4a9-0a43-4fda-a33b-9c24a5a0d8f2
 
@@ -11,16 +11,14 @@ WORKDIR /usr/src/app
 
 RUN apt-get update
 RUN apt-get install -y --allow-unauthenticated --no-install-recommends supervisor git nginx dos2unix
-RUN npm_config_user=root npm install -g grunt-cli grunt polymer-cli gulp
+RUN npm_config_user=root npm install -g grunt-cli grunt gulp
 
 ARG src="Utilities Frontend/docker/supervisorConfigs"
 ARG srx="Utilities Frontend"
 COPY ${src} /etc/supervisor/conf.d
 
-
 WORKDIR /usr/src/app
 COPY ${srx}/syncmeta syncmeta
-
 
 WORKDIR /usr/src/app/syncmeta
 RUN npm install
