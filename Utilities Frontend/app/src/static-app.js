@@ -1,8 +1,6 @@
 import { LitElement, html, css } from "lit";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
-import "@polymer/app-route/app-location.js";
-import "@polymer/app-route/app-route.js";
-import "@polymer/iron-pages/iron-pages.js";
+
 import Common from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
