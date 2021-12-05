@@ -404,7 +404,7 @@ module.exports = function(grunt) {
                     mainConfigFile:"<%= distdir %>/js/config.js",
                     include: ['plugin/main.js'],
                     paths:{
-                        jquery:  "empty:"
+                        jquery:  "jquery-1.9.0:"
                     },
                     out: 'html/plugin/syncmeta-plugin.js',
                     wrap: {
