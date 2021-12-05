@@ -132,7 +132,7 @@ class ModelTraining extends LitElement {
                 <i id="trainingStatus" class="form-text text-muted mr-1"></i>
                 <button
                   type="button"
-                  class="btn btn-lg btn-secondary"
+                  class="btn btn-lg btn-secondary mr-2"
                   @click="${this.retrieveStatus}"
                 >
                   <i class="bi bi-cpu"></i> Training Status

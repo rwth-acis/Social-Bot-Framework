@@ -13,6 +13,9 @@
   body {
     overflow-x: hidden;
   }
+  #sbfManagerEndpointInput {
+    min-width: 40vw;
+  }
 </style>
 
 <div class="m-1">
