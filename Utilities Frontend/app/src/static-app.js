@@ -170,7 +170,7 @@ class StaticApp extends LitElement {
         </form>
       </nav>
 
-      <div class="container ">${this.alertTemplate()}</div>
+      <!-- <div class="container ">${this.alertTemplate()}</div> -->
       <h2 class="mx-4">
         Current Space: <span class="text-primary" id="currentRoom">Test</span>
       </h2>
