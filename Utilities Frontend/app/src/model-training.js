@@ -128,8 +128,8 @@ class ModelTraining extends LitElement {
                   <i class="bi bi-arrow-clockwise"></i> Reload Example
                 </button>
               </div>
-              <div>
-                <span id="trainingStatus" class="form-text text-muted"></span>
+              <div class="d-flex align-items-center">
+                <i id="trainingStatus" class="form-text text-muted mr-1"></i>
                 <button
                   type="button"
                   class="btn btn-lg btn-secondary"
