@@ -290,8 +290,8 @@ class StaticApp extends LitElement {
         role="alert"
         id="alert"
       >
-        <!-- ${this.alertMessage}
-        <button
+        ${this.alertMessage}
+        <!-- <button
           @click="${this.closeAlert}"
           type="button"
           class="btn-close"
