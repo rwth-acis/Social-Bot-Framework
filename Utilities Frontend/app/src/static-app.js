@@ -7,6 +7,7 @@ import { Router } from "@vaadin/router";
 
 import "./bot-modeling.js";
 import "./model-training.js";
+import "./welcome.js";
 /**
  * @customElement
  */
@@ -171,9 +172,9 @@ class StaticApp extends LitElement {
       </nav>
 
       <!-- <div class="container ">${this.alertTemplate()}</div> -->
-      <h2 class="mx-4">
+      <h1 class="mx-4 display-5">
         Current Space: <span class="text-primary" id="currentRoom">Test</span>
-      </h2>
+      </h1>
 
       <div id="outlet" class="m-4"></div>
     `;
@@ -183,34 +184,34 @@ class StaticApp extends LitElement {
     return ["_routerChanged(routeData.page)"];
   }
 
-  _routerChanged(page) {
-    alert("_routerChanged");
-    this.page = page || "sbf";
-  }
+  // _routerChanged(page) {
+  //   alert("_routerChanged");
+  //   this.page = page || "sbf";
+  // }
 
-  /* this pagechanged triggers for simple onserver written in page properties written above */
-  _pageChanged(currentPage, oldPage) {
-    alert(currentPage);
-    // Firefox 1.0+
-    const isFirefox = typeof InstallTrigger !== "undefined";
+  // /* this pagechanged triggers for simple onserver written in page properties written above */
+  // _pageChanged(currentPage, oldPage) {
+  //   alert(currentPage);
+  //   // Firefox 1.0+
+  //   const isFirefox = typeof InstallTrigger !== "undefined";
 
-    switch (currentPage) {
-      case "bot-modeling":
-        if (isFirefox) {
-          import("./bot-modeling.js").then();
+  //   switch (currentPage) {
+  //     case "bot-modeling":
+  //       if (isFirefox) {
+  //         import("./bot-modeling.js").then();
 
-          break;
-        } else {
-          import("./bot-modelingChrome.js").then();
-        }
-        break;
-      case "model-training":
-        import("./model-training.js").then();
-        break;
-      default:
-        this.page = "sbf";
-    }
-  }
+  //         break;
+  //       } else {
+  //         import("./bot-modelingChrome.js").then();
+  //       }
+  //       break;
+  //     case "model-training":
+  //       import("./model-training.js").then();
+  //       break;
+  //     default:
+  //       this.page = "sbf";
+  //   }
+  // }
 
   firstUpdated() {
     const statusBar = this.shadowRoot.querySelector("#statusBar");
