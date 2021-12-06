@@ -79,7 +79,7 @@ class StaticApp extends LitElement {
   `;
   constructor() {
     super();
-    this.alertMessage = "Test. HI";
+   
   }
   render() {
     return html`
@@ -148,7 +148,7 @@ class StaticApp extends LitElement {
         <form class="d-flex" id="spaceForm">
           <div class="d-flex flex-row">
             <div class="me-2 align-self-center">
-              <label for="yjsRoomInput">Pick Space</label>
+              <label for="yjsRoomInput">Change Space</label>
             </div>
 
             <div class="me-2">
@@ -171,10 +171,8 @@ class StaticApp extends LitElement {
         </form>
       </nav>
 
-      <!-- <div class="container ">${this.alertTemplate()}</div> -->
-      <h1 class="mx-4 display-5">
-        Current Space: <span class="text-primary" id="currentRoom">Test</span>
-      </h1>
+      <div class="container ">${this.alertTemplate()}</div>
+      
 
       <div id="outlet" class="m-4"></div>
     `;
@@ -208,9 +206,19 @@ class StaticApp extends LitElement {
     ]);
   }
 
-  async _onChangeButtonClicked() {
-    const roomName = this.shadowRoot.querySelector("#yjsRoomInput").value;
-    Common.setYjsRoomName(roomName);
+   _onChangeButtonClicked() {
+    const input = this.shadowRoot.querySelector("#yjsRoomInput").value;
+    const currentRoomName = Common.getYjsRoomName();
+    if(!input || input.trim().length === 0) {
+      alert("Please enter a valid room name");
+      return;
+    }
+    if ( input === currentRoomName) {
+      alert("You are already in this space!")
+      return
+    }
+
+    Common.setYjsRoomName(input);
     this.changeVisibility("#roomEnterLoader", true);
     ModelOps.uploadMetaModel()
       .then(
@@ -233,13 +241,13 @@ class StaticApp extends LitElement {
   }
 
   displayCurrentRoomName() {
-    var spaceHTML = "";
-    if (Common.getYjsRoomName()) {
-      spaceHTML = Common.getYjsRoomName();
+    let spaceName = Common.getYjsRoomName();
+    if (spaceName) {
+      this.shadowRoot.querySelector("#yjsRoomInput").value = spaceName;
     } else {
-      spaceHTML = "No Space selected. Please enter a space!";
+      this.alertMessage = "No space selected. Please select a space in the top right corner of the navigation bar.";
     }
-    this.shadowRoot.querySelector("#currentRoom").innerHTML = spaceHTML;
+    
   }
 
   changeVisibility(htmlQuery, show) {
@@ -278,18 +286,18 @@ class StaticApp extends LitElement {
     }
     return html`
       <div
-        class="alert alert-${this.alertType} alert-dismissible fade show"
+        class="alert alert-${this.alertType} fade show"
         role="alert"
         id="alert"
       >
-        ${this.alertMessage}
+        <!-- ${this.alertMessage}
         <button
           @click="${this.closeAlert}"
           type="button"
           class="btn-close"
           data-bs-dismiss="alert"
           aria-label="Close"
-        ></button>
+        ></button> -->
       </div>
     `;
   }
