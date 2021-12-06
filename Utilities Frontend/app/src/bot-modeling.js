@@ -86,7 +86,7 @@ class BotModeling extends LitElement {
         >
         </iframe>
       </div>
-      <div class="maincontainer">
+      <div class="maincontainer card p-1 border-2 shadow">
         <div class="innercontainer">
           <iframe
             id="Canvas"
