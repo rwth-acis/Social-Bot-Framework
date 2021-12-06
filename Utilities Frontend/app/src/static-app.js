@@ -181,7 +181,6 @@ class StaticApp extends LitElement {
   }
 
   static get observers() {
-    return ["_routerChanged(routeData.page)"];
   }
 
   firstUpdated() {
