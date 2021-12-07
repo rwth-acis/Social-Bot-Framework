@@ -1,10 +1,22 @@
-# Social-Bot-Framework
+<p align="center">
+  <img src="Logos/sbf-logo.svg" width=400px/>
+</p>
+<p align="center">
+        <a href="https://github.com/rwth-acis/Social-Bot-Framework/blob/master/LICENSE">
+            <img alt="GitHub" src="https://img.shields.io/github/license/rwth-acis/Social-Bot-Framework.svg?color=blue">
+        </a>
+        <a href="https://github.com/rwth-acis/Social-Bot-Framework/releases">
+        <img alt="GitHub release" src="https://img.shields.io/github/release/rwth-acis/Social-Bot-Framework.svg">
+    </a>
+</p>
+
+A Web-based, model-driven framework for creating social bots for RESTful web applications. Check out the [wiki](https://github.com/rwth-acis/Social-Bot-Framework/wiki) for more information about the modeling language and tutorials on creating bots with the framework.
 
 ## Core Components
 
 * [las2peer-Social-Bot-Manager-Service](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service)
 
-## External Dependencies
+### External Dependencies
 
 * [y-websockets-server](https://github.com/y-js/y-websockets-server)
 * [SyncMeta](https://github.com/rwth-acis/syncmeta)
@@ -12,30 +24,11 @@
 * [MobSOS Success-Modeling](https://github.com/rwth-acis/mobsos-success-modeling)
 * [Rasa](https://github.com/RasaHQ/rasa.git)
 
-## Backend Integration
-
-### Trigger
-
-For the bot to be triggered, the service must send an appropriate [monitoring message](https://github.com/rwth-acis/mobsos-data-processing/wiki/Manual#2-monitor-a-service).
-
-```json
-{
-    "serviceAlias": "",
-    "functionName": "",
-    "attributes":{}
-}
-```
-
-The `serviceAlias` attribute should contain the alias given by the @ServicePath annotation. 
-The `functionName`attribute should contain the name of the function. 
-Any type of attribute (@PathParam/@QueryParam/@BodyParam) should be listed in the `attributes` attribute.
-If the service uses [PoJo's](https://en.wikipedia.org/wiki/Plain_old_Java_object) the developer can make use of the [Gson library](https://github.com/google/gson).
-
 ## SBF Utilities Frontend
 
 This application provides helpers to interact with the Social Bot Manager service.
 
-This frontend consists of the Bot Modeling and the NLU Model Training Helper. 
+This frontend consists of the Bot Modeling and the NLU Model Training Helper.
 
 ### Build and Run the Frontend
 
@@ -79,6 +72,18 @@ Following environment variables have default values however they can be changed 
 [yjs-github]: https://github.com/yjs/yjs
 [y-websocket-server]: https://github.com/y-js/y-websockets-server
 
+
+## Examples
+| Bot            | Description | Application                                                                                                                                                | Demo |
+| -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| MensaBot       | Bot used to fetch and rate menu for canteens. | [las2peer-Mensa-Service](https://github.com/rwth-acis/las2peer-Mensa-Service)                                                                              | https://t.me/AcisMensaBot |
+| SurveyBot      | todo        | [Survey-Handler-Service](https://github.com/rwth-acis/Survey-Handler-Service), [MobSOS Surveys](https://github.com/rwth-acis/mobsos-surveys) or LimeSurvey | Todo |
+| FeedBot        | Gives out assignments to users, takes in their written solution and compares it with a master solution. Does not give a grade but returns a feedback file where the comparison is discussed. | [las2peer-T-MITOCAR-Service](https://github.com/rwth-acis/las2peer-tmitocar-service)                                                                       | https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-FeedBot |
+| ReaderbenchBot | todo        | [las2peer-readerbench](https://github.com/rwth-acis/las2peer-readerbench)                                                                                  | Todo |
+| LitBot         | todo   | [las2peer-akg](https://github.com/rwth-acis/las2peer-akg)                                                                                                  | https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-LitBot |
+| LA-Bot         | todo        | [learning-analytics-verification](https://github.com/rwth-acis/learning-analytics-verification)                                                            | Todo |
+| CitBot         | todo        | [Citation-Recommendation-Bot](https://github.com/rwth-acis/Citation-Recommendation-Bot)                                                                    | Todo |
+
 ## Deploying a Bot
 
 After creating a bot model on the frontend, you will be able to upload the bot to the SBFManager by using the "Model Uploader" on the "Bot Modeling" page. For this to work, you will need a running instance of the [SBFManager](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service) and adjust the "SBFManager Endpoint" accordingly. 
@@ -87,16 +92,17 @@ When creating chatbots you will also need to provide a [Rasa server](https://git
 
 To find out how to model bots, you can check the [SBF wiki](https://github.com/rwth-acis/Social-Bot-Framework/wiki). 
 
+
 ## References
 
-Neumann, Alexander Tobias, Tamar Arndt, Laura Köbis, Roy Meissner, Anne
+1. Neumann, Alexander Tobias, Tamar Arndt, Laura Köbis, Roy Meissner, Anne
 Martin, Peter de Lange, Norbert Pengel, Ralf Klamma, and Heinz-Werner
 Wollersheim. 2021. “Chatbots as a Tool to Scale Mentoring Processes:
 Individually Supporting Self-Study in Higher Education.” *Frontiers in
 Artificial Intelligence* 4: 64–71.
 <https://doi.org/10.3389/frai.2021.668220>.
 
-Neumann, Alexander Tobias, Peter de Lange, Ralf Klamma, Norbert Pengel,
+2. Neumann, Alexander Tobias, Peter de Lange, Ralf Klamma, Norbert Pengel,
 and Tamar Arndt. 2021. “Intelligent Mentoring Bots in Learning
 Management Systems: Concepts, Realizations and Evaluations.” In
 *Learning Technologies and Systems*, edited by Chaoyi Pang, Yunjun Gao,
@@ -105,7 +111,7 @@ Silvia Margarita Baldiris Navarro, and Qing Li, 12511:3–14. Lecture
 Notes in Computer Science. \[S.l.\]: Springer.
 [https://doi.org/10.1007/978-3-030-66906-5_1](https://doi.org/10.1007/978-3-030-66906-5_1).
 
-Neumann, Alexander Tobias, Peter de Lange, and Ralf Klamma. 2019.
+3. Neumann, Alexander Tobias, Peter de Lange, and Ralf Klamma. 2019.
 “Collaborative Creation and Training of Social Bots in Learning
 Communities.” In *2019 IEEE 5th International Conference on
 Collaboration and Internet Computing (CIC)*, 11–19. IEEE.
