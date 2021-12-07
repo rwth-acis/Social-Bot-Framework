@@ -31,13 +31,6 @@ class StaticApp extends LitElement {
   };
 
   static styles = css`
-    :root {
-      --statusbar-background: #808080;
-    }
-    :host {
-      display: block;
-    }
-
     #modeluploader {
       display: flex;
       margin: 5px;
@@ -79,7 +72,6 @@ class StaticApp extends LitElement {
   `;
   constructor() {
     super();
-   
   }
   render() {
     return html`
@@ -106,6 +98,14 @@ class StaticApp extends LitElement {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
         />
+        <style>
+          :root {
+            --statusbar-background: #00549f;
+          }
+          :host {
+            display: block;
+          }
+        </style>
       </head>
 
       <las2peer-frontend-statusbar
@@ -172,14 +172,12 @@ class StaticApp extends LitElement {
       </nav>
 
       <div class="container ">${this.alertTemplate()}</div>
-      
 
       <div id="outlet" class="m-4"></div>
     `;
   }
 
-  static get observers() {
-  }
+  static get observers() {}
 
   firstUpdated() {
     const statusBar = this.shadowRoot.querySelector("#statusBar");
@@ -206,16 +204,16 @@ class StaticApp extends LitElement {
     ]);
   }
 
-   _onChangeButtonClicked() {
+  _onChangeButtonClicked() {
     const input = this.shadowRoot.querySelector("#yjsRoomInput").value;
     const currentRoomName = Common.getYjsRoomName();
-    if(!input || input.trim().length === 0) {
+    if (!input || input.trim().length === 0) {
       alert("Please enter a valid room name");
       return;
     }
-    if ( input === currentRoomName) {
-      alert("You are already in this space!")
-      return
+    if (input === currentRoomName) {
+      alert("You are already in this space!");
+      return;
     }
 
     Common.setYjsRoomName(input);
@@ -245,9 +243,9 @@ class StaticApp extends LitElement {
     if (spaceName) {
       this.shadowRoot.querySelector("#yjsRoomInput").value = spaceName;
     } else {
-      this.alertMessage = "No space selected. Please select a space in the top right corner of the navigation bar.";
+      this.alertMessage =
+        "No space selected. Please select a space in the top right corner of the navigation bar.";
     }
-    
   }
 
   changeVisibility(htmlQuery, show) {
