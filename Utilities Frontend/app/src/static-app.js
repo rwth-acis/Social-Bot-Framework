@@ -99,11 +99,8 @@ class StaticApp extends LitElement {
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
         />
         <style>
-          :root {
-            --statusbar-background: #00549f;
-          }
-          :host {
-            display: block;
+          las2peer-frontend-statusbar {
+            color: white;
           }
         </style>
       </head>
