@@ -63,7 +63,7 @@
             Store your model on the server to back it up.
           </div> -->
 
-            <button id="store-model" class="btn btn-outline-info">
+            <button id="store-model" class="btn btn-outline-primary">
               <i class="bi bi-cloud-arrow-up"></i> Store
               <div
                 class="spinner-border spinner-border-sm text-secondary"
@@ -89,7 +89,7 @@
             Load a backup model from the server.
           </div> -->
 
-            <button id="load-model" class="btn btn-outline-info">
+            <button id="load-model" class="btn btn-outline-primary">
               <i class="bi bi-cloud-arrow-down"></i> Load
               <div
                 class="spinner-border spinner-border-sm text-secondary"

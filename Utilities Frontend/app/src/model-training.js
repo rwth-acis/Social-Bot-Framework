@@ -108,14 +108,14 @@ class ModelTraining extends LitElement {
               <div>
                 <button
                   type="button"
-                  class="btn btn-lg btn-info"
+                  class="btn btn-lg btn-primary"
                   on-click="storeData"
                 >
                   <i class="bi bi-cloud-arrow-up"></i> Store
                 </button>
                 <button
                   type="button"
-                  class="btn btn-lg btn-info"
+                  class="btn btn-lg btn-primary"
                   @click="${this.loadData}"
                 >
                   <i class="bi bi-cloud-arrow-down"></i> Load
