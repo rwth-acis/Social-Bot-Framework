@@ -120,13 +120,13 @@ class StaticApp extends LitElement {
       ></las2peer-frontend-statusbar>
 
       <nav class="navbar navbar-light bg-light mb-2 p-0">
-        <ul class="list-group list-group-horizontal navbar-nav mr-auto ">
+        <ul class="ms-4 list-group list-group-horizontal navbar-nav mr-auto ">
           <li class="nav-item me-4">
             <a
               class="nav-link d-flex flex-row bd-highlight "
               href="/bot-modeling"
             >
-              <div class="p-2 bd-highlight">
+              <div class="py-2 bd-highlight">
                 <i class="bi bi-robot"></i>
               </div>
               <div class="p-2 bd-highlight">Bot Modeling</div>
@@ -138,7 +138,7 @@ class StaticApp extends LitElement {
               href="/model-training"
               class="nav-link d-flex flex-row bd-highlight "
             >
-              <div class="p-2 bd-highlight">
+              <div class="py-2 bd-highlight">
                 <i class="bi bi-book"></i>
               </div>
               <div class="p-2 bd-highlight">NLU Model Training Helper</div>
