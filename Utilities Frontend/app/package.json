@@ -11,15 +11,15 @@
     "start": "node server.js",
     "build": "gulp clean-build:full",
     "build:watch": "gulp build:watch",
-    "lint": "polymer lint",
-    "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "lint": "echo not implemented",
+    "test": "echo not implemented",
+    "test:integration": "echo not implemented"
   },
   "dependencies": {
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
-    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.1",
-    "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.3.0",
+    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#widget-position-fix",
+    "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#widget-position-fix",
     "lit": "^2.0.2",
     "merge-stream": "^2.0.0",
     "nan": "^2.8.0",
