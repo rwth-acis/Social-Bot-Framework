@@ -130,6 +130,14 @@ class StaticApp extends LitElement {
       <nav class="navbar navbar-light bg-light mb-2 p-0">
         <ul class="ms-4 list-group list-group-horizontal navbar-nav mr-auto ">
           <li class="nav-item me-4">
+            <a class="nav-link d-flex flex-row bd-highlight " href="/">
+              <div class="py-2 bd-highlight">
+                <i class="bi bi-house"></i>
+              </div>
+              <div class="p-2 bd-highlight">Home</div>
+            </a>
+          </li>
+          <li class="nav-item me-4">
             <a
               class="nav-link d-flex flex-row bd-highlight "
               href="/bot-modeling"
