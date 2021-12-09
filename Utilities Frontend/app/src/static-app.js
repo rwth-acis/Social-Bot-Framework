@@ -46,6 +46,13 @@ class StaticApp extends LitElement {
       animation: spin 2s linear infinite;
       display: none;
     }
+    .logo {
+      width: 90px;
+      height: 65px;
+      background-color: white;
+      border-radius: 50%;
+      padding: 6px;
+    }
     #yjsRoomInput {
       max-width: 300px;
     }
@@ -114,7 +121,11 @@ class StaticApp extends LitElement {
         oidcclientid="{OIDC_CLIENT_ID}"
         subtitle="{STATUSBAR_SUBTITLE}"
         ?autoappendwidget=${this.autoAppendWidget}
-      ></las2peer-frontend-statusbar>
+      >
+        <div slot="left">
+          <img src="assets/images/sbf-logo-head.svg" class="logo" />
+        </div>
+      </las2peer-frontend-statusbar>
 
       <nav class="navbar navbar-light bg-light mb-2 p-0">
         <ul class="ms-4 list-group list-group-horizontal navbar-nav mr-auto ">
