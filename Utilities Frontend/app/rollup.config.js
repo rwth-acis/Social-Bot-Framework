@@ -1,6 +1,6 @@
 // Import rollup plugins
 import html from "@web/rollup-plugin-html";
-import { copy } from "@web/rollup-plugin-copy";
+import copy from "rollup-plugin-copy";
 import resolve from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import minifyHTML from "rollup-plugin-minify-html-literals";
@@ -25,9 +25,8 @@ export default {
     }),
     // Print bundle summary
     summary(),
-    // Optional: copy any static assets to build directory
     copy({
-      patterns: ["images/**/*"],
+      targets: [{ src: "src/images", dest: "dist/assets" }],
     }),
   ],
   output: {
