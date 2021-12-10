@@ -38,9 +38,7 @@ class BotModeling extends LitElement {
       height: 100%;
     }
     .maincontainer {
-      display: flex;
       min-height: 55vh;
-      flex-flow: row wrap;
       resize: both;
       overflow: auto;
     }
@@ -84,7 +82,10 @@ class BotModeling extends LitElement {
           crossorigin="anonymous"
         ></script>
       </head>
-      <div class="card card-body shadow-sm mb-4" id="modelOpsContainer">
+      <div
+        class="container-fluid card card-body shadow-sm mb-4"
+        id="modelOpsContainer"
+      >
         <iframe
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
@@ -92,44 +93,48 @@ class BotModeling extends LitElement {
         >
         </iframe>
       </div>
-      <div class="maincontainer card p-1 border-2 shadow">
-        <div class="innercontainer">
-          <iframe
-            id="Canvas"
-            src="{SYNC_META_HOST}/syncmeta/widget.html"
-            frameborder="0"
-          >
-          </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe
-            id="Palette"
-            src="{SYNC_META_HOST}/syncmeta/palette.html"
-            frameborder="0"
-          >
-          </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe
-            id="Property Browser"
-            src="{SYNC_META_HOST}/syncmeta/attribute.html"
-            frameborder="0"
-          >
-          </iframe>
-          <iframe
-            id="Import Tool"
-            src="{SYNC_META_HOST}/syncmeta/debug.html"
-            frameborder="0"
-          >
-          </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe
-            id="User Activity"
-            src="{SYNC_META_HOST}/syncmeta/activity.html"
-            frameborder="0"
-          >
-          </iframe>
+      <div class="container-fluid card p-1 border-2 shadow">
+        <div class="row ">
+          <div class="col col-md-6">
+            <iframe
+              id="Canvas"
+              src="{SYNC_META_HOST}/syncmeta/widget.html"
+              frameborder="0"
+            >
+            </iframe>
+          </div>
+          <div class="col col-md-2">
+            <iframe
+              id="Palette"
+              src="{SYNC_META_HOST}/syncmeta/palette.html"
+              frameborder="0"
+            >
+            </iframe>
+          </div>
+          <div class="col col-md-3">
+            <div>
+              <iframe
+                id="Property Browser"
+                src="{SYNC_META_HOST}/syncmeta/attribute.html"
+                frameborder="0"
+              >
+              </iframe>
+              <iframe
+                id="Import Tool"
+                src="{SYNC_META_HOST}/syncmeta/debug.html"
+                frameborder="0"
+              >
+              </iframe>
+            </div>
+            <div class="col col-md-1">
+              <iframe
+                id="User Activity"
+                src="{SYNC_META_HOST}/syncmeta/activity.html"
+                frameborder="0"
+              >
+              </iframe>
+            </div>
+          </div>
         </div>
       </div>
     `;
