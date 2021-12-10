@@ -76,6 +76,19 @@ class StaticApp extends LitElement {
       color: rgb(240, 248, 255);
       background: rgb(65, 105, 225);
     }
+
+    #id {
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+    }
+    header {
+      flex: 0 1 auto;
+    }
+    section .content {
+      flex: 1 1 auto;
+    
+    }
   `;
   constructor() {
     super();
@@ -111,85 +124,90 @@ class StaticApp extends LitElement {
           }
         </style>
       </head>
+      <div id="main">
+        <header>
+          <las2peer-frontend-statusbar
+            id="statusBar"
+            service="Social Bot Framework"
+            oidcpopupsigninurl="/src/callbacks/popup-signin-callback.html"
+            oidcpopupsignouturl="/src/callbacks/popup-signout-callback.html"
+            oidcsilentsigninturl="/src/callbacks/silent-callback.html"
+            oidcclientid="{OIDC_CLIENT_ID}"
+            subtitle="{STATUSBAR_SUBTITLE}"
+            ?autoappendwidget="${this.autoAppendWidget}"
+          >
+            <div slot="left">
+              <img src="assets/images/sbf-logo-head.svg" class="logo" />
+            </div>
+          </las2peer-frontend-statusbar>
 
-      <las2peer-frontend-statusbar
-        id="statusBar"
-        service="Social Bot Framework"
-        oidcpopupsigninurl="/src/callbacks/popup-signin-callback.html"
-        oidcpopupsignouturl="/src/callbacks/popup-signout-callback.html"
-        oidcsilentsigninturl="/src/callbacks/silent-callback.html"
-        oidcclientid="{OIDC_CLIENT_ID}"
-        subtitle="{STATUSBAR_SUBTITLE}"
-        ?autoappendwidget=${this.autoAppendWidget}
-      >
-        <div slot="left">
-          <img src="assets/images/sbf-logo-head.svg" class="logo" />
-        </div>
-      </las2peer-frontend-statusbar>
-
-      <nav class="navbar navbar-light bg-light mb-2 p-0">
-        <ul class="ms-4 list-group list-group-horizontal navbar-nav mr-auto ">
-          <li class="nav-item me-4">
-            <a class="nav-link d-flex flex-row bd-highlight " href="/">
-              <div class="py-2 bd-highlight">
-                <i class="bi bi-house"></i>
-              </div>
-              <div class="p-2 bd-highlight">Home</div>
-            </a>
-          </li>
-          <li class="nav-item me-4">
-            <a
-              class="nav-link d-flex flex-row bd-highlight "
-              href="/bot-modeling"
+          <nav class="navbar navbar-light bg-light mb-2 p-0">
+            <ul
+              class="ms-4 list-group list-group-horizontal navbar-nav mr-auto"
             >
-              <div class="py-2 bd-highlight">
-                <i class="bi bi-robot"></i>
+              <li class="nav-item me-4">
+                <a class="nav-link d-flex flex-row bd-highlight" href="/">
+                  <div class="py-2 bd-highlight">
+                    <i class="bi bi-house"></i>
+                  </div>
+                  <div class="p-2 bd-highlight">Home</div>
+                </a>
+              </li>
+              <li class="nav-item me-4">
+                <a
+                  class="nav-link d-flex flex-row bd-highlight"
+                  href="/bot-modeling"
+                >
+                  <div class="py-2 bd-highlight">
+                    <i class="bi bi-robot"></i>
+                  </div>
+                  <div class="p-2 bd-highlight">Bot Modeling</div>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a
+                  href="/model-training"
+                  class="nav-link d-flex flex-row bd-highlight"
+                >
+                  <div class="py-2 bd-highlight">
+                    <i class="bi bi-book"></i>
+                  </div>
+                  <div class="p-2 bd-highlight">NLU Model Training Helper</div>
+                </a>
+              </li>
+            </ul>
+            <form class="d-flex" id="spaceForm">
+              <div class="d-flex flex-row">
+                <div class="me-2 align-self-center">
+                  <label for="yjsRoomInput">Change Space</label>
+                </div>
+
+                <div class="me-2">
+                  <input
+                    id="yjsRoomInput"
+                    class="form-control me-2"
+                    type="text"
+                    placeholder="Enter Space name"
+                  />
+                </div>
+                <div class="mx-2 d-flex align-items-end">
+                  <button type="submit" class="btn btn-outline-primary">
+                    ENTER
+                  </button>
+                </div>
+                <div class="mx-2 d-flex align-items-end">
+                  <div class="loader" id="roomEnterLoader"></div>
+                </div>
               </div>
-              <div class="p-2 bd-highlight">Bot Modeling</div>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a
-              href="/model-training"
-              class="nav-link d-flex flex-row bd-highlight "
-            >
-              <div class="py-2 bd-highlight">
-                <i class="bi bi-book"></i>
-              </div>
-              <div class="p-2 bd-highlight">NLU Model Training Helper</div>
-            </a>
-          </li>
-        </ul>
-        <form class="d-flex" id="spaceForm">
-          <div class="d-flex flex-row">
-            <div class="me-2 align-self-center">
-              <label for="yjsRoomInput">Change Space</label>
-            </div>
-
-            <div class="me-2">
-              <input
-                id="yjsRoomInput"
-                class="form-control me-2"
-                type="text"
-                placeholder="Enter Space name"
-              />
-            </div>
-            <div class="mx-2 d-flex align-items-end">
-              <button type="submit" class="btn btn-outline-primary">
-                ENTER
-              </button>
-            </div>
-            <div class="mx-2 d-flex align-items-end">
-              <div class="loader" id="roomEnterLoader"></div>
-            </div>
-          </div>
-        </form>
-      </nav>
-
-      <div class="container ">${this.alertTemplate()}</div>
-
-      <div id="outlet" class="m-4"></div>
+            </form>
+          </nav>
+        </header>
+        <section class="content">
+          <div class="container">${this.alertTemplate()}</div>
+          <div id="outlet" class="m-4"></div>
+        </section>
+      </div>
     `;
   }
 

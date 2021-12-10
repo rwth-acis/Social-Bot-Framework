@@ -39,7 +39,7 @@ class BotModeling extends LitElement {
     }
     .maincontainer {
       display: flex;
-      height: 600px;
+      min-height: 55vh;
       flex-flow: row wrap;
       resize: both;
       overflow: auto;
