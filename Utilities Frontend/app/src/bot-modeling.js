@@ -41,6 +41,8 @@ class BotModeling extends LitElement {
       display: flex;
       height: 600px;
       flex-flow: row wrap;
+      resize: both;
+      overflow: auto;
     }
     .innercontainer {
       margin: 5px;
@@ -57,6 +59,10 @@ class BotModeling extends LitElement {
       display: flex;
       flex-flow: column;
       height: 100%;
+    }
+    #modelOpsContainer {
+      resize: vertical;
+      overflow: auto;
     }
   `;
   constructor() {
@@ -78,7 +84,7 @@ class BotModeling extends LitElement {
           crossorigin="anonymous"
         ></script>
       </head>
-      <div class="card card-body shadow-sm mb-4">
+      <div class="card card-body shadow-sm mb-4" id="modelOpsContainer">
         <iframe
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
