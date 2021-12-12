@@ -44,7 +44,7 @@ class BotModeling extends LitElement {
       overflow: auto;
     }
     .col {
-      padding: 5px;
+      padding: 0;
     }
     .maincontainer > .row {
       height: inherit;
@@ -115,7 +115,7 @@ class BotModeling extends LitElement {
             >
             </iframe>
           </div>
-          <div class="col col-md-2">
+          <div class="col col-md-2 border-end">
             <iframe
               id="Palette"
               src="{SYNC_META_HOST}/syncmeta/palette.html"
@@ -123,7 +123,7 @@ class BotModeling extends LitElement {
             >
             </iframe>
           </div>
-          <div class="col col-md-3">
+          <div class="col col-md-3 border-end">
             <div class="h-100 d-flex flex-column flex-fill">
               <iframe
                 id="Property Browser"
