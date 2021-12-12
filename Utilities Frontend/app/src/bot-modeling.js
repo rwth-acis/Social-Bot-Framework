@@ -165,7 +165,7 @@ class BotModeling extends LitElement {
         entries.forEach((entry) => {
           const dimensions = entry.contentRect;
           console.log(entry);
-          alert(dimensions.width);
+
           localStorage.setItem(
             entry.target.id,
             JSON.stringify({
@@ -191,7 +191,7 @@ class BotModeling extends LitElement {
     let containerDimensions = localStorage.getItem("modelOpsContainer");
     if (containerDimensions) {
       const { width, height } = JSON.parse(containerDimensions);
-      alert(width);
+      
       modelOpsContainer.width = width;
       modelOpsContainer.height = height;
     }
