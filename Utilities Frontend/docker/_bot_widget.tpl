@@ -35,7 +35,7 @@
           aria-describedby="submit-model"
         />
         <button id="submit-model" type="button" class="btn btn-outline-primary">
-          Submit
+          <i class="bi bi-robot"></i> Submit
           <div
             class="spinner-border spinner-border-sm text-secondary"
             id="sendStatusSpinner"
