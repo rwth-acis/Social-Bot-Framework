@@ -37,11 +37,20 @@ class BotModeling extends LitElement {
       width: 100%;
       height: 100%;
     }
+
     .maincontainer {
       min-height: 55vh;
       resize: both;
       overflow: auto;
     }
+    .col {
+      padding: 5px;
+    }
+    .maincontainer > .row {
+      height: inherit;
+      min-height: inherit;
+    }
+
     .innercontainer {
       margin: 5px;
       flex: 1;
@@ -93,8 +102,11 @@ class BotModeling extends LitElement {
         >
         </iframe>
       </div>
-      <div class="container-fluid maincontainer card p-1 border-2 shadow">
-        <div class="row ">
+      <div
+        class="container-fluid maincontainer  card  border-2 shadow"
+        id="maincontainer"
+      >
+        <div class="row flex-wrap">
           <div class="col col-md-6">
             <iframe
               id="Canvas"
@@ -112,11 +124,12 @@ class BotModeling extends LitElement {
             </iframe>
           </div>
           <div class="col col-md-3">
-            <div>
+            <div class="h-100 d-flex flex-column flex-fill">
               <iframe
                 id="Property Browser"
                 src="{SYNC_META_HOST}/syncmeta/attribute.html"
                 frameborder="0"
+                style="height: 50%"
               >
               </iframe>
               <iframe
@@ -126,14 +139,14 @@ class BotModeling extends LitElement {
               >
               </iframe>
             </div>
-            <div class="col col-md-1">
-              <iframe
-                id="User Activity"
-                src="{SYNC_META_HOST}/syncmeta/activity.html"
-                frameborder="0"
-              >
-              </iframe>
-            </div>
+          </div>
+          <div class="col col-md-1">
+            <iframe
+              id="User Activity"
+              src="{SYNC_META_HOST}/syncmeta/activity.html"
+              frameborder="0"
+            >
+            </iframe>
           </div>
         </div>
       </div>
@@ -141,8 +154,53 @@ class BotModeling extends LitElement {
   }
 
   firstUpdated() {
+    this.setInitialIframeDimensions();
+    const modelOpsContainer =
+      this.shadowRoot.getElementById("modelOpsContainer");
+    const maincontainer = this.shadowRoot.getElementById("maincontainer");
+
     parent.caeFrames = this.shadowRoot.querySelectorAll("iframe");
+    setTimeout(() => {
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          const dimensions = entry.contentRect;
+          console.log(entry);
+          alert(dimensions.width);
+          localStorage.setItem(
+            entry.target.id,
+            JSON.stringify({
+              width: dimensions.width,
+              height: dimensions.height,
+            })
+          );
+        });
+      });
+
+      resizeObserver.observe(modelOpsContainer);
+      resizeObserver.observe(maincontainer);
+    }, 1000);
     Common.setSpace("bot-modeling");
+  }
+  /**
+   * sets the initial dimensions of the widget containers based on the last dimensions set by the user
+   */
+  setInitialIframeDimensions() {
+    const modelOpsContainer =
+      this.shadowRoot.getElementById("modelOpsContainer");
+    const maincontainer = this.shadowRoot.getElementById("maincontainer");
+    let containerDimensions = localStorage.getItem("modelOpsContainer");
+    if (containerDimensions) {
+      const { width, height } = JSON.parse(containerDimensions);
+      alert(width);
+      modelOpsContainer.width = width;
+      modelOpsContainer.height = height;
+    }
+    containerDimensions = localStorage.getItem("maincontainer");
+    if (containerDimensions) {
+      const { width, height } = JSON.parse(containerDimensions);
+      maincontainer.width = width;
+      maincontainer.height = height;
+    }
   }
 }
 
