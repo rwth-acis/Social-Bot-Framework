@@ -75,7 +75,7 @@ class BotModeling extends LitElement {
   constructor() {
     super();
   }
-
+  static init = 0;
   render() {
     return html`
       <head>
@@ -160,12 +160,12 @@ class BotModeling extends LitElement {
     const maincontainer = this.shadowRoot.getElementById("maincontainer");
 
     parent.caeFrames = this.shadowRoot.querySelectorAll("iframe");
-    setTimeout(() => {
-      const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach((entry) => {
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        if (this.init >= 2) {
           const dimensions = entry.contentRect;
-          console.log(entry);
-          alert(dimensions.width);
+
           localStorage.setItem(
             entry.target.id,
             JSON.stringify({
@@ -173,12 +173,15 @@ class BotModeling extends LitElement {
               height: dimensions.height,
             })
           );
-        });
+        } else {
+          this.init++;
+        }
       });
+    });
 
-      resizeObserver.observe(modelOpsContainer);
-      resizeObserver.observe(maincontainer);
-    }, 1000);
+    resizeObserver.observe(modelOpsContainer);
+    resizeObserver.observe(maincontainer);
+
     Common.setSpace("bot-modeling");
   }
   /**
@@ -190,16 +193,17 @@ class BotModeling extends LitElement {
     const maincontainer = this.shadowRoot.getElementById("maincontainer");
     let containerDimensions = localStorage.getItem("modelOpsContainer");
     if (containerDimensions) {
+      console.log(containerDimensions);
       const { width, height } = JSON.parse(containerDimensions);
-      alert(width);
-      modelOpsContainer.width = width;
-      modelOpsContainer.height = height;
+      modelOpsContainer.style.width = width;
+      modelOpsContainer.style.height = height;
     }
     containerDimensions = localStorage.getItem("maincontainer");
     if (containerDimensions) {
+      console.log(containerDimensions);
       const { width, height } = JSON.parse(containerDimensions);
-      maincontainer.width = width;
-      maincontainer.height = height;
+      maincontainer.style.width = width;
+      maincontainer.style.height = height;
     }
   }
 }
