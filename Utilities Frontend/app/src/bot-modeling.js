@@ -193,14 +193,12 @@ class BotModeling extends LitElement {
     const maincontainer = this.shadowRoot.getElementById("maincontainer");
     let containerDimensions = localStorage.getItem("modelOpsContainer");
     if (containerDimensions) {
-      console.log(containerDimensions);
       const { width, height } = JSON.parse(containerDimensions);
       modelOpsContainer.style.width = width;
       modelOpsContainer.style.height = height;
     }
     containerDimensions = localStorage.getItem("maincontainer");
     if (containerDimensions) {
-      console.log(containerDimensions);
       const { width, height } = JSON.parse(containerDimensions);
       maincontainer.style.width = width;
       maincontainer.style.height = height;
