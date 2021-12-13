@@ -46,9 +46,7 @@ class BotModeling extends LitElement {
     .col {
       padding: 0;
     }
-    #Import-Tool {
-      padding: 17px;
-    }
+
     .maincontainer > .row {
       height: inherit;
       min-height: inherit;
@@ -132,11 +130,12 @@ class BotModeling extends LitElement {
                 id="Property Browser"
                 src="{SYNC_META_HOST}/syncmeta/attribute.html"
                 frameborder="0"
-                style="height: 50%"
+                class="p-3"
               >
               </iframe>
               <iframe
-                id="Import-Tool"
+                class="p-3"
+                id="Import Tool"
                 src="{SYNC_META_HOST}/syncmeta/debug_slim.html"
                 frameborder="0"
               >
