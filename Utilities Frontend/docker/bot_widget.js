@@ -223,7 +223,13 @@ requirejs(
           xhr.open("GET", endpoint + "/models/");
           xhr.onload = function () {
             if (xhr.status == 200) {
-              var models = JSON.parse(xhr.response);
+              var models;
+              try {
+                models = JSON.parse(xhr.response);
+              } catch (e) {
+                console.error("error while parsing models", e);
+                return;
+              }
               $.each(models, function (index, model) {
                 if (!curModels.includes(model)) {
                   $loadNameInput.append("<option>" + model + "</option>");
