@@ -76,7 +76,4 @@ async function watchChanges() {
   watcher.on("change", () => {
     console.log("\nRebuilding...\n");
   });
-  watcher.on("ready", () => {
-    console.log("\nWatching for changes...\n");
-  });
 }
