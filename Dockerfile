@@ -29,6 +29,12 @@ COPY ${srx}/docker/widgets/_bot_widget.tpl /usr/src/app/syncmeta/widgets/src/wid
 COPY ${srx}/docker/widgets/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
 # overwrite debug widget template to use slim version (js stays the same)
 COPY ${srx}/docker/widgets/_debug_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
+# overwrite attribute widget
+COPY ${srx}/docker/widgets/attribute_widget /usr/src/app/syncmeta/widgets/src/templates/attribute_widget
+# overwrite widget template to use bootstrap. This can be removed as soon as PR for bootstrap is merged in syncmetaf
+COPY ${srx}/docker/widgets/widget.html.tpl /usr/src/app/syncmeta/widgets/src/widgets/
+# overwrite styles
+COPY ${srx}/docker/widgets/css /usr/src/app/syncmeta/widgets/src/css/
 
 COPY ${srx}/docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
 COPY ${srx}/docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
