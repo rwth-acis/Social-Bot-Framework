@@ -44,7 +44,7 @@ Then you can start the container like this:
 $ docker run -p 8070:8070 -e SYNC_META_HOST=<host_address> -e YJS=<yjs_address> -e OIDC_CLIENT_ID=<oidc_client_id> -e RASA_NLU=<rasa_server> -e SBF_MANAGER=<sbfmanager_address> -d rwthacis/sbf-utils
 ```
 
-After the container started to run, the application will be accessible via http://127.0.0.1:8070
+After the container started to run, the application will be accessible via http://127.0.0.1:8070 . Make sure **not** to use `localhost` as you will run into cors issues when loading ressources from Syncmeta.
 
 Application is using [YJS][yjs-github] for interwidget communication, therefore it needs [y-websocket-server][y-websocket-server] instance. 
 It can be started with the following command:
