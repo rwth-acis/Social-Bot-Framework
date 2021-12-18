@@ -61,7 +61,7 @@ class ModelTraining extends LitElement {
             <div class="d-flex justify-content-end my-2">
               <button
                 type="button"
-                class="btn btn-lg btn-secondary "
+                class="btn btn-lg btn-danger "
                 @click="${this.resetForm}"
               >
                 <i class="bi bi-arrow-clockwise"></i> Reset
