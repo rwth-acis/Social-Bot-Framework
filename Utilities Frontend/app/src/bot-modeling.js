@@ -136,7 +136,7 @@ class BotModeling extends LitElement {
               <iframe
                 class="p-3"
                 id="Import Tool"
-                src="{SYNC_META_HOST}/syncmeta/debug_slim.html"
+                src="{SYNC_META_HOST}/syncmeta/debug.html"
                 frameborder="0"
               >
               </iframe>
