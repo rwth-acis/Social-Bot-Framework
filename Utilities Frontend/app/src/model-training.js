@@ -27,9 +27,9 @@ class ModelTraining extends LitElement {
         />
         <!-- Bootstrap core CSS -->
         <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous"
         />
         <link
@@ -47,7 +47,7 @@ class ModelTraining extends LitElement {
         />
       </head>
       <main role="main" class="container" style="margin-top: 76px">
-        <div class="jumbotron">
+        <div class="card border-0 shadow-sm card-body bg-light p-4">
           <h1>NLU Model Training Helper</h1>
           <p class="lead">
             With this tool, you can edit the training data for an NLU model and
@@ -58,7 +58,16 @@ class ModelTraining extends LitElement {
               <label for="formControlTextArea">Model Training Data</label>
               <div id="editor" class=""></div>
             </div>
-            <div class="form-group">
+            <div class="d-flex justify-content-end my-2">
+              <button
+                type="button"
+                class="btn btn-lg btn-secondary "
+                @click="${this.resetForm}"
+              >
+                <i class="bi bi-arrow-clockwise"></i> Reset
+              </button>
+            </div>
+            <div class="mb-3">
               <label for="rasaEndpoint">Rasa NLU Endpoint</label>
               <input
                 type="text"
@@ -70,7 +79,7 @@ class ModelTraining extends LitElement {
               />
               <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
             </div>
-            <div class="form-group">
+            <div class="mb-3">
               <label for="sbfManagerEndpoint">SBF Manager Endpoint</label>
               <input
                 type="text"
@@ -81,10 +90,10 @@ class ModelTraining extends LitElement {
                 required
               />
             </div>
-            <div class="form-row">
+            <div class="row mb-3">
               <div class="col">
-                <div class="form-group">
-                  <label for="dataName">Dataset Name</label>
+                <label for="dataName">Dataset Name</label>
+                <div class="input-group mb-3">
                   <input
                     type="text"
                     class="form-control"
@@ -92,60 +101,51 @@ class ModelTraining extends LitElement {
                     placeholder=""
                     value=""
                   />
+                  <button
+                    type="button"
+                    class="btn btn-lg btn-outline-primary"
+                    @click="${this.storeData}"
+                  >
+                    <i class="bi bi-cloud-arrow-up"></i> Store
+                  </button>
                 </div>
               </div>
               <div class="col">
-                <div class="form-group">
-                  <label for="loadNameInput">Load Dataset</label>
+                <label for="loadNameInput">Load Dataset</label>
+                <div class="input-group">
                   <select
                     id="loadNameInput"
-                    class="browser-default custom-select"
+                    form-select
+                    class="browser-default custom-select form-select"
                   ></select>
+                  <button
+                    type="button"
+                    class="btn btn-lg btn-outline-primary"
+                    @click="${this.loadData}"
+                  >
+                    <i class="bi bi-cloud-arrow-down"></i> Load
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="d-flex flex-row mb-3 justify-content-between">
-              <div>
-                <button
-                  type="button"
-                  class="btn btn-lg btn-primary"
-                  on-click="storeData"
-                >
-                  <i class="bi bi-cloud-arrow-up"></i> Store
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-lg btn-primary"
-                  @click="${this.loadData}"
-                >
-                  <i class="bi bi-cloud-arrow-down"></i> Load
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-lg btn-secondary"
-                  @click="${this.resetForm}"
-                >
-                  <i class="bi bi-arrow-clockwise"></i> Reload Example
-                </button>
-              </div>
-              <div class="d-flex align-items-center">
-                <i id="trainingStatus" class="form-text text-muted mr-1"></i>
-                <button
-                  type="button"
-                  class="btn btn-lg btn-secondary mr-2"
-                  @click="${this.retrieveStatus}"
-                >
-                  <i class="bi bi-cpu"></i> Training Status
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-lg btn-primary"
-                  @click="${this.submitForm}"
-                >
-                  <i class="bi bi-upload"></i> Submit
-                </button>
-              </div>
+            <div
+              class="d-flex flex-row mb-3 justify-content-end align-items-center"
+            >
+              <i id="trainingStatus" class="form-text text-muted me-1"></i>
+              <button
+                type="button"
+                class="btn btn-lg btn-secondary me-2"
+                @click="${this.retrieveStatus}"
+              >
+                <i class="bi bi-cpu"></i> Training Status
+              </button>
+              <button
+                type="button"
+                class="btn btn-lg btn-primary"
+                @click="${this.submitForm}"
+              >
+                <i class="bi bi-upload"></i> Submit
+              </button>
             </div>
           </form>
         </div>
