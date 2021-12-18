@@ -45,8 +45,4 @@
   </button>
 </div>
 
-<p class="hint text-muted">
-  After import or delete refresh the canvas widget to apply the new model. After
-  deleting and importing a new VLS refresh the whole role space.
-</p>
 <p id="feedback"></p>
