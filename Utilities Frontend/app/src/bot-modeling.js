@@ -120,16 +120,14 @@ class BotModeling extends LitElement {
             </iframe>
           </div>
           <div class="col col-md-3 border-end">
-            <div class="h-100 d-flex flex-column flex-fill">
+            <div class="h-100 d-flex flex-column justify-content-between px-1">
               <iframe
                 id="Property Browser"
                 src="{SYNC_META_HOST}/syncmeta/attribute.html"
                 frameborder="0"
-                class="p-3"
               >
               </iframe>
               <iframe
-                class="p-3"
                 id="Import Tool"
                 src="{SYNC_META_HOST}/syncmeta/debug.html"
                 frameborder="0"
@@ -137,7 +135,7 @@ class BotModeling extends LitElement {
               </iframe>
             </div>
           </div>
-          <div class="col col-md-1">
+          <div class="col col-md-1" id="user-activities">
             <iframe
               id="User Activity"
               src="{SYNC_META_HOST}/syncmeta/activity.html"
