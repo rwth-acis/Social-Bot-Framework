@@ -95,6 +95,7 @@ class BotModeling extends LitElement {
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
           frameborder="0"
+          onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
         >
         </iframe>
       </div>
@@ -127,10 +128,12 @@ class BotModeling extends LitElement {
                 frameborder="0"
               >
               </iframe>
+              <div class="mb-3"></div>
               <iframe
                 id="Import Tool"
                 src="{SYNC_META_HOST}/syncmeta/debug.html"
                 frameborder="0"
+                onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
               >
               </iframe>
             </div>
