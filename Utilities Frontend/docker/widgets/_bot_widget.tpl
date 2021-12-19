@@ -19,7 +19,7 @@
 </style>
 
 <div class="m-1">
-  <h3>Model Operations</h3>
+  <h3>Bot Operations</h3>
   <div class="d-flex flex-row justify-content-between">
     <div id="modeluploader">
       <label for="sbfManagerEndpointInput" class="form-label"

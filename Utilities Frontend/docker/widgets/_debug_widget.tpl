@@ -31,7 +31,7 @@
 </div>
 
 <div id="modelDiv" class="seperating_box mb-2">
-  <h5>Model Operations</h5>
+  <h5>Bot Model Operations</h5>
 
   <button
     class="btn btn-secondary"

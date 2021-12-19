@@ -30,95 +30,26 @@ class StaticApp extends LitElement {
     },
   };
 
-  static styles = css`
-    #modeluploader {
-      display: flex;
-      margin: 5px;
-      flex: 1;
-      align-items: center;
-    }
-    .loader {
-      border: 5px solid #f3f3f3; /* Light grey */
-      border-top: 5px solid #3498db; /* Blue */
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 2s linear infinite;
-      display: none;
-    }
-    .logo {
-      width: 90px;
-      height: 65px;
-      background-color: white;
-      border-radius: 50%;
-      padding: 6px;
-    }
-    #yjsRoomInput {
-      max-width: 300px;
-    }
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    paper-input {
-      max-width: 300px;
-    }
-    paper-button {
-      color: rgb(240, 248, 255);
-      background: rgb(30, 144, 255);
-      max-height: 30px;
-    }
-    paper-button:hover {
-      color: rgb(240, 248, 255);
-      background: rgb(65, 105, 225);
-    }
-
-    #id {
-      display: flex;
-      flex-flow: column;
-      height: 100%;
-    }
-    header {
-      flex: 0 1 auto;
-    }
-    section .content {
-      flex: 1 1 auto;
-    }
-  `;
+  static styles = css``;
   constructor() {
     super();
   }
   render() {
     return html`
-      <head>
-        <!-- Bootstrap core CSS -->
-
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-          crossorigin="anonymous"
-        />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          crossorigin="anonymous"
-        />
-
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
-        />
-        <style>
-          las2peer-frontend-statusbar {
-            color: white;
-          }
-        </style>
-      </head>
+      <style>
+        header {
+          flex: 0 1 auto;
+        }
+        section .content {
+          flex: 1 1 auto;
+        }
+        #main {
+          height: 100%;
+        }
+        #User-Activity {
+          overflow: hidden;
+        }
+      </style>
       <div id="main">
         <header>
           <las2peer-frontend-statusbar
@@ -132,14 +63,18 @@ class StaticApp extends LitElement {
             ?autoappendwidget="${this.autoAppendWidget}"
           >
             <div slot="left">
-              <img src="assets/images/sbf-logo-head.svg" class="logo" />
+              <img
+                src="assets/images/sbf-logo-head.svg"
+                class="logo"
+                id="sbf-logo"
+              />
             </div>
           </las2peer-frontend-statusbar>
 
-          <nav class="navbar navbar-light bg-light mb-2 p-0">
-            <ul
-              class="ms-4 list-group list-group-horizontal navbar-nav mr-auto"
-            >
+          <nav
+            class="navbar navbar-light bg-light mb-2 p-0 justify-content-start"
+          >
+            <ul class="ms-4 list-group list-group-horizontal navbar-nav me-2">
               <li class="nav-item me-4">
                 <a class="nav-link d-flex flex-row bd-highlight" href="/">
                   <div class="py-2 bd-highlight">
@@ -172,7 +107,17 @@ class StaticApp extends LitElement {
                 </a>
               </li>
             </ul>
-            <form class="d-flex" id="spaceForm">
+
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
+              <i class="bi bi-people"></i> User Activities
+            </button>
+            <form class="d-flex ms-auto" id="spaceForm">
               <div class="d-flex flex-row">
                 <div class="me-2 align-self-center">
                   <label for="yjsRoomInput">Change Space</label>
@@ -202,6 +147,31 @@ class StaticApp extends LitElement {
           <div class="container">${this.alertTemplate()}</div>
           <div id="outlet" class="m-4"></div>
         </section>
+
+        <aside
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">User Activities</h5>
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <iframe
+              id="User-Activity"
+              src="{SYNC_META_HOST}/syncmeta/activity.html"
+              frameborder="0"
+            >
+            </iframe>
+          </div>
+        </aside>
       </div>
     `;
   }
@@ -209,21 +179,19 @@ class StaticApp extends LitElement {
   static get observers() {}
 
   firstUpdated() {
-    const statusBar = this.shadowRoot.querySelector("#statusBar");
+    const statusBar = document.querySelector("#statusBar");
     statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));
     statusBar.addEventListener("signed-out", (event) =>
       this.handleLogout(event)
     );
-    this.shadowRoot
-      .querySelector("#spaceForm")
-      .addEventListener("submit", (e) => {
-        e.preventDefault();
-        this._onChangeButtonClicked();
-      });
+    document.querySelector("#spaceForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      this._onChangeButtonClicked();
+    });
     this.displayCurrentRoomName();
 
-    const outlet = this.shadowRoot.getElementById("outlet");
+    const outlet = document.getElementById("outlet");
     const router = new Router(outlet);
 
     router.setRoutes([
@@ -234,7 +202,7 @@ class StaticApp extends LitElement {
   }
 
   _onChangeButtonClicked() {
-    const input = this.shadowRoot.querySelector("#yjsRoomInput").value;
+    const input = document.querySelector("#yjsRoomInput").value;
     const currentRoomName = Common.getYjsRoomName();
     if (!input || input.trim().length === 0) {
       alert("Please enter a valid room name");
@@ -270,7 +238,7 @@ class StaticApp extends LitElement {
   displayCurrentRoomName() {
     let spaceName = Common.getYjsRoomName();
     if (spaceName) {
-      this.shadowRoot.querySelector("#yjsRoomInput").value = spaceName;
+      document.querySelector("#yjsRoomInput").value = spaceName;
     } else {
       this.alertMessage =
         "No space selected. Please select a space in the top right corner of the navigation bar.";
@@ -278,7 +246,7 @@ class StaticApp extends LitElement {
   }
 
   changeVisibility(htmlQuery, show) {
-    var item = this.shadowRoot.querySelector(htmlQuery);
+    var item = document.querySelector(htmlQuery);
     if (show) {
       item.style.display = "block";
     } else {
@@ -331,6 +299,10 @@ class StaticApp extends LitElement {
 
   closeAlert() {
     this.alertMessage = "";
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 
