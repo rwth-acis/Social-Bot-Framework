@@ -111,10 +111,10 @@ class BotModeling extends LitElement {
 
   firstUpdated() {
     this.setInitialIframeDimensions();
-    const modelOpsContainer = this.document.getElementById("modelOpsContainer");
-    const maincontainer = this.document.getElementById("maincontainer");
+    const modelOpsContainer = document.getElementById("modelOpsContainer");
+    const maincontainer = document.getElementById("maincontainer");
 
-    parent.caeFrames = this.document.querySelectorAll("iframe");
+    parent.caeFrames = document.querySelectorAll("iframe");
 
     const resizeObserver = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
