@@ -1,94 +1,167 @@
-import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
-import '@polymer/paper-button/paper-button.js';
-import Common from './common.js';
-import ModelOps from './model-ops.js';
+import "@polymer/paper-button/paper-button.js";
+import Common from "./common.js";
+import { LitElement, html, css } from "lit";
 
 /**
  * @customElement
- * @polymer
+ *
  */
-class BotModeling extends PolymerElement {
-  
-  static get template() {
+class BotModeling extends LitElement {
+  static properties = {};
+
+  static styles = css``;
+  constructor() {
+    super();
+  }
+  static init = 0;
+  render() {
     return html`
       <style>
-        #yjsroomcontainer {
-          display: flex;
-          margin: 5px;
-          flex: 1;
-          align-items: center;
+        .maincontainer {
+          min-height: 55vh;
+          resize: both;
+          overflow: hidden;
+          position: relative;
         }
-        .loader {
-          border: 5px solid #f3f3f3; /* Light grey */
-          border-top: 5px solid #3498db; /* Blue */
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          animation: spin 2s linear infinite;
-          display:none;
+        .col {
+          padding: 0;
         }
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+
+        .maincontainer > .row {
+          height: inherit;
+          min-height: inherit;
         }
-        iframe {
-            width: 100%;
-            height: 100%;
+
+        #modelOpsContainer {
+          resize: vertical;
+          overflow: hidden;
+          position: relative;
         }
-        .maincontainer { 
-            display: flex;
-            height: 600px;
-            flex-flow: row wrap;
+        #resize-icon {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
+          transform: rotate(90deg);
         }
-        .innercontainer {
-            padding: 5px;
-            margin: 5px;
-            flex: 1;
-        }
-        .innercontainer:nth-of-type(1) {
-            flex: 4;
-            display: flex;
-            flex-flow: column;
-        }
-        .innercontainer:nth-of-type(2) {
-            
-        }
-        .innercontainer:nth-of-type(3) {
-            flex: 2;
-            display: flex;
-            flex-flow: column;
-            height: 100%;
+        .resize-icon-vertical {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          transform: rotate(-45deg);
         }
       </style>
-
-      <div>
-          <iframe id="Bot" src="{WEBHOST}/syncmeta/bot.html"> </iframe>
+      <div
+        class="container-fluid card card-body shadow-sm mb-4"
+        id="modelOpsContainer"
+      >
+        <div class="bi bi-arrows-angle-expand resize-icon-vertical"></div>
+        <iframe
+          id="Bot"
+          src="{SYNC_META_HOST}/syncmeta/bot.html"
+          frameborder="0"
+          onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
+        >
+        </iframe>
       </div>
-      <div class="maincontainer">
-        <div class="innercontainer">
-          <iframe id="Canvas" src="{WEBHOST}/syncmeta/widget.html"> </iframe>
+      <div
+        class="container-fluid maincontainer  card  border-2 shadow"
+        id="maincontainer"
+      >
+        <div class="bi bi-arrows-angle-expand" id="resize-icon"></div>
+        <div class="row flex-wrap">
+          <div class="col col-md-6">
+            <iframe
+              id="Canvas"
+              src="{SYNC_META_HOST}/syncmeta/widget.html"
+              frameborder="0"
+            >
+            </iframe>
+          </div>
+          <div class="col col-md-2 border-end">
+            <iframe
+              id="Palette"
+              src="{SYNC_META_HOST}/syncmeta/palette.html"
+              frameborder="0"
+            >
+            </iframe>
+          </div>
+          <div class="col col-md-4 border-end">
+            <div class="h-100 d-flex flex-column justify-content-between px-1">
+              <iframe
+                id="Property Browser"
+                src="{SYNC_META_HOST}/syncmeta/attribute.html"
+                frameborder="0"
+              >
+              </iframe>
+              <div class="mb-3"></div>
+              <iframe
+                id="Import Tool"
+                src="{SYNC_META_HOST}/syncmeta/debug.html"
+                frameborder="0"
+                onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
+              >
+              </iframe>
+            </div>
+          </div>
         </div>
-        <div class="innercontainer">
-          <iframe id="Palette" src="{WEBHOST}/syncmeta/palette.html"> </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe id="Property Browser" src="{WEBHOST}/syncmeta/attribute.html"> </iframe>
-          <iframe id="Import Tool" src="{WEBHOST}/syncmeta/debug.html"> </iframe>
-        </div>
-        <div class="innercontainer">
-          <iframe id="User Activity" src="{WEBHOST}/syncmeta/activity.html"> </iframe>
-        </div>
-      </div>    
+      </div>
     `;
   }
 
-  static get properties() {}
+  firstUpdated() {
+    this.setInitialIframeDimensions();
+    const modelOpsContainer = document.getElementById("modelOpsContainer");
+    const maincontainer = document.getElementById("maincontainer");
 
-  ready() {
-    super.ready();
-    parent.caeFrames = this.shadowRoot.querySelectorAll("iframe");
+    parent.caeFrames = document.querySelectorAll("iframe");
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        if (this.init >= 2) {
+          const dimensions = entry.contentRect;
+
+          localStorage.setItem(
+            entry.target.id,
+            JSON.stringify({
+              width: dimensions.width,
+              height: dimensions.height,
+            })
+          );
+        } else {
+          this.init++;
+        }
+      });
+    });
+
+    resizeObserver.observe(modelOpsContainer);
+    resizeObserver.observe(maincontainer);
+
     Common.setSpace("bot-modeling");
+  }
+  /**
+   * sets the initial dimensions of the widget containers based on the last dimensions set by the user
+   */
+  setInitialIframeDimensions() {
+    const modelOpsContainer = document.getElementById("modelOpsContainer");
+    const maincontainer = document.getElementById("maincontainer");
+    let containerDimensions = localStorage.getItem("modelOpsContainer");
+    if (containerDimensions) {
+      const { width, height } = JSON.parse(containerDimensions);
+      modelOpsContainer.style.width = width;
+      modelOpsContainer.style.height = height;
+    }
+    containerDimensions = localStorage.getItem("maincontainer");
+    if (containerDimensions) {
+      const { width, height } = JSON.parse(containerDimensions);
+      maincontainer.style.width = width;
+      maincontainer.style.height = height;
+    }
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 
-window.customElements.define('bot-modeling', BotModeling);
+window.customElements.define("bot-modeling", BotModeling);
