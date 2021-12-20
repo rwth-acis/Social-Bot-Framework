@@ -37,25 +37,18 @@ class BotModeling extends LitElement {
           overflow: hidden;
           position: relative;
         }
-        #resize-icon {
+        .resize-icon {
           position: absolute;
           right: 0;
           bottom: 0;
           z-index: 1;
-          transform: rotate(90deg);
-        }
-        .resize-icon-vertical {
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          transform: rotate(-45deg);
         }
       </style>
       <div
         class="container-fluid card card-body shadow-sm mb-4"
         id="modelOpsContainer"
       >
-        <div class="bi bi-arrows-angle-expand resize-icon-vertical"></div>
+        <div class="bi bi-textarea-resize resize-icon"></div>
         <iframe
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
@@ -68,7 +61,7 @@ class BotModeling extends LitElement {
         class="container-fluid maincontainer  card  border-2 shadow"
         id="maincontainer"
       >
-        <div class="bi bi-arrows-angle-expand" id="resize-icon"></div>
+        <div class="bi bi-textarea-resize resize-icon"></div>
         <div class="row flex-wrap">
           <div class="col col-md-6">
             <iframe
@@ -78,7 +71,7 @@ class BotModeling extends LitElement {
             >
             </iframe>
           </div>
-          <div class="col col-md-2 border-end">
+          <div class="col col-md-2 border-end border-2">
             <iframe
               id="Palette"
               src="{SYNC_META_HOST}/syncmeta/palette.html"
@@ -86,7 +79,7 @@ class BotModeling extends LitElement {
             >
             </iframe>
           </div>
-          <div class="col col-md-4 border-end">
+          <div class="col col-md-4">
             <div class="h-100 d-flex flex-column justify-content-between px-1">
               <iframe
                 id="Property Browser"
@@ -113,8 +106,20 @@ class BotModeling extends LitElement {
     this.setInitialIframeDimensions();
     const modelOpsContainer = document.getElementById("modelOpsContainer");
     const maincontainer = document.getElementById("maincontainer");
-
-    parent.caeFrames = document.querySelectorAll("iframe");
+    const caeFrames = document.getElementsByTagName("iframe");
+    [...caeFrames].forEach((frame) => {
+      console.log(frame.contentWindow)
+      frame.onload = () => {
+        if (!parent.caeFrames) {
+          parent.caeFrames = [];
+        }
+        parent.caeFrames.find((f) => f.id === frame.id) || frame.id
+          ? parent.caeFrames.push(frame)
+          : null; // push new frames to the array
+      };
+      
+    });
+    console.log( parent.caeFrames);
 
     const resizeObserver = new ResizeObserver((entries) => {
       entries.forEach((entry) => {

@@ -1,10 +1,8 @@
 import { LitElement, html, css } from "lit";
-import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
-
 import Common from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
-
+import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 import "./bot-modeling.js";
 import "./model-training.js";
 import "./welcome.js";
@@ -163,9 +161,9 @@ class StaticApp extends LitElement {
               aria-label="Close"
             ></button>
           </div>
-          <div class="offcanvas-body">
+          <div class="offcanvas-body overflow-hidden">
             <iframe
-              id="User-Activity"
+              id="User Activity"
               src="{SYNC_META_HOST}/syncmeta/activity.html"
               frameborder="0"
             >
@@ -179,6 +177,7 @@ class StaticApp extends LitElement {
   static get observers() {}
 
   firstUpdated() {
+    
     const statusBar = document.querySelector("#statusBar");
     statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));
