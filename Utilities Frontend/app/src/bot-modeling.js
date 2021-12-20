@@ -48,7 +48,7 @@ class BotModeling extends LitElement {
         class="container-fluid card card-body shadow-sm mb-4"
         id="modelOpsContainer"
       >
-        <div class="bi bi-textarea-resize resize-icon"></div>
+        
         <iframe
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
@@ -61,7 +61,7 @@ class BotModeling extends LitElement {
         class="container-fluid maincontainer  card  border-2 shadow"
         id="maincontainer"
       >
-        <div class="bi bi-textarea-resize resize-icon"></div>
+       
         <div class="row flex-wrap">
           <div class="col col-md-6">
             <iframe
@@ -103,44 +103,48 @@ class BotModeling extends LitElement {
   }
 
   firstUpdated() {
-    this.setInitialIframeDimensions();
-    const modelOpsContainer = document.getElementById("modelOpsContainer");
-    const maincontainer = document.getElementById("maincontainer");
+    // this.setInitialIframeDimensions();
+    // const modelOpsContainer = document.getElementById("modelOpsContainer");
+    // const maincontainer = document.getElementById("maincontainer");
     const caeFrames = document.getElementsByTagName("iframe");
+    if (parent.caeFrames?.length>0) {
+      return
+    }
+      
+    
     [...caeFrames].forEach((frame) => {
-      console.log(frame.contentWindow)
-      frame.onload = () => {
+     
+        console.log(frame.id,frame.contentWindow);
         if (!parent.caeFrames) {
-          parent.caeFrames = [];
+          parent.caeFrames=[]
         }
-        parent.caeFrames.find((f) => f.id === frame.id) || frame.id
+        parent.caeFrames.find((f) => f.id === frame.id) || (frame.id && frame.contentWindow)
           ? parent.caeFrames.push(frame)
           : null; // push new frames to the array
-      };
-      
+    
     });
-    console.log( parent.caeFrames);
+    console.log(parent.caeFrames);
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        if (this.init >= 2) {
-          const dimensions = entry.contentRect;
+    // const resizeObserver = new ResizeObserver((entries) => {
+    //   entries.forEach((entry) => {
+    //     if (this.init >= 2) {
+    //       const dimensions = entry.contentRect;
 
-          localStorage.setItem(
-            entry.target.id,
-            JSON.stringify({
-              width: dimensions.width,
-              height: dimensions.height,
-            })
-          );
-        } else {
-          this.init++;
-        }
-      });
-    });
+    //       localStorage.setItem(
+    //         entry.target.id,
+    //         JSON.stringify({
+    //           width: dimensions.width,
+    //           height: dimensions.height,
+    //         })
+    //       );
+    //     } else {
+    //       this.init++;
+    //     }
+    //   });
+    // });
 
-    resizeObserver.observe(modelOpsContainer);
-    resizeObserver.observe(maincontainer);
+    // resizeObserver.observe(modelOpsContainer);
+    // resizeObserver.observe(maincontainer);
 
     Common.setSpace("bot-modeling");
   }

@@ -44,9 +44,6 @@ class StaticApp extends LitElement {
         #main {
           height: 100%;
         }
-        #User-Activity {
-          overflow: hidden;
-        }
       </style>
       <div id="main">
         <header>

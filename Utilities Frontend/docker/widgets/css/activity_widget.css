@@ -10,7 +10,7 @@ h2 {
     overflow: hidden;
 }
 .fs-sm{
-    font-size: 60%;
+    font-size: 50%;
 }
 .toast{
     display: block;
@@ -27,7 +27,6 @@ h2 {
 }
 
 #user_list .item h3 {
-    margin: 1px 25px 1px 1px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -35,10 +34,9 @@ h2 {
 
 #user_list .item span {
     position: absolute;
-    right: 0;
+    right: 0;   
     top: 0;
     display: block;
-    width: 25px;
     font-weight: bold;
     font-size: 1.2em;
     text-align: right;
@@ -46,7 +44,6 @@ h2 {
 
 #activity_list {
     width: auto;
-    height: 90%;
     box-sizing: border-box;
     padding-bottom: 150%;
     overflow-y: auto;
