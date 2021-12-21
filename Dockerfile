@@ -6,7 +6,6 @@ ENV SYNC_META_HOST http://127.0.0.1:8070
 ENV YJS https://sbf.tech4comp.dbis.rwth-aachen.de
 ENV OIDC_CLIENT_ID a7ece4a9-0a43-4fda-a33b-9c24a5a0d8f2
 
-
 WORKDIR /usr/src/app
 
 RUN apt-get update
@@ -33,6 +32,7 @@ COPY ${srx}/docker/widgets/_debug_widget.tpl /usr/src/app/syncmeta/widgets/src/w
 COPY ${srx}/docker/widgets/attribute_widget /usr/src/app/syncmeta/widgets/src/templates/attribute_widget
 # overwrite activity widget
 COPY ${srx}/docker/widgets/activity_widget /usr/src/app/syncmeta/widgets/src/templates/activity_widget
+COPY ${srx}/docker/widgets/_activity_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
 # overwrite js
 COPY ${srx}/docker/widgets/js/activity_widget/Activity.js /usr/src/app/syncmeta/widgets/src/js/activity_widget/Activity.js
 # overwrite widget template to use bootstrap. This can be removed as soon as PR for bootstrap is merged in syncmetaf

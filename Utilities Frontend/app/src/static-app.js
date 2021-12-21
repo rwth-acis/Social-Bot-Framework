@@ -149,7 +149,7 @@ class StaticApp extends LitElement {
           id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel"
         >
-          <div class="offcanvas-header">
+          <div class="offcanvas-header p-2">
             <h5 id="offcanvasRightLabel">User Activities</h5>
             <button
               type="button"
@@ -158,7 +158,7 @@ class StaticApp extends LitElement {
               aria-label="Close"
             ></button>
           </div>
-          <div class="offcanvas-body overflow-hidden">
+          <div class="offcanvas-body overflow-hidden p-0">
             <iframe
               id="User Activity"
               src="{SYNC_META_HOST}/syncmeta/activity.html"
@@ -174,7 +174,6 @@ class StaticApp extends LitElement {
   static get observers() {}
 
   firstUpdated() {
-    
     const statusBar = document.querySelector("#statusBar");
     statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));

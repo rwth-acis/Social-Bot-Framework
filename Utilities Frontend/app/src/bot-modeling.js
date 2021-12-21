@@ -48,12 +48,10 @@ class BotModeling extends LitElement {
         class="container-fluid card card-body shadow-sm mb-4"
         id="modelOpsContainer"
       >
-        
         <iframe
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
           frameborder="0"
-          onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
         >
         </iframe>
       </div>
@@ -61,7 +59,6 @@ class BotModeling extends LitElement {
         class="container-fluid maincontainer  card  border-2 shadow"
         id="maincontainer"
       >
-       
         <div class="row flex-wrap">
           <div class="col col-md-6">
             <iframe
@@ -92,7 +89,6 @@ class BotModeling extends LitElement {
                 id="Import Tool"
                 src="{SYNC_META_HOST}/syncmeta/debug.html"
                 frameborder="0"
-                onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
               >
               </iframe>
             </div>
@@ -103,27 +99,22 @@ class BotModeling extends LitElement {
   }
 
   firstUpdated() {
+    Common.setSpace("bot-modeling");
     // this.setInitialIframeDimensions();
     // const modelOpsContainer = document.getElementById("modelOpsContainer");
     // const maincontainer = document.getElementById("maincontainer");
-    const caeFrames = document.getElementsByTagName("iframe");
-    if (parent.caeFrames?.length>0) {
-      return
-    }
-      
-    
-    [...caeFrames].forEach((frame) => {
-     
-        console.log(frame.id,frame.contentWindow);
-        if (!parent.caeFrames) {
-          parent.caeFrames=[]
-        }
-        parent.caeFrames.find((f) => f.id === frame.id) || (frame.id && frame.contentWindow)
-          ? parent.caeFrames.push(frame)
-          : null; // push new frames to the array
-    
-    });
-    console.log(parent.caeFrames);
+    setTimeout(() => {
+      const Iframes = document.getElementsByTagName("iframe");
+      if (parent.caeFrames?.length > 0) {
+        return;
+      }
+      if (!parent.caeFrames) {
+        parent.caeFrames = [];
+      }
+      for (const frame of Iframes) {
+        frame.id && frame.contentWindow ? parent.caeFrames.push(frame) : null;
+      }
+    }, 100);
 
     // const resizeObserver = new ResizeObserver((entries) => {
     //   entries.forEach((entry) => {
@@ -145,8 +136,6 @@ class BotModeling extends LitElement {
 
     // resizeObserver.observe(modelOpsContainer);
     // resizeObserver.observe(maincontainer);
-
-    Common.setSpace("bot-modeling");
   }
   /**
    * sets the initial dimensions of the widget containers based on the last dimensions set by the user

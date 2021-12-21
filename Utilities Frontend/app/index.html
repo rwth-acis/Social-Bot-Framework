@@ -32,39 +32,6 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
     />
 
-    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="/node_modules/yjs/dist/y.js"></script>
-    <script src="/node_modules/y-array/dist/y-array.js"></script>
-    <script src="/node_modules/y-map/dist/y-map.js"></script>
-    <script src="/node_modules/y-memory/dist/y-memory.js"></script>
-    <script src="/node_modules/y-text/dist/y-text.js"></script>
-    <script src="/node_modules/y-richtext/dist/y-richtext.js"></script>
-    <script src="/node_modules/y-websockets-client/dist/y-websockets-client.js"></script>
-
-    <!-- interwidget communication depends on jquery -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-    <!-- 
-      Reason of using self-served version of Quill instead of using official version is that official version of Quill does not have support for WebComponents currently
-      and a new pull request is opened to add WebComponent support(https://github.com/quilljs/quill/pull/2966) however it is not merged to master branch yet.
-      In order to use Quill in this project, we built it ourself and put it under this project as temporary solution.
-      If WebComponent suppport is added to Quill when you read this, feel free to change it with official version.
-    -->
-    <!-- Main Quill library -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-    <!-- Theme included stylesheets -->
-    <link
-      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/rwth-acis/InterwidgetCommunication@develop/iwc.js"
-    ></script>
     <script type="module" src="/src/static-app.js" crossorigin></script>
     <style>
       :root {
@@ -114,6 +81,40 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
+    ></script>
+
+    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="/node_modules/yjs/dist/y.js"></script>
+    <script src="/node_modules/y-array/dist/y-array.js"></script>
+    <script src="/node_modules/y-map/dist/y-map.js"></script>
+    <script src="/node_modules/y-memory/dist/y-memory.js"></script>
+    <script src="/node_modules/y-text/dist/y-text.js"></script>
+    <script src="/node_modules/y-richtext/dist/y-richtext.js"></script>
+    <script src="/node_modules/y-websockets-client/dist/y-websockets-client.js"></script>
+
+    <!-- interwidget communication depends on jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- 
+      Reason of using self-served version of Quill instead of using official version is that official version of Quill does not have support for WebComponents currently
+      and a new pull request is opened to add WebComponent support(https://github.com/quilljs/quill/pull/2966) however it is not merged to master branch yet.
+      In order to use Quill in this project, we built it ourself and put it under this project as temporary solution.
+      If WebComponent suppport is added to Quill when you read this, feel free to change it with official version.
+    -->
+    <!-- Main Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Theme included stylesheets -->
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/rwth-acis/InterwidgetCommunication@develop/iwc.js"
     ></script>
   </body>
 </html>
