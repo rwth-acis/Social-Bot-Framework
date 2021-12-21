@@ -103,27 +103,21 @@ class BotModeling extends LitElement {
   }
 
   firstUpdated() {
+    Common.setSpace("bot-modeling");
     // this.setInitialIframeDimensions();
     // const modelOpsContainer = document.getElementById("modelOpsContainer");
     // const maincontainer = document.getElementById("maincontainer");
-    const caeFrames = document.getElementsByTagName("iframe");
-    if (parent.caeFrames?.length>0) {
-      return
+
+    const Iframes = document.getElementsByTagName("iframe");
+    if (parent.caeFrames?.length > 0) {
+      return;
     }
-      
-    
-    [...caeFrames].forEach((frame) => {
-     
-        console.log(frame.id,frame.contentWindow);
         if (!parent.caeFrames) {
-          parent.caeFrames=[]
+      parent.caeFrames = [];
         }
-        parent.caeFrames.find((f) => f.id === frame.id) || (frame.id && frame.contentWindow)
-          ? parent.caeFrames.push(frame)
-          : null; // push new frames to the array
-    
-    });
-    console.log(parent.caeFrames);
+    for (const frame of Iframes) {
+      frame.id && frame.contentWindow ? parent.caeFrames.push(frame) : null;
+    }
 
     // const resizeObserver = new ResizeObserver((entries) => {
     //   entries.forEach((entry) => {
@@ -145,8 +139,6 @@ class BotModeling extends LitElement {
 
     // resizeObserver.observe(modelOpsContainer);
     // resizeObserver.observe(maincontainer);
-
-    Common.setSpace("bot-modeling");
   }
   /**
    * sets the initial dimensions of the widget containers based on the last dimensions set by the user
