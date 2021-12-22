@@ -3,9 +3,7 @@ import Common from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
-import "./bot-modeling.js";
-import "./model-training.js";
-import "./welcome.js";
+
 
 /**
  * @customElement
@@ -27,6 +25,7 @@ class StaticApp extends LitElement {
     alertType: {
       type: String,
     },
+    router: {},
   };
 
   static styles = css``;
@@ -72,14 +71,7 @@ class StaticApp extends LitElement {
           >
             <ul class="ms-4 list-group list-group-horizontal navbar-nav me-2">
               <li class="nav-item me-4">
-                <a
-                  class="nav-link d-flex flex-row bd-highlight"
-                  data-bs-toggle="tab"
-                  data-bs-target="#welcome"
-                  type="button"
-                  role="tab"
-                  aria-controls="welcome"
-                >
+                <a class="nav-link d-flex flex-row bd-highlight" href="/">
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-house"></i>
                   </div>
@@ -94,6 +86,7 @@ class StaticApp extends LitElement {
                   type="button"
                   role="tab"
                   aria-controls="bot-modeling"
+                  @click="${this.leaveHome}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-robot"></i>
@@ -110,6 +103,7 @@ class StaticApp extends LitElement {
                   role="tab"
                   aria-controls="nlu-training"
                   class="nav-link d-flex flex-row bd-highlight"
+                  @click="${this.leaveHome}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-book"></i>
@@ -156,32 +150,7 @@ class StaticApp extends LitElement {
         </header>
         <section class="content">
           <div class="container">${this.alertTemplate()}</div>
-          <div class="tab-content" id="myTabContent">
-            <div
-              class="tab-pane fade show active"
-              id="welcome"
-              role="tabpanel"
-              aria-labelledby="welcome"
-            >
-              <welcome-page></welcome-page>
-            </div>
-            <div
-              class="tab-pane fade "
-              id="bot-modeling"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-            >
-              <bot-modeling></bot-modeling>
-            </div>
-            <div
-              class="tab-pane fade"
-              id="nlu-training"
-              role="tabpanel"
-              aria-labelledby="profile-tab"
-            >
-              <model-training></model-training>
-            </div>
-          </div>
+
           <div id="outlet" class="m-4"></div>
         </section>
 
@@ -230,13 +199,23 @@ class StaticApp extends LitElement {
     this.displayCurrentRoomName();
 
     const outlet = document.getElementById("outlet");
-    // const router = new Router(outlet);
+    this.router = new Router(outlet);
 
-    // router.setRoutes([
-    //   { path: "/", component: "welcome-page" ,action: ()=> import('./welcome.js') },
-    //   { path: "/bot-modeling", component: "bot-modeling" , action: ()=> import('./bot-modeling.js') },
-    //   { path: "/model-training", component: "model-training" , action: ()=> import('./model-training.js') },
-    // ]);
+    this.router.setRoutes([
+      {
+        path: "/",
+        component: "welcome-page",
+        action: () => import("./welcome.js"),
+      },
+      {
+        path: "/modeling",
+        component: "main-page",
+        action: () => import("./main.js"),
+      },
+    ]);
+    this.router.subscribe((e)=>{
+      console.log(e);
+    })
   }
 
   _onChangeButtonClicked() {
@@ -271,6 +250,16 @@ class StaticApp extends LitElement {
           })
       )
       .then((_) => location.reload());
+  }
+
+  /**
+   * This function is called whenever the user wants to navigate to page other than home page. 
+  */
+  leaveHome() {
+    const path = window.location.pathname;
+    if (path === "/") {
+      Router.go("/modeling");
+    }
   }
 
   displayCurrentRoomName() {
