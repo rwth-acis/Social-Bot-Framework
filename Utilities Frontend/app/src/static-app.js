@@ -3,9 +3,8 @@ import Common from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
-import "./bot-modeling.js";
-import "./model-training.js";
-import "./welcome.js";
+
+
 /**
  * @customElement
  */
@@ -26,6 +25,7 @@ class StaticApp extends LitElement {
     alertType: {
       type: String,
     },
+    router: {},
   };
 
   static styles = css``;
@@ -82,7 +82,12 @@ class StaticApp extends LitElement {
               <li class="nav-item me-4">
                 <a
                   class="nav-link d-flex flex-row bd-highlight"
-                  href="/bot-modeling"
+                  data-bs-toggle="tab"
+                  data-bs-target="#bot-modeling"
+                  type="button"
+                  role="tab"
+                  aria-controls="bot-modeling"
+                  @click="${this.leaveHome}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-robot"></i>
@@ -93,8 +98,13 @@ class StaticApp extends LitElement {
 
               <li class="nav-item">
                 <a
-                  href="/model-training"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nlu-training"
+                  type="button"
+                  role="tab"
+                  aria-controls="nlu-training"
                   class="nav-link d-flex flex-row bd-highlight"
+                  @click="${this.leaveHome}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-book"></i>
@@ -141,6 +151,7 @@ class StaticApp extends LitElement {
         </header>
         <section class="content">
           <div class="container">${this.alertTemplate()}</div>
+
           <div id="outlet" class="m-4"></div>
         </section>
 
@@ -161,6 +172,7 @@ class StaticApp extends LitElement {
           </div>
           <div class="offcanvas-body overflow-hidden p-0">
             <iframe
+              loading="lazy"
               id="User Activity"
               src="{SYNC_META_HOST}/syncmeta/activity.html"
               frameborder="0"
@@ -188,13 +200,23 @@ class StaticApp extends LitElement {
     this.displayCurrentRoomName();
 
     const outlet = document.getElementById("outlet");
-    const router = new Router(outlet);
+    this.router = new Router(outlet);
 
-    router.setRoutes([
-      { path: "/", component: "welcome-page" },
-      { path: "/bot-modeling", component: "bot-modeling" },
-      { path: "/model-training", component: "model-training" },
+    this.router.setRoutes([
+      {
+        path: "/",
+        component: "welcome-page",
+        action: () => import("./welcome.js"),
+      },
+      {
+        path: "/modeling",
+        component: "main-page",
+        action: () => import("./main.js"),
+      },
     ]);
+    this.router.subscribe((e)=>{
+      console.log(e);
+    })
   }
 
   _onChangeButtonClicked() {
@@ -229,6 +251,16 @@ class StaticApp extends LitElement {
           })
       )
       .then((_) => location.reload());
+  }
+
+  /**
+   * This function is called whenever the user wants to navigate to page other than home page. 
+  */
+  leaveHome() {
+    const path = window.location.pathname;
+    if (path === "/") {
+      Router.go("/modeling");
+    }
   }
 
   displayCurrentRoomName() {
