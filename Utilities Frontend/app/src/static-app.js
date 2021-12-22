@@ -212,9 +212,6 @@ class StaticApp extends LitElement {
         action: () => import("./main.js"),
       },
     ]);
-    this.router.subscribe((e) => {
-      console.log(e);
-    });
   }
 
   _onChangeButtonClicked() {
