@@ -26,7 +26,10 @@ export default {
     // Print bundle summary
     summary(),
     copy({
-      targets: [{ src: "src/images", dest: "dist/assets" }],
+      targets: [
+        { src: "src/images", dest: "dist/assets" },
+        { src: "src/callbacks", dest: "dist" },
+      ],
     }),
   ],
   output: {

@@ -8,7 +8,7 @@ const loadConfigFile = require("rollup/dist/loadConfigFile");
 const path = require("path");
 
 gulp.task("clean:dist", () => {
-  return del(["dist/*.js", "dist/assets"]);
+  return del(["dist/*.js", "dist/assets", "dist/callbacks"]);
 });
 
 gulp.task("copy:modules", () => {
