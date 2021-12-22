@@ -53,7 +53,6 @@ class BotModeling extends LitElement {
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
           frameborder="0"
-          class=${this.loading ? "placeholder" : ""}
         >
         </iframe>
       </div>
@@ -61,19 +60,16 @@ class BotModeling extends LitElement {
         class="container-fluid maincontainer card  border-2 shadow"
         id="maincontainer"
       >
-        <div class="row flex-wrap ${this.loading ? "placeholder" : ""}">
-          <div class="col col-md-6 ">
+        <div class="row flex-wrap ">
+          <div class="col col-md-6">
             <iframe
               id="Canvas"
               src="{SYNC_META_HOST}/syncmeta/widget.html"
               frameborder="0"
-              on-load="${() => {
-                this.loading = false;
-              }}"
             >
             </iframe>
           </div>
-          <div class="col col-md-2 border-end border-2 ">
+          <div class="col col-md-2 border-end border-2">
             <iframe
               id="Palette"
               src="{SYNC_META_HOST}/syncmeta/palette.html"
@@ -81,10 +77,9 @@ class BotModeling extends LitElement {
             >
             </iframe>
           </div>
-          <div class="col col-md-4 ">
+          <div class="col col-md-4">
             <div class="h-100 d-flex flex-column justify-content-between px-1">
               <iframe
-                class=${this.loading ? "placeholder" : ""}
                 id="Property Browser"
                 src="{SYNC_META_HOST}/syncmeta/attribute.html"
                 frameborder="0"

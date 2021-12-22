@@ -150,7 +150,7 @@ class StaticApp extends LitElement {
         </header>
         <section class="content">
           <div class="container">${this.alertTemplate()}</div>
-          <div id="outlet" class="m-4 placeholder-wave"></div>
+          <div id="outlet" class="m-4"></div>
         </section>
 
         <aside
