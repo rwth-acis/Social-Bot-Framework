@@ -50,9 +50,9 @@ class StaticApp extends LitElement {
           <las2peer-frontend-statusbar
             id="statusBar"
             service="Social Bot Framework"
-            oidcpopupsigninurl="/src/callbacks/popup-signin-callback.html"
-            oidcpopupsignouturl="/src/callbacks/popup-signout-callback.html"
-            oidcsilentsigninturl="/src/callbacks/silent-callback.html"
+            oidcpopupsigninurl="/callbacks/popup-signin-callback.html"
+            oidcpopupsignouturl="/callbacks/popup-signout-callback.html"
+            oidcsilentsigninturl="/callbacks/silent-callback.html"
             oidcclientid="{OIDC_CLIENT_ID}"
             subtitle="{STATUSBAR_SUBTITLE}"
             ?autoappendwidget="${this.autoAppendWidget}"
@@ -141,7 +141,7 @@ class StaticApp extends LitElement {
         </header>
         <section class="content">
           <div class="container">${this.alertTemplate()}</div>
-          <div id="outlet" class="m-4"></div>
+          <div id="outlet" class="m-4 placeholder-wave"></div>
         </section>
 
         <aside
@@ -194,6 +194,21 @@ class StaticApp extends LitElement {
       { path: "/", component: "welcome-page" },
       { path: "/bot-modeling", component: "bot-modeling" },
       { path: "/model-training", component: "model-training" },
+      {
+        path: "/callbacks/popup-signin-callback.html",
+        component: "popup-signin-callback",
+        action: import("./callbacks/openidconnect-popup-signin-callback.js"),
+      },
+      {
+        path: "/callbacks/popup-signout-callback.html",
+        component: "popup-signout-callback",
+        action: import("./callbacks/openidconnect-popup-signout-callback.js"),
+      },
+      {
+        path: "/callbacks/silent-callback.html",
+        component: "silent-callback",
+        action: import("./callbacks/openidconnect-signin-silent-callback.js"),
+      },
     ]);
   }
 

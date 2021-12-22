@@ -7,11 +7,12 @@ import { LitElement, html, css } from "lit";
  *
  */
 class BotModeling extends LitElement {
-  static properties = {};
+  static properties = { loading: { type: Boolean, value: true } };
 
   static styles = css``;
   constructor() {
     super();
+    this.loading = true;
   }
   static init = 0;
   render() {
@@ -45,30 +46,34 @@ class BotModeling extends LitElement {
         }
       </style>
       <div
-        class="container-fluid card card-body shadow-sm mb-4"
+        class="container-fluid  card card-body shadow-sm mb-4"
         id="modelOpsContainer"
       >
         <iframe
           id="Bot"
           src="{SYNC_META_HOST}/syncmeta/bot.html"
           frameborder="0"
+          class=${this.loading ? "placeholder" : ""}
         >
         </iframe>
       </div>
       <div
-        class="container-fluid maincontainer  card  border-2 shadow"
+        class="container-fluid maincontainer card  border-2 shadow"
         id="maincontainer"
       >
-        <div class="row flex-wrap">
-          <div class="col col-md-6">
+        <div class="row flex-wrap ${this.loading ? "placeholder" : ""}">
+          <div class="col col-md-6 ">
             <iframe
               id="Canvas"
               src="{SYNC_META_HOST}/syncmeta/widget.html"
               frameborder="0"
+              on-load="${() => {
+                this.loading = false;
+              }}"
             >
             </iframe>
           </div>
-          <div class="col col-md-2 border-end border-2">
+          <div class="col col-md-2 border-end border-2 ">
             <iframe
               id="Palette"
               src="{SYNC_META_HOST}/syncmeta/palette.html"
@@ -76,9 +81,10 @@ class BotModeling extends LitElement {
             >
             </iframe>
           </div>
-          <div class="col col-md-4">
+          <div class="col col-md-4 ">
             <div class="h-100 d-flex flex-column justify-content-between px-1">
               <iframe
+                class=${this.loading ? "placeholder" : ""}
                 id="Property Browser"
                 src="{SYNC_META_HOST}/syncmeta/attribute.html"
                 frameborder="0"
@@ -99,6 +105,7 @@ class BotModeling extends LitElement {
   }
 
   firstUpdated() {
+    
     Common.setSpace("bot-modeling");
     // this.setInitialIframeDimensions();
     // const modelOpsContainer = document.getElementById("modelOpsContainer");
