@@ -6,6 +6,7 @@ import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 import "./bot-modeling.js";
 import "./model-training.js";
 import "./welcome.js";
+
 /**
  * @customElement
  */
@@ -71,7 +72,14 @@ class StaticApp extends LitElement {
           >
             <ul class="ms-4 list-group list-group-horizontal navbar-nav me-2">
               <li class="nav-item me-4">
-                <a class="nav-link d-flex flex-row bd-highlight" href="/">
+                <a
+                  class="nav-link d-flex flex-row bd-highlight"
+                  data-bs-toggle="tab"
+                  data-bs-target="#welcome"
+                  type="button"
+                  role="tab"
+                  aria-controls="welcome"
+                >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-house"></i>
                   </div>
@@ -81,7 +89,11 @@ class StaticApp extends LitElement {
               <li class="nav-item me-4">
                 <a
                   class="nav-link d-flex flex-row bd-highlight"
-                  href="/bot-modeling"
+                  data-bs-toggle="tab"
+                  data-bs-target="#bot-modeling"
+                  type="button"
+                  role="tab"
+                  aria-controls="bot-modeling"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-robot"></i>
@@ -92,7 +104,11 @@ class StaticApp extends LitElement {
 
               <li class="nav-item">
                 <a
-                  href="/model-training"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nlu-training"
+                  type="button"
+                  role="tab"
+                  aria-controls="nlu-training"
                   class="nav-link d-flex flex-row bd-highlight"
                 >
                   <div class="py-2 bd-highlight">
@@ -140,6 +156,32 @@ class StaticApp extends LitElement {
         </header>
         <section class="content">
           <div class="container">${this.alertTemplate()}</div>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="welcome"
+              role="tabpanel"
+              aria-labelledby="welcome"
+            >
+              <welcome-page></welcome-page>
+            </div>
+            <div
+              class="tab-pane fade "
+              id="bot-modeling"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <bot-modeling></bot-modeling>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nlu-training"
+              role="tabpanel"
+              aria-labelledby="profile-tab"
+            >
+              <model-training></model-training>
+            </div>
+          </div>
           <div id="outlet" class="m-4"></div>
         </section>
 
@@ -188,13 +230,13 @@ class StaticApp extends LitElement {
     this.displayCurrentRoomName();
 
     const outlet = document.getElementById("outlet");
-    const router = new Router(outlet);
+    // const router = new Router(outlet);
 
-    router.setRoutes([
-      { path: "/", component: "welcome-page" },
-      { path: "/bot-modeling", component: "bot-modeling" },
-      { path: "/model-training", component: "model-training" },
-    ]);
+    // router.setRoutes([
+    //   { path: "/", component: "welcome-page" ,action: ()=> import('./welcome.js') },
+    //   { path: "/bot-modeling", component: "bot-modeling" , action: ()=> import('./bot-modeling.js') },
+    //   { path: "/model-training", component: "model-training" , action: ()=> import('./model-training.js') },
+    // ]);
   }
 
   _onChangeButtonClicked() {
