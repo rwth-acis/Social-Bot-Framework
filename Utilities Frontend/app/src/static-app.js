@@ -58,11 +58,12 @@ class StaticApp extends LitElement {
             ?autoappendwidget="${this.autoAppendWidget}"
           >
             <div slot="left">
-              <img
-                src="assets/images/sbf-logo-head.svg"
-                class="logo"
-                id="sbf-logo"
-              />
+              <a href="/">
+                <img
+                  src="assets/images/sbf-logo-head.svg"
+                  class="logo"
+                  id="sbf-logo"
+              /></a>
             </div>
           </las2peer-frontend-statusbar>
 
