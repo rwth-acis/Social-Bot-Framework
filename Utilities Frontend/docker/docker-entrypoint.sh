@@ -9,7 +9,7 @@ check_if_exists () {
     fi
 }
 
-check_if_exists "$WEBHOST" "WEBHOST"
+check_if_exists "$SYNC_META_HOST" "SYNC_META_HOST"
 check_if_exists "$YJS" "YJS"
 check_if_exists "$PORT" "PORT"
 check_if_exists "$OIDC_CLIENT_ID" "OIDC_CLIENT_ID"
@@ -36,7 +36,7 @@ sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" syncmeta/widgets/src/js/bot_widget.js
 #### Syncmeta ####
 cd syncmeta/widgets
 cp .localGruntConfig.json.sample .localGruntConfig.json
-sed -i "s=http://localhost:8081=$WEBHOST/syncmeta=g" .localGruntConfig.json
+sed -i "s=http://localhost:8081=$SYNC_META_HOST/syncmeta=g" .localGruntConfig.json
 sed -i "s=http://localhost:1234=$YJS=g" .localGruntConfig.json
 sed -i "s=/socket.io=$YJS_RESOURCE_PATH=g" .localGruntConfig.json
 
@@ -46,7 +46,7 @@ cd ../..
 ##### CAE App ####
 cd app
 cp config.json.sample config.json
-sed -i "s=<WEBHOST>=$WEBHOST=g" config.json
+sed -i "s=<SYNC_META_HOST>=$SYNC_META_HOST=g" config.json
 sed -i "s=<OIDC_CLIENT_ID>=$OIDC_CLIENT_ID=g" config.json
 sed -i "s=<YJS_ADDRESS>=$YJS=g" config.json
 sed -i "s=<YJS_RESOURCE_PATH>=$YJS_RESOURCE_PATH=g" config.json
