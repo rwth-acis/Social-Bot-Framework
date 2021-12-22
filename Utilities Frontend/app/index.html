@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"
-    />
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Social Bot Framework</title>
+
     <meta
       name="description"
       content="An intuitive approach to social bot modeling"
@@ -83,12 +80,6 @@
   </head>
   <body style="margin: 0">
     <static-app></static-app>
-    <!-- Bootstrap js -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
 
     <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="/node_modules/yjs/dist/y.js"></script>
@@ -101,10 +92,25 @@
 
     <!-- interwidget communication depends on jquery -->
     <script
+      defer
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+    <script
+      defer
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/rwth-acis/InterwidgetCommunication@develop/iwc.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap js -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
     <!-- 
       Reason of using self-served version of Quill instead of using official version is that official version of Quill does not have support for WebComponents currently
       and a new pull request is opened to add WebComponent support(https://github.com/quilljs/quill/pull/2966) however it is not merged to master branch yet.
@@ -112,6 +118,7 @@
       If WebComponent suppport is added to Quill when you read this, feel free to change it with official version.
     -->
     <!-- Main Quill library -->
+
     <script
       src="https://cdn.quilljs.com/1.3.6/quill.js"
       crossorigin="anonymous"
