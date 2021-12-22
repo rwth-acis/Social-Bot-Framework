@@ -46,7 +46,7 @@ $ docker run -p 8070:8070 -e SYNC_META_HOST=<host_address> -e YJS=<yjs_address> 
 
 After the container started to run, the application will be accessible via http://127.0.0.1:8070 . Make sure **not** to use `localhost` as you will run into cors issues when loading ressources from Syncmeta.
 
-Application is using [YJS][yjs-github] for interwidget communication, therefore it needs [y-websocket-server][y-websocket-server] instance. 
+Application is using [YJS][yjs-github] for interwidget communication, therefore it needs [y-websocket-server][y-websocket-server] instance.
 It can be started with the following command:
 
 ```bash
@@ -54,7 +54,6 @@ $ docker run -p 1234:1234  -d rwthacis/y-websockets-server
 ```
 
 Then, the address of y-websockets-server instance needs to be passed to Docker container during initialization with `YJS` environment variable. If the WebSocket server is started with the previous command, its address will be `127.0.0.1:1234` and this value needs to be passed to Docker container during initialization.
-
 
 Following environment variables are needed to be passed to the container during initialization:
 
@@ -72,26 +71,25 @@ Following environment variables have default values however they can be changed 
 [yjs-github]: https://github.com/yjs/yjs
 [y-websocket-server]: https://github.com/y-js/y-websockets-server
 
-
 ## Examples
-| Bot            | Description | Application                                                                                                                                                | Demo |
-| -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
-| MensaBot       | Bot used to fetch and rate menu for canteens. | [las2peer-Mensa-Service](https://github.com/rwth-acis/las2peer-Mensa-Service)                                                                              | https://t.me/AcisMensaBot |
-| SurveyBot      | todo        | [Survey-Handler-Service](https://github.com/rwth-acis/Survey-Handler-Service), [MobSOS Surveys](https://github.com/rwth-acis/mobsos-surveys) or LimeSurvey | Todo |
-| FeedBot        | Gives out assignments to users, takes in their written solution and compares it with a master solution. Does not give a grade but returns a feedback file where the comparison is discussed. | [las2peer-T-MITOCAR-Service](https://github.com/rwth-acis/las2peer-tmitocar-service)                                                                       | https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-FeedBot |
-| ReaderbenchBot | todo        | [las2peer-readerbench](https://github.com/rwth-acis/las2peer-readerbench)                                                                                  | Todo |
-| LitBot         | todo   | [las2peer-akg](https://github.com/rwth-acis/las2peer-akg)                                                                                                  | https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-LitBot |
-| LA-Bot         | todo        | [learning-analytics-verification](https://github.com/rwth-acis/learning-analytics-verification)                                                            | Todo |
-| CitBot         | todo        | [Citation-Recommendation-Bot](https://github.com/rwth-acis/Citation-Recommendation-Bot)                                                                    | Todo |
+
+| Bot            | Description                                                                                                                                                                                  | Application                                                                                                                                                | Demo                                                                                 |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| MensaBot       | Bot used to fetch and rate menu for canteens.                                                                                                                                                | [las2peer-Mensa-Service](https://github.com/rwth-acis/las2peer-Mensa-Service)                                                                              | [Telegram](https://t.me/AcisMensaBot)                                                |
+| SurveyBot      | Conducts surveys in chat, including getting the survey information, sending reminders and passing user results back to the survey instance.                                                  | [Survey-Handler-Service](https://github.com/rwth-acis/Survey-Handler-Service), [MobSOS Surveys](https://github.com/rwth-acis/mobsos-surveys) or LimeSurvey | [Rocket.Chat](https://chat.tech4comp.dbis.rwth-aachen.de/direct/surveybot)            | [Rocket.Chat](https://chat.tech4comp.dbis.rwth-aachen.de/direct/la-verification-bot) |
+| FeedBot        | Gives out assignments to users, takes in their written solution and utilizes T-MITOCAR to compare it with a master solution. Does not give a grade but returns a feedback file where the comparison is discussed. | [las2peer-T-MITOCAR-Service](https://github.com/rwth-acis/las2peer-tmitocar-service)                                                                       | [Rocket.Chat](https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-FeedBot)        |
+| ReaderbenchBot | Gives out assignments to users, takes in their written solution and utilizes Readerbench to compare it with a master solution. Does not give a grade but returns a feedback file where the comparison is discussed.                                                                                                                                                                                         | [las2peer-readerbench](https://github.com/rwth-acis/las2peer-readerbench)                                                                                  | [Rocket.Chat](https://chat.tech4comp.dbis.rwth-aachen.de/direct/readerbot)           |
+| LitBot         | Supports students with reading seminar texts. Conducts small exercises with students and proposes additional tips, tools and learning material for before and after reading the texts. Also does recommendations based on the read texts.                                                                                                                                                                                        | [las2peer-akg](https://github.com/rwth-acis/las2peer-akg)                                                                                                  | [Rocket.Chat](https://chat.tech4comp.dbis.rwth-aachen.de/direct/BiWi-LitBot)         |
+| LA-Bot         | Verifies a student's consent and manages it via blockchain. Continuing learner activities are verified and can be queried.                                                                                                                                                                                         | [learning-analytics-verification](https://github.com/rwth-acis/learning-analytics-verification)                                                            | [Rocket.Chat](https://chat.tech4comp.dbis.rwth-aachen.de/direct/la-verification-bot) |
+| CitBot         | Finds references for text passages or for keywords. Manages marked literature and offers an export.                                                                                                                                                                                         | [Citation-Recommendation-Bot](https://github.com/rwth-acis/Citation-Recommendation-Bot)                                                                    | Slack - Contacat us                                                                                 |
 
 ## Deploying a Bot
 
-After creating a bot model on the frontend, you will be able to upload the bot to the SBFManager by using the "Model Uploader" on the "Bot Modeling" page. For this to work, you will need a running instance of the [SBFManager](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service) and adjust the "SBFManager Endpoint" accordingly. 
+After creating a bot model on the frontend, you will be able to upload the bot to the SBFManager by using the "Model Uploader" on the "Bot Modeling" page. For this to work, you will need a running instance of the [SBFManager](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service) and adjust the "SBFManager Endpoint" accordingly.
 
 When creating chatbots you will also need to provide a [Rasa server](https://github.com/RasaHQ/rasa.git) hosting an NLU Model. You can also use the "NLU Model Training Helper" to create your own NLU Model and upload that model by adjusting the "SBFManager Endpoint" and "Rasa NLU Endpoint" accordingly.
 
-To find out how to model bots, you can check the [SBF wiki](https://github.com/rwth-acis/Social-Bot-Framework/wiki). 
-
+To find out how to model bots, you can check the [SBF wiki](https://github.com/rwth-acis/Social-Bot-Framework/wiki).
 
 ## References
 
