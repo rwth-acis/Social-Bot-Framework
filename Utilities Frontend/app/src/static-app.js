@@ -160,6 +160,7 @@ class StaticApp extends LitElement {
           </div>
           <div class="offcanvas-body overflow-hidden p-0">
             <iframe
+              loading="lazy"
               id="User Activity"
               src="{SYNC_META_HOST}/syncmeta/activity.html"
               frameborder="0"
