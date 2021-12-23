@@ -1,0 +1,43 @@
+## intent: getThemeSuggestion
+- where can I find more information about [Barabasi-Albert networks](barabasiAlbert)?
+- where can I find the definition of [map reduce](mapReduce)?
+- where can I find the definition of [cloud computing](cloudComputingDefinition)?
+- where can I find the definition of the [prisoner’s dilemma](prisonersDilemma)?
+- what is the use of map reduce [combiners](mapReduceCombiners)?
+- I don’t understand the concept of [mapreduce](mapReduce)?
+- can you give me some [examples of map reduce](mapReduceExamples)?
+- where can I find soome [mapreduce examples](mapReduceExamples)?
+- Can someone explain [MapReduce](mapReduce)?
+- What is a [combiner](mapReduceCombiners) used for in MapReduce?
+- [Introduction to Cloud Computing](cloudComputingIntro)
+- [Concerns of Cloud Computing](cloudComputingConcerns)
+- [Definition of Cloud Computing](cloudComputingDefinition)
+- [Features of Cloud Computing](cloudComputingFeatures)
+- [Types of Cloud](cloudComputingTypesOfCloud)
+- [Cloud Computing Delivery Models](cloudComputingDeliveryModels)
+- [IaaS](cloudComputingIaaS)
+- [PaaS](cloudComputingPaaS)
+- [SaaS](cloudComputingSaaS)
+- [Cloud Computing Technologies](cloudComputingTechnologies)
+- [Data Centers](cloudComputingDataCenters)
+- [Virtualization](cloudComputingVirtualization)
+- [Access and Management APIs](cloudComputingAccessAndManagementAPIs)
+- [MapReduce](mapReduce)
+- [Map Reduce](mapReduce)
+- [MapReduce Examples](mapReduceExamples)
+- [Map Reduce Examples](mapReduceExamples)
+- [Map Reduce Example](mapReduceExamples)
+- [MapReduce Example](mapReduceExamples)
+- [Combiners](mapReduceCombiners)
+- [Combiner](mapReduceCombiners)
+- [Graph Algorithms with MapReduce](mapReduceGraphs)
+- [Graph Algorithms with Map Reduce](mapReduceGraphs)
+- [Scalable Storage](cloudComputingScalableStorage)
+- [Prisoner's Dilemma](prisonersDilemma)
+- [Prisoners Dilemma](prisonersDilemma)
+- [Prisoners’ Dilemma](prisonersDilemma)
+- [Prisoner's Dilemma on Complex Networks](prisonersDilemmaOnComplexNetworks)
+- [Prisoners Dilemma on Complex Networks](prisonersDilemmaOnComplexNetworks)
+- [Prisoner's’ Dilemma on Complex Networks](prisonersDilemmaOnComplexNetworks)
+- [MATLAB](matlab)
+- [Barabasi Albert network](barabasiAlbert)

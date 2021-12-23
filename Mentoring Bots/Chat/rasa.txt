@@ -1,0 +1,39 @@
+## intent: getPersonalizedSuggestion
+- which file should I access next?
+- which quiz should I take next?
+- which link should I access next?
+- can you give me a suggestion?
+- any other suggestions?
+- can you suggest me something?
+- can you recommend me something?
+- can you help me?
+- where can I find?
+- yes
+- yes please
+- yep
+- yea
+- ye
+- sure
+- ok
+- yes I would
+- I do
+
+
+## intent: refuseSuggestion
+- no
+- nope
+- nah
+- no thank you
+- no thanks
+
+## intent: greetings
+- hello
+- hi
+- good morning
+- hey there
+- what’s up
+
+## intent: thank
+- thank
+- thanks
+- appreciated

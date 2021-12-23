@@ -1,0 +1,514 @@
+@prefix ulo:   <http://uni-leipzig.de/tech4comp/ontology/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://moodle.tech4comp.dbis.rwth-aachen.de/course/view.php?id=18> a ulo:course ;
+                                                                     ulo:hasTheme    <http://halle/domainmodel/cloudComputingIntro>,
+                                                                         <http://halle/domainmodel/cloudComputingConcerns>,
+                                                                         <http://halle/domainmodel/cloudComputingDefinition>,
+                                                                         <http://halle/domainmodel/cloudComputingFeatures>,
+                                                                         <http://halle/domainmodel/cloudComputingTypesOfCloud>,
+                                                                         <http://halle/domainmodel/cloudComputingDeliveryModels>,
+                                                                         <http://halle/domainmodel/cloudComputingIaaS>,
+                                                                         <http://halle/domainmodel/cloudComputingPaaS>,
+                                                                         <http://halle/domainmodel/cloudComputingSaaS>,
+                                                                         <http://halle/domainmodel/cloudComputingTechnologies>,
+                                                                         <http://halle/domainmodel/cloudComputingDataCenters>,
+                                                                         <http://halle/domainmodel/cloudComputingVirtualization>,
+                                                                         <http://halle/domainmodel/cloudComputingAccessAndManagementAPIs>,
+                                                                         <http://halle/domainmodel/mapReduce>,
+                                                                         <http://halle/domainmodel/mapReduceExamples>,
+                                                                         <http://halle/domainmodel/mapReduceCombiners>,
+                                                                         <http://halle/domainmodel/mapReduceGraphs>,
+                                                                         <http://halle/domainmodel/cloudComputingScalableStorage>,
+                                                                         <http://halle/domainmodel/prisonersDilemma>,
+                                                                         <http://halle/domainmodel/prisonersDilemmaOnComplexNetworks>,
+                                                                         <http://halle/domainmodel/matlab>,
+                                                                         <http://halle/domainmodel/barabasiAlbert> .
+
+<https://moodle.tech4comp.dbis.rwth-aachen.de/course/view.php?id=20> a ulo:course ;
+                                                                     ulo:hasTheme    <http://halle/domainmodel/semesterFees>,
+                                                                         <http://halle/domainmodel/enrolling>,
+                                                                         <http://halle/domainmodel/corona>,
+                                                                         <http://halle/domainmodel/counseling>,
+                                                                         <http://halle/domainmodel/library>,
+                                                                         <http://halle/domainmodel/blueCard>,
+                                                                         <http://halle/domainmodel/semesterTicket>,
+                                                                         <http://halle/domainmodel/housing>,
+                                                                         <http://halle/domainmodel/healthInsurance> .
+
+<http://halle/domainmodel/cloudComputingIntro>
+    rdfs:label    "Introduction to Cloud Computing" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/cloudComputingConcerns>, <http://halle/domainmodel/cloudComputingDefinition>,
+                        <http://halle/domainmodel/cloudComputingFeatures>, <http://halle/domainmodel/cloudComputingTypesOfCloud>,
+                        <http://halle/domainmodel/cloudComputingDeliveryModels> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "209-230" 
+                                ] .
+
+<http://halle/domainmodel/cloudComputingConcerns>
+    rdfs:label    "Concerns of Cloud Computing" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "220" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "23:15" ;
+                                  ulo:password        "NC&8?.7G"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=214> 
+                                ] .
+
+<http://halle/domainmodel/cloudComputingDefinition>
+    rdfs:label    "Definition of Cloud Computing" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "215" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "11:15" ;
+                                  ulo:password        "NC&8?.7G"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=214> 
+                                ] .
+                                
+<http://halle/domainmodel/cloudComputingFeatures>
+    rdfs:label    "Features of Cloud Computing" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "217-219" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "15:13" ;
+                                  ulo:password        "NC&8?.7G"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=214> 
+                                ] .
+
+<http://halle/domainmodel/cloudComputingTypesOfCloud>
+    rdfs:label    "Types of Cloud" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "222-223" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "28:30" ;
+                                  ulo:password        "NC&8?.7G"
+                                ] .
+
+<http://halle/domainmodel/cloudComputingDeliveryModels>
+    rdfs:label    "Cloud Computing Delivery Models" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/cloudComputingIaaS>, <http://halle/domainmodel/cloudComputingPaaS>,
+                        <http://halle/domainmodel/cloudComputingSaaS> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "224-230" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "30:45" ;
+                                  ulo:password        "NC&8?.7G"
+                                ] .
+
+<http://halle/domainmodel/cloudComputingIaaS>
+    rdfs:label    "IaaS" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "226-227" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "35:30" ;
+                                  ulo:password        "NC&8?.7G"
+                                ] .
+                                
+<http://halle/domainmodel/cloudComputingPaaS>
+    rdfs:label    "PaaS" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "228-229" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "38:15" ;
+                                  ulo:password        "NC&8?.7G"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=214> 
+                                ] .
+
+<http://halle/domainmodel/cloudComputingSaaS>
+    rdfs:label    "SaaS" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "230" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "40:41" ;
+                                  ulo:password        "NC&8?.7G"
+                                ] .
+
+<http://halle/domainmodel/cloudComputingTechnologies>
+    rdfs:label    "Cloud Computing Technologies" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/cloudComputingDataCenters>, <http://halle/domainmodel/cloudComputingVirtualization>,
+                        <http://halle/domainmodel/cloudComputingAccessAndManagementAPIs>, 
+                        <http://halle/domainmodel/cloudComputingScalableStorage> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "231-280" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "42:40" ;
+                                  ulo:password        "NC&8?.7G"
+                                ] .
+
+<http://halle/domainmodel/cloudComputingDataCenters>
+    rdfs:label    "Data Centers" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "233-236" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "43:30" ;
+                                  ulo:password        "NC&8?.7G"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=214> 
+                                ] .
+
+<http://halle/domainmodel/cloudComputingVirtualization>
+    rdfs:label    "Virtualization" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "237-246" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "54:13" ;
+                                  ulo:password        "NC&8?.7G"
+                                ] .
+
+<http://halle/domainmodel/cloudComputingAccessAndManagementAPIs>
+    rdfs:label    "Access and Management APIs" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "247" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "1:23:50" ;
+                                  ulo:password        "NC&8?.7G"
+                                ] .
+
+<http://halle/domainmodel/mapReduce>
+    rdfs:label    "MapReduce" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/mapReduceExamples>,
+                        <http://halle/domainmodel/mapReduceCombiners>, <http://halle/domainmodel/mapReduceGraphs> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "249-277" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "01:27:08" ;
+                                  ulo:password        "NC&8?.7G"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=216> ;
+                                  ulo:timestamp       "04:30" ;
+                                  ulo:password        "uuKh1=tU"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=211> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=214> 
+                                ] .
+
+<http://halle/domainmodel/mapReduceExamples>
+    rdfs:label    "MapReduce Examples" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "257-260" ;
+                                  ulo:pagerange       "267-275" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=216> ;
+                                  ulo:timestamp       "16:00" ;
+                                  ulo:timestamp       "46:16" ;
+                                  ulo:password        "uuKh1=tU"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=211> 
+                                ] .
+
+<http://halle/domainmodel/mapReduceCombiners>
+    rdfs:label    "Combiners" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "261-262" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=216> ;
+                                  ulo:timestamp       "27:18" ;
+                                  ulo:password        "uuKh1=tU"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=214> 
+                                ] .
+
+<http://halle/domainmodel/mapReduceGraphs>
+    rdfs:label    "Graph Algorithms with MapReduce" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/mapReduce> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "266-275" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=216> ;
+                                  ulo:timestamp       "44:40" ;
+                                  ulo:password        "uuKh1=tU"
+                                ] .
+
+<http://halle/domainmodel/cloudComputingScalableStorage>
+    rdfs:label    "Scalable Storage" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=205> ;
+                                  ulo:pagerange       "278-280" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=204> ;
+                                  ulo:timestamp       "01:08:25" ;
+                                  ulo:password        "uuKh1=tU"
+                                ] .
+
+<http://halle/domainmodel/prisonersDilemma>
+    rdfs:label    "Prisoner's Dilemma" ;
+    a             ulo:theme ;
+    ulo:relatedTo     <http://halle/domainmodel/prisonersDilemmaOnComplexNetworks>, <http://halle/domainmodel/barabasiAlbert> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=208> ;
+                                  ulo:pagerange       "29-49" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=215> ;
+                                  ulo:timestamp       "01:07:02" ;
+                                  ulo:password        "8KcQt%4S"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=213> 
+                                ] .
+
+
+<http://halle/domainmodel/prisonersDilemmaOnComplexNetworks>
+    rdfs:label    "Prisoner's Dilemma on Complex Networks" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/barabasiAlbert>, <http://halle/domainmodel/matlab> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=208> ;
+                                  ulo:pagerange       "47-58" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=215> ;
+                                  ulo:timestamp       "01:24:02" ;
+                                  ulo:password        "8KcQt%4S"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=212> 
+                                ] .
+
+<http://halle/domainmodel/matlab>
+    rdfs:label    "MATLAB Tutorial" ;
+    a             ulo:theme ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=202> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=210>;
+                                  ulo:password        "x*6@XK$7"
+                                ] .
+
+<http://halle/domainmodel/barabasiAlbert>
+    rdfs:label    "Barabasi-Albert Networks" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/matlab> ;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=206> ;
+                                  ulo:pagerange       "117-118" 
+                                ] .
+
+<http://halle/domainmodel/semesterFees>
+    rdfs:label    "Semester Fees" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/semesterTicket>, <http://halle/domainmodel/enrolling>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=228> ;
+                                  ulo:pagerange       "14" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=226> ;
+                                  ulo:timestamp       "7:36" 
+                                ] .
+
+<http://halle/domainmodel/enrolling>
+    rdfs:label    "Enrolling" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/blueCard>, <http://halle/domainmodel/semesterTicket>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=228> ;
+                                  ulo:pagerange       "14" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=229> ;
+                                  ulo:pagerange       "14" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=226> ;
+                                  ulo:timestamp       "0:00" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=231> 
+                                ] .
+
+<http://halle/domainmodel/corona>
+    rdfs:label    "Corona Guidelines" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/counseling>, <http://halle/domainmodel/enrolling>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=222> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=231> 
+                                ] .
+
+<http://halle/domainmodel/counseling>
+    rdfs:label    "Counseling" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/corona>, <http://halle/domainmodel/housing>, <http://halle/domainmodel/healthInsurance>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=228> ;
+                                  ulo:pagerange       "15" ;
+                                  ulo:item            "10"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=229> ;
+                                  ulo:timestamp       "30" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=219> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=220> 
+                                ] .
+
+<http://halle/domainmodel/library>
+    rdfs:label    "University Library" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/corona>, <http://halle/domainmodel/blueCard>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=225> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=224> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=223> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=231> 
+                                ] .                            
+
+<http://halle/domainmodel/blueCard>
+    rdfs:label    "BlueCard" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/semesterTicket>, <http://halle/domainmodel/enrolling>, <http://halle/domainmodel/library>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=228> ;
+                                  ulo:pagerange       "14" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=226> ;
+                                  ulo:timestamp       "17:43" 
+                                ] .
+
+<http://halle/domainmodel/semesterTicket>
+    rdfs:label    "Semester Ticket" ;
+    a             ulo:theme ;
+    ulo:relatedTo   <http://halle/domainmodel/housing>,  <http://halle/domainmodel/healthInsurance>, <http://halle/domainmodel/semesterFees>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=228> ;
+                                  ulo:pagerange       "15";
+                                  ulo:item            "7"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=229> ;
+                                  ulo:pagerange       "24"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=226> ;
+                                  ulo:timestamp       "9:58" 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=231> 
+                                ] .
+
+<http://halle/domainmodel/housing>
+    rdfs:label    "Housing" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/healthInsurance>, <http://halle/domainmodel/semesterTicket>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=228> ;
+                                  ulo:pagerange       "15";
+                                  ulo:item            "1"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/url/view.php?id=221> 
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=229> ;
+                                  ulo:pagerange       "8"
+                                ] .
+
+<http://halle/domainmodel/healthInsurance>
+    rdfs:label    "Health Insurance" ;
+    a             ulo:theme ;
+    ulo:relatedTo    <http://halle/domainmodel/housing>, <http://halle/domainmodel/semesterTicket>;
+    ulo:discusses    [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=228> ;
+                                  ulo:pagerange       "18";
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/resource/view.php?id=229> ;
+                                  ulo:pagerange       "14"
+                                ],
+                                [ 
+                                  ulo:discussResource              <https://moodle.tech4comp.dbis.rwth-aachen.de/mod/quiz/view.php?id=231> 
+                                ] .

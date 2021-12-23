@@ -1,223 +1,332 @@
-import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
-import 'las2peer-frontend-statusbar/las2peer-frontend-statusbar.js';
-import '@polymer/app-route/app-location.js';
-import '@polymer/app-route/app-route.js';
-import '@polymer/iron-pages/iron-pages.js';
-import Common from './common.js';
-import ModelOps from './model-ops.js';
+import { LitElement, html, css } from "lit";
+import Common from "./common.js";
+import ModelOps from "./model-ops.js";
+import { Router } from "@vaadin/router";
+import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 
 /**
  * @customElement
- * @polymer
  */
-class StaticApp extends PolymerElement {
-  static get template() {
+class StaticApp extends LitElement {
+  static properties = {
+    prop1: {
+      type: String,
+      value: "static-app",
+    },
+
+    autoAppendWidget: {
+      type: Boolean,
+      value: true,
+    },
+    alertMessage: {
+      type: String,
+    },
+    alertType: {
+      type: String,
+    },
+    router: {},
+  };
+
+  static styles = css``;
+  constructor() {
+    super();
+  }
+  render() {
     return html`
-      <head>
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-      </head>
       <style>
-        :root {
-          --statusbar-background: #808080;
+        header {
+          flex: 0 1 auto;
         }
-        :host {
-          display: block;
+        section .content {
+          flex: 1 1 auto;
         }
-        #yjsroomcontainer, #modeluploader {
-          display: flex;
-          margin: 5px;
-          flex: 1;
-          align-items: center;
-        }
-        .loader {
-          border: 5px solid #f3f3f3; /* Light grey */
-          border-top: 5px solid #3498db; /* Blue */
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          animation: spin 2s linear infinite;
-          display:none;
-        }
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        paper-input {
-          max-width: 300px;    
-        }
-        paper-button{
-          color: rgb(240,248,255);
-          background: rgb(30,144,255);
-          max-height: 30px;
-        }
-        paper-button:hover{
-          color: rgb(240,248,255);
-          background: rgb(65,105,225);
+        #main {
+          height: 100%;
         }
       </style>
+      <div id="main">
+        <header>
+          <las2peer-frontend-statusbar
+            id="statusBar"
+            service="Social Bot Framework"
+            oidcpopupsigninurl="/callbacks/popup-signin-callback.html"
+            oidcpopupsignouturl="/callbacks/popup-signout-callback.html"
+            oidcsilentsigninturl="/callbacks/silent-callback.html"
+            oidcclientid="{OIDC_CLIENT_ID}"
+            subtitle="{STATUSBAR_SUBTITLE}"
+            ?autoappendwidget="${this.autoAppendWidget}"
+          >
+            <div slot="left">
+              <a href="/">
+                <img
+                  src="assets/images/sbf-logo-head.svg"
+                  class="logo"
+                  id="sbf-logo"
+              /></a>
+            </div>
+          </las2peer-frontend-statusbar>
 
-      <las2peer-frontend-statusbar
-        id="statusBar"
-        service="Social Bot Framework"
-        oidcpopupsigninurl="/src/callbacks/popup-signin-callback.html"
-        oidcpopupsignouturl="/src/callbacks/popup-signout-callback.html"
-        oidcsilentsigninturl="/src/callbacks/silent-callback.html"
-        oidcclientid="{OIDC_CLIENT_ID}"
-        subtitle="{STATUSBAR_SUBTITLE}"
-        autoAppendWidget=true
-      ></las2peer-frontend-statusbar>    
+          <nav
+            class="navbar navbar-light bg-light mb-2 p-0 justify-content-start"
+          >
+            <ul class="ms-4 list-group list-group-horizontal navbar-nav me-2">
+              <li class="nav-item me-4">
+                <a class="nav-link d-flex flex-row bd-highlight" href="/">
+                  <div class="py-2 bd-highlight">
+                    <i class="bi bi-house"></i>
+                  </div>
+                  <div class="p-2 bd-highlight">Home</div>
+                </a>
+              </li>
+              <li class="nav-item me-4">
+                <a
+                  class="nav-link d-flex flex-row bd-highlight"
+                  data-bs-toggle="tab"
+                  data-bs-target="#bot-modeling"
+                  type="button"
+                  role="tab"
+                  aria-controls="bot-modeling"
+                  @click="${this.leaveHome}"
+                >
+                  <div class="py-2 bd-highlight">
+                    <i class="bi bi-robot"></i>
+                  </div>
+                  <div class="p-2 bd-highlight">Bot Modeling</div>
+                </a>
+              </li>
 
-      <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href="/bot-modeling">Bot Modeling<span class="sr-only"></span></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/model-training">NLU Model Training Helper<span class="sr-only"></span></a>
-                  </li>
-              </ul>
+              <li class="nav-item">
+                <a
+                  data-bs-toggle="tab"
+                  data-bs-target="#nlu-training"
+                  type="button"
+                  role="tab"
+                  aria-controls="nlu-training"
+                  class="nav-link d-flex flex-row bd-highlight"
+                  @click="${this.leaveHome}"
+                >
+                  <div class="py-2 bd-highlight">
+                    <i class="bi bi-book"></i>
+                  </div>
+                  <div class="p-2 bd-highlight">NLU Model Training Helper</div>
+                </a>
+              </li>
+            </ul>
+
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
+              <i class="bi bi-people"></i> User Activities
+            </button>
+            <form class="d-flex ms-auto" id="spaceForm">
+              <div class="d-flex flex-row">
+                <div class="me-2 align-self-center">
+                  <label for="yjsRoomInput">Change Space</label>
+                </div>
+
+                <div class="me-2">
+                  <input
+                    id="yjsRoomInput"
+                    class="form-control me-2"
+                    type="text"
+                    placeholder="Enter Space name"
+                  />
+                </div>
+                <div class="mx-2 d-flex align-items-end">
+                  <button type="submit" class="btn btn-outline-primary">
+                    ENTER
+                  </button>
+                </div>
+                <div class="mx-2 d-flex align-items-end">
+                  <div class="loader" id="roomEnterLoader"></div>
+                </div>
+              </div>
+            </form>
+          </nav>
+        </header>
+        <section class="content">
+          <div class="container">${this.alertTemplate()}</div>
+          <div id="outlet" class="m-4"></div>
+        </section>
+
+        <aside
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-header p-2">
+            <h5 id="offcanvasRightLabel">User Activities</h5>
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
           </div>
-      </nav>
-
-      <div>
-        <p id="currentRoom">Current Space: Test</p>
-        <div id="yjsroomcontainer">
-          <paper-input id="yjsRoomInput" always-float-label label="Space"></paper-input>
-          <paper-button on-click="_onChangeButtonClicked">Enter</paper-button>
-          <div class="loader" id="roomEnterLoader"></div> 
-        </div>
+          <div class="offcanvas-body overflow-hidden p-0">
+            <iframe
+              loading="lazy"
+              id="User Activity"
+              src="{SYNC_META_HOST}/syncmeta/activity.html"
+              frameborder="0"
+            >
+            </iframe>
+          </div>
+        </aside>
       </div>
-
-      <app-location route="{{route}}"></app-location>
-      <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
-      <iron-pages selected="[[page]]" attr-for-selected="name" selected-attribute="visible" fallback-selection="404">
-        <bot-modeling name="bot-modeling"></bot-modeling>
-        <model-training name="model-training"></model-training>
-      </iron-pages>  
     `;
   }
 
-  static get properties() {
-    return {
-      prop1: {
-        type: String,
-        value: 'static-app'
-      },
-      page:{
-        type: String,
-        value: 'sbf',
-        observer: '_pageChanged'
-      }
-    };
-  }
+  static get observers() {}
 
-  static get observers(){
-	  return ['_routerChanged(routeData.page)'];
-  }
-
-  _routerChanged(page){
-    this.page = page || 'sbf';
-  }
-
-  /* this pagechanged triggers for simple onserver written in page properties written above */
-  _pageChanged(currentPage, oldPage){
-        // Opera 8.0+
-    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-
-    // Firefox 1.0+
-    var isFirefox = typeof InstallTrigger !== 'undefined';
-
-    // Safari 3.0+ "[object HTMLElementConstructor]" 
-    var isSafari =/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
-
-    // Internet Explor+er 6-11
-    var isIE =  false || !!document.documentMode;
-
-    // Chrome 1 - 79
-    var isChrome = !!window.chrome;
-
-    switch(currentPage){
-      case 'bot-modeling':
-        if(isChrome || isIE || isOpera || isSafari){
-          import('./bot-modelingChrome.js').then()
-          break;  
-        } else if(isFirefox){
-          import('./bot-modeling.js').then()
-          break;
-        }  
-        break;
-      case 'model-training':
-        import('./model-training.js').then()
-        break;
-      default:
-        this.page = 'sbf';
-    }
-  }
-
-  ready() {
-    super.ready();
-    const statusBar = this.shadowRoot.querySelector("#statusBar");
-    console.log("{CONTACT_SERVICE_URL}");
-    console.log("{OIDC_CLIENT_ID}");
-    statusBar.setAttribute("baseUrl", {CONTACT_SERVICE_URL});
-    statusBar.addEventListener('signed-in',(event) => this.handleLogin(event));
-    statusBar.addEventListener('signed-out',(event) => this.handleLogout(event));
+  firstUpdated() {
+    const statusBar = document.querySelector("#statusBar");
+    statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
+    statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));
+    statusBar.addEventListener("signed-out", (event) =>
+      this.handleLogout(event)
+    );
+    document.querySelector("#spaceForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      this._onChangeButtonClicked();
+    });
     this.displayCurrentRoomName();
+
+    const outlet = document.getElementById("outlet");
+    this.router = new Router(outlet);
+
+    this.router.setRoutes([
+      {
+        path: "/",
+        component: "welcome-page",
+        action: () => import("./welcome.js"),
+      },
+      {
+        path: "/modeling",
+        component: "main-page",
+        action: () => import("./main.js"),
+      },
+    ]);
   }
 
   _onChangeButtonClicked() {
-    var roomName = this.shadowRoot.querySelector('#yjsRoomInput').value;
-    Common.setYjsRoomName(roomName);
+    const input = document.querySelector("#yjsRoomInput").value;
+    const currentRoomName = Common.getYjsRoomName();
+    if (!input || input.trim().length === 0) {
+      alert("Please enter a valid room name");
+      return;
+    }
+    if (input === currentRoomName) {
+      alert("You are already in this space!");
+      return;
+    }
+
+    Common.setYjsRoomName(input);
     this.changeVisibility("#roomEnterLoader", true);
     ModelOps.uploadMetaModel()
-      .then(_ => new Promise((resolve, reject) => {
-        // wait for data become active
-        setTimeout(_ => resolve(), 2000);
-      }))
-      .then(_ => location.reload());
-      ModelOps.uploadBotModel()
-      .then(_ => new Promise((resolve, reject) => {
-        // wait for data become active
-        setTimeout(_ => resolve(), 2000);
-      }))
-      .then(_ => location.reload());
+      .then(
+        (_) =>
+          new Promise((resolve, reject) => {
+            // wait for data become active
+            setTimeout((_) => resolve(), 2000);
+          })
+      )
+      .then((_) => location.reload());
+    ModelOps.uploadBotModel()
+      .then(
+        (_) =>
+          new Promise((resolve, reject) => {
+            // wait for data become active
+            setTimeout((_) => resolve(), 2000);
+          })
+      )
+      .then((_) => location.reload());
+  }
+
+  /**
+   * This function is called whenever the user wants to navigate to page other than home page.
+   */
+  leaveHome() {
+    const path = window.location.pathname;
+    if (path === "/") {
+      Router.go("/modeling");
+    }
   }
 
   displayCurrentRoomName() {
-    var spaceHTML = "";
-    if (Common.getYjsRoomName()) {
-      spaceHTML = `<span style="font-weight: bold;">Current Space:</span> ${Common.getYjsRoomName()}`;
+    let spaceName = Common.getYjsRoomName();
+    if (spaceName) {
+      document.querySelector("#yjsRoomInput").value = spaceName;
     } else {
-      spaceHTML = "Please enter a space!";
+      this.alertMessage =
+        "No space selected. Please select a space in the top right corner of the navigation bar.";
     }
-    this.shadowRoot.querySelector('#currentRoom').innerHTML = spaceHTML;
   }
 
   changeVisibility(htmlQuery, show) {
-    var item = this.shadowRoot.querySelector(htmlQuery);
+    var item = document.querySelector(htmlQuery);
     if (show) {
-      item.style.display = 'block';
+      item.style.display = "block";
     } else {
-      item.style.display = 'none';
+      item.style.display = "none";
     }
-  } 
+  }
 
   handleLogin(event) {
-    if(localStorage.getItem("access_token") == null){
+    if (localStorage.getItem("access_token") == null) {
       localStorage.setItem("access_token", event.detail.access_token);
-      localStorage.setItem("userinfo_endpoint", "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo");
+      localStorage.setItem(
+        "userinfo_endpoint",
+        "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
+      );
       location.reload();
     }
-
   }
 
   handleLogout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("userinfo_endpoint");
   }
+  /**
+   * Template for alert messages
+   */
+  alertTemplate() {
+    if (!this.alertType) {
+      this.alertType = "info";
+    }
+    if (!this.alertMessage) {
+      return;
+    }
+    return html`
+      <div
+        class="alert alert-${this.alertType} fade show"
+        role="alert"
+        id="alert"
+      >
+        ${this.alertMessage}
+        <!-- <button
+          @click="${this.closeAlert}"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button> -->
+      </div>
+    `;
+  }
+
+  closeAlert() {
+    this.alertMessage = "";
+  }
+
+  createRenderRoot() {
+    return this;
+  }
 }
 
-window.customElements.define('static-app', StaticApp);
+window.customElements.define("static-app", StaticApp);
