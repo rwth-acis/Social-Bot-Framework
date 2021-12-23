@@ -16,7 +16,7 @@ A Web-based, model-driven framework for creating social bots for RESTful web app
 
 * [las2peer-Social-Bot-Manager-Service](https://github.com/rwth-acis/las2peer-Social-Bot-Manager-Service)
 
-### External Dependencies
+## External Dependencies
 
 * [y-websockets-server](https://github.com/y-js/y-websockets-server)
 * [SyncMeta](https://github.com/rwth-acis/syncmeta)
@@ -24,54 +24,80 @@ A Web-based, model-driven framework for creating social bots for RESTful web app
 * [MobSOS Success-Modeling](https://github.com/rwth-acis/mobsos-success-modeling)
 * [Rasa](https://github.com/RasaHQ/rasa.git)
 
-## SBF Utilities Frontend
+# SBF Utilities Frontend
 
 This application provides helpers to interact with the Social Bot Manager service.
 
 This frontend consists of the Bot Modeling and the NLU Model Training Helper.
 
-### Build and Run the Frontend
+## Build the application
 
+There are two possibilities to build the application:
+* Use the Docker image
+* Build using Grunt
+The Docker image includes all Syncmeta dependencies. If you build the application using Grunt you need to host Syncmeta yourself.
+
+### Build using Docker
 First, build the Docker image. Please note that the frontend can onyl be built using node versions <=11
 
 ```bash
 $ docker build -t rwthacis/sbf-utils .
 ```
 
-Then you can start the container like this:
-
-```bash
-$ docker run -p 8070:8070 -e SYNC_META_HOST=<host_address> -e YJS=<yjs_address> -e OIDC_CLIENT_ID=<oidc_client_id> -e RASA_NLU=<rasa_server> -e SBF_MANAGER=<sbfmanager_address> -d rwthacis/sbf-utils
-```
-
-After the container started to run, the application will be accessible via http://127.0.0.1:8070 . Make sure **not** to use `localhost` as you will run into cors issues when loading ressources from Syncmeta.
-
-Application is using [YJS][yjs-github] for interwidget communication, therefore it needs [y-websocket-server][y-websocket-server] instance.
+The application is using [YJS][yjs-github] for interwidget communication, therefore it needs [y-websocket-server][y-websocket-server] instance.
 It can be started with the following command:
 
 ```bash
 $ docker run -p 1234:1234  -d rwthacis/y-websockets-server
 ```
 
-Then, the address of y-websockets-server instance needs to be passed to Docker container during initialization with `YJS` environment variable. If the WebSocket server is started with the previous command, its address will be `127.0.0.1:1234` and this value needs to be passed to Docker container during initialization.
+Then you can start the container like this:
 
-Following environment variables are needed to be passed to the container during initialization:
+```bash
+$ docker run -p 8070:8070 -d rwthacis/sbf-utils
+```
+After the container started to run, the application will be accessible via http://127.0.0.1:8070 . Make sure **not** to use `localhost` as you will run into CORS issues when loading ressources from Syncmeta.
 
-* `SYNC_META_HOST`: Url address of application
-* `YJS`: Root URL address of Yjs WebSocket server. If it is running behind a reverse proxy, a relative path needs to be provided with the `YJS_RESOURCE_PATH` env variable.
-* `OIDC_CLIENT_ID`: OIDC client id which is used for authentication purposes. Client id can be acquired from Learning Layers after client registration
+#### Confguration
 
-Following environment variables have default values however they can be changed during initialization:
+The following environment variables can be configured. 
+| Variable  | Meaning   | Default  | Required |
+|---        |---        |---       |---       |
+|OIDC_CLIENT_ID|  OIDC client id which is used for authentication purposes. The client id can be acquired from Learning Layers after client registration    | www.localclient.com  |  Yes |
+|YJS        |The adress of the yjs instance.    | http://127.0.0.1:1234  | Yes|
+|YJS_RESOURCE_PATH | If the WebSocket server is running behind a reverse proxy and the /yjs path is redirected to the WebSocket server, this env variable needs to be /yjs/socket.io. | | No| 
+| RASA_NLU  | Address of a server hosting the NLU Model. If not empty, the given address will be written in the "Rasa NLU Endpoint" field of the NLU Model Training Helper.  |   |   No |
+|SBF_MANAGER| Address of a running SBFManager Instance. If not empty, the given address will be written in the "SBFManager Endpoint" fields of the frontend. | |No|
 
-* `PORT`: Port which Nginx server is listening locally. This port need to be made accessible to the outside with port mapping during initialization. The default value is `8070`.
-* `YJS_RESOURCE_PATH`: Resource path of Yjs WebSocket server. If the WebSocket server is running behind a reverse proxy and the `/yjs` path is redirected to the WebSocket server, this env variable needs to be `/yjs/socket.io`. The default value is `/socket.io`.
-* `SBF_MANAGER`: Address of a running SBFManager Instance. If not empty, the given address will be written in the "SBFManager Endpoint" fields of the frontend.
-* `RASA_NLU`: Address of a server hosting the NLU Model. If not empty, the given address will be written in the "Rasa NLU Endpoint" field of the NLU Model Training Helper.
+### Build using Grunt
+You can also build the application using Grunt. First create `config.json` file in the `Utilities Frontend/app` directory. It should have the following content:
+```
+{
+    "syncMetaHost": "<SYNC_META_HOST>",
+    "oidc_client_id": "<OIDC_CLIENT_ID>",
+    "yjs_address": "<YJS_ADDRESS>",
+    "yjs_resource_path": "<YJS_RESOURCE_PATH>",
+    "contact_service_url": "<CONTACT_SERVICE_URL>"
+}
+```
 
-[yjs-github]: https://github.com/yjs/yjs
-[y-websocket-server]: https://github.com/y-js/y-websockets-server
+Open a terminal in the `Utilities Frontend/app` folder. Run 
+```
+npm install
+```
+After that run
+```
+npm run build  
+```
+to build the application. Alternatively, you can use `npm run build:watch` to automatically rebuild the application on file changes.
 
-## Examples
+Now, run 
+```
+npm run start
+```
+to start the server. The application will be served on `localhost:8082`. 
+
+## Bots created using this framework
 
 | Bot            | Description                                                                                                                                                                                  | Application                                                                                                                                                | Demo                                                                                 |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
