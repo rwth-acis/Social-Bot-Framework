@@ -1,10 +1,9 @@
 FROM node:10
 
-ENV YJS_RESOURCE_PATH "/yjs/socket.io"
 ENV PORT 8070
 ENV SYNC_META_HOST http://127.0.0.1:8070
-ENV YJS https://sbf.tech4comp.dbis.rwth-aachen.de
-ENV OIDC_CLIENT_ID a7ece4a9-0a43-4fda-a33b-9c24a5a0d8f2
+ENV YJS http://127.0.0.1:1234
+ENV OIDC_CLIENT_ID www.localclient.com
 
 WORKDIR /usr/src/app
 
@@ -42,6 +41,7 @@ COPY ${srx}/docker/widgets/css /usr/src/app/syncmeta/widgets/src/css/
 
 COPY ${srx}/docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
 COPY ${srx}/docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
+
 WORKDIR /usr/src/app/syncmeta
 RUN cd widgets && npm install
 
