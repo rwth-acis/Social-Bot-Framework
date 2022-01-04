@@ -3,7 +3,7 @@ import Common from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
-
+import "oidc-client";
 /**
  * @customElement
  */
@@ -278,13 +278,13 @@ class StaticApp extends LitElement {
   }
 
   handleLogin(event) {
-      localStorage.setItem("access_token", event.detail.access_token);
-      localStorage.setItem(
-        "userinfo_endpoint",
-        "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
-      );
-      location.reload();
-    
+    console.log(event);
+    localStorage.setItem("access_token", event.detail.access_token);
+    localStorage.setItem(
+      "userinfo_endpoint",
+      "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
+    );
+    new UserManager().signinSilentCallback();
   }
 
   handleLogout() {
