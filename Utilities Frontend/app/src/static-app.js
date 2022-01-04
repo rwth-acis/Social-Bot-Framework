@@ -278,6 +278,7 @@ class StaticApp extends LitElement {
   }
 
   handleLogin(event) {
+    console.log(event);
       localStorage.setItem("access_token", event.detail.access_token);
       localStorage.setItem(
         "userinfo_endpoint",
