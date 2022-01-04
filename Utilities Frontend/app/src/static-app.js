@@ -278,14 +278,13 @@ class StaticApp extends LitElement {
   }
 
   handleLogin(event) {
-    if (localStorage.getItem("access_token") == null) {
       localStorage.setItem("access_token", event.detail.access_token);
       localStorage.setItem(
         "userinfo_endpoint",
         "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
       );
       location.reload();
-    }
+    
   }
 
   handleLogout() {
