@@ -284,14 +284,9 @@ class StaticApp extends LitElement {
       "userinfo_endpoint",
       "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
     );
-    userinfo = {}
-    userInfo.sub = event.detail.profile.sub;
-    userInfo.email = event.detail.profile.email;
-  // preferred_username is used by project service frontend
-    userInfo.preferred_username = event.detail.profile.preferred_username;
-    userInfo.loginName = event.detail.profile.preferred_username;
-    localStorage.setItem("userInfo",JSON.stringify(userInfo))
-    new UserManager().signinSilentCallback();
+    new UserManager().signinSilentCallback().then(function (object) {
+      console.log(object);
+    });
   }
 
   handleLogout() {
