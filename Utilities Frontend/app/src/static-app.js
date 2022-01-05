@@ -286,6 +286,7 @@ class StaticApp extends LitElement {
     );
     userInfo = {"sub": event.detail.profile.sub, "email":event.detail.profile.email, "preferred_username":event.detail.profile.preferred_username,"loginName":event.detail.profile.preferred_username}
     localStorage.setItem("userInfo",JSON.stringify(userInfo))
+    refreshIframes();
   }
 
   handleLogout() {
@@ -322,6 +323,13 @@ class StaticApp extends LitElement {
 
   closeAlert() {
     this.alertMessage = "";
+  }
+
+  refreshIframes() {
+    const iframes = document.querySelectorAll("iframe");
+    iframes.forEach((iframe) => {
+      iframe.contentWindow.location.reload();
+    });
   }
 
   createRenderRoot() {
