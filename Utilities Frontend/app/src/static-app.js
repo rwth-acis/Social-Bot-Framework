@@ -286,7 +286,7 @@ class StaticApp extends LitElement {
     );
     const userInfo = {"sub": event.detail.profile.sub, "email":event.detail.profile.email, "preferred_username":event.detail.profile.preferred_username,"loginName":event.detail.profile.preferred_username}
     localStorage.setItem("userInfo",JSON.stringify(userInfo))
-    refreshIframes();
+    this.refreshIframes();
   }
 
   handleLogout() {
