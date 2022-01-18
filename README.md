@@ -22,7 +22,10 @@ A Web-based, model-driven framework for creating social bots for RESTful web app
 * [SyncMeta](https://github.com/rwth-acis/syncmeta)
 * [MobSOS Data-Processing](https://github.com/rwth-acis/mobsos-data-processing)
 * [MobSOS Success-Modeling](https://github.com/rwth-acis/mobsos-success-modeling)
-* [Rasa](https://github.com/RasaHQ/rasa.git) (Note that the markdown format is only supported until versions < 2.8.21, later releases only accept the yaml format)
+* [Rasa](https://github.com/RasaHQ/rasa.git) 
+
+
+(Note that the markdown format is only supported until versions < 2.8.21, later releases only accept the yaml format)
 
 # SBF Utilities Frontend
 
