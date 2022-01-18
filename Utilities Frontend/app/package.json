@@ -18,8 +18,8 @@
   "dependencies": {
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
-    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#widget-position-fix",
-    "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#widget-position-fix",
+    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.2",
+    "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.3.1",
     "lit": "^2.0.2",
     "merge-stream": "^2.0.0",
     "nan": "^2.8.0",
@@ -35,7 +35,7 @@
     "yjs": "12.3.3"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-node-resolve": "^13.1.2",
     "@web/rollup-plugin-copy": "^0.3.0",
     "@web/rollup-plugin-html": "^1.10.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",

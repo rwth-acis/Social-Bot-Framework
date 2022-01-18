@@ -3,7 +3,7 @@ import Common from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
-
+import "oidc-client";
 /**
  * @customElement
  */
@@ -278,14 +278,15 @@ class StaticApp extends LitElement {
   }
 
   handleLogin(event) {
-    if (localStorage.getItem("access_token") == null) {
-      localStorage.setItem("access_token", event.detail.access_token);
-      localStorage.setItem(
-        "userinfo_endpoint",
-        "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
-      );
-      location.reload();
-    }
+    console.log(event);
+    localStorage.setItem("access_token", event.detail.access_token);
+    localStorage.setItem(
+      "userinfo_endpoint",
+      "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
+    );
+    const userInfo = {"sub": event.detail.profile.sub, "email":event.detail.profile.email, "preferred_username":event.detail.profile.preferred_username,"loginName":event.detail.profile.preferred_username}
+    localStorage.setItem("userInfo",JSON.stringify(userInfo))
+    this.refreshIframes();
   }
 
   handleLogout() {
@@ -322,6 +323,14 @@ class StaticApp extends LitElement {
 
   closeAlert() {
     this.alertMessage = "";
+  }
+
+  refreshIframes() {
+    console.info("refreshing iframes");
+    const iframes = document.querySelectorAll("iframe");
+    iframes.forEach((iframe) => {
+      iframe.contentWindow.location.reload();
+    });
   }
 
   createRenderRoot() {
