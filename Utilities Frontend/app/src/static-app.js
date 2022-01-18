@@ -326,6 +326,7 @@ class StaticApp extends LitElement {
   }
 
   refreshIframes() {
+    console.info("refreshing iframes");
     const iframes = document.querySelectorAll("iframe");
     iframes.forEach((iframe) => {
       iframe.contentWindow.location.reload();
