@@ -5,7 +5,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 import summary from "rollup-plugin-summary";
-
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 export default [
   // openid callbacks
   {
@@ -15,6 +15,7 @@ export default [
     },
 
     plugins: [
+      nodeResolve(),
       // Entry point for application build; can specify a glob to build multiple
       // HTML files for non-SPA app
       html({
@@ -38,6 +39,7 @@ export default [
       dir: "dist/callbacks/",
     },
     plugins: [
+      nodeResolve(),
       // Entry point for application build; can specify a glob to build multiple
       // HTML files for non-SPA app
       html({
@@ -61,6 +63,7 @@ export default [
       dir: "dist/callbacks/",
     },
     plugins: [
+      nodeResolve(),
       html({
         input: "src/callbacks/popup-signin-callback.html",
       }),
@@ -79,6 +82,7 @@ export default [
   // main app
   {
     plugins: [
+      nodeResolve(),
       // Entry point for application build; can specify a glob to build multiple
       // HTML files for non-SPA app
       html({
