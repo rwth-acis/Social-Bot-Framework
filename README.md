@@ -56,6 +56,7 @@ Then you can start the container like this:
 ```bash
 $ docker run -p 8070:8070 -d rwthacis/sbf-utils
 ```
+Note that depending on your configuration, additional variables might need to be set. The list of possible variables can be found in the following section. 
 After the container started to run, the application will be accessible via http://127.0.0.1:8070 . Make sure **not** to use `localhost` as you will run into CORS issues when loading ressources from Syncmeta.
 
 #### Confguration
