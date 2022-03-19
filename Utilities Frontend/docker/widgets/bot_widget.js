@@ -114,6 +114,7 @@ requirejs(
               agentId = JSON.parse(xhr.response)[instanceName][botName]["id"]
               xhr2.open("DELETE", endpoint + "/bots/" + agentId);
               xhr2.setRequestHeader("Content-Type", "application/json");
+              // delete the chosen bot
               xhr2.send(JSON.stringify({"messengerNames":messengerNames}));
               } catch(error){
                 if(JSON.parse(xhr.response)[instanceName] == undefined){
@@ -148,7 +149,7 @@ requirejs(
             btn.prop("disabled", false);
             // cleanStatus("sendStatus");
           };
-
+          // first fetch the deployed bots 
           xhr.open("GET", endpoint + "/bots");
           xhr.setRequestHeader("Content-Type", "application/json");
           xhr.send();
