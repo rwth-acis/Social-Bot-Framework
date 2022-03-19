@@ -61,46 +61,44 @@ requirejs(
         });
 
         $deleteModel.click(function () {
+          let messengers = [];
+          let instanceName = "";
+          let botName = "";
+
           var sendStatus = $("#sendStatus");
           const spinner = $("#deleteStatusSpinner");
-          const btn = $("#delete-model")
+          const btn = $("#delete-model");
           var endpoint = y.share.sbfManager.toString();
           var model = y.share.data.get("model");
           sendStatus.text("Sending...");
-          var messengerNames = [];
-          var instanceName = ""
-          var botName = ""
-          Object.keys(model["nodes"]).forEach(val => {
-                            if(model["nodes"][val]["type"] == "Instance"){
-                              Object.values(model["nodes"][val]["attributes"]).forEach(val2 => {
-                                if(val2["name"] == "Name"){
-                                  instanceName = val2["value"]["value"]
-                                }       
-                            });
-                            }
-                            if(model["nodes"][val]["type"] == "Bot"){
-                              Object.values(model["nodes"][val]["attributes"]).forEach(val2 => {
-                                if(val2["name"] == "Name"){
-                                  botName = val2["value"]["value"]
-                                }       
-                            });
-                            }
-                            if(model["nodes"][val]["type"] == "Messenger"){
-                                    console.log("POG");
-                                    var messengerName = ""
-                                    var authToken = ""
-                                    Object.values(model["nodes"][val]["attributes"]).forEach(val2 => {
-                                        if(val2["name"] == "Authentication Token"){
-                                          authToken = val2["value"]["value"]
-                                        } 
-                                        if(val2["name"] == "Name"){
-                                          messengerName = val2["value"]["value"]
-                                        }       
-                                    });
-                                  var messenger = {"name":messengerName, "authToken":authToken}
-                                    messengerNames.push(messenger)
-                            }
-                          });;
+          const instanceNode = Object.values(model["nodes"]).find(
+            (node) => node.type === "Instance"
+          );
+          const botNode = Object.values(model["nodes"]).find(
+            (node) => node.type === "Bot"
+          );
+          const messengerNodes = Object.values(model["nodes"]).filter(
+            (node) => node.type === "Messenger"
+          );
+
+          instanceName = Object.values(instanceNode.attributes).find(
+            (attr) => attr.name === "Name"
+          )?.value?.value;
+
+          botName = Object.values(botNode.attributes).find(
+            (attr) => attr.name === "Name"
+          )?.value?.value;
+
+          messengers = messengerNodes.map((messengerNode) => {
+            const name = Object.values(messengerNode.attributes).find(
+              (attr) => attr.name === "Name"
+            )?.value?.value;
+            const authToken = Object.values(messengerNode.attributes).find(
+              (attr) => attr.name === "AuthToken"
+            )?.value?.value;
+            return { name, authToken };
+          });
+
           spinner.show();
           btn.prop("disabled", true)
 
