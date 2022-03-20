@@ -61,7 +61,7 @@ requirejs(
         });
 
         $deleteModel.click(function () {
-          let messengers = [];
+          let messengerNames = [];
           let instanceName = "";
           let botName = "";
 
@@ -89,12 +89,12 @@ requirejs(
             (attr) => attr.name === "Name"
           )?.value?.value;
 
-          messengers = messengerNodes.map((messengerNode) => {
+          messengerNames = messengerNodes.map((messengerNode) => {
             const name = Object.values(messengerNode.attributes).find(
               (attr) => attr.name === "Name"
             )?.value?.value;
             const authToken = Object.values(messengerNode.attributes).find(
-              (attr) => attr.name === "AuthToken"
+              (attr) => attr.name === "Authentication Token"
             )?.value?.value;
             return { name, authToken };
           });
