@@ -11,6 +11,7 @@ requirejs(
         );
 
         var $submitModel = $("#submit-model"),
+          $deleteModel = $("#delete-model"),
           $storeModel = $("#store-model"),
           $loadModel = $("#load-model"),
           $loadNameInput = $("#loadNameInput");
@@ -59,6 +60,99 @@ requirejs(
           xhr.send(JSON.stringify(model));
         });
 
+        $deleteModel.click(function () {
+          let messengers = [];
+          let instanceName = "";
+          let botName = "";
+
+          var sendStatus = $("#sendStatus");
+          const spinner = $("#deleteStatusSpinner");
+          const btn = $("#delete-model");
+          var endpoint = y.share.sbfManager.toString();
+          var model = y.share.data.get("model");
+          sendStatus.text("Sending...");
+          const instanceNode = Object.values(model["nodes"]).find(
+            (node) => node.type === "Instance"
+          );
+          const botNode = Object.values(model["nodes"]).find(
+            (node) => node.type === "Bot"
+          );
+          const messengerNodes = Object.values(model["nodes"]).filter(
+            (node) => node.type === "Messenger"
+          );
+
+          instanceName = Object.values(instanceNode.attributes).find(
+            (attr) => attr.name === "Name"
+          )?.value?.value;
+
+          botName = Object.values(botNode.attributes).find(
+            (attr) => attr.name === "Name"
+          )?.value?.value;
+
+          messengers = messengerNodes.map((messengerNode) => {
+            const name = Object.values(messengerNode.attributes).find(
+              (attr) => attr.name === "Name"
+            )?.value?.value;
+            const authToken = Object.values(messengerNode.attributes).find(
+              (attr) => attr.name === "Authentication Token"
+            )?.value?.value;
+            return { name, authToken };
+          });
+
+          spinner.show();
+          btn.prop("disabled", true)
+
+          var xhr = new XMLHttpRequest();
+          var agentId = ""
+          xhr.onload = function () {
+           if (xhr.status == 200) {
+
+              sendStatus.text("Successfully sent.");
+              try{
+              agentId = JSON.parse(xhr.response)[instanceName][botName]["id"]
+              xhr2.open("DELETE", endpoint + "/bots/" + agentId);
+              xhr2.setRequestHeader("Content-Type", "application/json");
+              // delete the chosen bot
+              xhr2.send(JSON.stringify({"messengers":messengers}));
+              } catch(error){
+                if(JSON.parse(xhr.response)[instanceName] == undefined){
+                  error = "Instance Name not found"
+                } else if(JSON.parse(xhr.response)[instanceName][botName] == undefined){
+                  error = "Bot Name not found"
+                }
+                alert("Given bot parameter is wrong: " + error);
+              }    
+        } else {
+              alert(
+                "The bot could not be deleted. The endpoint does not seem to be working."
+              );
+            }
+            spinner.hide();
+            btn.prop("disabled", false);
+            // cleanStatus("sendStatus");
+          };
+
+        
+          var xhr2 = new XMLHttpRequest();
+          xhr2.onload = function () {
+           if (xhr2.status == 200) {
+              sendStatus.text("Successfully sent.");
+              alert("The bot has been successfully deleted!");
+            } else {
+              alert(
+                "The bot could not be deleted. Please check if the messengerName and authToken are right!"
+              );
+            }
+            spinner.hide();
+            btn.prop("disabled", false);
+            // cleanStatus("sendStatus");
+          };
+          // first fetch the deployed bots 
+          xhr.open("GET", endpoint + "/bots");
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.send();
+        });
+
         $storeModel.click(function () {
           var name = y.share.storeName.toString();
           var endpoint = y.share.sbfManager.toString();
@@ -99,6 +193,8 @@ requirejs(
             cleanStatus("storeStatus");
           }
         });
+
+        
 
         $loadModel.click(function () {
           var name = $loadNameInput.val();
