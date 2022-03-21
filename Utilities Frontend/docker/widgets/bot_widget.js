@@ -61,7 +61,7 @@ requirejs(
         });
 
         $deleteModel.click(function () {
-          let messengerNames = [];
+          let messengers = [];
           let instanceName = "";
           let botName = "";
 
@@ -89,7 +89,7 @@ requirejs(
             (attr) => attr.name === "Name"
           )?.value?.value;
 
-          messengerNames = messengerNodes.map((messengerNode) => {
+          messengers = messengerNodes.map((messengerNode) => {
             const name = Object.values(messengerNode.attributes).find(
               (attr) => attr.name === "Name"
             )?.value?.value;
@@ -113,7 +113,7 @@ requirejs(
               xhr2.open("DELETE", endpoint + "/bots/" + agentId);
               xhr2.setRequestHeader("Content-Type", "application/json");
               // delete the chosen bot
-              xhr2.send(JSON.stringify({"messengerNames":messengerNames}));
+              xhr2.send(JSON.stringify({"messengerNames":messengers}));
               } catch(error){
                 if(JSON.parse(xhr.response)[instanceName] == undefined){
                   error = "Instance Name not found"
