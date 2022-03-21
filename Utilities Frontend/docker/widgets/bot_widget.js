@@ -113,7 +113,7 @@ requirejs(
               xhr2.open("DELETE", endpoint + "/bots/" + agentId);
               xhr2.setRequestHeader("Content-Type", "application/json");
               // delete the chosen bot
-              xhr2.send(JSON.stringify({"messengerNames":messengers}));
+              xhr2.send(JSON.stringify({"messengers":messengers}));
               } catch(error){
                 if(JSON.parse(xhr.response)[instanceName] == undefined){
                   error = "Instance Name not found"
