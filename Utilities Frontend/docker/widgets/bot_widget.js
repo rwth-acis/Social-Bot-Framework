@@ -46,9 +46,13 @@ requirejs(
               sendStatus.text("Successfully sent.");
               alert("The bot has been successfully sent and is now available.");
             } else {
+              if(xhr.response != undefined){
+                alert("There is something wrong with your bot model: " +  xhr.response) 
+              } else {
               alert(
-                "The bot could not be sent. Please check the Social bot manager endpoint and try again."
+                "The bot could not be sent. Please make sure that: the Social Bot Manager is running, your endpoint is correct, your bot model is correct."
               );
+            }
             }
             spinner.hide();
             btn.prop("disabled", false);
