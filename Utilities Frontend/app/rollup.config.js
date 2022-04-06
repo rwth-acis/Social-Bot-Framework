@@ -4,7 +4,6 @@ import copy from "rollup-plugin-copy";
 import resolve from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import minifyHTML from "rollup-plugin-minify-html-literals";
-import summary from "rollup-plugin-summary";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 export default [
   // openid callbacks
@@ -98,8 +97,6 @@ export default [
         module: true,
         warnings: true,
       }),
-      // Print bundle summary
-      summary(),
       copy({
         targets: [{ src: "src/images", dest: "dist/assets" }],
       }),
