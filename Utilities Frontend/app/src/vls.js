@@ -303,7 +303,9 @@
                         "Slack": "Slack",
                         "Telegram": "Telegram",
                         "Moodle Forum": "Moodle Forum",
-                        "Moodle Chat": "Moodle Chat"
+                        "Moodle Chat": "Moodle Chat",
+                        "GitHub Issues": "GitHub Issues",
+                        "GitHub Pull Requests": "GitHub Pull Requests"
                     }
                 },
                 "fac7a2b850919e041f655919": {
