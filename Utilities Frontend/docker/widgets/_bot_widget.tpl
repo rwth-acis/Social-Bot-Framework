@@ -45,7 +45,7 @@
             <span class="visually-hidden">Loading...</span>
           </div>
         </button>
-                <button id="delete-model" type="button" class="btn btn-outline-danger">
+        <button id="delete-model" type="button" class="btn btn-outline-danger">
           <i class="bi bi-cloud-slash-fill"></i> Deactivate
           <div
             class="spinner-border spinner-border-sm text-secondary"

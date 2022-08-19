@@ -124,7 +124,7 @@ requirejs(
                 } else if(JSON.parse(xhr.response)[instanceName][botName] == undefined){
                   error = "Bot Name not found"
                 }
-                alert("Given bot parameter is wrong: " + error);
+                alert("The submitted model has following problems: " + error);
               }    
         } else {
               alert(
