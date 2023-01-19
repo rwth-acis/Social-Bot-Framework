@@ -27,6 +27,13 @@
     >
       Import
     </button>
+        <button
+      class="btn btn-secondary"
+      id="add-model"
+      title="Add elements to the canvas"
+    >
+      Add model
+    </button>
   </div>
 </div>
 

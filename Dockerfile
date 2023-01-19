@@ -34,6 +34,8 @@ COPY ${srx}/docker/widgets/activity_widget /usr/src/app/syncmeta/widgets/src/tem
 COPY ${srx}/docker/widgets/_activity_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
 # overwrite js
 COPY ${srx}/docker/widgets/js/activity_widget/Activity.js /usr/src/app/syncmeta/widgets/src/js/activity_widget/Activity.js
+COPY ${srx}/docker/widgets/debug_widget.js /usr/src/app/syncmeta/widgets/src/js/
+COPY ${srx}/docker/widgets/debug_widget.js /usr/src/app/syncmeta/widgets/html/js/
 # overwrite widget template to use bootstrap. This can be removed as soon as PR for bootstrap is merged in syncmetaf
 COPY ${srx}/docker/widgets/widget.html.tpl /usr/src/app/syncmeta/widgets/src/widgets/
 # overwrite styles

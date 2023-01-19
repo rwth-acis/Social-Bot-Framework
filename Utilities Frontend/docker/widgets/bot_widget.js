@@ -64,6 +64,23 @@ requirejs(
           xhr.send(JSON.stringify(model));
         });
 
+   /*     $addModel.click(function () {
+          getFileContent().then(function (data) {
+              var model = y.share.data.get('model')
+                  y.share.data.set('model', data);
+              for(var key in data.nodes){
+                  model.nodes[key] = data.nodes[key]
+              }
+              for(var key in data.edges){
+                model.edges[key] = data.edges[key]
+              }
+              console.log(model)
+              y.share.data.set('model',model)
+              y.share.canvas.set('ReloadWidgetOperation', 'import');
+              feedback("Done!");
+          });
+      });
+*/
         $deleteModel.click(function () {
           let messengers = [];
           let instanceName = "";

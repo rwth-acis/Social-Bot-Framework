@@ -24,8 +24,10 @@ RUN cp -a node_modules/. widgets/node_modules/
 # copy widgets
 COPY docker/widgets/_bot_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
 COPY docker/widgets/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
+COPY docker/widgets/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
 # overwrite debug widget template (js stays the same)
-COPY docker/widgets/_debug_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
+COPY docker/widgets/debug_widget.js /usr/src/app/syncmeta/widgets/src/js/
+COPY docker/widgets/debug_widget.js /usr/src/app/syncmeta/widgets/html/js/
 
 COPY docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
 COPY docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
