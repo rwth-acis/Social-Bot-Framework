@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 RUN apt-get update
 RUN apt-get install -y --allow-unauthenticated --no-install-recommends supervisor git nginx dos2unix
-RUN npm_config_user=root npm install -g bower grunt-cli grunt polymer-cli gulp
+RUN npm_config_user=root npm install -g polymer-cli gulp
 
 COPY docker/supervisorConfigs /etc/supervisor/conf.d
 
@@ -24,6 +24,7 @@ WORKDIR /usr/src/app
 COPY . .
 WORKDIR /usr/src/app/app
 RUN npm install 
+RUN npm run build
 
 WORKDIR /usr/src/app
 
