@@ -4,6 +4,10 @@ import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 import "oidc-client";
+
+// // Syncmeta Widget
+import "@rwth-acis/syncmeta-widgets/build/widgets/partials/activity.widget";
+
 /**
  * @customElement
  */
@@ -169,13 +173,7 @@ class StaticApp extends LitElement {
             ></button>
           </div>
           <div class="offcanvas-body overflow-hidden p-0">
-            <iframe
-              loading="lazy"
-              id="User Activity"
-              src="{SYNC_META_HOST}/syncmeta/activity.html"
-              frameborder="0"
-            >
-            </iframe>
+            <activity-widget></activity-widget>
           </div>
         </aside>
       </div>
