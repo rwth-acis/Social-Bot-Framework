@@ -1,6 +1,7 @@
 import "@polymer/paper-button/paper-button.js";
 import Common from "./common.js";
 import { LitElement, html, css } from "lit";
+import "./bot.widget.js";
 import "@rwth-acis/syncmeta-widgets/build/widgets/partials/main.widget";
 import "@rwth-acis/syncmeta-widgets/build/widgets/partials/attribute.widget";
 import "@rwth-acis/syncmeta-widgets/build/widgets/partials/debug.widget";
@@ -48,6 +49,12 @@ class BotModeling extends LitElement {
           z-index: 1;
         }
       </style>
+      <div
+        class="container-fluid  card card-body shadow-sm mb-4"
+        id="modelOpsContainer"
+      >
+        <bot-widget></bot-widget>
+      </div>
       <div class="container-fluid row w-100 px-0 mx-0" style="height:98vh">
         <div class="col-9 innercontainer">
           <div class="row h-100">
@@ -95,7 +102,6 @@ class BotModeling extends LitElement {
   }
 
   firstUpdated() {
-    
     Common.setSpace("bot-modeling");
     // this.setInitialIframeDimensions();
     // const modelOpsContainer = document.getElementById("modelOpsContainer");
@@ -186,7 +192,7 @@ class BotModeling extends LitElement {
       }
       rowContainer.firstElementChild?.appendChild(
         new DOMParser().parseFromString(btnTemplate, "text/html").body
-          .firstChild 
+          .firstChild
       );
     }, 100);
   }
