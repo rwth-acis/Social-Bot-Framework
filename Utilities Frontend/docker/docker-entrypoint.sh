@@ -24,18 +24,13 @@ check_if_exists "$RASA_NLU" "RASA_NLU"
 check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
 check_if_exists "$CONTACT_SERVICE_URL" "CONTACT_SERVICE_URL"
 
-#### Replace SBF Manager and Rasa-NLU URLs ####
-sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js
 
 #### Replace SBF Manager and Rasa-NLU URLs ####
 sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js 
-
 sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" app/src/model-training.js
 sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" syncmeta/widgets/src/js/bot_widget.js
 
 #### Syncmeta ####
-cd syncmeta/widgets
-cp .localGruntConfig.json.sample .localGruntConfig.json
 sed -i "s=http://localhost:8081=$SYNC_META_HOST/syncmeta=g" .localGruntConfig.json
 sed -i "s=http://localhost:1234=$YJS=g" .localGruntConfig.json
 sed -i "s=/socket.io=$YJS_RESOURCE_PATH=g" .localGruntConfig.json
