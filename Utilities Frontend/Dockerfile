@@ -22,7 +22,10 @@ COPY docker/supervisorConfigs /etc/supervisor/conf.d
 
 WORKDIR /usr/src/app
 COPY . .
+
 WORKDIR /usr/src/app/app
+RUN cp ./config.json.sample ./config.json
+
 RUN npm install 
 RUN npm run build
 

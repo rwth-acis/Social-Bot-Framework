@@ -2,7 +2,6 @@
   "name": "SocialBotFramework",
   "version": "1.0.3",
   "description": "Frontend of Social Bot Framework",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/rwth-acis/Social-Bot-Framework"
@@ -16,7 +15,7 @@
     "test:integration": "echo not implemented"
   },
   "dependencies": {
-    "@rwth-acis/syncmeta-widgets": "^2.0.0",
+    "@rwth-acis/syncmeta-widgets": "github:rwth-acis/syncmeta#2.0.0",
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.6",
