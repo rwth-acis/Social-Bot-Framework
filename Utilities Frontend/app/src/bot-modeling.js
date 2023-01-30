@@ -2,7 +2,7 @@ import "@polymer/paper-button/paper-button.js";
 import Common from "./common.js";
 import { LitElement, html, css } from "lit";
 import "./bot.widget.js";
-import "@rwth-acis/syncmeta";
+import "@rwth-acis/syncmeta-widgets";
 
 /**
  * @customElement
