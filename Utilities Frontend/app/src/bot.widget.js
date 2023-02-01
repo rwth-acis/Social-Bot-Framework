@@ -1,5 +1,5 @@
 import "./bot.widget.script";
-import { html, LitElement } from "lit-element";
+import { html, LitElement, css } from "lit-element";
 
 class BotWidget extends LitElement {
   static styles = css``;
