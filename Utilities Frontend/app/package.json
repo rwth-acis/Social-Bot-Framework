@@ -15,7 +15,7 @@
     "test:integration": "echo not implemented"
   },
   "dependencies": {
-    "@rwth-acis/syncmeta-widgets": "^1.0.3",
+    "@rwth-acis/syncmeta-widgets": "^0.0.8",
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.6",
@@ -25,7 +25,9 @@
     "nan": "^2.8.0",
     "polymer": "^0.5.0",
     "rollup-plugin-copy": "^3.4.0",
-    "yjs": "12.3.3"
+    "y-quill": "^0.1.5",
+    "y-websocket": "^1.4.5",
+    "yjs": "13.5.6"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.1.2",
