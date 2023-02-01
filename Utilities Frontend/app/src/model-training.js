@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 import NLUConfig from "./nlu.md.js";
 import ModelOps from "./model-ops.js";
+import { QuillBinding } from "y-quill";
 
 /**
  * @customElement
@@ -172,14 +173,27 @@ class ModelTraining extends LitElement {
       placeholder: "Compose an epic...",
       theme: "snow", // or 'bubble'
     });
-    ModelOps.getY(true).then((y) => y.share.training.bindQuill(this.editor));
-    ModelOps.getY(true).then((y) => y.share.rasa.bind(this.rasaEndpoint));
     ModelOps.getY(true).then((y) => {
-      y.share.sbfManager.bind(this.sbmEndpoint);
+      const _ytext = y.getText("training");
+      new QuillBinding(_ytext, this.editor);
+    });
+    ModelOps.getY(true).then((y) => {
+      y.getText("rasa").observe((event) => {
+        this.rasaEndpoint.value = event.target.toString();
+      });
+    });
+    ModelOps.getY(true).then((y) => {
+      y.getText("sbfManager").observe((event) => {
+        this.sbmEndpoint.value = event.target.toString();
+      });
       this.updateMenu(this);
       setInterval(this.updateMenu, 10000, this);
     });
-    ModelOps.getY(true).then((y) => y.share.dataName.bind(this.dataName));
+    ModelOps.getY(true).then((y) => {
+      y.getText("dataName").observe((event) => {
+        this.dataName.value = event.target.toString();
+      });
+    });
 
     ModelOps.getY(true)
       .then((y) => y.share.rasa.toString())
@@ -189,11 +203,11 @@ class ModelTraining extends LitElement {
         }
       });
     ModelOps.getY(true)
-      .then((y) => y.share.sbfManager.toString())
+      .then((y) => y.getText("sbfManager").toString())
       .then((x) => {
         if (!x) {
           ModelOps.getY(true).then((z) =>
-            z.share.sbfManager.insert(0, "{SBF_MANAGER}")
+            z.getText("sbfManager").insert(0, "{SBF_MANAGER}")
           );
         }
       });
