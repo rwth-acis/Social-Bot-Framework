@@ -1,6 +1,6 @@
 import "@polymer/paper-button/paper-button.js";
 import Common from "./common.js";
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
 import "./bot.widget.js";
 import "@rwth-acis/syncmeta-widgets";
 
@@ -11,7 +11,9 @@ import "@rwth-acis/syncmeta-widgets";
 class BotModeling extends LitElement {
   static properties = { loading: { type: Boolean, value: true } };
 
-  static styles = css``;
+  renderRoot() {
+    return this;
+  }
   constructor() {
     super();
     this.loading = true;
