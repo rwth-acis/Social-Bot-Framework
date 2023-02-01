@@ -5,8 +5,6 @@ import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 import "oidc-client";
 
-// // Syncmeta Widget
-import "@rwth-acis/syncmeta-widgets/build/widgets/partials/activity.widget";
 
 /**
  * @customElement
@@ -156,26 +154,6 @@ class StaticApp extends LitElement {
           <div class="container">${this.alertTemplate()}</div>
           <div id="outlet" class="m-4"></div>
         </section>
-
-        <aside
-          class="offcanvas offcanvas-end"
-          tabindex="-1"
-          id="offcanvasRight"
-          aria-labelledby="offcanvasRightLabel"
-        >
-          <div class="offcanvas-header p-2">
-            <h5 id="offcanvasRightLabel">User Activities</h5>
-            <button
-              type="button"
-              class="btn-close text-reset"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body overflow-hidden p-0">
-            <activity-widget></activity-widget>
-          </div>
-        </aside>
       </div>
     `;
   }
