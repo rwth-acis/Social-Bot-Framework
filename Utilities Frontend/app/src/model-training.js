@@ -2,6 +2,7 @@ import { LitElement, html, css } from "lit";
 import NLUConfig from "./nlu.md.js";
 import ModelOps from "./model-ops.js";
 import { QuillBinding } from "y-quill";
+import "https://cdn.quilljs.com/1.3.6/quill.js";
 
 /**
  * @customElement
@@ -159,10 +160,12 @@ class ModelTraining extends LitElement {
   }
 
   firstUpdated() {
-    this.rasaEndpoint = this.htmlQuery("#rasaEndpoint");
-    this.sbmEndpoint = this.htmlQuery("#sbfManagerEndpoint");
-    this.dataName = this.htmlQuery("#dataName");
-    this.loadName = this.htmlQuery("#loadNameInput");
+    this.rasaEndpoint =
+      this.htmlQuery("#rasaEndpoint") || "http://localhost:5005";
+    this.sbmEndpoint =
+      this.htmlQuery("#sbfManagerEndpoint") || "http://localhost:8080";
+    this.dataName = this.htmlQuery("#dataName") || "default";
+    this.loadName = this.htmlQuery("#loadNameInput") || "default";
     this.curModels = [];
     const _editor = this.shadowRoot.getElementById("editor");
     this.editor = new Quill(_editor, {
@@ -170,8 +173,8 @@ class ModelTraining extends LitElement {
         toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"]],
       },
       formats: ["bold", "color", "font", "italic", "underline"],
-      placeholder: "Compose an epic...",
-      theme: "snow", // or 'bubble'
+      placeholder: "Write your training data here...",
+      theme: "snow",
     });
     ModelOps.getY(true).then((y) => {
       const _ytext = y.getText("training");
@@ -196,10 +199,12 @@ class ModelTraining extends LitElement {
     });
 
     ModelOps.getY(true)
-      .then((y) => y.share.rasa.toString())
+      .then((y) => y.getText("rasa").toString())
       .then((x) => {
         if (!x) {
-          ModelOps.getY(true).then((z) => z.share.rasa.insert(0, "{RASA_NLU}"));
+          ModelOps.getY(true).then((_y) =>
+            _y.getText("rasa").insert(0, "{RASA_NLU}")
+          );
         }
       });
     ModelOps.getY(true)
@@ -319,6 +324,10 @@ class ModelTraining extends LitElement {
       url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/",
       contentType: "application/json",
       success: function (data, textStatus, jqXHR) {
+        if (textStatus !== "success") {
+          console.error("Error", textStatus);
+          return;
+        }
         $.each(data, function (index, name) {
           if (!_this.curModels.includes(name)) {
             var template = document.createElement("template");
