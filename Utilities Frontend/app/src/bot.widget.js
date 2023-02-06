@@ -6,6 +6,9 @@ class BotWidget extends LitElement {
   constructor() {
     super();
   }
+  renderRoot() {
+    return this;
+  }
   render() {
     html`
       <link
@@ -35,14 +38,7 @@ class BotWidget extends LitElement {
               >Social bot manager endpoint
             </label>
             <div class="input-group mb-3">
-              <input
-                id="sbfManagerEndpointInput"
-                type="text"
-                class="form-control"
-                placeholder=""
-                aria-label="Social bot manager endpoint"
-                aria-describedby="submit-model"
-              />
+              <div id="sbfManagerEndpointInput"></div>
               <button
                 id="submit-model"
                 type="button"
@@ -79,16 +75,8 @@ class BotWidget extends LitElement {
           <div class="row">
             <div class="col">
               <div id="modelstorer">
-                <label for="storeNameInput" class="form-label"
-                  >Store model as
-                </label>
                 <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    id="storeNameInput"
-                    class="form-control"
-                    aria-describedby="storeNameInput"
-                  />
+                  <div id="storeNameInput"></div>
                   <!-- <div class="form-text text-sm text-muted">
             Store your model on the server to back it up.
           </div> -->
