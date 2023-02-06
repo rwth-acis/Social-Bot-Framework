@@ -11,7 +11,6 @@ import "@rwth-acis/syncmeta-widgets";
 class BotModeling extends LitElement {
   static properties = {
     loading: { type: Boolean, value: true },
-    name: { type: String },
   };
 
   // firstUpdated() {
@@ -62,15 +61,8 @@ class BotModeling extends LitElement {
     return this;
   }
 
-  static styles = css`
-    p {
-      color: blue;
-    }
-  `;
-
   constructor() {
     super();
-    this.name = "Somebody";
   }
 
   render() {
