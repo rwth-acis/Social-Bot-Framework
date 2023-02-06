@@ -5,6 +5,7 @@ import _ from "lodash-es";
 import { getGuidanceModeling } from "@rwth-acis/syncmeta-widgets/src/es6/Guidancemodel";
 import { yjsSync } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import * as Y from "yjs";
+import { QuillBinding } from "y-quill";
 
 $(function () {
   yjsSync().then((y) => {
@@ -22,10 +23,27 @@ $(function () {
     if (!y.getText("sbfManager").toString()) {
       y.getText("sbfManager").insert(0, "{SBF_MANAGER}");
     }
-    y.getText("sbfManager").bindTextarea(sbfManagerEndpointInput);
+    // create  div for quill editor
+    let quillDiv = document.querySelector("#sbfManagerEndpointInput");
+    const sbfManagerEndpointEditor = new Quill(quillDiv, {
+      modules: {
+        toolbar: false, // toolbar options
+      },
+      cursors: false,
+      placeholder: "Enter your endpoint here...",
+      theme: "snow", // or 'bubble'
+    });
+    new QuillBinding(y.getText("sbfManager"), sbfManagerEndpointEditor);
 
     storeNameInput = document.querySelector("#storeNameInput");
-    y.getText("sbfManager").bindTextarea(storeNameInput);
+    quillDiv = new Quill(storeNameInput, {
+      modules: { toolbar: false },
+      cursors: false,
+      placeholder: "Enter a name for your model...",
+      theme: "snow",
+    });
+    new QuillBinding(y.getText("storeName"), quillDiv);
+
     var curModels = [];
     updateMenu();
     setInterval(updateMenu, 10000);
