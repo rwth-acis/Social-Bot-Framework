@@ -22,9 +22,11 @@ class StaticApp extends LitElement {
     },
     alertMessage: {
       type: String,
+      value: "",
     },
     alertType: {
       type: String,
+      value: "",
     },
     router: {},
   };
@@ -260,8 +262,13 @@ class StaticApp extends LitElement {
       "userinfo_endpoint",
       "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
     );
-    const userInfo = {"sub": event.detail.profile.sub, "email":event.detail.profile.email, "preferred_username":event.detail.profile.preferred_username,"loginName":event.detail.profile.preferred_username}
-    localStorage.setItem("userInfo",JSON.stringify(userInfo))
+    const userInfo = {
+      sub: event.detail.profile.sub,
+      email: event.detail.profile.email,
+      preferred_username: event.detail.profile.preferred_username,
+      loginName: event.detail.profile.preferred_username,
+    };
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
     this.refreshIframes();
   }
 
