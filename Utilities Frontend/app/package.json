@@ -2,12 +2,14 @@
   "name": "SocialBotFramework",
   "version": "1.0.3",
   "description": "Frontend of Social Bot Framework",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/rwth-acis/Social-Bot-Framework"
   },
   "scripts": {
     "start": "node server.js",
+    "start:watch": "web-dev-server  --node-resolve --watch",
     "build": "gulp clean-build:full",
     "build:watch": "gulp build:watch",
     "lint": "echo not implemented",
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.1.2",
+    "@web/dev-server": "^0.1.35",
     "@web/rollup-plugin-copy": "^0.3.0",
     "@web/rollup-plugin-html": "^1.10.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",

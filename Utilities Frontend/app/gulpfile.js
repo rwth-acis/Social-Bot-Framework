@@ -8,18 +8,18 @@ const loadConfigFile = require("rollup/dist/loadConfigFile");
 const path = require("path");
 
 gulp.task("clean:dist", () => {
-  return del(["dist/*.js", "dist/assets", "dist/callbacks"]);
+  return del(["dist/**", "!dist"]);
 });
 
-gulp.task("copy:modules", () => {
-  const copyNodeModules = gulp
-    .src("node_modules/**")
-    .pipe(gulp.dest("dist/node_modules"));
-  const copyBowerModules = gulp
-    .src("bower_components/**")
-    .pipe(gulp.dest("dist/bower_components"));
-  return merge(copyNodeModules, copyBowerModules);
-});
+// gulp.task("copy:modules", () => {
+//   const copyNodeModules = gulp
+//     .src("node_modules/**")
+//     .pipe(gulp.dest("dist/node_modules"));
+//   const copyBowerModules = gulp
+//     .src("bower_components/**")
+//     .pipe(gulp.dest("dist/bower_components"));
+//   return merge(copyNodeModules, copyBowerModules);
+// });
 
 gulp.task("replace config variables", () => {
   const config = JSON.parse(fs.readFileSync("./config.json"));
@@ -40,7 +40,7 @@ gulp.task("replace config variables", () => {
 
 gulp.task(
   "clean-build:full",
-  gulp.series("clean:dist", "copy:modules", bundle, "replace config variables")
+  gulp.series("clean:dist", bundle, "replace config variables")
 );
 
 gulp.task("build:watch", gulp.series("clean-build:full", watchChanges));

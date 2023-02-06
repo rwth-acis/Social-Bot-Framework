@@ -163,6 +163,7 @@ class StaticApp extends LitElement {
   static get observers() {}
 
   firstUpdated() {
+    super.firstUpdated();
     const statusBar = document.querySelector("#statusBar");
     statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));

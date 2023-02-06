@@ -49,39 +49,19 @@ class BotModeling extends LitElement {
           z-index: 1;
         }
       </style>
-      <div
-        class="container-fluid  card card-body shadow-sm mb-4"
-        id="modelOpsContainer"
-      >
-        <bot-widget></bot-widget>
-      </div>
-      <widget-container></widget-container>
+<p> HI</p>
     `;
   }
 
   firstUpdated() {
-    Common.setSpace("bot-modeling");
+    // Common.setSpace("bot-modeling");
     // this.setInitialIframeDimensions();
     // const modelOpsContainer = document.getElementById("modelOpsContainer");
     // const maincontainer = document.getElementById("maincontainer");
-    setTimeout(() => {
-      const Iframes = document.getElementsByTagName("iframe");
-      if (parent.caeFrames?.length > 0) {
-        return;
-      }
-      if (!parent.caeFrames) {
-        parent.caeFrames = [];
-      }
-      for (const frame of Iframes) {
-        frame.id && frame.contentWindow ? parent.caeFrames.push(frame) : null;
-      }
-    }, 100);
-
     // const resizeObserver = new ResizeObserver((entries) => {
     //   entries.forEach((entry) => {
     //     if (this.init >= 2) {
     //       const dimensions = entry.contentRect;
-
     //       localStorage.setItem(
     //         entry.target.id,
     //         JSON.stringify({
@@ -94,7 +74,6 @@ class BotModeling extends LitElement {
     //     }
     //   });
     // });
-
     // resizeObserver.observe(modelOpsContainer);
     // resizeObserver.observe(maincontainer);
   }

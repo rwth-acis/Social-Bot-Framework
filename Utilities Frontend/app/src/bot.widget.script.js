@@ -1,3 +1,4 @@
+import "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.4.1/jquery-migrate.min.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js";
 import _ from "lodash-es";
