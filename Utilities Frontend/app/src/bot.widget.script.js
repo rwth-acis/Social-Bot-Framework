@@ -4,15 +4,11 @@ import "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
 import _ from "lodash-es";
 import { getGuidanceModeling } from "@rwth-acis/syncmeta-widgets/src/es6/Guidancemodel";
 import { yjsSync } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
+import * as Y from "yjs";
+
 $(function () {
   yjsSync().then((y) => {
-    guidance = getGuidanceModeling(y);
-    console.info(
-      "DEBUG: Yjs successfully initialized in room " +
-        spaceTitle +
-        " with y-user-id: " +
-        y.db.userId
-    );
+    const guidance = getGuidanceModeling(y);
 
     var $submitModel = $("#submit-model"),
       $deleteModel = $("#delete-model"),
@@ -23,13 +19,13 @@ $(function () {
     var sbfManagerEndpointInput = document.querySelector(
       "#sbfManagerEndpointInput"
     );
-    if (!y.share.sbfManager.toString()) {
-      y.share.sbfManager.insert(0, "{SBF_MANAGER}");
+    if (!y.getText("sbfManager").toString()) {
+      y.getText("sbfManager").insert(0, "{SBF_MANAGER}");
     }
-    y.share.sbfManager.bindTextarea(sbfManagerEndpointInput);
+    y.getText("sbfManager").bindTextarea(sbfManagerEndpointInput);
 
     storeNameInput = document.querySelector("#storeNameInput");
-    y.share.storeName.bindTextarea(storeNameInput);
+    y.getText("sbfManager").bindTextarea(storeNameInput);
     var curModels = [];
     updateMenu();
     setInterval(updateMenu, 10000);
@@ -38,8 +34,8 @@ $(function () {
       var sendStatus = $("#sendStatus");
       const spinner = $("#sendStatusSpinner");
       const btn = $("#submit-model");
-      var endpoint = y.share.sbfManager.toString();
-      var model = y.share.data.get("model");
+      var endpoint = y.getText("sbfManager").toString();
+      var model = y.getMap("data").get("model");
       sendStatus.text("Sending...");
       spinner.show();
       btn.prop("disabled", true);
@@ -78,8 +74,8 @@ $(function () {
       var sendStatus = $("#sendStatus");
       const spinner = $("#deleteStatusSpinner");
       const btn = $("#delete-model");
-      var endpoint = y.share.sbfManager.toString();
-      var model = y.share.data.get("model");
+      var endpoint = y.getText("sbfManager").toString();
+      var model = y.getMap("data").get("model");
       sendStatus.text("Sending...");
       const instanceNode = Object.values(model["nodes"]).find(
         (node) => node.type === "Instance"
@@ -164,9 +160,9 @@ $(function () {
     });
 
     $storeModel.click(function () {
-      var name = y.share.storeName.toString();
-      var endpoint = y.share.sbfManager.toString();
-      var model = y.share.data.get("model");
+      var name = y.getText("storeName").toString();
+      var endpoint = y.getText("sbfManager").toString();
+      var model = y.getMap("data").get("model");
       var storeStatus = $("#storeStatus");
       const spinner = $("#storeStatusSpinner");
       const btn = $("#store-model");
@@ -206,7 +202,7 @@ $(function () {
 
     $loadModel.click(function () {
       var name = $loadNameInput.val();
-      var endpoint = y.share.sbfManager.toString();
+      var endpoint = y.getText("sbfManager").toString();
       var loadStatus = $("#loadStatus");
       const spinner = $("#loadStatusSpinner");
       const btn = $("#load-model");
@@ -238,10 +234,10 @@ $(function () {
               for (var key in attr) {
                 if (attr.hasOwnProperty(key)) {
                   if (attr[key].hasOwnProperty("key")) {
-                    var ytext = map.set(attr[key].key.id, Y.Text);
+                    var ytext = map.set(attr[key].key.id, new Y.Text());
                     ytext.insert(0, attr[key].key.value);
                   } else {
-                    var ytext = map.set(attr[key].value.id, Y.Text);
+                    var ytext = map.set(attr[key].value.id, new Y.Text());
                     ytext.insert(0, attr[key].value.value);
                   }
                 }
@@ -252,7 +248,7 @@ $(function () {
                   var value = attrs[key].value;
                   if (!value.hasOwnProperty("option")) {
                     if (value.value instanceof String) {
-                      var ytext = map.set(value.id, Y.Text);
+                      var ytext = map.set(value.id, new Y.Text());
                       ytext.insert(0, value.value);
                     }
                   }
@@ -261,15 +257,15 @@ $(function () {
             }
           };
           if (guidance.isGuidanceEditor())
-            y.share.data.set("guidancemodel", data);
-          else y.share.data.set("model", data);
+            y.getMap("data").set("guidancemodel", data);
+          else y.getMap("data").set("model", data);
           for (var key in data.nodes) {
             if (data.nodes.hasOwnProperty(key)) {
               var entity = data.nodes[key];
-              var map = y.share.nodes.set(key, Y.Map);
+              var map = y.getMap("nodes").set(key, new Y.Map());
               var attrs = entity.attributes;
               if (entity.hasOwnProperty("label")) {
-                var ytext = map.set(entity.label.value.id, Y.Text);
+                var ytext = map.set(entity.label.value.id, new Y.Text());
                 ytext.insert(0, entity.label.value.value);
               }
               initAttributes(attrs, map);
@@ -278,16 +274,16 @@ $(function () {
           for (var key in data.edges) {
             if (data.edges.hasOwnProperty(key)) {
               var entity = data.edges[key];
-              var map = y.share.edges.set(key, Y.Map);
+              var map = y.getMap("edges").set(key, new Y.Map());
               var attrs = entity.attributes;
               if (entity.hasOwnProperty("label")) {
-                var ytext = map.set(entity.label.value.id, Y.Text);
+                var ytext = map.set(entity.label.value.id, new Y.Text());
                 ytext.insert(0, entity.label.value.value);
               }
               initAttributes(attrs, map);
             }
           }
-          y.share.canvas.set("ReloadWidgetOperation", "import");
+          y.getMap("canvas").set("ReloadWidgetOperation", "import");
         } else {
           $(loadStatus).text("Loading failed.");
           cleanStatus("loadStatus");

@@ -324,8 +324,8 @@ class ModelTraining extends LitElement {
       url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/",
       contentType: "application/json",
       success: function (data, textStatus, jqXHR) {
+        console.error("Error", textStatus, data, jqXHR);
         if (textStatus !== "success") {
-          console.error("Error", textStatus);
           return;
         }
         $.each(data, function (index, name) {
