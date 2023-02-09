@@ -1,6 +1,6 @@
 import "@polymer/paper-button/paper-button.js";
 import { LitElement, html } from "lit";
-import "./bot.widget.js";
+import "./bot.manager.widget.js";
 import "@rwth-acis/syncmeta-widgets";
 
 /**
@@ -100,6 +100,9 @@ class BotModeling extends LitElement {
         <bot-manager-widget></bot-manager-widget>
       </div>
       <widget-container></widget-container>`;
+  }
+  firstUpdated() {
+    super.firstUpdated();
   }
 }
 
