@@ -1,6 +1,5 @@
 import "@polymer/paper-button/paper-button.js";
-import Common from "./common.js";
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
 import "./bot.widget.js";
 import "@rwth-acis/syncmeta-widgets";
 
@@ -98,7 +97,7 @@ class BotModeling extends LitElement {
         class="container-fluid  card card-body shadow-sm mb-4"
         id="modelOpsContainer"
       >
-        <bot-widget></bot-widget>
+        <bot-manager-widget></bot-manager-widget>
       </div>
       <widget-container></widget-container>`;
   }
