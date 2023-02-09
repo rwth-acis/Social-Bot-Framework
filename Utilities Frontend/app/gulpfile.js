@@ -28,6 +28,7 @@ gulp.task("replace config variables", () => {
   const result = gulp
     .src("dist/*.js")
     .pipe(replace("{SYNC_META_HOST}", config.syncMetaHost))
+    .pipe(replace("{SBF_MANAGER}", config.sbfManagerHost))
     .pipe(replace("{OIDC_CLIENT_ID}", config.oidc_client_id))
     .pipe(replace("{YJS_ADDRESS}", config.yjs_address))
     .pipe(replace("{YJS_RESOURCE_PATH}", config.yjs_resource_path))
