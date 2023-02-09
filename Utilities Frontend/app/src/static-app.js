@@ -117,15 +117,6 @@ class StaticApp extends LitElement {
               </li>
             </ul>
 
-            <button
-              class="btn btn-outline-primary"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight"
-            >
-              <i class="bi bi-people"></i> User Activities
-            </button>
             <form class="d-flex ms-auto" id="spaceForm">
               <div class="d-flex flex-row">
                 <div class="me-2 align-self-center">
