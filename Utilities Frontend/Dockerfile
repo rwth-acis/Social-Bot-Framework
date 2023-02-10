@@ -1,24 +1,12 @@
-FROM node:11
+FROM node:16
 
 ENV YJS_RESOURCE_PATH "/socket.io"
-ENV PORT 8070
+ENV PORT 8082
 
 WORKDIR /usr/src/app
 
 RUN apt-get update
-RUN apt-get install -y --allow-unauthenticated --no-install-recommends supervisor git nginx dos2unix
-RUN npm_config_user=root npm install -g polymer-cli gulp
-
-COPY docker/supervisorConfigs /etc/supervisor/conf.d
-
-# # copy widgets
-# COPY docker/widgets/_bot_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
-# COPY docker/widgets/bot_widget.js /usr/src/app/syncmeta/widgets/src/js/
-# overwrite debug widget template (js stays the same)
-# COPY docker/widgets/_debug_widget.tpl /usr/src/app/syncmeta/widgets/src/widgets/partials/
-
-# COPY docker/Gruntfile.js /usr/src/app/syncmeta/widgets/
-# COPY docker/yjs-sync.js /usr/src/app/syncmeta/widgets/src/js/lib/
+RUN apt-get install -y --allow-unauthenticated --no-install-recommends supervisor git dos2unix
 
 WORKDIR /usr/src/app
 COPY . .
@@ -27,10 +15,9 @@ WORKDIR /usr/src/app/app
 RUN cp ./config.json.sample ./config.json
 
 RUN npm install 
-RUN npm run build
 
 WORKDIR /usr/src/app
+EXPOSE ${PORT}
 
-COPY docker/docker-entrypoint.sh docker-entrypoint.sh
 RUN dos2unix docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

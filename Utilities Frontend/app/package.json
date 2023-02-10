@@ -1,11 +1,11 @@
 {
-  "name": "SocialBotFramework",
+  "name": "social-bot-framework",
   "version": "1.0.3",
   "description": "Frontend of Social Bot Framework",
   "type": "module",
-  "main": "dist/static-app.js",
+  "main": "dist/social-bot-framework.js",
   "exports": {
-    ".": "./dist/static-app.js"
+    ".": "./dist/social-bot-framework.js"
   },
   "files": [
     "dist"
@@ -15,21 +15,24 @@
     "url": "https://github.com/rwth-acis/Social-Bot-Framework"
   },
   "scripts": {
-    "start": "node server.js",
-    "start:watch": "web-dev-server  --node-resolve --watch",
-    "build": "gulp clean-build:full",
-    "build:watch": "gulp build:watch",
-    "dev": "vite"
+    "dev": "vite",
+    "start": "vite --host",
+    "node": "nodemon ./server.cjs",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
+    "@rollup/plugin-replace": "^5.0.2",
     "@rwth-acis/syncmeta-widgets": "^0.0.8",
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
+    "i": "^0.3.7",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.6",
     "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.3.3",
     "lit": "^2.0.2",
     "merge-stream": "^2.0.0",
     "nan": "^2.8.0",
+    "npm": "^9.4.2",
     "polymer": "^0.5.0",
     "rollup-plugin-copy": "^3.4.0",
     "y-quill": "^0.1.5",
@@ -51,7 +54,7 @@
     "rollup-plugin-minify-html-literals": "^1.2.6",
     "rollup-plugin-summary": "^1.3.0",
     "rollup-plugin-terser": "^7.0.2",
-    "wct-mocha": "^1.0.1",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "wct-mocha": "^1.0.1"
   }
 }

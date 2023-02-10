@@ -9,7 +9,12 @@ check_if_exists () {
     fi
 }
 
-check_if_exists "$SYNC_META_HOST" "SYNC_META_HOST"
+export YJS=${YJS:-http://localhost:1234}
+export PORT=${PORT:-80}
+export YJS_RESOURCE_PATH=${YJS_RESOURCE_PATH:-/socket.io}
+export OIDC_CLIENT_ID=${OIDC_CLIENT_ID:-localtestclient}
+
+
 check_if_exists "$YJS" "YJS"
 check_if_exists "$PORT" "PORT"
 check_if_exists "$OIDC_CLIENT_ID" "OIDC_CLIENT_ID"
@@ -30,15 +35,8 @@ sed -i "s={RASA_NLU}=$RASA_NLU=g" app/src/model-training.js
 sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" app/src/model-training.js
 sed -i "s={SBF_MANAGER}=$SBF_MANAGER=g" syncmeta/widgets/src/js/bot_widget.js
 
-#### Syncmeta ####
-sed -i "s=http://localhost:8081=$SYNC_META_HOST/syncmeta=g" .localGruntConfig.json
-sed -i "s=http://localhost:1234=$YJS=g" .localGruntConfig.json
-sed -i "s=/socket.io=$YJS_RESOURCE_PATH=g" .localGruntConfig.json
 
-grunt build
-cd ../..
-
-##### CAE App ####
+##### App ####
 cd app
 cp config.json.sample config.json
 sed -i "s=<SYNC_META_HOST>=$SYNC_META_HOST=g" config.json
@@ -46,14 +44,6 @@ sed -i "s=<OIDC_CLIENT_ID>=$OIDC_CLIENT_ID=g" config.json
 sed -i "s=<YJS_ADDRESS>=$YJS=g" config.json
 sed -i "s=<YJS_RESOURCE_PATH>=$YJS_RESOURCE_PATH=g" config.json
 sed -i "s=<CONTACT_SERVICE_URL>=$CONTACT_SERVICE_URL=g" config.json
+
 npm run build
-cd ..
-
-##### Nginx ####
-cp docker/nginx.conf /etc/nginx/conf.d/default.conf
-sed -i "s=<port>=$PORT=g" /etc/nginx/conf.d/default.conf
-/etc/init.d/nginx start
-
-
-#### Supervisor ####
-/usr/bin/supervisord -n
+npm run start
