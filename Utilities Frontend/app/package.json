@@ -2,7 +2,14 @@
   "name": "SocialBotFramework",
   "version": "1.0.3",
   "description": "Frontend of Social Bot Framework",
-  "type": "commonjs",
+  "type": "module",
+  "main": "dist/static-app.js",
+  "exports": {
+    ".": "./dist/static-app.js"
+  },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rwth-acis/Social-Bot-Framework"
@@ -12,9 +19,7 @@
     "start:watch": "web-dev-server  --node-resolve --watch",
     "build": "gulp clean-build:full",
     "build:watch": "gulp build:watch",
-    "lint": "echo not implemented",
-    "test": "echo not implemented",
-    "test:integration": "echo not implemented"
+    "dev": "vite"
   },
   "dependencies": {
     "@rwth-acis/syncmeta-widgets": "^0.0.8",
@@ -46,6 +51,7 @@
     "rollup-plugin-minify-html-literals": "^1.2.6",
     "rollup-plugin-summary": "^1.3.0",
     "rollup-plugin-terser": "^7.0.2",
-    "wct-mocha": "^1.0.1"
+    "wct-mocha": "^1.0.1",
+    "vite": "^4.1.0"
   }
 }

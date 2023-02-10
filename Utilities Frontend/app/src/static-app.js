@@ -62,10 +62,7 @@ class StaticApp extends LitElement {
           >
             <div slot="left">
               <a href="/">
-                <img
-                  src="assets/images/sbf-logo-head.svg"
-                  class="logo"
-                  id="sbf-logo"
+                <img src="/sbf-logo-head.svg" class="logo" id="sbf-logo"
               /></a>
             </div>
           </las2peer-frontend-statusbar>
