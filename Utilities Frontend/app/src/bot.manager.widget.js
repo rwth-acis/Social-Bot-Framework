@@ -2,7 +2,7 @@ import { html, LitElement } from "lit-element";
 import _ from "lodash-es";
 import { getGuidanceModeling } from "@rwth-acis/syncmeta-widgets/src/es6/Guidancemodel";
 import { yjsSync } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
-import * as Y from "yjs";
+import { Text as YText, Map as YMap } from "yjs";
 import { QuillBinding } from "y-quill";
 import "https://cdn.quilljs.com/1.3.7/quill.js";
 
@@ -100,10 +100,10 @@ class BotManagerWidget extends LitElement {
             for (var key in attr) {
               if (attr.hasOwnProperty(key)) {
                 if (attr[key].hasOwnProperty("key")) {
-                  var ytext = map.set(attr[key].key.id, new Y.Text());
+                  var ytext = map.set(attr[key].key.id, new YText());
                   ytext.insert(0, attr[key].key.value);
                 } else {
-                  var ytext = map.set(attr[key].value.id, new Y.Text());
+                  var ytext = map.set(attr[key].value.id, new YText());
                   ytext.insert(0, attr[key].value.value);
                 }
               }
@@ -114,7 +114,7 @@ class BotManagerWidget extends LitElement {
                 var value = attrs[key].value;
                 if (!value.hasOwnProperty("option")) {
                   if (value.value instanceof String) {
-                    var ytext = map.set(value.id, new Y.Text());
+                    var ytext = map.set(value.id, new YText());
                     ytext.insert(0, value.value);
                   }
                 }
@@ -128,10 +128,10 @@ class BotManagerWidget extends LitElement {
         for (var key in data.nodes) {
           if (data.nodes.hasOwnProperty(key)) {
             var entity = data.nodes[key];
-            var map = y.getMap("nodes").set(key, new Y.Map());
+            var map = y.getMap("nodes").set(key, new YMap());
             var attrs = entity.attributes;
             if (entity.hasOwnProperty("label")) {
-              var ytext = map.set(entity.label.value.id, new Y.Text());
+              var ytext = map.set(entity.label.value.id, new YText());
               ytext.insert(0, entity.label.value.value);
             }
             initAttributes(attrs, map);
@@ -140,10 +140,10 @@ class BotManagerWidget extends LitElement {
         for (var key in data.edges) {
           if (data.edges.hasOwnProperty(key)) {
             var entity = data.edges[key];
-            var map = y.getMap("edges").set(key, new Y.Map());
+            var map = y.getMap("edges").set(key, new YMap());
             var attrs = entity.attributes;
             if (entity.hasOwnProperty("label")) {
-              var ytext = map.set(entity.label.value.id, new Y.Text());
+              var ytext = map.set(entity.label.value.id, new YText());
               ytext.insert(0, entity.label.value.value);
             }
             initAttributes(attrs, map);
