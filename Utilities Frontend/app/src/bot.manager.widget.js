@@ -201,7 +201,7 @@ class BotManagerWidget extends LitElement {
 
     var sendStatus = $("#sendStatus");
     const spinner = $("#deleteStatusSpinner");
-    const btn = $("#delete-model");
+    const btn = $("#delete-nlu-model");
     var endpoint = y.getText("sbfManager").toString();
     var model = y.getMap("data").get("model");
     sendStatus.text("Sending...");
@@ -445,7 +445,7 @@ class BotManagerWidget extends LitElement {
                 </div>
               </button>
               <button
-                id="delete-model"
+                id="delete-nlu-model"
                 type="button"
                 class="btn btn-outline-danger"
                 @click="${this.deleteModel}"
