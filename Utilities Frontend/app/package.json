@@ -17,16 +17,15 @@
   "scripts": {
     "dev": "vite",
     "start": "vite --host",
-    "node": "nodemon ./server.cjs",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build:prod": "vite build",
+    "preview": "vite preview",
+    "node:prod": "node ./server.cjs"
   },
   "dependencies": {
     "@rollup/plugin-replace": "^5.0.2",
     "@rwth-acis/syncmeta-widgets": "^0.0.13",
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
-    "i": "^0.3.7",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.3.6",
     "las2peer-frontend-user-widget": "github:rwth-acis/las2peer-frontend-user-widget#0.3.3",
     "lit": "^2.0.2",
