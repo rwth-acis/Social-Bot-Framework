@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import replace from "@rollup/plugin-replace";
-
+import { rollupPluginHTML } from "@web/rollup-plugin-html";
 import config from "./config.json";
 import packageInfo from "./package.json";
 import nodeResolve from "@rollup/plugin-node-resolve";
@@ -20,8 +20,9 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: /^lit/,
+      external: [/^lit/, "yjs", "y-websocket", "y-quill"],
       plugins: [
+        nodeResolve(),
         replace({
           "{SBF_MANAGER}": config.sbfManagerHost,
           "{OIDC_CLIENT_ID}": config.oidc_client_id,
@@ -30,7 +31,9 @@ export default defineConfig({
           "{STATUSBAR_SUBTITLE}": "v" + packageInfo.version,
           "{CONTACT_SERVICE_URL}": config.contact_service_url,
         }),
-        nodeResolve(),
+        rollupPluginHTML({
+          input: "index.html",
+        }),
       ],
     },
   },
