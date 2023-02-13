@@ -17,9 +17,9 @@
   "scripts": {
     "dev": "vite",
     "start": "vite --host",
-    "node": "nodemon ./server.cjs",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build:prod": "vite build",
+    "preview": "vite preview",
+    "node:prod": "node ./server.cjs"
   },
   "dependencies": {
     "@rollup/plugin-replace": "^5.0.2",

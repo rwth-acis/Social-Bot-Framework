@@ -34,6 +34,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => ({
             "{STATUSBAR_SUBTITLE}": "v" + packageInfo.version,
             "{CONTACT_SERVICE_URL}": config.contact_service_url,
           },
+          preventAssignment: true,
         }),
         nodeResolve(),
         rollupPluginHTML({

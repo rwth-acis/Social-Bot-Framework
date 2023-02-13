@@ -3,13 +3,10 @@ const app = express();
 const path = require("path");
 const port = 8082;
 
-app.use("/dist", express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "dist")));
 
-app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
-
-app.get("*", (req, res) => {
-  console.log(req.url);
-  res.sendFile(__dirname + "/index.html");
+app.get("*", (_req, res) => {
+  res.sendFile(__dirname + "/dist/index.html");
 });
 
 app.listen(port, () => {
