@@ -5,7 +5,7 @@ ENV PORT 8082
 WORKDIR /usr/src/app
 
 RUN apt-get update
-RUN apt-get install -y --allow-unauthenticated --no-install-recommends supervisor git dos2unix
+RUN apt-get install dos2unix
 
 WORKDIR /usr/src/app
 COPY . .
