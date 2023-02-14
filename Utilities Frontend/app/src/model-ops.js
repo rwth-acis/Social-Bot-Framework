@@ -13,7 +13,8 @@ class ModelOps {
 
   getY(useCache) {
     if (useCache && this.y) {
-      return new Promise(() => this.y);
+      console.log("HI");
+      return new Promise((resolve) => resolve(this.y));
     }
     // return yjsSync(null, "{YJS_ADDRESS}", "ws");
     return yjsSync();
