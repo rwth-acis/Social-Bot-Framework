@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@rollup/plugin-replace": "^5.0.2",
-    "@rwth-acis/syncmeta-widgets": "^2.0.1",
+    "@rwth-acis/syncmeta-widgets": "^2.0.2",
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar",
