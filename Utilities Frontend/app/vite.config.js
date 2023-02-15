@@ -33,8 +33,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => ({
             "{YJS_RESOURCE_PATH}": config.yjs_resource_path,
             "{STATUSBAR_SUBTITLE}": "v" + packageInfo.version,
             "{CONTACT_SERVICE_URL}": config.contact_service_url,
+            "{RASA_NLU}": config.rasaEndpoint,
           },
           preventAssignment: true,
+          delimiters: ["", ""],
         }),
         nodeResolve(),
         rollupPluginHTML({

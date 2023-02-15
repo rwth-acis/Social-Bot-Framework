@@ -16,7 +16,6 @@
   },
   "scripts": {
     "dev": "vite",
-    "start": "vite --host",
     "build:prod": "vite build",
     "preview": "vite preview",
     "node:prod": "node ./server.cjs"
