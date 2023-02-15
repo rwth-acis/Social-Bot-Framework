@@ -3,7 +3,6 @@ import Common from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
-import "oidc-client";
 
 
 /**
