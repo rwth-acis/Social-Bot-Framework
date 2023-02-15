@@ -90,19 +90,20 @@ export default [
       // Resolve bare module specifiers to relative paths
       resolve(),
       // Minify HTML template literals
-      minifyHTML(),
+      // minifyHTML(),
       // Minify JS
-      terser({
-        ecma: 2020,
-        module: true,
-        warnings: true,
-      }),
+      // terser({
+      //   ecma: 2020,
+      //   module: true,
+      //   warnings: true,
+      // }),
       copy({
         targets: [{ src: "src/images", dest: "dist/assets" }],
       }),
     ],
     output: {
       dir: "dist",
+      sourcemap: true,
     },
     preserveEntrySignatures: "strict",
   },

@@ -4,6 +4,8 @@ import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 import "oidc-client";
+
+
 /**
  * @customElement
  */
@@ -20,9 +22,11 @@ class StaticApp extends LitElement {
     },
     alertMessage: {
       type: String,
+      value: "",
     },
     alertType: {
       type: String,
+      value: "",
     },
     router: {},
   };
@@ -58,10 +62,7 @@ class StaticApp extends LitElement {
           >
             <div slot="left">
               <a href="/">
-                <img
-                  src="assets/images/sbf-logo-head.svg"
-                  class="logo"
-                  id="sbf-logo"
+                <img src="/sbf-logo-head.svg" class="logo" id="sbf-logo"
               /></a>
             </div>
           </las2peer-frontend-statusbar>
@@ -113,15 +114,6 @@ class StaticApp extends LitElement {
               </li>
             </ul>
 
-            <button
-              class="btn btn-outline-primary"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight"
-            >
-              <i class="bi bi-people"></i> User Activities
-            </button>
             <form class="d-flex ms-auto" id="spaceForm">
               <div class="d-flex flex-row">
                 <div class="me-2 align-self-center">
@@ -150,34 +142,8 @@ class StaticApp extends LitElement {
         </header>
         <section class="content">
           <div class="container">${this.alertTemplate()}</div>
-          <div id="outlet" class="m-4"></div>
+          <div id="outlet" class="m-2"></div>
         </section>
-
-        <aside
-          class="offcanvas offcanvas-end"
-          tabindex="-1"
-          id="offcanvasRight"
-          aria-labelledby="offcanvasRightLabel"
-        >
-          <div class="offcanvas-header p-2">
-            <h5 id="offcanvasRightLabel">User Activities</h5>
-            <button
-              type="button"
-              class="btn-close text-reset"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body overflow-hidden p-0">
-            <iframe
-              loading="lazy"
-              id="User Activity"
-              src="{SYNC_META_HOST}/syncmeta/activity.html"
-              frameborder="0"
-            >
-            </iframe>
-          </div>
-        </aside>
       </div>
     `;
   }
@@ -185,6 +151,7 @@ class StaticApp extends LitElement {
   static get observers() {}
 
   firstUpdated() {
+    super.firstUpdated();
     const statusBar = document.querySelector("#statusBar");
     statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));
@@ -284,8 +251,13 @@ class StaticApp extends LitElement {
       "userinfo_endpoint",
       "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
     );
-    const userInfo = {"sub": event.detail.profile.sub, "email":event.detail.profile.email, "preferred_username":event.detail.profile.preferred_username,"loginName":event.detail.profile.preferred_username}
-    localStorage.setItem("userInfo",JSON.stringify(userInfo))
+    const userInfo = {
+      sub: event.detail.profile.sub,
+      email: event.detail.profile.email,
+      preferred_username: event.detail.profile.preferred_username,
+      loginName: event.detail.profile.preferred_username,
+    };
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
     this.refreshIframes();
   }
 

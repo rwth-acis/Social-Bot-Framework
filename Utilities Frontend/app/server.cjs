@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const port = 8082;
 
-app.use(express.static("dist"));
+app.use(express.static(path.join(__dirname, "dist")));
 
-app.get("*", (req, res) => {
+app.get("*", (_req, res) => {
   res.sendFile(__dirname + "/dist/index.html");
 });
 

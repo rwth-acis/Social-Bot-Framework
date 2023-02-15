@@ -1,6 +1,8 @@
 import { LitElement, html, css } from "lit";
 import NLUConfig from "./nlu.md.js";
 import ModelOps from "./model-ops.js";
+import { QuillBinding } from "y-quill";
+import "https://cdn.quilljs.com/1.3.7/quill.js";
 
 /**
  * @customElement
@@ -37,14 +39,10 @@ class ModelTraining extends LitElement {
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           crossorigin="anonymous"
         />
-        <script src="http://cdn.quilljs.com/1.3.6/quill.js"></script>
 
         <!-- Theme included stylesheets -->
-        <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
-        <link
-          href="//cdn.quilljs.com/1.3.6/quill.bubble.css"
-          rel="stylesheet"
-        />
+        <link href="//cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+       
       </head>
       <main role="main" class="container" style="margin-top: 76px">
         <div class="card border-0 shadow-sm card-body bg-light p-4">
@@ -56,7 +54,7 @@ class ModelTraining extends LitElement {
           <form>
             <div class="form-group">
               <label for="formControlTextArea">Model Training Data</label>
-              <div id="editor" class=""></div>
+              <div id="editor" class="form-control"></div>
             </div>
             <div class="d-flex justify-content-end my-2">
               <button
@@ -67,28 +65,15 @@ class ModelTraining extends LitElement {
                 <i class="bi bi-arrow-clockwise"></i> Reset
               </button>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 input-group">
               <label for="rasaEndpoint">Rasa NLU Endpoint</label>
-              <input
-                type="text"
-                class="form-control"
-                id="rasaEndpoint"
-                placeholder=""
-                value=""
-                required
-              />
+
+              <div id="rasaEndpoint" class="w-100 form-control"></div>
               <!-- Kubernetes cluster IP of the sbf/rasa-nlu service -->
             </div>
-            <div class="mb-3">
+            <div class="mb-3 input-group">
               <label for="sbfManagerEndpoint">SBF Manager Endpoint</label>
-              <input
-                type="text"
-                class="form-control"
-                id="sbfManagerEndpoint"
-                placeholder=""
-                value=""
-                required
-              />
+              <div id="sbfManagerEndpoint" class="w-100 form-control"></div>
             </div>
             <div class="row mb-3">
               <div class="col">
@@ -157,46 +142,61 @@ class ModelTraining extends LitElement {
     super();
   }
 
-  firstUpdated() {
-    this.rasaEndpoint = this.htmlQuery("#rasaEndpoint");
-    this.sbmEndpoint = this.htmlQuery("#sbfManagerEndpoint");
+  async firstUpdated() {
     this.dataName = this.htmlQuery("#dataName");
     this.loadName = this.htmlQuery("#loadNameInput");
     this.curModels = [];
-    const _editor = this.shadowRoot.getElementById("editor");
-    this.editor = new Quill(_editor, {
+
+    const y = await ModelOps.getY(true);
+
+    if (this.shadowRoot.getElementById("editor") == null)
+      throw new Error("Editor not found");
+    // NLU training data editor
+    this.editor = new Quill(this.shadowRoot.getElementById("editor"), {
       modules: {
         toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"]],
       },
       formats: ["bold", "color", "font", "italic", "underline"],
-      placeholder: "Compose an epic...",
-      theme: "snow", // or 'bubble'
+      placeholder: "Write your training data here...",
+      theme: "snow",
     });
-    ModelOps.getY(true).then((y) => y.share.training.bindQuill(this.editor));
-    ModelOps.getY(true).then((y) => y.share.rasa.bind(this.rasaEndpoint));
-    ModelOps.getY(true).then((y) => {
-      y.share.sbfManager.bind(this.sbmEndpoint);
-      this.updateMenu(this);
-      setInterval(this.updateMenu, 10000, this);
-    });
-    ModelOps.getY(true).then((y) => y.share.dataName.bind(this.dataName));
+    new QuillBinding(y.getText("training"), this.editor);
 
-    ModelOps.getY(true)
-      .then((y) => y.share.rasa.toString())
-      .then((x) => {
-        if (!x) {
-          ModelOps.getY(true).then((z) => z.share.rasa.insert(0, "{RASA_NLU}"));
-        }
-      });
-    ModelOps.getY(true)
-      .then((y) => y.share.sbfManager.toString())
-      .then((x) => {
-        if (!x) {
-          ModelOps.getY(true).then((z) =>
-            z.share.sbfManager.insert(0, "{SBF_MANAGER}")
-          );
-        }
-      });
+    // SBF Manager endpoint
+    const _sbfQuill = new Quill(
+      this.shadowRoot.getElementById("sbfManagerEndpoint"),
+      {
+        modules: {
+          toolbar: false,
+        },
+        placeholder: "",
+        theme: "snow",
+      }
+    );
+    new QuillBinding(y.getText("sbfManager"), _sbfQuill);
+
+    // Rasa NLU endpoint
+    const _rasaQuill = new Quill(
+      this.shadowRoot.getElementById("rasaEndpoint"),
+      {
+        modules: {
+          toolbar: false,
+        },
+        placeholder: "",
+        theme: "snow",
+      }
+    );
+    new QuillBinding(y.getText("rasa"), _rasaQuill);
+
+    if (y.getText("rasa")?.toString().length === 0) {
+      y.getText("rasa").insert(0, "{RASA_NLU}");
+    }
+
+    if (y.getText("sbfManager")?.toString().length === 0) {
+      y.getText("sbfManager").insert(0, "{SBF_MANAGER}");
+    }
+
+    this.updateMenu();
   }
 
   htmlQuery(query) {
@@ -299,12 +299,17 @@ class ModelTraining extends LitElement {
     });
   }
 
-  updateMenu(_this) {
+  updateMenu() {
+    const _this = this;
     $.ajax({
       type: "GET",
       url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/",
       contentType: "application/json",
       success: function (data, textStatus, jqXHR) {
+        console.error("Error", textStatus, data, jqXHR);
+        if (textStatus !== "success") {
+          return;
+        }
         $.each(data, function (index, name) {
           if (!_this.curModels.includes(name)) {
             var template = document.createElement("template");
