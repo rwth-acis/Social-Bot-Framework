@@ -189,11 +189,11 @@ class ModelTraining extends LitElement {
     new QuillBinding(y.getText("rasa"), _rasaQuill);
 
     if (y.getText("rasa")?.toString().length === 0) {
-      _y.getText("rasa").insert(0, "{RASA_NLU}");
+      y.getText("rasa").insert(0, "{RASA_NLU}");
     }
 
     if (y.getText("sbfManager")?.toString().length === 0) {
-      _y.getText("sbfManager").insert(0, "{SBF_MANAGER}");
+      y.getText("sbfManager").insert(0, "{SBF_MANAGER}");
     }
 
     this.updateMenu();
