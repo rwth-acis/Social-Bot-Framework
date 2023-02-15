@@ -36,7 +36,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "y-quill": "^0.1.5",
     "y-websocket": "^1.4.5",
-    "yjs": "13.5.6"
+    "yjs": "13.5.44"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.1.2",
