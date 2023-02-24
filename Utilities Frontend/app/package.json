@@ -25,7 +25,7 @@
     "@rwth-acis/syncmeta-widgets": "^2.0.2",
     "@vaadin/router": "^1.7.4",
     "express": "^4.17.1",
-    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar",
+    "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.4.0",
     "lit": "^2.0.2",
     "merge-stream": "^2.0.0",
     "nan": "^2.8.0",

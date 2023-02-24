@@ -52,10 +52,7 @@ class StaticApp extends LitElement {
           <las2peer-frontend-statusbar
             id="statusBar"
             service="Social Bot Framework"
-            oidcpopupsigninurl="/callbacks/popup-signin-callback.html"
-            oidcpopupsignouturl="/callbacks/popup-signout-callback.html"
-            oidcsilentsigninturl="/callbacks/silent-callback.html"
-            oidcclientid="{OIDC_CLIENT_ID}"
+            oidcclientid="localtestclient"
             subtitle="{STATUSBAR_SUBTITLE}"
             ?autoappendwidget="${this.autoAppendWidget}"
           >
@@ -248,7 +245,7 @@ class StaticApp extends LitElement {
     localStorage.setItem("access_token", event.detail.access_token);
     localStorage.setItem(
       "userinfo_endpoint",
-      "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
+      "https://auth.las2peer.org/auth/realms/main/protocol/openid-connect/userinfo"
     );
     const userInfo = {
       sub: event.detail.profile.sub,
@@ -257,7 +254,6 @@ class StaticApp extends LitElement {
       loginName: event.detail.profile.preferred_username,
     };
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    this.refreshIframes();
   }
 
   handleLogout() {
@@ -297,11 +293,7 @@ class StaticApp extends LitElement {
   }
 
   refreshIframes() {
-    console.info("refreshing iframes");
-    const iframes = document.querySelectorAll("iframe");
-    iframes.forEach((iframe) => {
-      iframe.contentWindow.location.reload();
-    });
+
   }
 
   createRenderRoot() {
