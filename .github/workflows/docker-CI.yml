@@ -15,7 +15,7 @@ jobs:
       id: extract_branch
     - name: Build the Docker image
       run: | 
-        docker build -t registry.tech4comp.dbis.rwth-aachen.de/rwthacis/sbf-utils:${{ steps.extract_branch.outputs.branch }} ./Utilities Frontend/Dockerfile
+        docker build -t registry.tech4comp.dbis.rwth-aachen.de/rwthacis/sbf-utils:${{ steps.extract_branch.outputs.branch }} "Utilities Frontend" 
     - name: Push to registry
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}  
