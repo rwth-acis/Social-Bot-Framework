@@ -248,7 +248,7 @@ class StaticApp extends LitElement {
     localStorage.setItem("access_token", event.detail.access_token);
     localStorage.setItem(
       "userinfo_endpoint",
-      "https://api.learning-layers.eu/auth/realms/main/protocol/openid-connect/userinfo"
+      "https://auth.las2peer.org/auth/realms/main/protocol/openid-connect/userinfo"
     );
     const userInfo = {
       sub: event.detail.profile.sub,
