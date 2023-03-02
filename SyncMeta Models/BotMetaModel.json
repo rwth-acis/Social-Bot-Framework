@@ -1282,6 +1282,33 @@
                                 "name": "Attribute",
                                 "value": "Moodle Chat"
                             }
+                        },
+                        "e057df0633b312491937dd05[value]": {
+                            "id": "e057df0633b312491937dd05[value]",
+                            "name": "Attribute",
+                            "value": {
+                                "id": "e057df0633b312491937dd05[value]",
+                                "name": "Attribute",
+                                "value": "GitHub Issues"
+                            }
+                        },
+                        "e3977fbbe42b96e7115a8794[value]": {
+                            "id": "e3977fbbe42b96e7115a8794[value]",
+                            "name": "Attribute",
+                            "value": {
+                                "id": "e3977fbbe42b96e7115a8794[value]",
+                                "name": "Attribute",
+                                "value": "GitHub Pull Requests"
+                            }
+                        },
+                        "a011db7b30641d06da8479fb[value]": {
+                            "id": "a011db7b30641d06da8479fb[value]",
+                            "name": "Attribute",
+                            "value": {
+                                "id": "a011db7b30641d06da8479fb[value]",
+                                "name": "Attribute",
+                                "value": "RESTfulChat"
+                            }
                         }
                     }
                 }
