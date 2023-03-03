@@ -38,7 +38,7 @@ sed -i "s=<RASA_NLU>=$RASA_NLU=g" config.json
 sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
 
 sed -i "s=localhost:1234=$YJS=g" /usr/src/app/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
-sed -i "s=yjsProtocol = \"ws\"=wss=g" /usr/src/app/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
+sed -i 's/yjsProtocol = "ws"/yjsProtocol = "wss"/g' /usr/src/app/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
 
 
 npm run build:prod
