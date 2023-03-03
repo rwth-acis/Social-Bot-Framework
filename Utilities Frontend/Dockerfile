@@ -2,6 +2,7 @@ FROM node:16
 
 ENV YJS_RESOURCE_PATH "/socket.io"
 ENV PORT 8082
+
 WORKDIR /usr/src/app
 
 RUN apt-get update
@@ -19,6 +20,6 @@ WORKDIR /usr/src/app
 
 RUN dos2unix docker-entrypoint.sh
 
-EXPOSE 8082
+EXPOSE ${PORT}
 
 ENTRYPOINT [ "bash",  "/usr/src/app/docker-entrypoint.sh" ]
