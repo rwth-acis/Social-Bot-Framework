@@ -35,7 +35,7 @@ sed -i "s=<CONTACT_SERVICE_URL>=$CONTACT_SERVICE_URL=g" config.json
 sed -i "s=<RASA_NLU>=$RASA_NLU=g" config.json
 sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
 
-sed -i "s=localhost:1234=$YJS=g" /usr/src/app/app/node_modules/@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync.js
+sed -i "s=localhost:1234=$YJS=g" Utilities Frontend/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
 
 npm run build:prod
 npm run node:prod
