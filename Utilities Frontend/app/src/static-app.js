@@ -52,7 +52,7 @@ class StaticApp extends LitElement {
           <las2peer-frontend-statusbar
             id="statusBar"
             service="Social Bot Framework"
-            oidcclientid="localtestclient"
+            oidcclientid="{OIDC_CLIENT_ID}"
             subtitle="{STATUSBAR_SUBTITLE}"
             ?autoappendwidget="${this.autoAppendWidget}"
           >
