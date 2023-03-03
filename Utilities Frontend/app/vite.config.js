@@ -36,6 +36,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => ({
             "{STATUSBAR_SUBTITLE}": "v" + packageInfo.version,
             "{CONTACT_SERVICE_URL}": config.contact_service_url,
             "{RASA_NLU}": config.rasaEndpoint,
+            "{YJS_PROTOCOL}": config.yjs_protocol || "wss",
           },
           preventAssignment: true,
           delimiters: ["", ""],

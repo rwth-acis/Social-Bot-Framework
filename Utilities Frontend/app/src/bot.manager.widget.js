@@ -39,7 +39,7 @@ class BotManagerWidget extends LitElement {
   }
 
   async updateMenu() {
-    const y = await yjsSync(null, "{YJS_ADDRESS}");
+    const y = await yjsSync(null, "{YJS_ADDRESS}", "{YJS_PROTOCOL}");
     var xhr = new XMLHttpRequest();
     var endpoint = y.getText("sbfManager").toString();
     xhr.open("GET", endpoint + "/models/");
