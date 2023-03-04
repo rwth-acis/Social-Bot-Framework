@@ -330,7 +330,7 @@ class BotManagerWidget extends LitElement {
 
   firstUpdated() {
     super.firstUpdated();
-    yjsSync().then((y) => {
+    yjsSync(null, "{YJS_ADDRESS}", "{YJS_PROTOCOL}").then((y) => {
       if (!("y" in window)) window.y = y;
       this.guidance = getGuidanceModeling();
       if (!y.getText("sbfManager")) {

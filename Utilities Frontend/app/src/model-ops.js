@@ -17,7 +17,7 @@ class ModelOps {
       return new Promise((resolve) => resolve(this.y));
     }
     // return yjsSync(null, "{YJS_ADDRESS}", "ws");
-    return yjsSync();
+    return yjsSync(null, "{YJS_ADDRESS}", "{YJS_PROTOCOL}");
   }
 
   async uploadMetaModel() {
