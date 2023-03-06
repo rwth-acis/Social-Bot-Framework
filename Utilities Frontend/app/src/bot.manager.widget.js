@@ -47,7 +47,7 @@ class BotManagerWidget extends LitElement {
     var xhr = new XMLHttpRequest();
     var endpoint = y.getText("sbfManager").toString();
     xhr.open("GET", endpoint + "/models/");
-    xhr.onload = function () {
+    xhr.onload = () => {
       if (xhr.status == 200) {
         var models;
         try {
