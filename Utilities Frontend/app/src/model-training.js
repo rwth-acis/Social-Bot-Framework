@@ -314,7 +314,6 @@ class ModelTraining extends LitElement {
       url: botManagerEndpoint + "/training/",
       contentType: "application/json",
       success: function (data, textStatus, jqXHR) {
-        console.error("Error", textStatus, data, jqXHR);
         if (textStatus !== "success") {
           return;
         }
