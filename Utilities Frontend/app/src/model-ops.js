@@ -1,6 +1,7 @@
 import vls from "./vls.js";
 import botModel from "./botModel.js";
 import { yjsSync } from "@rwth-acis/syncmeta-widgets";
+const production = "env:development" === "env:production";
 
 class ModelOps {
   y = null;
@@ -13,11 +14,11 @@ class ModelOps {
 
   getY(useCache) {
     if (useCache && this.y) {
-      console.log("HI");
       return new Promise((resolve) => resolve(this.y));
     }
-    // return yjsSync(null, "{YJS_ADDRESS}", "ws");
-    return yjsSync(null, "{YJS_ADDRESS}", "{YJS_PROTOCOL}");
+    const yjs_address = production ? "{YJS_ADDRESS}" : "localhost:1234";
+    const yjs_protocol = production ? "{YJS_PROTOCOL}" : "ws";
+    return yjsSync(null, yjs_address, yjs_protocol);
   }
 
   async uploadMetaModel() {

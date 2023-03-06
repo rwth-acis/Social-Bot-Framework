@@ -4,7 +4,8 @@ import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 
-
+// will be replaced by vite during build process
+const production = "env:development" === "env:production";
 /**
  * @customElement
  */
@@ -30,7 +31,6 @@ class StaticApp extends LitElement {
     router: {},
   };
 
-  static styles = css``;
   constructor() {
     super();
   }
@@ -52,8 +52,6 @@ class StaticApp extends LitElement {
           <las2peer-frontend-statusbar
             id="statusBar"
             service="Social Bot Framework"
-            oidcclientid="{OIDC_CLIENT_ID}"
-            subtitle="{STATUSBAR_SUBTITLE}"
             ?autoappendwidget="${this.autoAppendWidget}"
           >
             <div slot="left">
@@ -149,7 +147,16 @@ class StaticApp extends LitElement {
   firstUpdated() {
     super.firstUpdated();
     const statusBar = document.querySelector("#statusBar");
-    statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
+
+    if (production) {
+      statusBar.setAttribute("baseUrl", "{CONTACT_SERVICE_URL}");
+      statusBar.setAttribute("subtitle", "{STATUSBAR_SUBTITLE}");
+      statusBar.setAttribute("oidcclientid", "{OIDC_CLIENT_ID}");
+    } else {
+      statusBar.setAttribute("baseUrl", "http://localhost:8080");
+      statusBar.setAttribute("subtitle", "development");
+      statusBar.setAttribute("oidcclientid", "localtestclient");
+    }
     statusBar.addEventListener("signed-in", (event) => this.handleLogin(event));
     statusBar.addEventListener("signed-out", (event) =>
       this.handleLogout(event)
@@ -241,7 +248,6 @@ class StaticApp extends LitElement {
   }
 
   handleLogin(event) {
-    console.log(event);
     localStorage.setItem("access_token", event.detail.access_token);
     localStorage.setItem(
       "userinfo_endpoint",
@@ -292,9 +298,7 @@ class StaticApp extends LitElement {
     this.alertMessage = "";
   }
 
-  refreshIframes() {
-
-  }
+  refreshIframes() {}
 
   createRenderRoot() {
     return this;
