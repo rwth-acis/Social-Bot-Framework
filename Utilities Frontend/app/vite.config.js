@@ -27,15 +27,16 @@ export default defineConfig(({ command, mode, ssrBuild }) => ({
         command === "serve" ? [/^lit/, "yjs", "y-websocket", "y-quill"] : [], // Don't bundle node_modules in dev mode
       plugins: [
         replace({
-          include: ["src/**/*.js"],
           values: {
             "{SBF_MANAGER}": config.sbfManagerHost,
             "{OIDC_CLIENT_ID}": config.oidc_client_id,
-            "{YJS_ADDRESS}": config.yjs_address,
+            "{YJS_ADDRESS}": config.yjs_socket_url,
             "{YJS_RESOURCE_PATH}": config.yjs_resource_path,
             "{STATUSBAR_SUBTITLE}": "v" + packageInfo.version,
             "{CONTACT_SERVICE_URL}": config.contact_service_url,
-            "{RASA_NLU}": config.rasaEndpoint,
+            "{RASA_URL}": config.rasaEndpoint,
+            "{YJS_PROTOCOL}": config.yjs_socket_protocol || "wss",
+            "env:development": "env:production",
           },
           preventAssignment: true,
           delimiters: ["", ""],

@@ -81,7 +81,7 @@ First create `config.json` file in the `Utilities Frontend/app` directory. It sh
 {
     "syncMetaHost": "<SYNC_META_HOST>",
     "oidc_client_id": "<OIDC_CLIENT_ID>",
-    "yjs_address": "<YJS_ADDRESS>",
+    "yjs_socket_url": "<YJS_ADDRESS>",
     "yjs_resource_path": "<YJS_RESOURCE_PATH>",
     "contact_service_url": "<CONTACT_SERVICE_URL>"
 }

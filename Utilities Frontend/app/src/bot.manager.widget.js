@@ -6,6 +6,8 @@ import { Text as YText, Map as YMap } from "yjs";
 import { QuillBinding } from "y-quill";
 import "https://cdn.quilljs.com/1.3.7/quill.js";
 
+const production = "env:development" === "env:production";
+
 const keyboardEnterPrevent = {
   bindings: {
     shift_enter: {
@@ -39,11 +41,13 @@ class BotManagerWidget extends LitElement {
   }
 
   async updateMenu() {
-    const y = await yjsSync();
+    const yjs_address = production ? "{YJS_ADDRESS}" : "localhost:1234";
+    const yjs_protocol = production ? "{YJS_PROTOCOL}" : "ws";
+    const y = await yjsSync(null, yjs_address, yjs_protocol);
     var xhr = new XMLHttpRequest();
     var endpoint = y.getText("sbfManager").toString();
     xhr.open("GET", endpoint + "/models/");
-    xhr.onload = function () {
+    xhr.onload = () => {
       if (xhr.status == 200) {
         var models;
         try {
@@ -330,11 +334,16 @@ class BotManagerWidget extends LitElement {
 
   firstUpdated() {
     super.firstUpdated();
-    yjsSync().then((y) => {
+    const yjs_address = production ? "{YJS_ADDRESS}" : "localhost:1234";
+    const yjs_protocol = production ? "{YJS_PROTOCOL}" : "ws";
+    yjsSync(null, yjs_address, yjs_protocol).then((y) => {
       if (!("y" in window)) window.y = y;
       this.guidance = getGuidanceModeling();
       if (!y.getText("sbfManager")) {
-        y.getText("sbfManager").insert(0, "{SBF_MANAGER}");
+        y.getText("sbfManager").insert(
+          0,
+          production ? "{SBF_MANAGER}" : "http://localhost:8080"
+        );
       }
 
       this.sbfManagerEndpointEditor = new Quill(

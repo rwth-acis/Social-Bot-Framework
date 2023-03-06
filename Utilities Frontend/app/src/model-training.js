@@ -4,6 +4,8 @@ import ModelOps from "./model-ops.js";
 import { QuillBinding } from "y-quill";
 import "https://cdn.quilljs.com/1.3.7/quill.js";
 
+const production = "env:development" === "env:production";
+
 /**
  * @customElement
  *
@@ -42,7 +44,6 @@ class ModelTraining extends LitElement {
 
         <!-- Theme included stylesheets -->
         <link href="//cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
-       
       </head>
       <main role="main" class="container" style="margin-top: 76px">
         <div class="card border-0 shadow-sm card-body bg-light p-4">
@@ -189,11 +190,17 @@ class ModelTraining extends LitElement {
     new QuillBinding(y.getText("rasa"), _rasaQuill);
 
     if (y.getText("rasa")?.toString().length === 0) {
-      y.getText("rasa").insert(0, "{RASA_NLU}");
+      y.getText("rasa").insert(
+        0,
+        production ? "{RASA_URL}" : "http://localhost:5005"
+      );
     }
 
     if (y.getText("sbfManager")?.toString().length === 0) {
-      y.getText("sbfManager").insert(0, "{SBF_MANAGER}");
+      y.getText("sbfManager").insert(
+        0,
+        production ? "{SBF_MANAGER}" : "http://localhost:8080"
+      );
     }
 
     this.updateMenu();
@@ -301,9 +308,10 @@ class ModelTraining extends LitElement {
 
   updateMenu() {
     const _this = this;
+    const botManagerEndpoint = $(_this.htmlQuery("#sbfManagerEndpoint")).text();
     $.ajax({
       type: "GET",
-      url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/",
+      url: botManagerEndpoint + "/training/",
       contentType: "application/json",
       success: function (data, textStatus, jqXHR) {
         console.error("Error", textStatus, data, jqXHR);
