@@ -1,10 +1,10 @@
 import { LitElement, html, css } from "lit";
-import Common from "./common.js";
+import { Common } from "./common.js";
 import ModelOps from "./model-ops.js";
 import { Router } from "@vaadin/router";
 import "las2peer-frontend-statusbar/las2peer-frontend-statusbar.js";
 
-// will be replaced by vite during build process
+// env:development will be replaced by vite with env:production during build process
 const production = "env:development" === "env:production";
 /**
  * @customElement
@@ -197,6 +197,7 @@ class StaticApp extends LitElement {
     }
 
     Common.setYjsRoomName(input);
+    Common.setSpace("space");
     this.changeVisibility("#roomEnterLoader", true);
     ModelOps.uploadMetaModel()
       .then(
