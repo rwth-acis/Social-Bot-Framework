@@ -24,7 +24,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => ({
     },
     rollupOptions: {
       external:
-        command === "serve" ? [/^lit/, "yjs", "y-websocket", "y-quill"] : [], // Don't bundle node_modules in dev mode
+        command === "serve" ? [/^lit/, "yjs", "y-websocket", "y-quill", "quill"] : [], // Don't bundle node_modules in dev mode
       plugins: [
         replace({
           values: {
