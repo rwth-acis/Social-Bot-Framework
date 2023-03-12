@@ -2,7 +2,7 @@ import { LitElement, html, css } from "lit";
 import NLUConfig from "./nlu.md.js";
 import ModelOps from "./model-ops.js";
 import { QuillBinding } from "y-quill";
-import "https://cdn.quilljs.com/1.3.7/quill.js";
+import Quill from "quill";
 
 const production = "env:development" === "env:production";
 

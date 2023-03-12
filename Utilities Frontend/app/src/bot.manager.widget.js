@@ -4,7 +4,7 @@ import { getGuidanceModeling } from "@rwth-acis/syncmeta-widgets/src/es6/Guidanc
 import { yjsSync } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import { Text as YText, Map as YMap } from "yjs";
 import { QuillBinding } from "y-quill";
-import "https://cdn.quilljs.com/1.3.7/quill.js";
+import Quill from "quill";
 
 const production = "env:development" === "env:production";
 
@@ -13,16 +13,11 @@ const keyboardEnterPrevent = {
     shift_enter: {
       key: 13,
       shiftKey: true,
-      handler: (range, ctx) => {
-        console.log(range, ctx); // if you want to see the output of the binding
-        this.editor.insertText(range.index, "\n");
-      },
+      handler: () => {},
     },
     enter: {
       key: 13,
-      handler: () => {
-        // submit form }
-      },
+      handler: () => {},
     },
   },
 };
