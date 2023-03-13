@@ -333,13 +333,7 @@ class BotManagerWidget extends LitElement {
     const yjs_protocol = production ? "{YJS_PROTOCOL}" : "ws";
     yjsSync(null, yjs_address, yjs_protocol).then((y) => {
       if (!("y" in window)) window.y = y;
-      this.guidance = getGuidanceModeling();
-      if (!y.getText("sbfManager")) {
-        y.getText("sbfManager").insert(
-          0,
-          production ? "{SBF_MANAGER}" : "http://localhost:8080"
-        );
-      }
+      this.guidance = getGuidanceModeling();   
 
       this.sbfManagerEndpointEditor = new Quill(
         document.querySelector("#sbfManagerEndpointInput"),
