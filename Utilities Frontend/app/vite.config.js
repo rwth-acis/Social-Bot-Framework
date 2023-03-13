@@ -35,7 +35,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => ({
             "{STATUSBAR_SUBTITLE}": "v" + packageInfo.version,
             "{CONTACT_SERVICE_URL}": config.contact_service_url,
             "{RASA_URL}": config.rasaEndpoint,
-            "{YJS_PROTOCOL}": config.yjs_socket_protocol || "wss",
+            "{YJS_PROTOCOL}": config.yjs_socket_protocol,
             "env:development": "env:production",
           },
           preventAssignment: true,
