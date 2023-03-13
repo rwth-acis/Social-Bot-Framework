@@ -188,20 +188,22 @@ class ModelTraining extends LitElement {
       }
     );
     new QuillBinding(y.getText("rasa"), _rasaQuill);
+      setTimeout(() => {
+        if (y.getText("rasa")?.toString().length === 0) {
+          y.getText("rasa").insert(
+            0,
+            production ? "{RASA_URL}" : "http://localhost:5005"
+          );
+        }
 
-    if (y.getText("rasa")?.toString().length === 0) {
-      y.getText("rasa").insert(
-        0,
-        production ? "{RASA_URL}" : "http://localhost:5005"
-      );
-    }
-
-    if (y.getText("sbfManager")?.toString().length === 0) {
-      y.getText("sbfManager").insert(
-        0,
-        production ? "{SBF_MANAGER}" : "http://localhost:8080"
-      );
-    }
+        if (y.getText("sbfManager")?.toString().length === 0) {
+          y.getText("sbfManager").insert(
+            0,
+            production ? "{SBF_MANAGER}" : "http://localhost:8080"
+          );
+        }
+      }, 300);
+   
 
     this.updateMenu();
   }
