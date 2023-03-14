@@ -23,15 +23,26 @@ class ModelOps {
 
   async uploadMetaModel() {
     const y = await this.getY(false);
-    return await new Promise((resolve, reject) => {
-      // check whether there already is a metamodel or not
-      if (y.getMap("data").get("metamodel") != null) {
-        resolve();
-      } else {
-        console.log("Metamodel not found. Uploading default metamodel.");
-        y.getMap("data").set("metamodel", vls);
-        resolve();
-      }
+    return new Promise((resolve) => {
+      setTimeout(async () => {
+        // check whether there already is a metamodel or not
+        const model = y.getMap("data").get("metamodel");
+        if (model != null) {
+          resolve();
+        } else {
+          // ask user whether to upload the default metamodel
+          const confirmed = confirm(
+            "You are currently working on the metamodel. Do you want to switch to bot modeling?"
+          );
+          if (confirmed) {
+            y.getMap("data").set("metamodel", vls);
+            await this.uploadBotModel();
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      }, 400);
     });
   }
 
@@ -42,11 +53,12 @@ class ModelOps {
 
   async uploadBotModel() {
     const y = await this.getY(false);
-
-    if (!y.getMap("data").get("model")) {
+    const model = y.getMap("data").get("model");
+    if (model == null || Object.keys(model.nodes).length === 0) {
       y.getMap("data").set("model", botModel);
+      return botModel;
     }
-    return y.getMap("data").get("model");
+    return model;
   }
 
   async observeTraininingData(cb) {
