@@ -182,6 +182,14 @@ class StaticApp extends LitElement {
         action: () => import("./main.js"),
       },
     ]);
+    // if on modeling route, upload meta model
+    if (window.location.pathname === "/modeling") {
+      ModelOps.uploadMetaModel().then(async (confirmation) => {
+        if (confirmation) {
+          location.reload();
+        }
+      });
+    }
   }
 
   _onChangeButtonClicked() {
@@ -195,28 +203,10 @@ class StaticApp extends LitElement {
       alert("You are already in this space!");
       return;
     }
-
     Common.setYjsRoomName(input);
     Common.setSpace("space");
     this.changeVisibility("#roomEnterLoader", true);
-    ModelOps.uploadMetaModel()
-      .then(
-        (_) =>
-          new Promise((resolve, reject) => {
-            // wait for data become active
-            setTimeout((_) => resolve(), 2000);
-          })
-      )
-      .then((_) => location.reload());
-    ModelOps.uploadBotModel()
-      .then(
-        (_) =>
-          new Promise((resolve, reject) => {
-            // wait for data become active
-            setTimeout((_) => resolve(), 2000);
-          })
-      )
-      .then((_) => location.reload());
+    location.reload();
   }
 
   /**
