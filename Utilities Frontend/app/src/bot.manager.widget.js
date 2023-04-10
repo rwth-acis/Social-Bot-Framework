@@ -56,6 +56,7 @@ class BotManagerWidget extends LitElement {
             const loadNameInput = document.querySelector("#loadNameInput");
             const option = document.createElement("option");
             option.value = model;
+            option.text = model;
             loadNameInput.appendChild(option);
             this.botModels.push(model);
           }
