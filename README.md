@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Logos/sbf-logo.svg" width=400px/>
+  <img src="assets/sbf-logo.svg" width=400px/>
 </p>
 <p align="center">
         <a href="https://github.com/rwth-acis/Social-Bot-Framework/blob/master/LICENSE">
@@ -74,10 +74,8 @@ The following environment variables can be configured.
 |SBF_MANAGER| Address of a running SBFManager Instance. If not empty, the given address will be written in the "SBFManager Endpoint" fields of the frontend. | |No|
 
 ### Build using Grunt
-You can also build the application using Grunt.First make sure that you are using a compatible node version. The framework currently only supports up to node `^10.0.0`. You can check your version by running `node --version`
-
-First create `config.json` file in the `Utilities Frontend/app` directory. It should have the following content:
-```
+You can also build the application using Grunt. First, make sure that you are using a compatible node version. The framework currently only supports up to node `^10.0.0`. You can check your version by running `node --version`. First, create `config.json` file in the `Utilities Frontend/app` directory. It should have the following content:
+```json
 {
     "syncMetaHost": "<SYNC_META_HOST>",
     "oidc_client_id": "<OIDC_CLIENT_ID>",
@@ -99,7 +97,7 @@ to build the application. Alternatively, you can use `npm run build:watch` to au
 
 Now, run 
 ```
-npm run start
+npm run dev
 ```
 to start the server. The application will be served on `localhost:8082`. 
 
