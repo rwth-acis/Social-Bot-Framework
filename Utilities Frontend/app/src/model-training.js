@@ -188,22 +188,21 @@ class ModelTraining extends LitElement {
       }
     );
     new QuillBinding(y.getText("rasa"), _rasaQuill);
-      setTimeout(() => {
-        if (y.getText("rasa")?.toString().length === 0) {
-          y.getText("rasa").insert(
-            0,
-            production ? "{RASA_URL}" : "http://localhost:5005"
-          );
-        }
+    setTimeout(() => {
+      if (y.getText("rasa")?.toString().length === 0) {
+        y.getText("rasa").insert(
+          0,
+          production ? "{RASA_URL}" : "http://localhost:5005"
+        );
+      }
 
-        if (y.getText("sbfManager")?.toString().length === 0) {
-          y.getText("sbfManager").insert(
-            0,
-            production ? "{SBF_MANAGER}" : "http://localhost:8080"
-          );
-        }
-      }, 300);
-   
+      if (y.getText("sbfManager")?.toString().length === 0) {
+        y.getText("sbfManager").insert(
+          0,
+          production ? "{SBF_MANAGER}" : "http://localhost:8080"
+        );
+      }
+    }, 300);
 
     this.updateMenu();
   }
@@ -218,14 +217,19 @@ class ModelTraining extends LitElement {
     }
   }
 
-  submitForm() {
+  async submitForm() {
     var _this = this;
-    $(_this.htmlQuery("#trainingStatus")).text("Starting training...");
+    const y = await ModelOps.getY(true);
+    const trainingUrl = y.getText("sbfManager").toString() + "/trainAndLoad/";
+    const rasaUrl = y.getText("rasa").toString();
+    $(_this.htmlQuery("#trainingStatus")).text(
+      `Submitting NLU Modelt to ${trainingUrl} and starting training...`
+    );
     $.ajax({
       type: "POST",
-      url: $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/trainAndLoad/",
+      url: trainingUrl,
       data: JSON.stringify({
-        url: $(_this.htmlQuery("#rasaEndpoint")).val(),
+        url: rasaUrl,
         config:
           'language: "de"\npipeline:\n - name: WhitespaceTokenizer\n - name: RegexFeaturizer\n - name: CRFEntityExtractor\n - name: EntitySynonymMapper\n - name: CountVectorsFeaturizer\n - name: DIETClassifier\npolicies:\n - name: MemoizationPolicy\n - name: KerasPolicy\n - name: MappingPolicy\n - name: FormPolicy\n',
         markdownTrainingData: _this.editor.getText(),
@@ -242,14 +246,17 @@ class ModelTraining extends LitElement {
     });
   }
 
-  retrieveStatus() {
+  async retrieveStatus() {
+    const y = await ModelOps.getY(true);
+    const trainingStatusUrl =
+      y.getText("sbfManager").toString() + "/trainAndLoadStatus/";
     var _this = this;
-    $(_this.htmlQuery("#trainingStatus")).text("Checking status...");
+    $(_this.htmlQuery("#trainingStatus")).text(
+      `Checking status from ${trainingStatusUrl},...`
+    );
     $.ajax({
       type: "GET",
-      url:
-        $(_this.htmlQuery("#sbfManagerEndpoint")).val() +
-        "/trainAndLoadStatus/",
+      url: trainingStatusUrl,
       contentType: "text/plain",
       success: function (data, textStatus, jqXHR) {
         $(_this.htmlQuery("#trainingStatus")).text(data);
@@ -262,7 +269,9 @@ class ModelTraining extends LitElement {
     });
   }
 
-  storeData() {
+ async storeData() {
+  const y = await ModelOps.getY(true);
+  const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
     var _this = this;
     $(_this.htmlQuery("#trainingStatus")).text("Storing...");
     var name = $(_this.htmlQuery("#dataName")).val();
@@ -271,7 +280,7 @@ class ModelTraining extends LitElement {
     $.ajax({
       type: "POST",
       url:
-        $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/" + name,
+        trainingStatusUrl + name,
       data: trainingData,
       contentType: "text/plain",
       success: function (data, textStatus, jqXHR) {
@@ -286,7 +295,9 @@ class ModelTraining extends LitElement {
     });
   }
 
-  loadData() {
+  async loadData() {
+    const y = await ModelOps.getY(true);
+    const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
     var _this = this;
     $(_this.htmlQuery("#trainingStatus")).text("Loading...");
     var name = $(_this.htmlQuery("#loadNameInput")).val();
@@ -294,7 +305,7 @@ class ModelTraining extends LitElement {
     $.ajax({
       type: "GET",
       url:
-        $(_this.htmlQuery("#sbfManagerEndpoint")).val() + "/training/" + name,
+        trainingStatusUrl + name,
       contentType: "text/plain",
       success: function (data, textStatus, jqXHR) {
         $(_this.htmlQuery("#trainingStatus")).text("Data loaded.");
@@ -308,12 +319,13 @@ class ModelTraining extends LitElement {
     });
   }
 
-  updateMenu() {
+  async updateMenu() {
+    const y = await ModelOps.getY(true);
     const _this = this;
-    const botManagerEndpoint = $(_this.htmlQuery("#sbfManagerEndpoint")).text();
+    const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
     $.ajax({
       type: "GET",
-      url: botManagerEndpoint + "/training/",
+      url: trainingStatusUrl + "/training/",
       contentType: "application/json",
       success: function (data, textStatus, jqXHR) {
         if (textStatus !== "success") {
