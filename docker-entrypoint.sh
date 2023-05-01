@@ -25,8 +25,6 @@ export RASA_NLU=${RASA_NLU:-http://localhost:5005}
 export SBF_MANAGER=${SBF_MANAGER:-http://localhost:8080}
 export CONTACT_SERVICE_URL=${CONTACT_SERVICE_URL:-http://localhost:8080}
 
-##### App ####
-cd app
 cp config.json.sample config.json
 
 sed -i "s=<OIDC_CLIENT_ID>=$OIDC_CLIENT_ID=g" config.json
@@ -40,7 +38,7 @@ sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
 # TODO: This is a workaround for the issue that the yjs address is not set correctly in the widget container
 sed -i "s=localhost:1234=$YJS=g" /usr/src/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
 # replace yjsProtocol = "ws" with yjsProtocol = $YJS_PROTOCOL in widget.container.js
-sed -i "s=yjsProtocol = \"ws\"=yjsProtocol = \"$YJS_PROTOCOL\"=g" /usr/src/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
+sed -i 's/yjsProtocol = "ws"/yjsProtocol = "'$YJS_PROTOCOL'"/g' /usr/src/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
 
 npm run build:prod
 npm run node:prod
