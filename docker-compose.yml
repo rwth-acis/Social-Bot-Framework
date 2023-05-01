@@ -2,7 +2,7 @@ version: '3'
 
 services:
   social-bot-manager:
-    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:master
+    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:develop
     environment:
       DATABASE_NAME: ${DATABASE_NAME:-SBF}
       DATABASE_HOST: db
@@ -10,7 +10,7 @@ services:
       DATABASE_USER: ${DATABASE_USER:-root}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:-root}
     ports:
-      - "8090:8080"
+      - "8080:8080"
       - "9011:9011"
     depends_on:
       - db
@@ -35,15 +35,17 @@ services:
       - ./assets/SBF.sql:/docker-entrypoint-initdb.d/init.sql
 
   frontend:
-    build: .
+    build: . # or use image: <your image>
+    # image: socialbotframework:latest 
     environment:
-      YJS: ${YJS:-ws://localhost:1234}
+      YJS: ${YJS:-localhost:1234}
       PORT: ${PORT:-8082}
       OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-localtestclient}
       YJS_RESOURCE_PATH: ${YJS_RESOURCE_PATH:-/socket.io}
       RASA_NLU: ${RASA_NLU:-http://localhost:5005}
-      SBF_MANAGER: ${SBF_MANAGER:-http://localhost:8090}
-      CONTACT_SERVICE_URL: ${CONTACT_SERVICE_URL:-http://localhost:8090}
+      SBF_MANAGER: ${SBF_MANAGER:-http://localhost:8080/SBFmanager}
+      CONTACT_SERVICE_URL: ${CONTACT_SERVICE_URL:-http://localhost:8080/contactservice}
+      YJS_PROTOCOL: ${YJS_PROTOCOL:-ws}
     depends_on:
       - yjs
       - rasa

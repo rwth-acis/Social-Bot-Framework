@@ -39,8 +39,8 @@ sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
 
 # TODO: This is a workaround for the issue that the yjs address is not set correctly in the widget container
 sed -i "s=localhost:1234=$YJS=g" /usr/src/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
-sed -i 's/yjsProtocol = "ws"/yjsProtocol = "wss"/g' /usr/src/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
-
+# replace yjsProtocol = "ws" with yjsProtocol = $YJS_PROTOCOL in widget.container.js
+sed -i "s=yjsProtocol = \"ws\"=yjsProtocol = \"$YJS_PROTOCOL\"=g" /usr/src/app/node_modules/@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js
 
 npm run build:prod
 npm run node:prod
