@@ -2,7 +2,7 @@ version: '3'
 
 services:
   social-bot-manager:
-    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:develop
+    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:MA-aaron
     environment:
       DATABASE_NAME: ${DATABASE_NAME:-SBF}
       DATABASE_HOST: db
@@ -21,8 +21,8 @@ services:
       - "1234:1234"
   
   rasa:
-    image: rasa/rasa:3.4.2-full
-    command: run --enable-api -m models
+    image: rasa/rasa:2.8.33-full
+    command: run --enable-api -m models --cors "*" --debug
   db:
     image: mysql:8
     platform: ${TARGETPLATFORM:-linux/amd64}
@@ -42,7 +42,7 @@ services:
       PORT: ${PORT:-8082}
       OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-localtestclient}
       YJS_RESOURCE_PATH: ${YJS_RESOURCE_PATH:-/socket.io}
-      RASA_NLU: ${RASA_NLU:-http://localhost:5005}
+      RASA_NLU: ${RASA_NLU:-http://rasa:5005}
       SBF_MANAGER: ${SBF_MANAGER:-http://localhost:8080/SBFmanager}
       CONTACT_SERVICE_URL: ${CONTACT_SERVICE_URL:-http://localhost:8080/contactservice}
       YJS_PROTOCOL: ${YJS_PROTOCOL:-ws}
