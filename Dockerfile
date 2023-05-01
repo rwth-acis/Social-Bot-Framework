@@ -11,7 +11,7 @@ RUN apt-get install dos2unix
 WORKDIR /usr/src/app
 COPY . .
 
-WORKDIR /usr/src/app/app
+WORKDIR /usr/src/app
 RUN cp ./config.json.sample ./config.json
 
 RUN npm install 
