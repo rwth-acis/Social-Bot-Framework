@@ -22,7 +22,7 @@ services:
   
   rasa:
     image: rasa/rasa:3.4.2-full
-    command: rasa run --enable-api -m models
+    command: run --enable-api -m models
   db:
     image: mysql:8
     platform: ${TARGETPLATFORM:-linux/amd64}
