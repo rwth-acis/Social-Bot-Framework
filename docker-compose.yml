@@ -30,6 +30,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD:-root}
       MYSQL_DATABASE: ${DATABASE_NAME:-SBF}
+      MYSQL_INITDB_SQL: /docker-entrypoint-initdb.d/init.sql
+    volumes:
+      - ./assets/SBF.sql:/docker-entrypoint-initdb.d/init.sql
 
   frontend:
     build: .
