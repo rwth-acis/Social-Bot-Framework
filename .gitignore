@@ -4,3 +4,4 @@ Utilities Frontend/syncmeta/node_modules
 Utilities Frontend/node_modules
 .vscode/launch.json
 **/**.DS_Store
+node_modules
