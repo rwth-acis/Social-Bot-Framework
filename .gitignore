@@ -1,6 +1,4 @@
-Utilities Frontend/app/config.json
-Utilities Frontend/syncmeta/node_modules
-.vscode/launch.json
-Utilities Frontend/node_modules
-.vscode/launch.json
-**/**.DS_Store
+node_modules
+.vscode
+.**/**.DS_Store
+/dist
