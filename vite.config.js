@@ -8,7 +8,7 @@ import packageInfo from "./package.json";
 
 // https://vitejs.dev/config/
 /** @type {import('vite').UserConfig} */
-export default defineConfig(({ command, mode, ssrBuild }) => ({
+export default defineConfig(({ command }) => ({
   build: {
     output: {
       dir: "dist",
@@ -24,7 +24,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => ({
     },
     rollupOptions: {
       external:
-        command === "serve" ? [/^lit/, "yjs", "y-websocket", "y-quill", "quill"] : [], // Don't bundle node_modules in dev mode
+        command === "serve"
+          ? [/^lit/, "yjs", "y-websocket", "y-quill", "quill"]
+          : [], // Don't bundle node_modules in dev mode
       plugins: [
         replace({
           values: {
