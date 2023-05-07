@@ -26,7 +26,6 @@ export SBF_MANAGER=${SBF_MANAGER:-http://localhost:8080}
 export CONTACT_SERVICE_URL=${CONTACT_SERVICE_URL:-http://localhost:8080}
 
 ##### App ####
-cd app
 cp config.json.sample config.json
 
 sed -i "s=<OIDC_CLIENT_ID>=$OIDC_CLIENT_ID=g" config.json
