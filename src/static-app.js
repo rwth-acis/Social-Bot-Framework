@@ -81,7 +81,7 @@ class StaticApp extends LitElement {
                   type="button"
                   role="tab"
                   aria-controls="bot-modeling"
-                  @click="${this.leaveHome}"
+                  @click="${()=>this.goToModeling('bot-modeling')}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-robot"></i>
@@ -98,7 +98,7 @@ class StaticApp extends LitElement {
                   role="tab"
                   aria-controls="nlu-training"
                   class="nav-link d-flex flex-row bd-highlight"
-                  @click="${this.leaveHome}"
+                  @click="${()=>this.goToModeling('nlu-training')}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-book"></i>
@@ -174,12 +174,12 @@ class StaticApp extends LitElement {
       {
         path: "/",
         component: "welcome-page",
-        action: () => import("./welcome.js"),
+        action: async () => await import("./welcome.js"),
       },
       {
         path: "/modeling",
         component: "main-page",
-        action: () => import("./main.js"),
+        action: async () => await import("./main.js"),
       },
     ]);
     // if on modeling route, upload meta model
@@ -210,12 +210,12 @@ class StaticApp extends LitElement {
   }
 
   /**
-   * This function is called whenever the user wants to navigate to page other than home page.
+   * This function is called whenever the user wants to navigate either to the bot modeling or the nlu training page, from a different page.
    */
-  leaveHome() {
-    const path = window.location.pathname;
-    if (path === "/") {
-      Router.go("/modeling");
+  goToModeling(subRoute) {
+    const currentPath = window.location.pathname;
+    if (currentPath === "/") {
+      Router.go(`modeling#${subRoute}`);
     }
   }
 
