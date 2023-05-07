@@ -174,12 +174,12 @@ class StaticApp extends LitElement {
       {
         path: "/",
         component: "welcome-page",
-        action: () => import("./welcome.js"),
+        action: async () => await import("./welcome.js"),
       },
       {
         path: "/modeling",
         component: "main-page",
-        action: () => import("./main.js"),
+        action: async () => await import("./main.js"),
       },
     ]);
     // if on modeling route, upload meta model
