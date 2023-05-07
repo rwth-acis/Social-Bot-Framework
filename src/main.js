@@ -37,7 +37,20 @@ class MainPage extends LitElement {
     `;
   }
 
-  firstUpdated() {}
+  firstUpdated() {
+    const routeFragment = window.location.hash;
+    if (routeFragment) {
+      const tab = routeFragment.split("#")[1];
+
+      const tabElement = document.querySelector(`#${tab}`);
+      if (tabElement) {
+        for (const tab of document.querySelectorAll(".tab-pane")) {
+          tab.classList.remove("active");
+        }
+        tabElement.classList.add("show", "active");
+      }
+    }
+  }
   createRenderRoot() {
     return this;
   }
