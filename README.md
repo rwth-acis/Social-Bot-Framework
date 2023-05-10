@@ -33,73 +33,53 @@ This application provides helpers to interact with the Social Bot Manager servic
 
 This frontend consists of the Bot Modeling and the NLU Model Training Helper.
 
-## Build the application
+# Getting started
 
-There are two possibilities to build the application:
-* Use the Docker image
-* Build using Grunt
-The Docker image includes all Syncmeta dependencies. If you build the application using Grunt you need to host Syncmeta yourself.
-
-### Build using Docker
-First, build the Docker image. Please note that the frontend can onyl be built using node versions <=11
-
-```bash
-$ docker build -t rwthacis/sbf-utils .
+The easiest way to get started is to use docker compose. 
+In case you are using an M1 Mac, you need to add the following line to the `.env` file (create it if it does not exist):
+```txt
+RASA_IMAGE=khalosa/rasa-aarch64:3.5.2 
 ```
+Then, run the following command:
+```bash
+docker-compose up
+```
+This will start the following services:
+* social-bot-manager-service
+* y-websockets-server
+* mysql
+* rasa 
+* social-bot-framework-frontend
+
+The frontend will be accessible via `http://localhost:8082`. 
+## Run only the frontend 
+
+You can also run only the frontend. 
+Use `npm install` to install the required dependencies.
+Run `vite` to start the server. The application will be served on `http://localhost:8082`.
 
 The application is using [YJS][yjs-github] for interwidget communication, therefore it needs [y-websocket-server][y-websocket-server] instance.
 It can be started with the following command:
 
 ```bash
-$ docker run -p 1234:1234  -d rwthacis/y-websockets-server
+$ docker run -p 1234:1234  -d lakhoune/y-websocket:latest
 ```
 
-Then you can start the container like this:
+## Confguration
 
-```bash
-$ docker run -p 8070:8070 -d rwthacis/sbf-utils
-```
-Note that depending on your configuration, additional variables might need to be set. The list of possible variables can be found in the following section. 
-After the container started to run, the application will be accessible via http://127.0.0.1:8070 . Make sure **not** to use `localhost` as you will run into CORS issues when loading ressources from Syncmeta.
-
-#### Confguration
-
+If you are using docker compose, you can configure the environment by adjusting the `.env` file.
 The following environment variables can be configured. 
 | Variable  | Meaning   | Default  | Required |
 |---        |---        |---       |---       |
-|OIDC_CLIENT_ID|  OIDC client id which is used for authentication purposes. The client id can be acquired from Learning Layers after client registration    | www.localclient.com  |  Yes |
-|YJS        |The adress of the yjs instance.    | http://127.0.0.1:1234  | Yes|
+|OIDC_CLIENT_ID|  OIDC client id which is used for authentication purposes. The client id can be acquired from Learning Layers after client registration    | localtestclient  |  Yes |
+|YJS        |The adress of the yjs instance.    | localhost:1234  | Yes|
 |YJS_RESOURCE_PATH | If the WebSocket server is running behind a reverse proxy and the /yjs path is redirected to the WebSocket server, this env variable needs to be /yjs/socket.io. | | No| 
-| RASA_NLU  | Address of a server hosting the NLU Model. If not empty, the given address will be written in the "Rasa NLU Endpoint" field of the NLU Model Training Helper.  |   |   No |
-|SBF_MANAGER| Address of a running SBFManager Instance. If not empty, the given address will be written in the "SBFManager Endpoint" fields of the frontend. | |No|
+| YJS_PROTOCOL | The protocol used to connect to the WebSocket server. | ws | No |
+| RASA_NLU  | Address of a server hosting the NLU Model. If not empty, the given address will be written in the "Rasa NLU Endpoint" field of the NLU Model Training Helper.  | http://rasa:5005 |   No |
+|SBF_MANAGER| Address of a running SBFManager Instance. If not empty, the given address will be written in the "SBFManager Endpoint" fields of the frontend. | http://localhost:8080/SBFmanager |No|
+| PORT | Port on which the frontend will be served. | 8082 | No |
+|CONTACT_SERVICE_URL | URL at which the contact service is reachable | http://localhost:8080/contactservice | No |
 
-### Build using Grunt
-You can also build the application using Grunt. First, make sure that you are using a compatible node version. The framework currently only supports up to node `^10.0.0`. You can check your version by running `node --version`. First, create `config.json` file in the `Utilities Frontend/app` directory. It should have the following content:
-```json
-{
-    "syncMetaHost": "<SYNC_META_HOST>",
-    "oidc_client_id": "<OIDC_CLIENT_ID>",
-    "yjs_socket_url": "<YJS_ADDRESS>",
-    "yjs_resource_path": "<YJS_RESOURCE_PATH>",
-    "contact_service_url": "<CONTACT_SERVICE_URL>"
-}
-```
-
-Open a terminal in the `Utilities Frontend/app` folder. Run 
-```
-npm install
-```
-After that run
-```
-npm run build  
-```
-to build the application. Alternatively, you can use `npm run build:watch` to automatically rebuild the application on file changes.
-
-Now, run 
-```
-npm run dev
-```
-to start the server. The application will be served on `localhost:8082`. 
 
 ## Bots created using this framework
 
