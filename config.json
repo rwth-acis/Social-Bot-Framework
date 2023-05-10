@@ -4,5 +4,6 @@
   "yjs_address": "http://localhost:1234",
   "yjs_resource_path": "",
   "contact_service_url": "http://localhost:8080",
-  "rasaEndpoint": "http://localhost:5005"
+  "rasaEndpoint": "http://localhost:5005",
+  "yjs_socket_protocol": "ws"
 }

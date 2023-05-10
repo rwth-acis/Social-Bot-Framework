@@ -21,7 +21,7 @@ services:
       - "1234:1234"
   
   rasa:
-    image: rasa/rasa:3.3.10-full
+    image: ${RASA_IMAGE:-rasa/rasa:3.3.10-full}
     command: run --enable-api -m models --cors "*" --debug
   db:
     image: mysql:8
