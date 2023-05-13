@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 import "./bot.manager.widget.js";
-import "@rwth-acis/syncmeta-widgets";
+import "@rwth-acis/syncmeta-widgets/build/widgets/widget.container.js";
 
 /**
  * @customElement
