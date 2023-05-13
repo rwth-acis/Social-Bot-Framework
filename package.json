@@ -21,7 +21,7 @@
     "node:prod": "node ./server.cjs"
   },
   "dependencies": {
-    "@rwth-acis/syncmeta-widgets": "^2.2.11",
+    "@rwth-acis/syncmeta-widgets": "^2.2.8",
     "@vaadin/router": "^1.7.4",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "express": "^4.17.1",
