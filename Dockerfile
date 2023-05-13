@@ -14,7 +14,7 @@ COPY . .
 WORKDIR /usr/src/app
 RUN cp ./config.json.sample ./config.json
 
-RUN npm install 
+RUN npm ci 
 
 WORKDIR /usr/src/app
 
