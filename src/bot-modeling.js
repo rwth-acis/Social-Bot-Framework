@@ -2,6 +2,7 @@ import { LitElement, html } from "lit";
 import "./bot.manager.widget.js";
 import "@rwth-acis/syncmeta-widgets";
 import config from "../config.json";
+import { Common } from "./common.js";
 
 /**
  * @customElement
@@ -21,12 +22,6 @@ class BotModeling extends LitElement {
   }
 
   render() {
-    const host = config.yjs_address.includes("http")
-      ? config.yjs_address.split("/")[2].split(":")[0]
-      : config.yjs_address.split(":")[0];
-    const port = config.yjs_address.includes("http")
-      ? config.yjs_address.split("/")[2].split(":")[1]
-      : config.yjs_address.split(":")[1];
     return html` <style>
         .maincontainer {
           min-height: 55vh;
@@ -62,10 +57,10 @@ class BotModeling extends LitElement {
         <bot-manager-widget></bot-manager-widget>
       </div>
       <widget-container
-        yjsHost="${host}"
-        yjsPort="${port}"
+        yjsHost="${config.yjs_host}"
+        yjsPort="${config.yjs_port}"
         yjsProtocol="${config.yjs_socket_protocol}"
-        yjsSpaceTitle="${window.spaceTitle}"
+        yjsSpaceTitle="${Common.getYjsRoomName()}"
       ></widget-container>`;
   }
   firstUpdated() {

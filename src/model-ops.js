@@ -4,7 +4,7 @@ import { yjsSync } from "@rwth-acis/syncmeta-widgets";
 const production = "env:development" === "env:production";
 import config from "../config.json";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync.js";
-
+import { Common } from "./common.js";
 class ModelOps {
   y = null;
 
@@ -18,17 +18,12 @@ class ModelOps {
     if (useCache && this.y) {
       return new Promise((resolve) => resolve(this.y));
     }
-    const host = config.yjs_address.includes("http")
-      ? config.yjs_address.split("/")[2].split(":")[0]
-      : config.yjs_address.split(":")[0];
-    const port = config.yjs_address.includes("http")
-      ? config.yjs_address.split("/")[2].split(":")[1]
-      : config.yjs_address.split(":")[1];
+
     const yjsInsatnce = getInstance({
-      host: host,
-      port: port,
+      host: config.yjs_host,
+      port: config.yjs_port,
       protocol: config.yjs_socket_protocol,
-      spaceTitle: window.spaceTitle,
+      spaceTitle: Common.getYjsRoomName(),
     });
     return yjsInsatnce.connect();
   }
