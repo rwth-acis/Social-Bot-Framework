@@ -1,12 +1,11 @@
 import { html, LitElement } from "lit";
 import _ from "lodash-es";
 import { getGuidanceModeling } from "@rwth-acis/syncmeta-widgets/src/es6/Guidancemodel";
-import { yjsSync } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
+import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import { Text as YText, Map as YMap } from "yjs";
 import { QuillBinding } from "y-quill";
 import Quill from "quill";
-
-const production = "env:development" === "env:production";
+import config from "../config.json";
 
 const keyboardEnterPrevent = {
   bindings: {
@@ -36,9 +35,16 @@ class BotManagerWidget extends LitElement {
   }
 
   async updateMenu() {
-    const yjs_address = production ? "{YJS_ADDRESS}" : "localhost:1234";
-    const yjs_protocol = production ? "{YJS_PROTOCOL}" : "ws";
-    const y = await yjsSync(null, yjs_address, yjs_protocol);
+    const host = config.yjs_address.split("/")[2].split(":")[0];
+    const port = config.yjs_address.split(":")[2];
+    console.log(host, port);
+    const instance = getInstance({
+      host,
+      port,
+      protocol: config.yjs_socket_protocol,
+      spaceTitle: window.spaceTitle,
+    });
+    const y = await instance.connect();
     var xhr = new XMLHttpRequest();
     var endpoint = y.getText("sbfManager").toString();
     xhr.open("GET", endpoint + "/models/");
@@ -330,11 +336,18 @@ class BotManagerWidget extends LitElement {
 
   firstUpdated() {
     super.firstUpdated();
-    const yjs_address = production ? "{YJS_ADDRESS}" : "localhost:1234";
-    const yjs_protocol = production ? "{YJS_PROTOCOL}" : "ws";
-    yjsSync(null, yjs_address, yjs_protocol).then((y) => {
+    const host = config.yjs_address.split("/")[2].split(":")[0];
+    const port = config.yjs_address.split(":")[2];
+    console.log(host, port);
+    const instance = getInstance({
+      host,
+      port,
+      protocol: config.yjs_socket_protocol,
+      spaceTitle: window.spaceTitle,
+    });
+    instance.connect().then((y) => {
       if (!("y" in window)) window.y = y;
-      this.guidance = getGuidanceModeling();   
+      this.guidance = getGuidanceModeling();
 
       this.sbfManagerEndpointEditor = new Quill(
         document.querySelector("#sbfManagerEndpointInput"),
