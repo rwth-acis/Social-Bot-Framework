@@ -49,7 +49,7 @@ class ModelOps {
             resolve(false);
           }
         }
-      }, 600);
+      }, 1200);
     });
   }
 
