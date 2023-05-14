@@ -19,7 +19,7 @@ check_if_exists "$CONTACT_SERVICE_URL" "CONTACT_SERVICE_URL"
 
 #### Set default values ####
 export YJS_HOST=${YJS_HOST:-localhost}
-export YJS_PORT=${YJS_PORT:-80}
+export YJS_PORT=${YJS_PORT:-1234}
 export YJS_PROTOCOL=${YJS_PROTOCOL:-ws}
 export YJS_RESOURCE_PATH=${YJS_RESOURCE_PATH:-/socket.io}
 
