@@ -338,7 +338,7 @@ class BotManagerWidget extends LitElement {
       host: config.yjs_host,
       port: config.yjs_port,
       protocol: config.yjs_socket_protocol,
-      spaceTitle: Common.getYjsRoomName(),
+      spaceTitle: Common.getYjsRoom(),
     });
     instance.connect().then((y) => {
       if (!("y" in window)) window.y = y;

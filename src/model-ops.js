@@ -23,7 +23,7 @@ class ModelOps {
       host: config.yjs_host,
       port: config.yjs_port,
       protocol: config.yjs_socket_protocol,
-      spaceTitle: Common.getYjsRoomName(),
+      spaceTitle: Common.getYjsRoom(),
     });
     return yjsInsatnce.connect();
   }

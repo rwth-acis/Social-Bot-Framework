@@ -1,15 +1,49 @@
+/**
+ * This class contains common functions that are used in the example app.
+ * It is used to set the space and the yjs room.
+ * Each space has two yjs rooms, one for the model and one for the meta-model.
+ */
 export class Common {
-  static setSpace(syncmetaSpace) {
-    window.syncmetaRoom = this.createYjsRoomNameWithSpace(syncmetaSpace);
-    localStorage.setItem("syncmetaSpace", window.syncmetaRoom);
+  /**
+   * Sets the current yjs room. This is used for synchronization with YJS.
+   * @param spaceName  the current space
+   */
+  static setYjsRoom(spaceName) {
+    if (!spaceName) {
+      spaceName = Common.getSyncmetaSpaceName();
+    }
+    const room = Common.getYjsRoomNameForCurrentSpace(spaceName);
+    localStorage.setItem("yjs-room", room);
   }
-  static createYjsRoomNameWithSpace(space) {
-    return space + "-" + this.getYjsRoomName();
+  /**
+   *  Returns the current space. This is used for synchronization with YJS.
+   * @returns the current space
+   */
+  static getYjsRoom() {
+    return localStorage.getItem("yjs-room");
   }
-  static setYjsRoomName(roomName) {
-    localStorage.setItem("yjsRoomWithoutSpaceName", roomName);
+  /**
+   * Returns the Yjs room name for the current space.
+   * It prepends the space name to the syncmeta space.
+   * @param space  the current space
+   * @returns
+   */
+  static getYjsRoomNameForCurrentSpace(space) {
+    return space + "-" + Common.getSyncmetaSpaceName();
   }
-  static getYjsRoomName() {
-    return localStorage.getItem("yjsRoomWithoutSpaceName");
+
+  /**
+   * Sets the syncmeta space name. It taken from the user input in the space input.
+   * @param name
+   */
+  static setSyncmetaSpaceName(name) {
+    localStorage.setItem("syncmeta-space-name", name);
+  }
+  /**
+   * Returns the syncmeta space name
+   * @returns the syncmeta space name
+   **/
+  static getSyncmetaSpaceName() {
+    return localStorage.getItem("syncmeta-space-name");
   }
 }

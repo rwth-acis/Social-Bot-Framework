@@ -60,7 +60,7 @@ class BotModeling extends LitElement {
         yjsHost="${config.yjs_host}"
         yjsPort="${config.yjs_port}"
         yjsProtocol="${config.yjs_socket_protocol}"
-        yjsSpaceTitle="${Common.getYjsRoomName()}"
+        yjsSpaceTitle="${Common.getYjsRoom()}"
       ></widget-container>`;
   }
   firstUpdated() {
