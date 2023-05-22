@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  mobsos-data-processing:
+    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/mobsos-data-processing:master
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: ${DATABASE_PORT:-3306}
+      MYSQL_USER: ${DATABASE_USER:-root}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD:-root}
+      LAS2PEER_PORT: 9013
+      BOOTSTRAP: social-bot-manager:9011
+    ports:
+      - "9013:9013"
   social-bot-manager:
     image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:MA-aaron
     environment:

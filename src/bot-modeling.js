@@ -1,6 +1,8 @@
 import { LitElement, html } from "lit";
 import "./bot.manager.widget.js";
 import "@rwth-acis/syncmeta-widgets";
+import config from "../config.json";
+import { Common } from "./common.js";
 
 /**
  * @customElement
@@ -54,7 +56,12 @@ class BotModeling extends LitElement {
       >
         <bot-manager-widget></bot-manager-widget>
       </div>
-      <widget-container></widget-container>`;
+      <widget-container
+        yjsHost="${config.yjs_host}"
+        yjsPort="${config.yjs_port}"
+        yjsProtocol="${config.yjs_socket_protocol}"
+        yjsSpaceTitle="${Common.getYjsRoom()}"
+      ></widget-container>`;
   }
   firstUpdated() {
     super.firstUpdated();

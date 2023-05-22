@@ -2,7 +2,9 @@ import vls from "./vls.js";
 import botModel from "./botModel.js";
 import { yjsSync } from "@rwth-acis/syncmeta-widgets";
 const production = "env:development" === "env:production";
-
+import config from "../config.json";
+import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync.js";
+import { Common } from "./common.js";
 class ModelOps {
   y = null;
 
@@ -16,9 +18,14 @@ class ModelOps {
     if (useCache && this.y) {
       return new Promise((resolve) => resolve(this.y));
     }
-    const yjs_address = production ? "{YJS_ADDRESS}" : "localhost:1234";
-    const yjs_protocol = production ? "{YJS_PROTOCOL}" : "ws";
-    return yjsSync(null, yjs_address, yjs_protocol);
+
+    const yjsInsatnce = getInstance({
+      host: config.yjs_host,
+      port: config.yjs_port,
+      protocol: config.yjs_socket_protocol,
+      spaceTitle: Common.getYjsRoom(),
+    });
+    return yjsInsatnce.connect();
   }
 
   async uploadMetaModel() {
@@ -42,7 +49,7 @@ class ModelOps {
             resolve(false);
           }
         }
-      }, 400);
+      }, 1200);
     });
   }
 

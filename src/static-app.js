@@ -194,7 +194,7 @@ class StaticApp extends LitElement {
 
   _onChangeButtonClicked() {
     const input = document.querySelector("#yjsRoomInput").value;
-    const currentRoomName = Common.getYjsRoomName();
+    const currentRoomName = Common.getYjsRoom();
     if (!input || input.trim().length === 0) {
       alert("Please enter a valid room name");
       return;
@@ -203,8 +203,8 @@ class StaticApp extends LitElement {
       alert("You are already in this space!");
       return;
     }
-    Common.setYjsRoomName(input);
-    Common.setSpace("space");
+    Common.setSyncmetaSpaceName(input);
+    Common.setYjsRoom("space");
     this.changeVisibility("#roomEnterLoader", true);
     location.reload();
   }
@@ -220,7 +220,7 @@ class StaticApp extends LitElement {
   }
 
   displayCurrentRoomName() {
-    let spaceName = Common.getYjsRoomName();
+    let spaceName = Common.getSyncmetaSpaceName();
     if (spaceName) {
       document.querySelector("#yjsRoomInput").value = spaceName;
     } else {
