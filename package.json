@@ -18,7 +18,8 @@
     "dev": "vite",
     "build:prod": "vite build",
     "preview": "vite preview",
-    "node:prod": "node ./server.cjs"
+    "node:prod": "node ./server.cjs",
+    "yjs-socket": "npx y-websocket"
   },
   "dependencies": {
     "@rwth-acis/syncmeta-widgets": "^2.4.2",
