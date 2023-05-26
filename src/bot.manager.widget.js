@@ -360,6 +360,7 @@ class BotManagerWidget extends LitElement {
       if (!this.sbfManagerEndpointEditor) {
         throw new Error("Could not find quill editor");
       }
+
       new QuillBinding(y.getText("sbfManager"), this.sbfManagerEndpointEditor);
 
       this.storeNameInputEditor = new Quill(

@@ -1,7 +1,5 @@
 import vls from "./vls.js";
 import botModel from "./botModel.js";
-import { yjsSync } from "@rwth-acis/syncmeta-widgets";
-const production = "env:development" === "env:production";
 import config from "../config.json";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync.js";
 import { Common } from "./common.js";
@@ -49,7 +47,7 @@ class ModelOps {
             resolve(false);
           }
         }
-      }, 1200);
+      }, 5000);
     });
   }
 
