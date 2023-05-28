@@ -22,7 +22,7 @@
     "yjs-socket": "npx y-websocket"
   },
   "dependencies": {
-    "@rwth-acis/syncmeta-widgets": "^2.4.5",
+    "@rwth-acis/syncmeta-widgets": "^2.4.6",
     "@vaadin/router": "^1.7.4",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "express": "^4.17.1",
