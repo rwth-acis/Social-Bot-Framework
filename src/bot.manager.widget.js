@@ -37,132 +37,97 @@ class BotManagerWidget extends LitElement {
     return this;
   }
 
-  async updateMenu() {
-    const instance = getInstance({
-      host: config.yjs_host,
-      port: config.yjs_port,
-      protocol: config.yjs_socket_protocol,
-      spaceTitle: Common.getYjsRoom(),
-    });
-    const y = await instance.connect();
-    var xhr = new XMLHttpRequest();
-    var endpoint = y.getText("sbfManager").toString();
-    xhr.open("GET", endpoint + "/models/");
-    xhr.onload = () => {
-      if (xhr.status == 200) {
-        var models;
-        try {
-          models = JSON.parse(xhr.response);
-        } catch (e) {
-          console.error("error while parsing models", e);
-          return;
-        }
-        Object.values(models).forEach((model) => {
-          if (!this.botModels.includes(model)) {
-            const loadNameInput = document.querySelector("#loadNameInput");
-            const option = document.createElement("option");
-            option.value = model;
-            option.text = model;
-            loadNameInput.appendChild(option);
-            this.botModels.push(model);
-          }
-        });
-      }
-    };
-    xhr.send(null);
-  }
+  // loadModel() {
+  //   var name = document.querySelector("#storeNameInput").val();
+  //   var endpoint = window.y.getText("sbfManager").toString();
+  //   var loadStatus = $("#loadStatus");
+  //   const spinner = $("#loadStatusSpinner");
+  //   const btn = $("#load-model");
+  //   $(loadStatus).text("Loading...");
+  //   spinner.show();
+  //   btn.prop("disabled", true);
 
-  loadModel() {
-    var name = document.querySelector("#storeNameInput").val();
-    var endpoint = window.y.getText("sbfManager").toString();
-    var loadStatus = $("#loadStatus");
-    const spinner = $("#loadStatusSpinner");
-    const btn = $("#load-model");
-    $(loadStatus).text("Loading...");
-    spinner.show();
-    btn.prop("disabled", true);
-
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", () => {
-      alert("The model was successfully loaded.");
-      cleanStatus("loadStatus");
-      spinner.hide();
-      btn.prop("disabled", false);
-    });
-    xhr.addEventListener("error", () => {
-      alert("The model could not be loaded.");
-      cleanStatus("loadStatus");
-      spinner.hide();
-      btn.prop("disabled", false);
-    });
-    xhr.open("GET", endpoint + "/models/" + name);
-    xhr.responseType = "json";
-    xhr.onload = function () {
-      var data = xhr.response;
-      if (data && name) {
-        var initAttributes = function (attrs, map) {
-          if (attrs.hasOwnProperty("[attributes]")) {
-            var attr = attrs["[attributes]"].list;
-            for (var key in attr) {
-              if (attr.hasOwnProperty(key)) {
-                if (attr[key].hasOwnProperty("key")) {
-                  var ytext = map.set(attr[key].key.id, new YText());
-                  ytext.insert(0, attr[key].key.value);
-                } else {
-                  var ytext = map.set(attr[key].value.id, new YText());
-                  ytext.insert(0, attr[key].value.value);
-                }
-              }
-            }
-          } else {
-            for (var key in attrs) {
-              if (attrs.hasOwnProperty(key)) {
-                var value = attrs[key].value;
-                if (!value.hasOwnProperty("option")) {
-                  if (value.value instanceof String) {
-                    var ytext = map.set(value.id, new YText());
-                    ytext.insert(0, value.value);
-                  }
-                }
-              }
-            }
-          }
-        };
-        if (this.guidance.isGuidanceEditor())
-          y.getMap("data").set("guidancemodel", data);
-        else y.getMap("data").set("model", data);
-        for (var key in data.nodes) {
-          if (data.nodes.hasOwnProperty(key)) {
-            var entity = data.nodes[key];
-            var map = y.getMap("nodes").set(key, new YMap());
-            var attrs = entity.attributes;
-            if (entity.hasOwnProperty("label")) {
-              var ytext = map.set(entity.label.value.id, new YText());
-              ytext.insert(0, entity.label.value.value);
-            }
-            initAttributes(attrs, map);
-          }
-        }
-        for (var key in data.edges) {
-          if (data.edges.hasOwnProperty(key)) {
-            var entity = data.edges[key];
-            var map = y.getMap("edges").set(key, new YMap());
-            var attrs = entity.attributes;
-            if (entity.hasOwnProperty("label")) {
-              var ytext = map.set(entity.label.value.id, new YText());
-              ytext.insert(0, entity.label.value.value);
-            }
-            initAttributes(attrs, map);
-          }
-        }
-        y.getMap("canvas").set("ReloadWidgetOperation", "import");
-      } else {
-        $(loadStatus).text("Loading failed.");
-        cleanStatus("loadStatus");
-      }
-    };
-    xhr.send(null);
-  }
+  //   var xhr = new XMLHttpRequest();
+  //   xhr.addEventListener("load", () => {
+  //     alert("The model was successfully loaded.");
+  //     cleanStatus("loadStatus");
+  //     spinner.hide();
+  //     btn.prop("disabled", false);
+  //   });
+  //   xhr.addEventListener("error", () => {
+  //     alert("The model could not be loaded.");
+  //     cleanStatus("loadStatus");
+  //     spinner.hide();
+  //     btn.prop("disabled", false);
+  //   });
+  //   xhr.open("GET", endpoint + "/models/" + name);
+  //   xhr.responseType = "json";
+  //   xhr.onload = function () {
+  //     var data = xhr.response;
+  //     if (data && name) {
+  //       var initAttributes = function (attrs, map) {
+  //         if (attrs.hasOwnProperty("[attributes]")) {
+  //           var attr = attrs["[attributes]"].list;
+  //           for (var key in attr) {
+  //             if (attr.hasOwnProperty(key)) {
+  //               if (attr[key].hasOwnProperty("key")) {
+  //                 var ytext = map.set(attr[key].key.id, new YText());
+  //                 ytext.insert(0, attr[key].key.value);
+  //               } else {
+  //                 var ytext = map.set(attr[key].value.id, new YText());
+  //                 ytext.insert(0, attr[key].value.value);
+  //               }
+  //             }
+  //           }
+  //         } else {
+  //           for (var key in attrs) {
+  //             if (attrs.hasOwnProperty(key)) {
+  //               var value = attrs[key].value;
+  //               if (!value.hasOwnProperty("option")) {
+  //                 if (value.value instanceof String) {
+  //                   var ytext = map.set(value.id, new YText());
+  //                   ytext.insert(0, value.value);
+  //                 }
+  //               }
+  //             }
+  //           }
+  //         }
+  //       };
+  //       if (this.guidance.isGuidanceEditor())
+  //         y.getMap("data").set("guidancemodel", data);
+  //       else y.getMap("data").set("model", data);
+  //       for (var key in data.nodes) {
+  //         if (data.nodes.hasOwnProperty(key)) {
+  //           var entity = data.nodes[key];
+  //           var map = y.getMap("nodes").set(key, new YMap());
+  //           var attrs = entity.attributes;
+  //           if (entity.hasOwnProperty("label")) {
+  //             var ytext = map.set(entity.label.value.id, new YText());
+  //             ytext.insert(0, entity.label.value.value);
+  //           }
+  //           initAttributes(attrs, map);
+  //         }
+  //       }
+  //       for (var key in data.edges) {
+  //         if (data.edges.hasOwnProperty(key)) {
+  //           var entity = data.edges[key];
+  //           var map = y.getMap("edges").set(key, new YMap());
+  //           var attrs = entity.attributes;
+  //           if (entity.hasOwnProperty("label")) {
+  //             var ytext = map.set(entity.label.value.id, new YText());
+  //             ytext.insert(0, entity.label.value.value);
+  //           }
+  //           initAttributes(attrs, map);
+  //         }
+  //       }
+  //       y.getMap("canvas").set("ReloadWidgetOperation", "import");
+  //     } else {
+  //       $(loadStatus).text("Loading failed.");
+  //       cleanStatus("loadStatus");
+  //     }
+  //   };
+  //   xhr.send(null);
+  // }
 
   submitModel() {
     var sendStatus = $("#sendStatus");
