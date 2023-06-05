@@ -7,6 +7,7 @@ import { QuillBinding } from "y-quill";
 import Quill from "quill";
 import config from "../config.json";
 import { Common } from "./common.js";
+import "./model.storage.modal.js";
 
 const keyboardEnterPrevent = {
   bindings: {
@@ -363,20 +364,6 @@ class BotManagerWidget extends LitElement {
 
       new QuillBinding(y.getText("sbfManager"), this.sbfManagerEndpointEditor);
 
-      this.storeNameInputEditor = new Quill(
-        document.querySelector("#storeNameInput"),
-        {
-          modules: { toolbar: false, keyboard: keyboardEnterPrevent },
-          cursors: false,
-          placeholder: "Enter a name for your model...",
-          theme: "snow",
-        }
-      );
-      if (!this.storeNameInputEditor) {
-        throw new Error("Could not find quill editor");
-      }
-      new QuillBinding(y.getText("storeName"), this.storeNameInputEditor);
-
       this.updateMenu();
 
       // function showAlert(message, type) {
@@ -417,73 +404,51 @@ class BotManagerWidget extends LitElement {
         body {
           overflow-x: hidden;
         }
-        .ql-container{
+        .ql-container {
           flex-grow: 1;
         }
-        #loadNameInput{
+        #loadNameInput {
           height: 44px;
         }
-        
       </style>
 
       <div class="m-1">
         <h3>Bot Operations</h3>
         <div class="row">
-          <div id="modeluploader" class="col col-5">
+          <div id="modeluploader" class="col col-6">
             <label for="sbfManagerEndpointInput" class="form-label"
               >Social bot manager endpoint
             </label>
-            <div class="input-group mb-3">
-              <div id="sbfManagerEndpointInput"></div>
-              <button
-                id="submit-model"
-                type="button"
-                class="btn btn-outline-primary"
-                @click="${this.submitModel}"
-              >
-                <i class="bi bi-robot"></i> Submit
-                <div
-                  class="spinner-border spinner-border-sm text-secondary"
-                  id="sendStatusSpinner"
-                  role="status"
-                  style="display: none"
-                >
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </button>
-              <button
-                id="delete-nlu-model"
-                type="button"
-                class="btn btn-outline-danger"
-                @click="${this.deleteModel}"
-              >
-                <i class="bi bi-cloud-slash-fill"></i> Deactivate
-                <div
-                  class="spinner-border spinner-border-sm text-secondary"
-                  id="deleteStatusSpinner"
-                  role="status"
-                  style="display: none"
-                >
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </button>
-            </div>
-          </div>
-
-     
-            <div id="modelstorer" class="col col-4">
-              <label for="store-model" class="form-label">Store model</label>
               <div class="input-group mb-3">
-                <div id="storeNameInput"></div>
-
-                <button id="store-model" class="btn btn-outline-primary">
-                  <i class="bi bi-cloud-arrow-up"></i> Store
+                <div id="sbfManagerEndpointInput"></div>
+                <button
+                  id="submit-model"
+                  type="button"
+                  class="btn btn-outline-primary"
+                  @click="${this.submitModel}"
+                >
+                  <i class="bi bi-robot"></i> Submit
                   <div
                     class="spinner-border spinner-border-sm text-secondary"
-                    id="storeStatusSpinner"
-                    style="display: none"
+                    id="sendStatusSpinner"
                     role="status"
-                    @click="${this.storeModel}"
+                    style="display: none"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
+                <button
+                  id="delete-nlu-model"
+                  type="button"
+                  class="btn btn-outline-danger"
+                  @click="${this.deleteModel}"
+                >
+                  <i class="bi bi-cloud-slash-fill"></i> Deactivate
+                  <div
+                    class="spinner-border spinner-border-sm text-secondary"
+                    id="deleteStatusSpinner"
+                    role="status"
+                    style="display: none"
                   >
                     <span class="visually-hidden">Loading...</span>
                   </div>
@@ -491,7 +456,28 @@ class BotManagerWidget extends LitElement {
               </div>
             </div>
 
-            <div class="col col-3">
+            <div id="modelstorer" class="col col-2">
+              <label for="store-model" class="form-label">Store model</label>
+              <div>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <i class="bi bi-cloud-arrow-up"></i> Store
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                        <model-storage-form></model-storage-form>
+                    </div>
+                  </div>
+                </div>
+                
+
+                
+              </div>
+            </div>
+
+            <div class="col col-4">
               <div id="modelloader">
                 <label for="loadNameInput" class="form-label">Load model</label>
                 <div class="input-group">
