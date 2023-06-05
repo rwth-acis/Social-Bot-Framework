@@ -8,6 +8,7 @@ import Quill from "quill";
 import config from "../config.json";
 import { Common } from "./common.js";
 import "./model.storage.modal.js";
+import "./model.list.js";
 
 const keyboardEnterPrevent = {
   bindings: {
@@ -419,88 +420,100 @@ class BotManagerWidget extends LitElement {
             <label for="sbfManagerEndpointInput" class="form-label"
               >Social bot manager endpoint
             </label>
-              <div class="input-group mb-3">
-                <div id="sbfManagerEndpointInput"></div>
-                <button
-                  id="submit-model"
-                  type="button"
-                  class="btn btn-outline-primary"
-                  @click="${this.submitModel}"
+            <div class="input-group mb-3">
+              <div id="sbfManagerEndpointInput"></div>
+              <button
+                id="submit-model"
+                type="button"
+                class="btn btn-outline-primary"
+                @click="${this.submitModel}"
+              >
+                <i class="bi bi-robot"></i> Submit
+                <div
+                  class="spinner-border spinner-border-sm text-secondary"
+                  id="sendStatusSpinner"
+                  role="status"
+                  style="display: none"
                 >
-                  <i class="bi bi-robot"></i> Submit
-                  <div
-                    class="spinner-border spinner-border-sm text-secondary"
-                    id="sendStatusSpinner"
-                    role="status"
-                    style="display: none"
-                  >
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                </button>
-                <button
-                  id="delete-nlu-model"
-                  type="button"
-                  class="btn btn-outline-danger"
-                  @click="${this.deleteModel}"
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+              <button
+                id="delete-nlu-model"
+                type="button"
+                class="btn btn-outline-danger"
+                @click="${this.deleteModel}"
+              >
+                <i class="bi bi-cloud-slash-fill"></i> Deactivate
+                <div
+                  class="spinner-border spinner-border-sm text-secondary"
+                  id="deleteStatusSpinner"
+                  role="status"
+                  style="display: none"
                 >
-                  <i class="bi bi-cloud-slash-fill"></i> Deactivate
-                  <div
-                    class="spinner-border spinner-border-sm text-secondary"
-                    id="deleteStatusSpinner"
-                    role="status"
-                    style="display: none"
-                  >
-                    <span class="visually-hidden">Loading...</span>
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div id="modelstorer" class="col col-2">
+            <label for="store-model" class="form-label">Store model</label>
+            <div>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                <i class="bi bi-cloud-arrow-up"></i> Store
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="staticBackdrop"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <model-storage-form></model-storage-form>
                   </div>
-                </button>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div id="modelstorer" class="col col-2">
-              <label for="store-model" class="form-label">Store model</label>
+          <div class="col col-4">
+            <div id="modelloader">
+              <label for="loadNameInput" class="form-label">Load model</label>
               <div>
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <i class="bi bi-cloud-arrow-up"></i> Store
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loadModelModal"
+                >
+                  <i class="bi bi-cloud-arrow-down"></i> Load
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div
+                  class="modal fade"
+                  id="loadModelModal"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
                   <div class="modal-dialog">
                     <div class="modal-content">
-                        <model-storage-form></model-storage-form>
+                      <model-list></model-list>
                     </div>
                   </div>
-                </div>
-                
-
-                
-              </div>
-            </div>
-
-            <div class="col col-4">
-              <div id="modelloader">
-                <label for="loadNameInput" class="form-label">Load model</label>
-                <div class="input-group">
-                  <select
-                    id="loadNameInput"
-                    class="form-select form-control"
-                  ></select>
-
-                  <button
-                    id="load-model"
-                    class="btn btn-outline-primary"
-                    @click="${this.loadModel}"
-                  >
-                    <i class="bi bi-cloud-arrow-down"></i> Load
-                    <div
-                      class="spinner-border spinner-border-sm text-secondary"
-                      id="loadStatusSpinner"
-                      role="status"
-                      style="display: none"
-                    >
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </button>
                 </div>
               </div>
             </div>

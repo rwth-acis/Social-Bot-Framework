@@ -37,30 +37,7 @@ class ModelStorageForm extends LitElement {
     return this;
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    const currentDate = new Date();
-    const timestamp = currentDate.toLocaleString();
-    const username = "anonymous"; // Replace with actual username logic if available
-
-    // Store the model and its metadata
-    const modelData = {
-      name: this.modelName,
-      timestamp,
-      username,
-      versionTag: this.versionTag,
-    };
-
-    // TODO: Perform the necessary actions to store the model data
-
-    // Clear the form inputs after submission
-    this.modelName = "";
-    this.versionTag = "";
-  }
-
   async firstUpdated() {
-    this.modelName = Common.getYjsRoom() + "-model";
     const instance = getInstance({
       spaceTitle: Common.getYjsRoom(),
       host: config.yjs_host,
@@ -68,9 +45,6 @@ class ModelStorageForm extends LitElement {
       protocol: config.yjs_socket_protocol,
     });
     const y = await instance.connect();
-    const modelData = y.getMap("bot-model").get(this.modelName);
-
-    console.log(modelData);
 
     this.storeNameInputEditor = new Quill(
       document.querySelector("#storeNameInput"),
@@ -126,7 +100,7 @@ class ModelStorageForm extends LitElement {
       </div>
       <!-- Modal -->
       <div class="modal-body">
-        <form @submit="${this.handleSubmit}">
+        <form>
           <div class="form-group">
             <label for="modelName">Model Name</label>
             <div id="storeNameInput"></div>
@@ -165,22 +139,26 @@ class ModelStorageForm extends LitElement {
       protocol: config.yjs_socket_protocol,
     });
     const y = await instance.connect();
-    if (!this.modelName) {
+    const modelName = y.getText("storeName").toString();
+    if (!modelName) {
       alert("Please enter a model name");
       return;
     }
     const currentBotModel = y.getMap("data").get("model");
     const modelData = {
-      name: this.modelName,
+      name: modelName,
       timestamp: new Date().toLocaleString(),
       username: this.username,
-      versionTag: this.versionTag,
+      versionTag: y.getText("storeVersion").toString(),
       model: currentBotModel,
     };
-    const botModel = y.getMap("bot-models").has(this.modelName)
-      ? y.getMap("bot-models").get(this.modelName)
-      : new YMap();
-    botModel.set(this.versionTag, modelData);
+    let botModel = y.getMap("bot-models").get(modelName);
+    if (!botModel) {
+      botModel = new YMap();
+      y.getMap("bot-models").set(modelName, botModel);
+    }
+    botModel.set(y.getText("storeVersion").toString(), modelData);
+    alert("Model stored successfully");
     // close the modal
     const closeBtn = document
       .querySelector(".modal-footer")
