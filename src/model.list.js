@@ -158,14 +158,19 @@ class ModelSearch extends LitElement {
       ></script>
       <div class="modal-body">
         <div class="form-group">
-          <label for="searchQuery">Search Model</label>
-          <input
-            id="searchQuery"
-            type="text"
-            class="form-control"
-            .value="${this.searchQuery}"
-            @input="${this.handleSearchInput}"
-          />
+          <div class="input-group">
+            <input
+              id="searchQuery"
+              type="text"
+              class="form-control"
+              placeholder="Search Model"
+              .value="${this.searchQuery}"
+              @input="${this.handleSearchInput}"
+            />
+            <div class="input-group-text" id="btnGroupAddon">
+              <i class="bi bi-search"></i>
+            </div>
+          </div>
         </div>
 
         <div class="search-results mt-2">${this.renderSearchResults()}</div>

@@ -7,7 +7,7 @@ import { QuillBinding } from "y-quill";
 import Quill from "quill";
 import config from "../config.json";
 import { Common } from "./common.js";
-import "./model.storage.modal.js";
+import "./model.storage.js";
 import "./model.list.js";
 
 const keyboardEnterPrevent = {
@@ -416,7 +416,7 @@ class BotManagerWidget extends LitElement {
       <div class="m-1">
         <h3>Bot Operations</h3>
         <div class="row">
-          <div id="modeluploader" class="col col-6">
+          <div id="modeluploader" class="col col-10">
             <label for="sbfManagerEndpointInput" class="form-label"
               >Social bot manager endpoint
             </label>
@@ -458,8 +458,9 @@ class BotManagerWidget extends LitElement {
           </div>
 
           <div id="modelstorer" class="col col-2">
-            <label for="store-model" class="form-label">Store model</label>
-            <div>
+            <label class="form-label">Model Operations</label>
+            <br />
+            <div class="btn-group" style="height:44px">
               <button
                 type="button"
                 class="btn btn-outline-primary"
@@ -468,52 +469,43 @@ class BotManagerWidget extends LitElement {
               >
                 <i class="bi bi-cloud-arrow-up"></i> Store
               </button>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="staticBackdrop"
-                data-bs-keyboard="false"
-                tabindex="-1"
-                aria-labelledby="staticBackdropLabel"
-                aria-hidden="true"
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#loadModelModal"
               >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <model-storage-form></model-storage-form>
-                  </div>
+                <i class="bi bi-cloud-arrow-down"></i> Load
+              </button>
+            </div>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="loadModelModal"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <model-list></model-list>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="col col-4">
-            <div id="modelloader">
-              <label for="loadNameInput" class="form-label">Load model</label>
-              <div>
-                <button
-                  type="button"
-                  class="btn btn-outline-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loadModelModal"
-                >
-                  <i class="bi bi-cloud-arrow-down"></i> Load
-                </button>
-
-                <!-- Modal -->
-                <div
-                  class="modal fade"
-                  id="loadModelModal"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <model-list></model-list>
-                    </div>
-                  </div>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="staticBackdrop"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <model-storage-form></model-storage-form>
                 </div>
               </div>
             </div>
