@@ -40,13 +40,55 @@ class ModelSearch extends LitElement {
     this.searchResults = filteredList
       .map((modelName) => this.models[modelName])
       .reduce((acc, curr) => [...acc, ...Object.values(curr)], []);
+    y.getText("sbfManager").observe(async (e) => {
+      this.fetchStoredModelNames();
+    });
+    this.fetchStoredModelNames();
+  }
+
+  /**
+   * Fetches the names of all stored models from the SBF Manager and udpates the models property.
+   */
+  async fetchStoredModelNames() {
+    const endpoint = y.getText("sbfManager").toString();
+    try {
+      const response = await fetch(endpoint + "/models/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      // this.models = data;
+    } catch (e) {}
+  }
+
+  /**
+   * Fetches a model from the SBF Manager.
+   * @param {*} modelName name of the model to fetch
+   * @param {*} versionTag version of the model to fetch
+   * @returns
+   */
+  async fetchModel(modelName, versionTag) {
+    const endpoint = y.getText("sbfManager").toString();
+    try {
+      const response = await fetch(endpoint + "/models/" + modelName, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (e) {}
   }
 
   handleMoreInfoClick(e, index) {
     const popover = new bootstrap.Popover(e.target, {
       content: this.getPopoverContent(index),
       html: true,
-      trigger: "manual",
+      trigger: "hover",
+      placement: "bottom",
     });
     popover.toggle();
   }
@@ -81,7 +123,6 @@ class ModelSearch extends LitElement {
 
             <button
               class="btn btn-link btn-sm"
-              data-bs-content="${this.getPopoverContent(index)}"
               @click="${(e) => this.handleMoreInfoClick(e, index)}"
               aria-expanded="false"
               tabindex="0"
@@ -124,7 +165,6 @@ class ModelSearch extends LitElement {
     `;
   }
   async handleModelSelect(index) {
-    const result = this.searchResults[index];
     const instance = getInstance({
       spaceTitle: Common.getYjsRoom(),
       host: config.yjs_host,
@@ -132,7 +172,8 @@ class ModelSearch extends LitElement {
       protocol: config.yjs_socket_protocol,
     });
     const y = await instance.connect();
-    const model = y.getMap("bot-models").get(result.name);
+    const result = this.searchResults[index];
+    const model = await this.fetchModel(result.name);
     y.getMap("data").set("model", model);
     alert("Model selected. The page will reload now.");
     location.reload();
