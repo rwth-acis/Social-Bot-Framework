@@ -88,9 +88,7 @@ class ModelStorageForm extends LitElement {
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
       />
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">
-          Store Bot Model
-        </h1>
+        <h1 class="modal-title fs-5">Store Bot Model</h1>
         <button
           type="button"
           class="btn-close"
@@ -125,7 +123,7 @@ class ModelStorageForm extends LitElement {
           class="btn btn-primary"
           @click="${this.storeModel}"
         >
-          <i class="fas fa-save"></i> Store Model
+          Store Model
         </button>
       </div>
     `;
@@ -149,7 +147,7 @@ class ModelStorageForm extends LitElement {
       name: modelName,
       timestamp: new Date().toLocaleString(),
       username: this.username,
-      versionTag: y.getText("storeVersion").toString(),
+      versionTag: y.getText("storeVersion").toString() || "latest",
       model: currentBotModel,
     };
     let botModel = y.getMap("bot-models").get(modelName);
