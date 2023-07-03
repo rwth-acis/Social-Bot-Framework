@@ -22,17 +22,17 @@
     "yjs-socket": "npx y-websocket"
   },
   "dependencies": {
-    "@rwth-acis/syncmeta-widgets": "^2.4.1",
+    "@rwth-acis/syncmeta-widgets": "^2.4.7",
     "@vaadin/router": "^1.7.4",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "express": "^4.17.1",
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.4.0",
     "lit": "^2.0.2",
     "quill": "^1.3.7",
+    "vite": "^4.1.0",
     "y-quill": "^0.1.5",
     "y-websocket": "^1.4.5",
-    "yjs": "13.5.44",
-    "vite": "^4.1.0"
+    "yjs": "13.5.44"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",

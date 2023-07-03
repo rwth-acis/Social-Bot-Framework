@@ -3,6 +3,7 @@ import NLUConfig from "./nlu.md.js";
 import ModelOps from "./model-ops.js";
 import { QuillBinding } from "y-quill";
 import Quill from "quill";
+import config from "../config.json";
 
 const production = "env:development" === "env:production";
 
@@ -174,6 +175,7 @@ class ModelTraining extends LitElement {
         theme: "snow",
       }
     );
+
     new QuillBinding(y.getText("sbfManager"), _sbfQuill);
 
     // Rasa NLU endpoint
@@ -187,22 +189,29 @@ class ModelTraining extends LitElement {
         theme: "snow",
       }
     );
-    new QuillBinding(y.getText("rasa"), _rasaQuill);
-    setTimeout(() => {
-      if (y.getText("rasa")?.toString().length === 0) {
-        y.getText("rasa").insert(
-          0,
-          production ? "{RASA_URL}" : "http://localhost:5005"
-        );
-      }
 
-      if (y.getText("sbfManager")?.toString().length === 0) {
-        y.getText("sbfManager").insert(
-          0,
-          production ? "{SBF_MANAGER}" : "http://localhost:8080"
-        );
-      }
-    }, 300);
+    new QuillBinding(y.getText("rasa"), _rasaQuill);
+    // setTimeout(() => {
+    //   y.transact(() => {
+    //     if (y.getText("rasa")?.toString().length === 0) {
+    //       y.getText("rasa").delete(0, y.getText("rasa").length);
+    //       y.getText("rasa").insert(
+    //         0,
+    //         config.rasaEndpoint ? config.rasaEndpoint : "http://localhost:5005"
+    //       );
+    //     }
+
+    //     if (y.getText("sbfManager")?.toString().length === 0) {
+    //       y.getText("sbfManager").delete(0, y.getText("sbfManager").length);
+    //       y.getText("sbfManager").insert(
+    //         0,
+    //         config.sbfManagerHost
+    //           ? config.sbfManagerHost
+    //           : "http://localhost:8080"
+    //       );
+    //     }
+    //   });
+    // }, 1000);
 
     this.updateMenu();
   }
@@ -269,9 +278,9 @@ class ModelTraining extends LitElement {
     });
   }
 
- async storeData() {
-  const y = await ModelOps.getY(true);
-  const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
+  async storeData() {
+    const y = await ModelOps.getY(true);
+    const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
     var _this = this;
     $(_this.htmlQuery("#trainingStatus")).text("Storing...");
     var name = $(_this.htmlQuery("#dataName")).val();
@@ -279,8 +288,7 @@ class ModelTraining extends LitElement {
 
     $.ajax({
       type: "POST",
-      url:
-        trainingStatusUrl + name,
+      url: trainingStatusUrl + name,
       data: trainingData,
       contentType: "text/plain",
       success: function (data, textStatus, jqXHR) {
@@ -304,8 +312,7 @@ class ModelTraining extends LitElement {
 
     $.ajax({
       type: "GET",
-      url:
-        trainingStatusUrl + name,
+      url: trainingStatusUrl + name,
       contentType: "text/plain",
       success: function (data, textStatus, jqXHR) {
         $(_this.htmlQuery("#trainingStatus")).text("Data loaded.");

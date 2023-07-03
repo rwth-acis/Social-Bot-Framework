@@ -1,10 +1,10 @@
 import vls from "./vls.js";
+import metamodel from "./metamodel.json";
 import botModel from "./botModel.js";
-import { yjsSync } from "@rwth-acis/syncmeta-widgets";
-const production = "env:development" === "env:production";
 import config from "../config.json";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync.js";
 import { Common } from "./common.js";
+import GenerateViewpointModel from "./generateVLS.js";
 class ModelOps {
   y = null;
 
@@ -42,14 +42,15 @@ class ModelOps {
             "You are currently working on the metamodel. Do you want to switch to bot modeling?"
           );
           if (confirmed) {
-            y.getMap("data").set("metamodel", vls);
+           
+            y.getMap("data").set("metamodel", GenerateViewpointModel(metamodel, y));
             await this.uploadBotModel();
             resolve(true);
           } else {
             resolve(false);
           }
         }
-      }, 1200);
+      }, 5000);
     });
   }
 
