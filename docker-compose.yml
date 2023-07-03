@@ -12,14 +12,24 @@ services:
       BOOTSTRAP: social-bot-manager:9011
     ports:
       - "9013:9013"
+    depends_on:
+      - social-bot-manager
   social-bot-manager:
-    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:MA-aaron
+    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:master
     environment:
       DATABASE_NAME: ${DATABASE_NAME:-SBF}
       DATABASE_HOST: db
       DATABASE_PORT: ${DATABASE_PORT:-3306}
       DATABASE_USER: ${DATABASE_USER:-root}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:-root}
+      ADDRESS: ${ADDRESS:-127.0.0.1:8080}
+      MONGO_HOST: ${MONGO_HOST:-127.0.0.1:8080}
+      MONGO_DB: ${MONGO_DB:-sbf}
+      MONGO_USER: ${MONGO_USER:-admin}
+      MONGO_PASSWORD: ${MONGO_PASSWORD:-password}
+      MONGO_AUTH: ${MONGO_AUTH:-auth}
+      LRS_URL: ${LRL_URL:-127.0.0.1:8080}
+      LRS_AUTH_TOKEN: ${LRL_AUTH_TOKEN:-token} 
     ports:
       - "8080:8080"
       - "9011:9011"
