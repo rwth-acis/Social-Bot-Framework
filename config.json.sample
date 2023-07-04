@@ -1,0 +1,10 @@
+{
+    "oidc_client_id": "<OIDC_CLIENT_ID>",
+    "yjs_host": "<YJS_HOST>",
+    "yjs_port": "<YJS_PORT>",
+    "yjs_socket_protocol":"<YJS_PROTOCOL>",	
+    "yjs_resource_path": "<YJS_RESOURCE_PATH>",
+    "contact_service_url": "<CONTACT_SERVICE_URL>",
+    "sbfManagerHost": "<SBF_MANAGER_HOST>",
+    "rasaEndpoint": "<RASA_NLU>"
+}
