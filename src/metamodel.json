@@ -11,8 +11,8 @@
         },
         "left": 0,
         "top": 0,
-        "width": 0,
-        "height": 0,
+        "width": 50,
+        "height": 50,
         "zIndex": 0,
         "type": "ModelAttributesNode",
         "attributes": {
@@ -109,20 +109,6 @@
                             },
                             "value": {
                                 "id": "dbcf8b46f8cd76f445b9dea4[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "19df132ba486480d8860a040": {
-                            "id": "19df132ba486480d8860a040",
-                            "name": "19df132ba486480d8860a040",
-                            "key": {
-                                "id": "19df132ba486480d8860a040[key]",
-                                "name": "",
-                                "value": "ID"
-                            },
-                            "value": {
-                                "id": "19df132ba486480d8860a040[value]",
                                 "name": "",
                                 "value": "string"
                             }
@@ -738,8 +724,8 @@
             },
             "left": 5036.999999999999,
             "top": 4135.999999999999,
-            "width": 150,
-            "height": 100,
+            "width": 118,
+            "height": 99,
             "zIndex": 16034,
             "type": "Enumeration",
             "attributes": {
@@ -1559,7 +1545,7 @@
                     "value": "ConType"
                 }
             },
-            "left": 4638.333333333331,
+            "left": 4639.333333333331,
             "top": 5513.666666666663,
             "width": 150,
             "height": 100,
@@ -2800,7 +2786,7 @@
                             "value": {
                                 "id": "73513d1ebee40382b36aa297[value]",
                                 "name": "73513d1ebee40382b36aa297[value]",
-                                "value": "button"
+                                "value": "text"
                             }
                         },
                         "4848cd2aa0ff2da00f95193d[value]": {
@@ -2827,7 +2813,7 @@
                             "value": {
                                 "id": "2e2c05cafc517a4ca0641168[value]",
                                 "name": "2e2c05cafc517a4ca0641168[value]",
-                                "value": "text"
+                                "value": "button"
                             }
                         }
                     }
