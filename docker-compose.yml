@@ -15,7 +15,7 @@ services:
     depends_on:
       - social-bot-manager
   social-bot-manager:
-    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:master
+    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:ma-lakhoune
     environment:
       DATABASE_NAME: ${DATABASE_NAME:-SBF}
       DATABASE_HOST: db
