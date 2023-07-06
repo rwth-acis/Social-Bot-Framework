@@ -28,6 +28,7 @@ export OIDC_CLIENT_ID=${OIDC_CLIENT_ID:-localtestclient}
 export RASA_NLU=${RASA_NLU:-http://localhost:5005}
 export SBF_MANAGER=${SBF_MANAGER:-http://localhost:8080}
 export CONTACT_SERVICE_URL=${CONTACT_SERVICE_URL:-http://localhost:8080}
+export BASE_HREF=${BASE_HREF:-/}
 
 cp config.json.sample config.json
 
@@ -39,6 +40,11 @@ sed -i "s=<YJS_RESOURCE_PATH>=$YJS_RESOURCE_PATH=g" config.json
 sed -i "s=<CONTACT_SERVICE_URL>=$CONTACT_SERVICE_URL=g" config.json
 sed -i "s=<RASA_NLU>=$RASA_NLU=g" config.json
 sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
+
+# find <base href="" /> and replace with the value of BASE_HREF
+if [[ -n "$BASE_HREF" ]]; then
+    sed -i "s=<base href=\"\" />=<base href=\"$BASE_HREF\" />=g" dist/index.html
+fi
 
 npm run build:prod
 npm run node:prod
