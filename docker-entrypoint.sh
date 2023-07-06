@@ -48,7 +48,7 @@ sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
 if [ -n "$BASE_HREF" ]; then
     file="index.html"
     tag="head"
-    line_to_add="<base href=\"$BASE_HREF\">"
+    line_to_add="<base href=\"/$BASE_HREF/\">"
     sed -i "/<$tag>/a $line_to_add" "$file"
 fi
 
