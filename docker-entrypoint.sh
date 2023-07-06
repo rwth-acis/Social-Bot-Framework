@@ -40,10 +40,18 @@ sed -i "s=<CONTACT_SERVICE_URL>=$CONTACT_SERVICE_URL=g" config.json
 sed -i "s=<RASA_NLU>=$RASA_NLU=g" config.json
 sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
 
-# find <base href="" /> and replace with the value of BASE_HREF
-if [[ -n "$BASE_HREF" ]]; then
-    sed -i "s=<base href=\"\" />=<base href=\"/$BASE_HREF/\" />=g" index.html
+
+
+
+
+# if BASE_HREF then append it to the index.html head tag
+if [ -n "$BASE_HREF" ]; then
+    file="index.html"
+    tag="head"
+    line_to_add="<base href=\"$BASE_HREF\">"
+    sed -i "/<$tag>/a $line_to_add" "$file"
 fi
+
 
 npm run build:prod
 npm run node:prod
