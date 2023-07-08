@@ -43,18 +43,27 @@ class BotManagerWidget extends LitElement {
       spaceTitle: Common.getYjsRoom(),
     });
     const y = await instance.connect();
-    var xhr = new XMLHttpRequest();
+    // wait 100ms necessary because the y fields are not immediately available. This seems to be a bug in yjs.
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
     var endpoint = y.getText("sbfManager").toString();
-    xhr.open("GET", endpoint + "/models/");
-    xhr.onload = () => {
-      if (xhr.status == 200) {
-        var models;
-        try {
-          models = JSON.parse(xhr.response);
-        } catch (e) {
-          console.error("error while parsing models", e);
-          return;
+
+    if (!endpoint) {
+      return;
+    }
+
+    fetch(endpoint + "/models/")
+      .then((response) => {
+        if (
+          response.ok &&
+          response.headers.get("content-type").includes("json")
+        ) {
+          return response.json();
+        } else {
+          throw new Error("Failed to fetch models.");
         }
+      })
+      .then((models) => {
         Object.values(models).forEach((model) => {
           if (!this.botModels.includes(model)) {
             const loadNameInput = document.querySelector("#loadNameInput");
@@ -65,13 +74,19 @@ class BotManagerWidget extends LitElement {
             this.botModels.push(model);
           }
         });
-      }
-    };
-    xhr.send(null);
+        // select the first model if there is no model selected
+        const loadNameInput = document.querySelector("#loadNameInput");
+        if (loadNameInput.value == "") {
+          loadNameInput.value = this.botModels[0];
+        }
+      })
+      .catch((error) => {
+        console.error("Error while fetching models:", error);
+      });
   }
 
   loadModel() {
-    var name = document.querySelector("#storeNameInput").val();
+    const name = $("#loadNameInput").val();
     var endpoint = window.y.getText("sbfManager").toString();
     var loadStatus = $("#loadStatus");
     const spinner = $("#loadStatusSpinner");
@@ -79,87 +94,94 @@ class BotManagerWidget extends LitElement {
     $(loadStatus).text("Loading...");
     spinner.show();
     btn.prop("disabled", true);
-
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", () => {
-      alert("The model was successfully loaded.");
-      cleanStatus("loadStatus");
-      spinner.hide();
-      btn.prop("disabled", false);
-    });
-    xhr.addEventListener("error", () => {
-      alert("The model could not be loaded.");
-      cleanStatus("loadStatus");
-      spinner.hide();
-      btn.prop("disabled", false);
-    });
-    xhr.open("GET", endpoint + "/models/" + name);
-    xhr.responseType = "json";
-    xhr.onload = function () {
-      var data = xhr.response;
-      if (data && name) {
-        var initAttributes = function (attrs, map) {
-          if (attrs.hasOwnProperty("[attributes]")) {
-            var attr = attrs["[attributes]"].list;
-            for (var key in attr) {
-              if (attr.hasOwnProperty(key)) {
-                if (attr[key].hasOwnProperty("key")) {
-                  var ytext = map.set(attr[key].key.id, new YText());
-                  ytext.insert(0, attr[key].key.value);
-                } else {
-                  var ytext = map.set(attr[key].value.id, new YText());
-                  ytext.insert(0, attr[key].value.value);
-                }
-              }
-            }
-          } else {
-            for (var key in attrs) {
-              if (attrs.hasOwnProperty(key)) {
-                var value = attrs[key].value;
-                if (!value.hasOwnProperty("option")) {
-                  if (value.value instanceof String) {
-                    var ytext = map.set(value.id, new YText());
-                    ytext.insert(0, value.value);
-                  }
-                }
-              }
-            }
-          }
-        };
-        if (this.guidance.isGuidanceEditor())
-          y.getMap("data").set("guidancemodel", data);
-        else y.getMap("data").set("model", data);
-        for (var key in data.nodes) {
-          if (data.nodes.hasOwnProperty(key)) {
-            var entity = data.nodes[key];
-            var map = y.getMap("nodes").set(key, new YMap());
-            var attrs = entity.attributes;
-            if (entity.hasOwnProperty("label")) {
-              var ytext = map.set(entity.label.value.id, new YText());
-              ytext.insert(0, entity.label.value.value);
-            }
-            initAttributes(attrs, map);
-          }
+    fetch(endpoint + "/models/" + name)
+      .then((response) => {
+        if (
+          response.ok &&
+          response.headers.get("content-type").includes("json")
+        ) {
+          return response.json();
+        } else {
+          throw new Error("The model could not be loaded.");
         }
-        for (var key in data.edges) {
-          if (data.edges.hasOwnProperty(key)) {
-            var entity = data.edges[key];
-            var map = y.getMap("edges").set(key, new YMap());
-            var attrs = entity.attributes;
-            if (entity.hasOwnProperty("label")) {
-              var ytext = map.set(entity.label.value.id, new YText());
-              ytext.insert(0, entity.label.value.value);
-            }
-            initAttributes(attrs, map);
-          }
+      })
+      .then((data) => {
+        if (data && name) {
+          this.initModel(data, name);
+          y.getMap("canvas").set("ReloadWidgetOperation", "import");
+          alert("The model was successfully loaded.");
+          cleanStatus("loadStatus");
+          spinner.hide();
+          btn.prop("disabled", false);
+        } else {
+          $(loadStatus).text("Loading failed.");
+          cleanStatus("loadStatus");
         }
-        y.getMap("canvas").set("ReloadWidgetOperation", "import");
-      } else {
-        $(loadStatus).text("Loading failed.");
+      })
+      .catch((error) => {
+        alert("The model could not be loaded.");
         cleanStatus("loadStatus");
+        spinner.hide();
+        btn.prop("disabled", false);
+      });
+  }
+
+  initModel(data, name) {
+    const initAttributes = (attrs, map) => {
+      if (attrs.hasOwnProperty("[attributes]")) {
+        var attr = attrs["[attributes]"].list;
+        for (var key in attr) {
+          if (attr.hasOwnProperty(key)) {
+            if (attr[key].hasOwnProperty("key")) {
+              var ytext = map.set(attr[key].key.id, new YText());
+              ytext.insert(0, attr[key].key.value);
+            } else {
+              var ytext = map.set(attr[key].value.id, new YText());
+              ytext.insert(0, attr[key].value.value);
+            }
+          }
+        }
+      } else {
+        for (var key in attrs) {
+          if (attrs.hasOwnProperty(key)) {
+            var value = attrs[key].value;
+            if (!value.hasOwnProperty("option")) {
+              if (value.value instanceof String) {
+                var ytext = map.set(value.id, new YText());
+                ytext.insert(0, value.value);
+              }
+            }
+          }
+        }
       }
     };
-    xhr.send(null);
+    if (this.guidance.isGuidanceEditor())
+      y.getMap("data").set("guidancemodel", data);
+    else y.getMap("data").set("model", data);
+    for (var key in data.nodes) {
+      if (data.nodes.hasOwnProperty(key)) {
+        var entity = data.nodes[key];
+        var map = y.getMap("nodes").set(key, new YMap());
+        var attrs = entity.attributes;
+        if (entity.hasOwnProperty("label")) {
+          var ytext = map.set(entity.label.value.id, new YText());
+          ytext.insert(0, entity.label.value.value);
+        }
+        initAttributes(attrs, map);
+      }
+    }
+    for (var key in data.edges) {
+      if (data.edges.hasOwnProperty(key)) {
+        var entity = data.edges[key];
+        var map = y.getMap("edges").set(key, new YMap());
+        var attrs = entity.attributes;
+        if (entity.hasOwnProperty("label")) {
+          var ytext = map.set(entity.label.value.id, new YText());
+          ytext.insert(0, entity.label.value.value);
+        }
+        initAttributes(attrs, map);
+      }
+    }
   }
 
   submitModel() {
@@ -303,23 +325,32 @@ class BotManagerWidget extends LitElement {
     btn.prop("disabled", true);
 
     if (name && model) {
-      var xhr = new XMLHttpRequest();
-      xhr.onload = function () {
-        if (xhr.status == 200) {
-          alert("Your bot model has been successfully backed up");
-          updateMenu();
-        } else {
-          alert(
-            "Your bot model could not be backed up. Make sure that the SBF endpoint is correct. "
-          );
-        }
-        spinner.hide();
-        btn.prop("disabled", false);
-        //   cleanStatus("storeStatus");
-      };
-      xhr.open("POST", endpoint + "/models/" + name);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(JSON.stringify(model));
+     fetch(endpoint + "/models/" + name, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(model),
+     })
+       .then((response) => {
+         if (response.ok) {
+           alert("Your bot model has been successfully backed up");
+           this.updateMenu();
+         } else {
+           throw new Error(
+             "Your bot model could not be backed up. Make sure that the SBF endpoint is correct."
+           );
+         }
+       })
+       .catch((error) => {
+         alert(error.message);
+       })
+       .finally(() => {
+         spinner.hide();
+         btn.prop("disabled", false);
+         // cleanStatus("storeStatus");
+       });
+
     } else {
       if (!name) {
         alert("The model name is invalid.");
@@ -476,14 +507,13 @@ class BotManagerWidget extends LitElement {
               <div class="input-group mb-3">
                 <div id="storeNameInput"></div>
 
-                <button id="store-model" class="btn btn-outline-primary">
+                <button id="store-model" class="btn btn-outline-primary"  @click="${this.storeModel}">
                   <i class="bi bi-cloud-arrow-up"></i> Store
                   <div
                     class="spinner-border spinner-border-sm text-secondary"
                     id="storeStatusSpinner"
                     style="display: none"
                     role="status"
-                    @click="${this.storeModel}"
                   >
                     <span class="visually-hidden">Loading...</span>
                   </div>
