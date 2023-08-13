@@ -185,39 +185,56 @@ class BotManagerWidget extends LitElement {
   }
 
   submitModel() {
-    var sendStatus = $("#sendStatus");
+    const sendStatus = $("#sendStatus");
     const spinner = $("#sendStatusSpinner");
     const btn = $("#submit-model");
-    var endpoint = y.getText("sbfManager").toString();
-    var model = y.getMap("data").get("model");
+    const endpoint = y.getText("sbfManager").toString();
+    const model = y.getMap("data").get("model");
+
     sendStatus.text("Sending...");
     spinner.show();
     btn.prop("disabled", true);
 
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      if (xhr.status == 200) {
-        sendStatus.text("Successfully sent.");
-        alert("The bot has been successfully sent and is now available.");
-      } else {
-        if (xhr.response != undefined) {
-          alert(
-            "There is something wrong with your bot model: " + xhr.response
-          );
+    const timeout = 10000; // 10 seconds
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    fetch(endpoint + "/bots", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(model),
+      signal: controller.signal,
+    })
+      .then((response) => {
+        clearTimeout(timeoutId);
+        if (response.ok) {
+          sendStatus.text("Successfully sent.");
+          alert("The bot has been successfully sent and is now available.");
+        } else {
+          response.text().then((errorMessage) => {
+            alert(
+              `There is something wrong with your bot model: ${errorMessage}`
+            );
+          });
+        }
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId);
+        if (error.name === "AbortError") {
+          alert("The request timed out. Please try again later.");
         } else {
           alert(
             "The bot could not be sent. Please make sure that: the Social Bot Manager is running, your endpoint is correct, your bot model is correct."
           );
         }
-      }
-      spinner.hide();
-      btn.prop("disabled", false);
-      // cleanStatus("sendStatus");
-    };
-
-    xhr.open("POST", endpoint + "/bots");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(model));
+      })
+      .finally(() => {
+        spinner.hide();
+        btn.prop("disabled", false);
+        // cleanStatus("sendStatus");
+      });
   }
 
   deleteModel() {
