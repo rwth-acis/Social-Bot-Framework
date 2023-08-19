@@ -12,7 +12,10 @@ const production = "env:development" === "env:production";
  *
  */
 class ModelTraining extends LitElement {
-  static properties = {};
+  static properties = {
+    missingIntents: { type: Set, state: true },
+    intentCoverage: { type: Number, state: true },
+  };
   static styles = css`
     #editor {
       height: 512px;
@@ -118,6 +121,13 @@ class ModelTraining extends LitElement {
             <div
               class="d-flex flex-row mb-3 justify-content-end align-items-center"
             >
+              <button
+                type="button"
+                class="btn btn-lg btn-info"
+                @click="${this.showIntentCoverage}"
+              >
+                Intent Coverage
+              </button>
               <i id="trainingStatus" class="form-text text-muted me-1"></i>
               <button
                 type="button"
@@ -136,18 +146,64 @@ class ModelTraining extends LitElement {
             </div>
           </form>
         </div>
+        <!-- Vertically centered modal -->
+
+        <div class="modal fade" id="intentCoverageModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Intent Coverage: ${Math.round(
+                  this.intentCoverage
+                )}%
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div id="intentCoverageModalBody" class="modal-body">
+                ${
+                  this.intentCoverage === 100
+                    ? html`<h5>
+                        All intents are covered by your training data. Great
+                        job!
+                      </h5>`
+                    : html`
+                        <h5>Missing Intents:</h5>
+
+                        <ul class="list-group list-group-flush">
+                          <!-- loop over missing intents -->
+                          ${this.missingIntents.map((intent) => {
+                            return html` <li class="list-group-item">
+                              ${intent}
+                            </li>`;
+                          })}
+                        </ul>
+                      `
+                }
+              
+            </div>
+          </div>
+        </div>
       </main>
     `;
   }
 
   constructor() {
     super();
+    this.missingIntents = [];
+    this.intentCoverage = 0;
   }
 
   async firstUpdated() {
     this.dataName = this.htmlQuery("#dataName");
     this.loadName = this.htmlQuery("#loadNameInput");
     this.curModels = [];
+    this.modal = new bootstrap.Modal(
+      this.shadowRoot.getElementById("intentCoverageModal")
+    );
 
     const y = await ModelOps.getY(true);
 
@@ -229,6 +285,15 @@ class ModelTraining extends LitElement {
   async submitForm() {
     var _this = this;
     const y = await ModelOps.getY(true);
+    await this.determineIntentCoverage();
+    if (
+      this.intentCoverage < 100 &&
+      !confirm(
+        "Your training data is missing some intents. Do you still wish to submit it? You can check the missing intents by clicking the Intent Coverage button."
+      )
+    ) {
+      return;
+    }
     const trainingUrl = y.getText("sbfManager").toString() + "/trainAndLoad/";
     const rasaUrl = y.getText("rasa").toString();
     $(_this.htmlQuery("#trainingStatus")).text(
@@ -253,6 +318,87 @@ class ModelTraining extends LitElement {
         );
       },
     });
+  }
+
+  async extractIntentsFromBotModel() {
+    const y = await ModelOps.getY(true);
+    const model = y.getMap("data").get("model");
+    if (!model) {
+      return new Set();
+    }
+    const incomingMessageNodes = Object.values(model["nodes"]).filter(
+      (node) => node.type === "Incoming Message"
+    );
+    const leadsToEdges = Object.values(model["edges"]).filter(
+      (edge) => edge.type === "leadsTo"
+    );
+    const intents = new Set();
+
+    for (const node of incomingMessageNodes) {
+      for (const attribute of Object.values(node.attributes)) {
+        if (
+          attribute.name === "Intent Keyword" &&
+          attribute.value.value !== ""
+        ) {
+          let intentValue = attribute.value.value;
+          if (intentValue.includes(",")) {
+            for (const int of intentValue.split(",")) {
+              intents.add(int.trim());
+            }
+          } else {
+            intents.add(intentValue);
+          }
+        }
+      }
+    }
+
+    for (const edge of leadsToEdges) {
+      if (edge.label.value.value !== "") {
+        let intentValue = edge.label.value.value;
+        if (intentValue.includes(",")) {
+          for (const int of intentValue.split(",")) {
+            intents.add(int.trim());
+          }
+        } else {
+          intents.add(intentValue);
+        }
+      }
+    }
+
+    return intents;
+  }
+
+  async extractIntentsFromNLUModel() {
+    const intents = new Set();
+    for (const line of this.editor.getText().split("\n")) {
+      if (line.trimStart().includes("intent:")) {
+        let intentValue = line.trimStart().split("intent:")[1].trim();
+        intents.add(intentValue);
+      }
+    }
+    return intents;
+  }
+
+  async determineIntentCoverage() {
+    const botModelIntents = await this.extractIntentsFromBotModel();
+    const nluModelIntents = await this.extractIntentsFromNLUModel();
+    // check if all intents from bot model are covered by nlu model
+    const missingIntents = new Set();
+    for (const intent of botModelIntents) {
+      if (!nluModelIntents.has(intent) && intent !== "default") {
+        missingIntents.add(intent);
+      }
+    }
+
+    this.missingIntents = Array.from(missingIntents).sort();
+    const coverage = (1 - missingIntents.size / botModelIntents.size) * 100;
+    this.intentCoverage = coverage;
+  }
+
+  async showIntentCoverage() {
+    await this.determineIntentCoverage();
+    // open modal
+    this.modal.show();
   }
 
   async retrieveStatus() {
