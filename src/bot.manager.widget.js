@@ -218,6 +218,12 @@ class BotManagerWidget extends LitElement {
     xhr.open("POST", endpoint + "/bots");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(model));
+    let botName;
+    const botNode = Object.values(model["nodes"]).find(
+      (node) => node.type === "Bot"
+    );
+    botName = botNode.label.value.value;
+    this.storeModel(botName);
   }
 
   deleteModel() {
@@ -313,8 +319,13 @@ class BotManagerWidget extends LitElement {
     xhr.send();
   }
 
-  storeModel() {
-    var name = y.getText("storeName").toString();
+  storeModel(name) {
+    let botName = "";
+    if (typeof name === "string") {
+      botName = name;
+    } else {
+      botName = "backup-" + y.getText("storeName").toString();
+    }
     var endpoint = y.getText("sbfManager").toString();
     var model = y.getMap("data").get("model");
     var storeStatus = $("#storeStatus");
@@ -324,35 +335,34 @@ class BotManagerWidget extends LitElement {
     storeStatus.text("Storing...");
     btn.prop("disabled", true);
 
-    if (name && model) {
-     fetch(endpoint + "/models/" + name, {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify(model),
-     })
-       .then((response) => {
-         if (response.ok) {
-           alert("Your bot model has been successfully backed up");
-           this.updateMenu();
-         } else {
-           throw new Error(
-             "Your bot model could not be backed up. Make sure that the SBF endpoint is correct."
-           );
-         }
-       })
-       .catch((error) => {
-         alert(error.message);
-       })
-       .finally(() => {
-         spinner.hide();
-         btn.prop("disabled", false);
-         // cleanStatus("storeStatus");
-       });
-
+    if (botName && model) {
+      fetch(endpoint + "/models/" + botName, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(model),
+      })
+        .then((response) => {
+          if (response.ok) {
+            if (!name) alert("Your bot model has been successfully backed up");
+            this.updateMenu();
+          } else {
+            throw new Error(
+              "Your bot model could not be backed up. Make sure that the SBF endpoint is correct."
+            );
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          spinner.hide();
+          btn.prop("disabled", false);
+          // cleanStatus("storeStatus");
+        });
     } else {
-      if (!name) {
+      if (!botName) {
         alert("The model name is invalid.");
       } else {
         alert("The model name is empty.");
@@ -505,6 +515,7 @@ class BotManagerWidget extends LitElement {
             <div id="modelstorer" class="col col-4">
               <label for="store-model" class="form-label">Store model</label>
               <div class="input-group mb-3">
+                 <span class="input-group-text" id="basic-addon3">backup-</span>
                 <div id="storeNameInput"></div>
 
                 <button id="store-model" class="btn btn-outline-primary"  @click="${this.storeModel}">
