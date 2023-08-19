@@ -121,13 +121,6 @@ class ModelTraining extends LitElement {
             <div
               class="d-flex flex-row mb-3 justify-content-end align-items-center"
             >
-              <button
-                type="button"
-                class="btn btn-lg btn-info"
-                @click="${this.showIntentCoverage}"
-              >
-                Intent Coverage
-              </button>
               <i id="trainingStatus" class="form-text text-muted me-1"></i>
               <button
                 type="button"
@@ -136,6 +129,14 @@ class ModelTraining extends LitElement {
               >
                 <i class="bi bi-cpu"></i> Training Status
               </button>
+              <button
+                type="button"
+                class="btn btn-lg btn-info me-2"
+                @click="${this.showIntentCoverage}"
+              >
+                Intent Coverage
+              </button>
+              
               <button
                 type="button"
                 class="btn btn-lg btn-primary"
