@@ -72,6 +72,7 @@ class BotManagerWidget extends LitElement {
             option.text = model;
             loadNameInput.appendChild(option);
             this.botModels.push(model);
+            this.botModels = this.botModels.sort();
           }
         });
         // select the first model if there is no model selected
@@ -217,7 +218,6 @@ class BotManagerWidget extends LitElement {
           );
           botName = botNode.label.value.value;
           this.storeModel(botName);
-          alert("The bot has been successfully sent and is now available.");
         } else {
           response.text().then((errorMessage) => {
             alert(
