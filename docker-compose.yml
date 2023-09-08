@@ -15,7 +15,7 @@ services:
     depends_on:
       - social-bot-manager
   social-bot-manager:
-    image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/social-bot-manager:master
+    image: social-bot-manager:latest
     environment:
       DATABASE_NAME: ${DATABASE_NAME:-SBF}
       DATABASE_HOST: db
@@ -29,7 +29,8 @@ services:
       MONGO_PASSWORD: ${MONGO_PASSWORD:-password}
       MONGO_AUTH: ${MONGO_AUTH:-auth}
       LRS_URL: ${LRL_URL:-127.0.0.1:8080}
-      LRS_AUTH_TOKEN: ${LRL_AUTH_TOKEN:-token} 
+      LRS_AUTH_TOKEN: ${LRL_AUTH_TOKEN:-token}
+      WEBCONNECTOR_URL: $(WEBCONNECTOR_URL:-localhost:8080} 
     ports:
       - "8080:8080"
       - "9011:9011"
@@ -42,8 +43,8 @@ services:
       - "1234:1234"
   
   rasa:
-    image: ${RASA_IMAGE:-rasa/rasa:3.3.10-full}
-    command: run --enable-api -m models --cors "*" --debug
+    image: ${RASA_IMAGE:-khalosa/rasa-aarch64:3.5.2}
+    command: run -p 5005 --enable-api -m models --cors "*" --debug
   db:
     image: mysql:8
     platform: ${TARGETPLATFORM:-linux/amd64}
