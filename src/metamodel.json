@@ -2837,6 +2837,24 @@
             "zIndex": 16077,
             "type": "Relation",
             "attributes": {}
+        },
+        "e9d8cce1c761cb497d391a5a": {
+            "label": {
+                "id": "e9d8cce1c761cb497d391a5a[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e9d8cce1c761cb497d391a5a[label]",
+                    "name": "Label",
+                    "value": "ActionLeadsToMessage"
+                }
+            },
+            "left": 3801.999999999999,
+            "top": 6031.233398437499,
+            "width": 150,
+            "height": 100,
+            "zIndex": 16078,
+            "type": "Relation",
+            "attributes": {}
         }
     },
     "edges": {
@@ -3844,6 +3862,51 @@
             "target": "ab97a135e2b083007f06c671",
             "attributes": {},
             "type": "Bi-Dir-Association"
+        },
+        "e82b6f1022a5d62c510e3aa9": {
+            "label": {
+                "id": "e82b6f1022a5d62c510e3aa9[label]",
+                "name": "Label",
+                "value": {
+                    "id": "e82b6f1022a5d62c510e3aa9[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "ab97a135e2b083007f06c671",
+            "target": "e9d8cce1c761cb497d391a5a",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "c5ca972df66092b72f9ddf98": {
+            "label": {
+                "id": "c5ca972df66092b72f9ddf98[label]",
+                "name": "Label",
+                "value": {
+                    "id": "c5ca972df66092b72f9ddf98[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "e9d8cce1c761cb497d391a5a",
+            "target": "64fc584ccce53ec8457a5fb4",
+            "attributes": {},
+            "type": "Uni-Dir-Association"
+        },
+        "775b051ee54f5b02e9451018": {
+            "label": {
+                "id": "775b051ee54f5b02e9451018[label]",
+                "name": "Label",
+                "value": {
+                    "id": "775b051ee54f5b02e9451018[label]",
+                    "name": "Label",
+                    "value": ""
+                }
+            },
+            "source": "e9d8cce1c761cb497d391a5a",
+            "target": "fdc66e8e6f1f726e3600ca30",
+            "attributes": {},
+            "type": "Generalisation"
         }
     }
 }
