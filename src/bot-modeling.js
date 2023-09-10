@@ -3,7 +3,8 @@ import "./bot.manager.widget.js";
 import "@rwth-acis/syncmeta-widgets";
 import config from "../config.json";
 import { Common } from "./common.js";
-
+import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
+import { ifDefined } from "lit/directives/if-defined.js";
 /**
  * @customElement
  *
@@ -12,6 +13,9 @@ class BotModeling extends LitElement {
   static properties = {
     loading: { type: Boolean, value: true },
   };
+  edgeLabels;
+  edgeTypes;
+  edgeInfoShown = true;
 
   createRenderRoot() {
     return this;
@@ -60,12 +64,85 @@ class BotModeling extends LitElement {
         yjsHost="${config.yjs_host}"
         yjsPort="${config.yjs_port}"
         yjsProtocol="${config.yjs_socket_protocol}"
-        yjsSpaceTitle="${Common.getYjsRoom()}"
+        yjsSpaceTitle="${ifDefined(
+          Common.getYjsRoom() === null ? undefined : Common.getYjsRoom()
+        )}"
       ></widget-container>`;
   }
-  firstUpdated() {
+  async firstUpdated() {
+    const instance = getInstance({
+      host: config.yjs_host,
+      port: config.yjs_port,
+      protocol: config.yjs_socket_protocol,
+      spaceTitle: Common.getYjsRoom(),
+    });
+    const y = await instance.connect();
     super.firstUpdated();
+
+    setTimeout(() => {
+      const botModel = y.getMap("data").get("model");
+      if (botModel) {
+        const botElement = Object.values(botModel.nodes).find((node) => {
+          return node.type === "Bot";
+        });
+        if (botElement) {
+          this.insertUsageButton();
+          const overelay = document.createElement("canvas-statistics-overlay");
+          const canvasContainer = document.querySelector("#canvas");
+          canvasContainer.appendChild(overelay);
+        }
+      }
+    }, 300);
   }
+  insertUsageButton() {
+    const firstButtonCol = document.querySelector(
+      "#main-widget-utilities-container  > div:nth-child(1)"
+    ); // get the first button column in the canvas widget container
+    if (firstButtonCol) {
+      const newButton = document.createElement("button");
+      newButton.classList.add("btn", "btn-primary", "btn-sm", "ml-2");
+      newButton.innerHTML = "<i class='bi bi-graph-up'></i> Usage ";
+      newButton.addEventListener("click", () => {
+        this.toggleEdgeInfoLabels();
+        const overlay = document.querySelector("#model-statistics-overlay");
+        if (overlay.style.display === "none") {
+          overlay.style.display = "block";
+        } else {
+          overlay.style.display = "none";
+        }
+      });
+      firstButtonCol.appendChild(newButton);
+    }
+  }
+
+  toggleEdgeInfoLabels() {
+    if (!this.edgeLabels) {
+      this.edgeLabels = document.querySelectorAll(".edge_label");
+    }
+    if (!this.edgeTypes) {
+      this.edgeTypes = document.querySelectorAll(".type");
+    }
+    this.edgeInfoShown = Array.from(this.edgeLabels).some(
+      (edgeLabel) => edgeLabel.style.display !== "none"
+    ); // check if any of the edge labels are shown
+    for (const edgeLabel of this.edgeLabels) {
+      if (this.edgeInfoShown) {
+        edgeLabel.style.display = "none";
+      } else {
+        edgeLabel.style.display = "block";
+      }
+    }
+    for (const edgeType of this.edgeTypes) {
+      if (this.edgeInfoShown) {
+        edgeType.style.display = "none";
+      } else {
+        edgeType.style.display = "block";
+      }
+    }
+    this.edgeInfoShown = !this.edgeInfoShown;
+  }
+
+  toggleEdgeStatistics() {}
 }
 
 window.customElements.define("bot-modeling", BotModeling);

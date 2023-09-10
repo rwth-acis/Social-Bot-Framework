@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 import "./bot-modeling.js";
 import "./model-training.js";
+import "./statistics/canvas-overlay.js";
 
 /**
  * @customElement
@@ -40,7 +41,8 @@ class MainPage extends LitElement {
   firstUpdated() {
     const routeFragment = window.location.hash;
     if (routeFragment) {
-      const tab = routeFragment.split("#")[1];
+      let tab = routeFragment.split("#")[1];
+      if (tab.indexOf("&") >= 0) tab = tab.split("&")[0];
 
       const tabElement = document.querySelector(`#${tab}`);
       if (tabElement) {

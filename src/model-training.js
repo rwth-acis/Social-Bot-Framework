@@ -477,15 +477,16 @@ class ModelTraining extends LitElement {
     const y = await ModelOps.getY(true);
     const _this = this;
     const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
-    $.ajax({
-      type: "GET",
-      url: trainingStatusUrl + "/training/",
-      contentType: "application/json",
-      success: function (data, textStatus, jqXHR) {
-        if (textStatus !== "success") {
-          return;
-        }
-        $.each(data, function (index, name) {
+    const response = await fetch(trainingStatusUrl + "/training/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      try {
+        const data = await response.json();
+        data.forEach(function (name) {
           if (!_this.curModels.includes(name)) {
             var template = document.createElement("template");
             template.innerHTML = "<option>" + name + "</option>";
@@ -493,8 +494,10 @@ class ModelTraining extends LitElement {
             _this.curModels.push(name);
           }
         });
-      },
-    });
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 }
 
