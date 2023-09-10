@@ -6,5 +6,6 @@
     "yjs_resource_path": "<YJS_RESOURCE_PATH>",
     "contact_service_url": "<CONTACT_SERVICE_URL>",
     "sbfManagerHost": "<SBF_MANAGER_HOST>",
-    "rasaEndpoint": "<RASA_NLU>"
+    "rasaEndpoint": "<RASA_NLU>",
+    "pm4botsEndpoint": "<PM4BOTS_ENDPOINT>"
 }
