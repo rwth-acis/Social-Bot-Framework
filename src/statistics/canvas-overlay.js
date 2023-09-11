@@ -67,6 +67,7 @@ class CanvasStatsOverlay extends LitElement {
       }
 
       const statistics = await response.json();
+      console.log(statistics);
       this.loading = false;
       this.statistics = statistics;
     } catch (error) {
