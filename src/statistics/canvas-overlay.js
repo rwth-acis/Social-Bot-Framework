@@ -54,7 +54,6 @@ class CanvasStatsOverlay extends LitElement {
     console.log(url);
     try {
       const response = await fetch(url, {
-        mode: "no-cors",
         timeout: 10000,
         headers: {
           "Access-Control-Allow-Origin": "*",
