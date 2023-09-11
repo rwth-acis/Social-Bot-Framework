@@ -53,7 +53,14 @@ class CanvasStatsOverlay extends LitElement {
     const url = `${config.pm4botsEndpoint}/bot/${botName}/enhanced-model`;
     console.log(url);
     try {
-      const response = await fetch(url, { mode: "no-cors", timeout: 10000 });
+      const response = await fetch(url, {
+        mode: "no-cors",
+        timeout: 10000,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      });
       if (!response.ok) {
         this.loading = false;
         return;
