@@ -59,8 +59,10 @@ class CanvasStatsOverlay extends LitElement {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
       });
+      console.log(response);
       if (!response.ok) {
         this.loading = false;
         return;

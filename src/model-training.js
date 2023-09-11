@@ -484,7 +484,12 @@ class ModelTraining extends LitElement {
       },
     });
     if (response.ok) {
+      // check response body type
+
       try {
+        if (response.headers.get("Content-Type") !== "application/json") {
+          throw new Error("Invalid response body");
+        }
         const data = await response.json();
         data.forEach(function (name) {
           if (!_this.curModels.includes(name)) {
