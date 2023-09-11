@@ -16,6 +16,7 @@ check_if_exists "$YJS_RESOURCE_PATH" "YJS_RESOURCE_PATH"
 check_if_exists "$RASA_NLU" "RASA_NLU"
 check_if_exists "$SBF_MANAGER" "SBF_MANAGER"
 check_if_exists "$CONTACT_SERVICE_URL" "CONTACT_SERVICE_URL"
+check_if_exists "$PM4BOTS_ENDPOINT" "PM4BOTS_ENDPOINT"
 
 #### Set default values ####
 export YJS_HOST=${YJS_HOST:-localhost}
@@ -28,6 +29,7 @@ export OIDC_CLIENT_ID=${OIDC_CLIENT_ID:-localtestclient}
 export RASA_NLU=${RASA_NLU:-http://localhost:5005}
 export SBF_MANAGER=${SBF_MANAGER:-http://localhost:8080}
 export CONTACT_SERVICE_URL=${CONTACT_SERVICE_URL:-http://localhost:8080}
+export PM4BOTS_ENDPOINT=${PM4BOTS_ENDPOINT:-http://localhost:8088}
 
 cp config.json.sample config.json
 
@@ -39,6 +41,7 @@ sed -i "s=<YJS_RESOURCE_PATH>=$YJS_RESOURCE_PATH=g" config.json
 sed -i "s=<CONTACT_SERVICE_URL>=$CONTACT_SERVICE_URL=g" config.json
 sed -i "s=<RASA_NLU>=$RASA_NLU=g" config.json
 sed -i "s=<SBF_MANAGER_HOST>=$SBF_MANAGER=g" config.json
+sed -i "s=<PM4BOTS_ENDPOINT>=$PM4BOTS_ENDPOINT=g" config.json
 
 
 
