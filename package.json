@@ -15,7 +15,7 @@
     "url": "https://github.com/rwth-acis/Social-Bot-Framework"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 4000",
     "build:prod": "vite build",
     "preview": "vite preview",
     "node:prod": "node ./server.cjs",
