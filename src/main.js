@@ -2,6 +2,7 @@ import { LitElement, html, css } from "lit";
 import "./bot-modeling.js";
 import "./model-training.js";
 import "./statistics/canvas-overlay.js";
+import "./statistics/bot-statistics.js";
 
 /**
  * @customElement
@@ -33,6 +34,14 @@ class MainPage extends LitElement {
           aria-labelledby="profile-tab"
         >
           <model-training></model-training>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="bot-statistics"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+        >
+          <bot-statistics></bot-statistics>
         </div>
       </div>
     `;

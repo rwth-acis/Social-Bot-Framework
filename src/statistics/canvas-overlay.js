@@ -32,11 +32,12 @@ class CanvasStatsOverlay extends LitElement {
       spaceTitle: Common.getYjsRoom(),
     });
     const y = await instance.connect();
+    this.y = y;
     super.firstUpdated();
-    const botManagerEndpoint = y.getText("sbfManager").toString();
 
     setTimeout(() => {
-      const botModel = y.getMap("data").get("model");
+    const botManagerEndpoint = y.getText("sbfManager").toString();
+    const botModel = y.getMap("data").get("model");
       if (botModel) {
         const botElement = Object.values(botModel.nodes).find((node) => {
           return node.type === "Bot";
@@ -50,7 +51,8 @@ class CanvasStatsOverlay extends LitElement {
   }
 
   async fetchStatistics(botName, botManagerEndpoint) {
-    const url = `${config.pm4botsEndpoint}/bot/${botName}/enhanced-model`;
+    // botManagerEndpoint = "http://social-bot-manager:8080/SBFManager"
+    const url = `${config.pm4botsEndpoint}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpoint}`;
     console.log(url);
     try {
       const response = await fetch(url, {
@@ -71,8 +73,22 @@ class CanvasStatsOverlay extends LitElement {
       console.log(statistics);
       this.loading = false;
       this.statistics = statistics;
+      this.addMissingNodesAndEdges(statistics);
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  addMissingNodesAndEdges(statistics) {
+    // Add missing edges to bot model as overlay
+    const botModel = this.y.getMap("data").get("model");
+    const botModelEdges = botModel.edges;
+    const botModelNodes = botModel.nodes;
+    for (const nodeId of statistics.graph.nodes) {
+      if (!botModelNodes[nodeId]) {
+        console.log("newNode", nodeId);
+        botModelNodes[nodeId] = node;
+      }
     }
   }
 }

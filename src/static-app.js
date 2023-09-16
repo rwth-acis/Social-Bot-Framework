@@ -81,7 +81,7 @@ class StaticApp extends LitElement {
                   type="button"
                   role="tab"
                   aria-controls="bot-modeling"
-                  @click="${()=>this.goToModeling('bot-modeling')}"
+                  @click="${() => this.goToModeling("bot-modeling")}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-robot"></i>
@@ -90,7 +90,7 @@ class StaticApp extends LitElement {
                 </a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item me-4">
                 <a
                   data-bs-toggle="tab"
                   data-bs-target="#nlu-training"
@@ -98,12 +98,29 @@ class StaticApp extends LitElement {
                   role="tab"
                   aria-controls="nlu-training"
                   class="nav-link d-flex flex-row bd-highlight"
-                  @click="${()=>this.goToModeling('nlu-training')}"
+                  @click="${() => this.goToModeling("nlu-training")}"
                 >
                   <div class="py-2 bd-highlight">
                     <i class="bi bi-book"></i>
                   </div>
                   <div class="p-2 bd-highlight">NLU Model Training Helper</div>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a
+                  data-bs-toggle="tab"
+                  data-bs-target="#bot-statistics"
+                  type="button"
+                  role="tab"
+                  aria-controls="bot-statistics"
+                  class="nav-link d-flex flex-row bd-highlight"
+                  @click="${() => this.goToModeling("bot-statistics")}"
+                >
+                  <div class="py-2 bd-highlight">
+                    <i class="bi bi-graph-up"></i>
+                  </div>
+                  <div class="p-2 bd-highlight">Statistics</div>
                 </a>
               </li>
             </ul>
