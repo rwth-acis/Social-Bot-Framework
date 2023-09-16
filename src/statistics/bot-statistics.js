@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 import config from "../../config.json";
 import { Common } from "../common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
-
+import "pm4js/dist/pm4js_latest_w.js";
 /**
  * @customElement
  *
@@ -21,9 +21,7 @@ class BotStats extends LitElement {
   }
 
   render() {
-    return html` <div class="container-fluid  card card-body shadow-sm mb-4">
-      bruh
-    </div>`;
+    return html` <div class="container-fluid">Bot statistics works</div>`;
   }
   async firstUpdated() {
     const instance = getInstance({
