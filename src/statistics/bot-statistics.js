@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 import config from "../../config.json";
 import { Common } from "../common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
-import "pm4js/dist/pm4js_latest_w.js";
+import interact from "interactjs";
 /**
  * @customElement
  *
@@ -21,7 +21,25 @@ class BotStats extends LitElement {
   }
 
   render() {
-    return html` <div class="container-fluid">Bot statistics works</div>`;
+    return html` <div class="container-fluid ">
+      <div class="row mh-100">
+        <div
+          class="col-8  border border-3 rounded p-6 overflow-hidden mh-100 position-relative"
+          style="height:98vh;position:relative;"
+          style=""
+          id="pm-res"
+        >
+          <div
+            class="spinner-border position-absolute"
+            role="status"
+            style="top:50%;left:50%;"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div class="col-4 ">Bot statistics works</div>
+      </div>
+    </div>`;
   }
   async firstUpdated() {
     const instance = getInstance({
@@ -50,31 +68,88 @@ class BotStats extends LitElement {
     }, 300);
   }
   async fetchStatistics(botName, botManagerEndpoint) {
-    botManagerEndpoint = "http://social-bot-manager:8080/SBFManager";
-    const url = `${config.pm4botsEndpoint}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpoint}`;
+    // botManagerEndpoint = "http://social-bot-manager:8080/SBFManager";
+    const url = `${config.pm4botsEndpoint}/bot/${botName}/petri-net?bot-manager-url=${botManagerEndpoint}`;
     console.log(url);
     try {
       const response = await fetch(url, {
         timeout: 10000,
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          Accept: "text/html",
         },
       });
-      console.log(response);
       if (!response.ok) {
         this.loading = false;
         return;
       }
+      const element = document.getElementById("pm-res");
 
-      const statistics = await response.json();
-      console.log(statistics);
-      this.loading = false;
-      this.statistics = statistics;
+      document.getElementById("pm-res").innerHTML = await response.text();
+      const svg = document.getElementById("pm-res").querySelector("svg");
+      svg.style.position = "absolute";
+      // set height and width of svg to that of the child
+      svg.width.baseVal.value = svg.getBBox().width;
+      svg.height.baseVal.value = svg.getBBox().height;
+      this.centerElement(svg);
+      // zoom on scroll
+      svg.parentElement.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+          this.zoomIn(element);
+        }
+        if (e.deltaY > 0) {
+          this.zoomOut(element);
+        }
+      });
+      // set z index of parent frame above the svg
+      svg.parentElement.style.zIndex = 1;
+      this.makeDraggable(svg);
     } catch (error) {
       console.error(error);
     }
+  }
+  centerElement(element) {
+    const bbox = element.getBBox();
+    element.parentElement.scrollTo(
+      bbox.x + bbox.width / 2,
+      bbox.y + bbox.height / 2
+    );
+  }
+
+  zoomIn(element) {
+    const svg = element.querySelector("svg");
+    svg.width.baseVal.value = svg.width.baseVal.value * 1.1;
+    svg.height.baseVal.value = svg.height.baseVal.value * 1.1;
+  }
+  zoomOut(element) {
+    const svg = element.querySelector("svg");
+    svg.width.baseVal.value = svg.width.baseVal.value * 0.9;
+    svg.height.baseVal.value = svg.height.baseVal.value * 0.9;
+  }
+  makeDraggable(element) {
+    interact(element).draggable({
+      onmove: function (event) {
+        const target = event.target;
+        // keep the dragged position in the data-x/data-y attributes
+        const x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+        const y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+        // translate the element
+        target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+        // update the posiion attributes
+        target.setAttribute("data-x", x);
+        target.setAttribute("data-y", y);
+      },
+
+      // 'xy' by default - any direction
+      startAxis: "xy",
+
+      lockAxis: "xy",
+
+      max: 1,
+    });
   }
 }
 
