@@ -109,6 +109,7 @@ services:
       - MYSQL_DATABASE=LAS2PEERMON
       - SOCIAL_BOT_MANAGER_ENDPOINT=http://social-bot-manager:8080/SBFmanager
       - EVENT_LOG_GENERATOR_ENDPOINT=http://event-log-generator:8087
+      - CORS_ORIGIN=http://localhost:8082 # Needed to prevent CORS errors
     ports:
       - "8088:8088"
     depends_on:
