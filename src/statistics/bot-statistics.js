@@ -46,11 +46,11 @@ class BotStats extends LitElement {
             </div>
           </div>
 
-          <div class="col-4">
-            <div class="row">
+          <div class="col-4" style="height:98vh;overflow-y:auto">
+            <div class="row h-50">
               <h3>Bot statistics</h3>
             </div>
-            <div class="row">
+            <div class="row h-50">
               <h3>Community statistics</h3>
               <div class="mb-3">
                 <label for="serviceId" class="form-label">Service name</label>
