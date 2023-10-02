@@ -37,7 +37,41 @@ class BotStats extends LitElement {
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-        <div class="col-4 ">Bot statistics works</div>
+
+        <div class="col-4">
+          <div class="row">
+            <h3>Bot statistics works</h3>
+          </div>
+          <div class="row">
+            <h3>Community statistics</h3>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Service name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="groupId"
+                placeholder="mensa"
+                value="mensa"
+                disabled
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput2" class="form-label"
+                >Group Id</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="serviceId"
+                placeholder="mensa"
+                value="343da947a6db1296fadb5eca3987bf71f2e36a6d088e224a006f4e20e6e7935bb0d5ce0c13ada9966228f86ea7cc2cf3a1435827a48329f46b0e3963213123e0"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>`;
   }
@@ -63,10 +97,30 @@ class BotStats extends LitElement {
         if (botElement) {
           const botName = botElement.label.value.value;
           this.fetchStatistics(botName, botManagerEndpoint);
+          const groupId = document.getElementById("groupId").value;
+          const serviceId = document.getElementById("serviceId").value;
+          this.fetchSuccessModel(botName, groupId, serviceId);
         }
       }
     }, 300);
   }
+
+  async fetchSuccessModel(botName, groupID, serviceId) {
+    const url = `${config.pm4botsEndpoint}/bot/${botName}/success-model?group-id=${groupID}&service-id=${serviceId}`;
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const successModelXMl = await res.json().xml;
+    console.log(successModelXMl);
+  }
+
+  async getSuccessMeasureList(botName, groupID, serviceId) {
+    const xml = await this.fetchSuccessModel(botName, groupID, serviceId);
+  }
+
   async fetchStatistics(botName, botManagerEndpoint) {
     // botManagerEndpoint = "http://social-bot-manager:8080/SBFManager";
     const url = `${config.pm4botsEndpoint}/bot/${botName}/petri-net?bot-manager-url=${botManagerEndpoint}`;
