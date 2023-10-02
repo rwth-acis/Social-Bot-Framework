@@ -21,57 +21,65 @@ class BotStats extends LitElement {
   }
 
   render() {
-    return html` <div class="container-fluid ">
-      <div class="row mh-100">
-        <div
-          class="col-8  border border-3 rounded p-6 overflow-hidden mh-100 position-relative"
-          style="height:98vh;position:relative;"
-          style=""
-          id="pm-res"
-        >
+    return html` <style>
+        #measure-list {
+          overflow-y: scroll;
+        }
+        .list-group-item {
+          overflow-x: scroll;
+        }
+      </style>
+      <div class="container-fluid ">
+        <div class="row mh-100">
           <div
-            class="spinner-border position-absolute"
-            role="status"
-            style="top:50%;left:50%;"
+            class="col-8  border border-3 rounded p-6 overflow-hidden mh-100 position-relative"
+            style="height:98vh;position:relative;"
+            style=""
+            id="pm-res"
           >
-            <span class="visually-hidden">Loading...</span>
+            <div
+              class="spinner-border position-absolute"
+              role="status"
+              style="top:50%;left:50%;"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="row">
+              <h3>Bot statistics</h3>
+            </div>
+            <div class="row">
+              <h3>Community statistics</h3>
+              <div class="mb-3">
+                <label for="serviceId" class="form-label">Service name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="serviceId"
+                  placeholder="mensa"
+                  value="i5.las2peer.services.mensaService.MensaService"
+                  disabled
+                />
+              </div>
+              <div class="mb-3">
+                <label for="groupId" class="form-label">Group Id</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="groupId"
+                  placeholder=""
+                  value="343da947a6db1296fadb5eca3987bf71f2e36a6d088e224a006f4e20e6e7935bb0d5ce0c13ada9966228f86ea7cc2cf3a1435827a48329f46b0e3963213123e0"
+                  disabled
+                />
+              </div>
+
+              <ul class="list-group" id="measure-list"></ul>
+            </div>
           </div>
         </div>
-
-        <div class="col-4">
-          <div class="row">
-            <h3>Bot statistics</h3>
-          </div>
-          <div class="row">
-            <h3>Community statistics</h3>
-            <div class="mb-3">
-              <label for="serviceId" class="form-label">Service name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="serviceId"
-                placeholder="mensa"
-                value="i5.las2peer.services.mensaService.MensaService"
-                disabled
-              />
-            </div>
-            <div class="mb-3">
-              <label for="groupId" class="form-label">Group Id</label>
-              <input
-                type="text"
-                class="form-control"
-                id="groupId"
-                placeholder=""
-                value="343da947a6db1296fadb5eca3987bf71f2e36a6d088e224a006f4e20e6e7935bb0d5ce0c13ada9966228f86ea7cc2cf3a1435827a48329f46b0e3963213123e0"
-                disabled
-              />
-            </div>
-
-            <ul class="list-group" id="measure-list"></ul>
-          </div>
-        </div>
-      </div>
-    </div>`;
+      </div>`;
   }
   async firstUpdated() {
     const instance = getInstance({
@@ -112,8 +120,7 @@ class BotStats extends LitElement {
         "Content-Type": "application/json",
       },
     });
-    const successModelXMl = await res.json().xml;
-    console.log(successModelXMl);
+    const successModelXMl = await res.text();
     return successModelXMl;
   }
 
@@ -123,7 +130,7 @@ class BotStats extends LitElement {
 
   async getSuccessMeasureList(botName, groupID, serviceId) {
     const res = await this.fetchSuccessModel(botName, groupID, serviceId);
-    const xmlString = res.xml;
+    const xmlString = res;
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, "text/xml");
 
@@ -136,6 +143,7 @@ class BotStats extends LitElement {
       const option = document.createElement("option");
       option.value = measureName;
       option.classList.add("list-group-item");
+      option.innerText = measureName;
       list.appendChild(option);
     });
   }
