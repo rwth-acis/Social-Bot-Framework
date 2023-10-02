@@ -45,27 +45,23 @@ class BotStats extends LitElement {
           <div class="row">
             <h3>Community statistics</h3>
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Service name</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="groupId"
-                placeholder="mensa"
-                value="mensa"
-                disabled
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlInput2" class="form-label"
-                >Group Id</label
-              >
+              <label for="serviceId" class="form-label">Service name</label>
               <input
                 type="text"
                 class="form-control"
                 id="serviceId"
                 placeholder="mensa"
+                value="i5.las2peer.services.mensaService.MensaService"
+                disabled
+              />
+            </div>
+            <div class="mb-3">
+              <label for="groupId" class="form-label">Group Id</label>
+              <input
+                type="text"
+                class="form-control"
+                id="groupId"
+                placeholder=""
                 value="343da947a6db1296fadb5eca3987bf71f2e36a6d088e224a006f4e20e6e7935bb0d5ce0c13ada9966228f86ea7cc2cf3a1435827a48329f46b0e3963213123e0"
                 disabled
               />
