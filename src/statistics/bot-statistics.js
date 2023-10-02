@@ -40,7 +40,7 @@ class BotStats extends LitElement {
 
         <div class="col-4">
           <div class="row">
-            <h3>Bot statistics works</h3>
+            <h3>Bot statistics</h3>
           </div>
           <div class="row">
             <h3>Community statistics</h3>
@@ -66,6 +66,8 @@ class BotStats extends LitElement {
                 disabled
               />
             </div>
+
+            <ul class="list-group" id="measure-list"></ul>
           </div>
         </div>
       </div>
@@ -95,13 +97,14 @@ class BotStats extends LitElement {
           this.fetchStatistics(botName, botManagerEndpoint);
           const groupId = document.getElementById("groupId").value;
           const serviceId = document.getElementById("serviceId").value;
-          this.fetchSuccessModel(botName, groupId, serviceId);
+          this.getSuccessMeasureList(botName, groupId, serviceId);
         }
       }
     }, 300);
   }
 
   async fetchSuccessModel(botName, groupID, serviceId) {
+    // const url = `https://mobsos.tech4comp.dbis.rwth-aachen.de/mobsos-success-modeling/apiv2/models/${groupID}/${serviceId}`;
     const url = `${config.pm4botsEndpoint}/bot/${botName}/success-model?group-id=${groupID}&service-id=${serviceId}`;
     const res = await fetch(url, {
       method: "GET",
@@ -111,10 +114,30 @@ class BotStats extends LitElement {
     });
     const successModelXMl = await res.json().xml;
     console.log(successModelXMl);
+    return successModelXMl;
+  }
+
+  async fetchMeasureCatalog(groupId){
+    
   }
 
   async getSuccessMeasureList(botName, groupID, serviceId) {
-    const xml = await this.fetchSuccessModel(botName, groupID, serviceId);
+    const res = await this.fetchSuccessModel(botName, groupID, serviceId);
+    const xmlString = res.xml;
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+    const measureNames = Array.from(xmlDoc.getElementsByTagName("measure")).map(
+      (measure) => measure.getAttribute("name")
+    );
+    // add them to the list
+    const list = document.getElementById("measure-list");
+    measureNames.forEach((measureName) => {
+      const option = document.createElement("option");
+      option.value = measureName;
+      option.classList.add("list-group-item");
+      list.appendChild(option);
+    });
   }
 
   async fetchStatistics(botName, botManagerEndpoint) {
