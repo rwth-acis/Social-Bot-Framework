@@ -107,10 +107,14 @@ services:
       - MYSQL_HOST=db
       - MYSQL_PORT=3306
       - MYSQL_DATABASE=LAS2PEERMON
+      - SUCCESS_MODEL_ENDPOINT=${SUCCESS_MODEL_ENDPOINT:-http://localhost:8088}
       - SOCIAL_BOT_MANAGER_ENDPOINT=http://social-bot-manager:8080/SBFmanager
-      - EVENT_LOG_GENERATOR_ENDPOINT=http://event-log-generator:8087
+      - EVENT_LOG_ENDPOINT=http://event-log-generator:8087
       - CORS_ORIGIN=http://localhost:8082 # Needed to prevent CORS errors
+      - DEFAULT_BOT_PASSWORD = actingAgent
+      - DEVELOPMENT_MODE = true
     ports:
       - "8088:8088"
     depends_on:
       - db
+
