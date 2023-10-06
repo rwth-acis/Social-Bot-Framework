@@ -11,7 +11,6 @@ import "./statistics/bot-statistics.js";
 class MainPage extends LitElement {
   static properties = {};
 
-  static styles = css``;
   constructor() {
     super();
   }

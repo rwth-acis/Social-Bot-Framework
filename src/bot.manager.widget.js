@@ -1,5 +1,4 @@
 import { html, LitElement } from "lit";
-import _ from "lodash-es";
 import { getGuidanceModeling } from "@rwth-acis/syncmeta-widgets/src/es6/Guidancemodel";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import { Text as YText, Map as YMap } from "yjs";

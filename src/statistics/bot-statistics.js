@@ -3,6 +3,7 @@ import config from "../../config.json";
 import { Common } from "../common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import interact from "interactjs";
+import "./config-pane.js";
 /**
  * @customElement
  *
@@ -11,6 +12,7 @@ class BotStats extends LitElement {
   static properties = {
     loading: { type: Boolean, value: true },
   };
+  configModal = null;
 
   createRenderRoot() {
     return this;
@@ -21,7 +23,8 @@ class BotStats extends LitElement {
   }
 
   render() {
-    return html` <style>
+    return html`
+      <style>
         #measure-list {
           overflow-y: scroll;
         }
@@ -29,7 +32,19 @@ class BotStats extends LitElement {
           overflow-x: scroll;
         }
       </style>
-      <div class="container-fluid ">
+      <div class="container-fluid position-relative">
+        <div
+          class="floaty-div"
+          style="position: absolute; top: 2px; right: 2px;"
+        >
+          <button
+            type="button"
+            class="btn btn-light shadow border"
+            @click="${this.showConfigDialog}"
+          >
+            <i class="bi bi-gear"></i>
+          </button>
+        </div>
         <div class="row mh-100">
           <div
             class="col-8  border border-3 rounded p-6 overflow-hidden mh-100 position-relative"
@@ -52,36 +67,41 @@ class BotStats extends LitElement {
             </div>
             <div class="row h-50">
               <h3>Community statistics</h3>
-              <div class="mb-3">
-                <label for="serviceId" class="form-label">Service name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="serviceId"
-                  placeholder="mensa"
-                  value="i5.las2peer.services.mensaService.MensaService"
-                  disabled
-                />
-              </div>
-              <div class="mb-3">
-                <label for="groupId" class="form-label">Group Id</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="groupId"
-                  placeholder=""
-                  value="343da947a6db1296fadb5eca3987bf71f2e36a6d088e224a006f4e20e6e7935bb0d5ce0c13ada9966228f86ea7cc2cf3a1435827a48329f46b0e3963213123e0"
-                  disabled
-                />
-              </div>
 
               <ul class="list-group" id="measure-list"></ul>
             </div>
           </div>
         </div>
-      </div>`;
+      </div>
+
+      <div
+        class="modal fade"
+        id="configModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="d-flex justify-content-end">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <pm4bots-config></pm4bots-config>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
   }
   async firstUpdated() {
+    this.configModal = new bootstrap.Modal("#configModal");
+
     const instance = getInstance({
       host: config.yjs_host,
       port: config.yjs_port,
@@ -93,6 +113,7 @@ class BotStats extends LitElement {
     super.firstUpdated();
 
     setTimeout(() => {
+      this.configMap = y.getMap("pm4bots-config");
       const botManagerEndpoint = y.getText("sbfManager").toString();
 
       const botModel = y.getMap("data").get("model");
@@ -103,8 +124,8 @@ class BotStats extends LitElement {
         if (botElement) {
           const botName = botElement.label.value.value;
           this.fetchStatistics(botName, botManagerEndpoint);
-          const groupId = document.getElementById("groupId").value;
-          const serviceId = document.getElementById("serviceId").value;
+          const groupId = this.configMap.get("group-id").toString();
+          const serviceId = this.configMap.get("service-name").toString();
           this.getSuccessMeasureList(botName, groupId, serviceId);
         }
       }
@@ -124,11 +145,10 @@ class BotStats extends LitElement {
     return successModelXMl;
   }
 
-  async fetchMeasureCatalog(groupId){
-    
-  }
+  async fetchMeasureCatalog(groupId) {}
 
   async getSuccessMeasureList(botName, groupID, serviceId) {
+    if (!groupID || !serviceId) return;
     const res = await this.fetchSuccessModel(botName, groupID, serviceId);
     const xmlString = res;
     const parser = new DOMParser();
@@ -231,6 +251,13 @@ class BotStats extends LitElement {
 
       max: 1,
     });
+  }
+
+  showConfigDialog() {
+    this.configModal.show();
+  }
+  hideConfigDialog() {
+    this.configModal.hide();
   }
 }
 
