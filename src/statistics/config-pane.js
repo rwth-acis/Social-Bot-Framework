@@ -27,6 +27,36 @@ class Pm4BotsConfig extends LitElement {
     };
   }
 
+  configOptions = [
+    {
+      id: "pm4bots-endpoint",
+      label: "Pm4Bots Endpoint",
+      placeholder: "https://pm4bots-endpoint",
+    },
+    {
+      id: "sbm-endpoint",
+      label: "Social Bot Manager Endpoint",
+      placeholder: "https://sbm-endpoint",
+    },
+    {
+      id: "event-log-endpoint",
+      label: "Event Log Endpoint",
+      placeholder: "https://event-log-endpoint",
+    },
+    {
+      id: "success-modeling-endpoint",
+      label: "Success Modeling Endpoint",
+      placeholder: "https://success-modeling-endpoint",
+    },
+    {
+      id: "query-viz-endpoint",
+      label: "Query Visualization Endpoint",
+      placeholder: "https://query-viz-endpoint",
+    },
+    { id: "service-name", label: "Service name", placeholder: "My Service" },
+    { id: "group-id", label: "Group Id", placeholder: "123456" },
+  ];
+
   constructor() {
     super();
   }
@@ -45,34 +75,14 @@ class Pm4BotsConfig extends LitElement {
       />
 
       <div>
-        <div class="mb-3">
-          <label for="pm4bots-endpoint">Pm4Bots Endpoint</label>
-          <div id="pm4bots-endpoint" class="rounded"></div>
-        </div>
-        <div class="mb-3">
-          <div class="mb-3">
-            <label for="event-log-endpoint">Event Log Endpoint</label>
-            <div id="event-log-endpoint" class="rounded"></div>
-          </div>
-          <div class="mb-3">
-            <label for="success-modeling-endpoint"
-              >Success Modeling Endpoint</label
-            >
-            <div id="success-modeling-endpoint" class="rounded"></div>
-          </div>
-          <div class="mb-3">
-            <label for="query-viz-endpoint">Query Visualization Endpoint</label>
-            <div id="query-viz-endpoint" class="rounded"></div>
-          </div>
-          <div class="mb-3">
-            <label for="service-name">Service name</label>
-            <div id="service-name" class="rounded"></div>
-          </div>
-          <div class="mb-3">
-            <label for="group-id">Group Id</label>
-            <div id="group-id" class="rounded"></div>
-          </div>
-        </div>
+        ${this.configOptions.map(
+          (item) => html`
+            <div class="mb-3">
+              <label for="${item.id}">${item.label}</label>
+              <div id="${item.id}" class="rounded"></div>
+            </div>
+          `
+        )}
       </div>
     `;
   }
@@ -85,7 +95,7 @@ class Pm4BotsConfig extends LitElement {
       spaceTitle: Common.getYjsRoom(),
     });
     const doc = await instance.connect();
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 400));
 
     this.initConfigMap(doc.getMap("pm4bots-config"));
   }
@@ -93,114 +103,23 @@ class Pm4BotsConfig extends LitElement {
   initConfigMap(configMap) {
     this.configMap = configMap;
 
-    this.eventLogEndpoint = new Quill(
-      this.shadowRoot.getElementById("event-log-endpoint"),
-      {
-        modules: {
-          toolbar: false, // toolbar options
-          keyboard: keyboardEnterPrevent,
-        },
-        cursors: false,
-        placeholder: "https://event-log-endpoint",
-        theme: "snow", // or 'bubble'
-      }
-    );
-    this.pm4botsEndpoint = new Quill(
-      this.shadowRoot.getElementById("pm4bots-endpoint"),
-      {
-        modules: {
-          toolbar: false, // toolbar options
-          keyboard: keyboardEnterPrevent,
-        },
-        cursors: false,
-        placeholder: "https://pm4bots-endpoint",
-        theme: "snow", // or 'bubble'
-      }
-    );
+    for (const value of this.configOptions) {
+      const key = value.id;
 
-    this.successModelingEndpoint = new Quill(
-      this.shadowRoot.getElementById("success-modeling-endpoint"),
-      {
+      const editor = new Quill(this.shadowRoot.getElementById(key), {
         modules: {
-          toolbar: false, // toolbar options
+          toolbar: false,
           keyboard: keyboardEnterPrevent,
         },
         cursors: false,
-        placeholder: "https://success-modeling-endpoint",
-        theme: "snow", // or 'bubble'
+        placeholder: value.placeholder,
+        theme: "snow",
+      });
+      if (!this.configMap.has(key)) {
+        this.configMap.set(key, new YText());
       }
-    );
-
-    this.queryVizEndpoint = new Quill(
-      this.shadowRoot.getElementById("query-viz-endpoint"),
-      {
-        modules: {
-          toolbar: false, // toolbar options
-          keyboard: keyboardEnterPrevent,
-        },
-        cursors: false,
-        placeholder: "https://query-viz-endpoint",
-        theme: "snow", // or 'bubble'
-      }
-    );
-    this.serviceName = new Quill(
-      this.shadowRoot.getElementById("service-name"),
-      {
-        modules: {
-          toolbar: false, // toolbar options
-          keyboard: keyboardEnterPrevent,
-        },
-        cursors: false,
-        placeholder: "i5.las2peer.services.mensaService.MensaService",
-        theme: "snow", // or 'bubble'
-      }
-    );
-    this.groupId = new Quill(this.shadowRoot.getElementById("group-id"), {
-      modules: {
-        toolbar: false, // toolbar options
-        keyboard: keyboardEnterPrevent,
-      },
-      cursors: false,
-      placeholder:
-        "343da947a6db1296fadb5eca3... (you can find it using the contact service)",
-      theme: "snow", // or 'bubble'
-    });
-    if (!this.configMap.has("pm4bots-endpoint")) {
-      this.configMap.set("pm4bots-endpoint", new YText());
+      new QuillBinding(this.configMap.get(key), editor);
     }
-    if (!this.configMap.has("event-log-endpoint")) {
-      this.configMap.set("event-log-endpoint", new YText());
-    }
-    if (!this.configMap.has("success-modeling-endpoint")) {
-      this.configMap.set("success-modeling-endpoint", new YText());
-    }
-    if (!this.configMap.has("query-viz-endpoint")) {
-      this.configMap.set("query-viz-endpoint", new YText());
-    }
-    if (!this.configMap.has("service-name")) {
-      this.configMap.set("service-name", new YText());
-    }
-    if (!this.configMap.has("group-id")) {
-      this.configMap.set("group-id", new YText());
-    }
-    new QuillBinding(
-      this.configMap.get("pm4bots-endpoint"),
-      this.pm4botsEndpoint
-    );
-    new QuillBinding(
-      this.configMap.get("event-log-endpoint"),
-      this.eventLogEndpoint
-    );
-    new QuillBinding(
-      this.configMap.get("success-modeling-endpoint"),
-      this.successModelingEndpoint
-    );
-    new QuillBinding(
-      this.configMap.get("query-viz-endpoint"),
-      this.queryVizEndpoint
-    );
-    new QuillBinding(this.configMap.get("service-name"), this.serviceName);
-    new QuillBinding(this.configMap.get("group-id"), this.groupId);
   }
 }
 
