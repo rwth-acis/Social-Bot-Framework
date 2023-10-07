@@ -140,6 +140,7 @@ class BotStats extends LitElement {
           const botName = botElement.label.value.value;
           this.fetchStatistics(botName, botManagerEndpoint);
           this.getSuccessMeasureList(botName);
+          this.fetchMeasureCatalog(botName);
         }
       }
     }, 300);
@@ -177,7 +178,27 @@ class BotStats extends LitElement {
     return successModelXMl;
   }
 
-  async fetchMeasureCatalog(groupId) {}
+  async fetchMeasureCatalog(botName) {
+    const groupId = this.configMap.get("group-id").toString();
+    const successModelEndpoint = this.configMap
+      .get("success-modeling-endpoint")
+      .toString();
+    const url = joinAbsoluteUrlPath(successModelEndpoint, "measures", groupId);
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: toAuthorizationHeader(botName),
+      },
+    });
+    if (!res.ok) {
+      return;
+    }
+    const body = await res.json();
+    const xmlString = body.xml;
+    const measureNames = parseMeasures(xmlString);
+    return measureNames;
+  }
 
   async getSuccessMeasureList(botName) {
     const res = await this.fetchSuccessModel(botName);
@@ -327,4 +348,60 @@ function joinAbsoluteUrlPath(...args) {
         .trim();
     })
     .join("/");
+}
+function parseMeasures(xmlString) {
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+  const measures = Array.from(xmlDoc.getElementsByTagName("measure")).map(
+    (measure) => {
+      const name = measure.getAttribute("name");
+      const tags = measure.getAttribute("tags");
+      const type = measure.getAttribute("type");
+      const description = measure
+        .getElementsByTagName("description")[0]
+        .textContent.trim();
+      const query =
+        measure.getElementsByTagName("query")[0]?.textContent?.trim() || null;
+      const visualization = measure.getElementsByTagName("visualization")[0];
+      const visualizationType = visualization.getAttribute("type");
+      const visualizationUnit =
+        visualization.getElementsByTagName("unit")[0]?.textContent?.trim() ||
+        null;
+      const chartType =
+        visualization
+          .getElementsByTagName("chartType")[0]
+          ?.textContent?.trim() || null;
+      const chartTitle =
+        visualization
+          .getElementsByTagName("chartTitle")[0]
+          ?.textContent?.trim() || null;
+      const chartXAxisLabel =
+        visualization
+          .getElementsByTagName("chartXAxisLabel")[0]
+          ?.textContent?.trim() || null;
+      const chartYAxisLabel =
+        visualization
+          .getElementsByTagName("chartYAxisLabel")[0]
+          ?.textContent?.trim() || null;
+
+      return {
+        name,
+        tags,
+        type,
+        description,
+        query,
+        visualization: {
+          type: visualizationType,
+          unit: visualizationUnit,
+          chartType,
+          chartTitle,
+          chartXAxisLabel,
+          chartYAxisLabel,
+        },
+      };
+    }
+  );
+
+  return measures;
 }
