@@ -27,6 +27,9 @@ class BotStats extends LitElement {
       <style>
         #measure-list {
           overflow-y: scroll;
+          padding-left: 12px;
+          padding-right: 12px;
+          width: 100%;
         }
         .list-group-item {
           overflow-x: scroll;
@@ -68,6 +71,18 @@ class BotStats extends LitElement {
             <div class="row h-50">
               <h3>Community statistics</h3>
 
+              <div class="input-group mb-3" style="max-height:30px">
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="search measures"
+                  @change="${(e) => this.filterList(e.target)}"
+                />
+                <span class="input-group-text"
+                  ><i class="bi bi-search"></i
+                ></span>
+              </div>
+
               <ul class="list-group" id="measure-list"></ul>
             </div>
           </div>
@@ -81,7 +96,7 @@ class BotStats extends LitElement {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-body">
               <div class="d-flex justify-content-end">
@@ -124,32 +139,48 @@ class BotStats extends LitElement {
         if (botElement) {
           const botName = botElement.label.value.value;
           this.fetchStatistics(botName, botManagerEndpoint);
-          const groupId = this.configMap.get("group-id").toString();
-          const serviceId = this.configMap.get("service-name").toString();
-          this.getSuccessMeasureList(botName, groupId, serviceId);
+          this.getSuccessMeasureList(botName);
         }
       }
     }, 300);
   }
 
-  async fetchSuccessModel(botName, groupID, serviceId) {
-    // const url = `https://mobsos.tech4comp.dbis.rwth-aachen.de/mobsos-success-modeling/apiv2/models/${groupID}/${serviceId}`;
-    const url = `${config.pm4botsEndpoint}/bot/${botName}/success-model?group-id=${groupID}&service-id=${serviceId}`;
+  async fetchSuccessModel(botName) {
+    const groupId = this.configMap.get("group-id").toString();
+    const serviceId = this.configMap.get("service-name").toString();
+    const successModelEndpoint = this.configMap
+      .get("success-modeling-endpoint")
+      .toString();
+
+    if (!successModelEndpoint) {
+      return;
+    }
+    const url = joinAbsoluteUrlPath(
+      successModelEndpoint,
+      "models",
+      groupId,
+      serviceId
+    );
+
     const res = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: toAuthorizationHeader(botName),
       },
     });
-    const successModelXMl = await res.text();
+    if (!res.ok) {
+      return;
+    }
+    const body = await res.json();
+    const successModelXMl = body.xml;
     return successModelXMl;
   }
 
   async fetchMeasureCatalog(groupId) {}
 
-  async getSuccessMeasureList(botName, groupID, serviceId) {
-    if (!groupID || !serviceId) return;
-    const res = await this.fetchSuccessModel(botName, groupID, serviceId);
+  async getSuccessMeasureList(botName) {
+    const res = await this.fetchSuccessModel(botName);
     const xmlString = res;
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, "text/xml");
@@ -157,15 +188,31 @@ class BotStats extends LitElement {
     const measureNames = Array.from(xmlDoc.getElementsByTagName("measure")).map(
       (measure) => measure.getAttribute("name")
     );
+    this.measures = measureNames;
     // add them to the list
     const list = document.getElementById("measure-list");
     measureNames.forEach((measureName) => {
-      const option = document.createElement("option");
+      const option = document.createElement("li");
       option.value = measureName;
       option.classList.add("list-group-item");
       option.innerText = measureName;
       list.appendChild(option);
     });
+  }
+
+  filterList(input) {
+    const list = document.getElementById("measure-list");
+    const filter = input.value.toUpperCase();
+    const options = list.getElementsByTagName("li");
+    for (let i = 0; i < options.length; i++) {
+      const option = options[i];
+      const txtValue = option.textContent || option.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        option.style.display = "";
+      } else {
+        option.style.display = "none";
+      }
+    }
   }
 
   async fetchStatistics(botName, botManagerEndpoint) {
@@ -262,3 +309,22 @@ class BotStats extends LitElement {
 }
 
 window.customElements.define("bot-statistics", BotStats);
+
+function toAuthorizationHeader(username, password = "actingAgent") {
+  return "Basic " + btoa(username + ":" + password);
+}
+
+function joinAbsoluteUrlPath(...args) {
+  return args
+    .filter((pathPart) => !!pathPart)
+    .map((pathPart) => {
+      if (typeof pathPart === "number") {
+        pathPart = pathPart?.toString();
+      }
+      return pathPart
+        .toString()
+        ?.replace(/(^\/|\/$)/g, "")
+        .trim();
+    })
+    .join("/");
+}
