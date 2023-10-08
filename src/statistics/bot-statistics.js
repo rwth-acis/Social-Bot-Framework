@@ -59,6 +59,7 @@ class BotStats extends LitElement {
               class="spinner-border position-absolute"
               role="status"
               style="top:50%;left:50%;"
+              ?hidden="${!this.loading}"
             >
               <span class="visually-hidden">Loading...</span>
             </div>
@@ -138,7 +139,7 @@ class BotStats extends LitElement {
         });
         if (botElement) {
           const botName = botElement.label.value.value;
-          this.fetchStatistics(botName, botManagerEndpoint);
+          this.fetchStatistics(botName);
           this.getSuccessMeasureList(botName);
           this.fetchMeasureCatalog(botName);
         }
@@ -197,6 +198,7 @@ class BotStats extends LitElement {
     const body = await res.json();
     const xmlString = body.xml;
     const measureNames = parseMeasures(xmlString);
+    this.measures = measureNames;
     return measureNames;
   }
 
@@ -236,9 +238,23 @@ class BotStats extends LitElement {
     }
   }
 
-  async fetchStatistics(botName, botManagerEndpoint) {
-    // botManagerEndpoint = "http://social-bot-manager:8080/SBFManager";
-    const url = `${config.pm4botsEndpoint}/bot/${botName}/petri-net?bot-manager-url=${botManagerEndpoint}`;
+  async fetchStatistics(botName) {
+    const botManagerEndpointInput = this.configMap
+      .get("sbm-endpoint")
+      .toString();
+    const pm4botsEndpointInput = this.configMap
+      .get("pm4bots-endpoint")
+      .toString();
+    if (!botManagerEndpointInput || !pm4botsEndpointInput) {
+      return;
+    }
+    let url = joinAbsoluteUrlPath(
+      pm4botsEndpointInput,
+      "bot",
+      botName,
+      "petri-net"
+    );
+    url += `?bot-manager-url=${botManagerEndpointInput}`;
     console.log(url);
     try {
       const response = await fetch(url, {
@@ -249,9 +265,9 @@ class BotStats extends LitElement {
         },
       });
       if (!response.ok) {
-        this.loading = false;
         return;
       }
+      this.loading = false;
       const element = document.getElementById("pm-res");
 
       document.getElementById("pm-res").innerHTML = await response.text();

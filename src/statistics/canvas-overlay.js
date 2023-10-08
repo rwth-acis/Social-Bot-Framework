@@ -34,17 +34,20 @@ class CanvasStatsOverlay extends LitElement {
     const y = await instance.connect();
     this.y = y;
     super.firstUpdated();
+    this.configMap = y.getMap("pm4bots-config");
 
     setTimeout(() => {
-    const botManagerEndpoint = y.getText("sbfManager").toString();
-    const botModel = y.getMap("data").get("model");
+      const botManagerEndpointInput = this.configMap
+        .get("sbm-endpoint")
+        .toString();
+      const botModel = y.getMap("data").get("model");
       if (botModel) {
         const botElement = Object.values(botModel.nodes).find((node) => {
           return node.type === "Bot";
         });
         if (botElement) {
           const botName = botElement.label.value.value;
-          this.fetchStatistics(botName, botManagerEndpoint);
+          this.fetchStatistics(botName, botManagerEndpointInput);
         }
       }
     }, 300);
