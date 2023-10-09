@@ -20,6 +20,7 @@ class BotStats extends LitElement {
 
   constructor() {
     super();
+    this.loading = true;
   }
 
   render() {
