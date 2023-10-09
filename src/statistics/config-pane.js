@@ -31,30 +31,41 @@ class Pm4BotsConfig extends LitElement {
     {
       id: "pm4bots-endpoint",
       label: "Pm4Bots Endpoint",
-      placeholder: "https://pm4bots-endpoint",
+      placeholder:
+        "https://bots-ma-lakhoune.tech4comp.dbis.rwth-aachen.de/pm4bots",
     },
     {
       id: "sbm-endpoint",
       label: "Social Bot Manager Endpoint",
-      placeholder: "https://sbm-endpoint",
+      placeholder: "https://mobsos.tech4comp.dbis.rwth-aachen.de/SBFManager",
     },
     {
       id: "event-log-endpoint",
       label: "Event Log Endpoint",
-      placeholder: "https://event-log-endpoint",
+      placeholder: "https://mobsos.tech4comp.dbis.rwth-aachen.de/event-log",
     },
     {
       id: "success-modeling-endpoint",
       label: "Success Modeling Endpoint",
-      placeholder: "https://success-modeling-endpoint",
+      placeholder:
+        "https://mobsos.tech4comp.dbis.rwth-aachen.de/mobsos-success-modeling/apiv2",
     },
     {
       id: "query-viz-endpoint",
       label: "Query Visualization Endpoint",
-      placeholder: "https://query-viz-endpoint",
+      placeholder: "https://mobsos.tech4comp.dbis.rwth-aachen.de/QVS",
     },
-    { id: "service-name", label: "Service name", placeholder: "My Service" },
-    { id: "group-id", label: "Group Id", placeholder: "123456" },
+    {
+      id: "service-name",
+      label: "Service name",
+      placeholder: "i5.las2peer.services.mensaService.MensaService",
+    },
+    {
+      id: "group-id",
+      label: "Group Id",
+      placeholder:
+        "343da947a6db1296fadb5eca3987bf71f2e36a6d088e224a006f4e20e6e7935bb0d5ce0c13ada9966228f86ea7cc2cf3a1435827a48329f46b0e3963213123e0",
+    },
   ];
 
   constructor() {
@@ -75,6 +86,13 @@ class Pm4BotsConfig extends LitElement {
       />
 
       <div>
+        <button
+          type="button"
+          class="btn btn-secondary mb-3"
+          @click="${this.insertDefaults}"
+        >
+          Insert Default Values
+        </button>
         ${this.configOptions.map(
           (item) => html`
             <div class="mb-3">
@@ -119,6 +137,14 @@ class Pm4BotsConfig extends LitElement {
         this.configMap.set(key, new YText());
       }
       new QuillBinding(this.configMap.get(key), editor);
+    }
+  }
+
+  insertDefaults() {
+    for (const value of this.configOptions) {
+      const key = value.id;
+      const placeholder = value.placeholder;
+      this.configMap.get(key).insert(0, placeholder);
     }
   }
 }
