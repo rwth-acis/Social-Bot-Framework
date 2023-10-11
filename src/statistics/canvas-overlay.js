@@ -115,7 +115,6 @@ class CanvasStatsOverlay extends LitElement {
         };
       }
     }
-    console.log(addedNodes);
 
     const addedEdges = [];
 
@@ -156,7 +155,6 @@ class CanvasStatsOverlay extends LitElement {
     }
     window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
     window.jsPlumbInstance.setSuspendDrawing(false);
-    print("added edges", addedEdges);
   }
 
   /**
