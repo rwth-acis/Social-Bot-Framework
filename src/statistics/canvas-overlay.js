@@ -55,7 +55,22 @@ class CanvasStatsOverlay extends LitElement {
 
   async fetchStatistics(botName, botManagerEndpoint) {
     // botManagerEndpoint = "http://social-bot-manager:8080/SBFManager"
-    const url = `${config.pm4botsEndpoint}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpoint}`;
+    const botManagerEndpointInput = this.configMap
+      .get("sbm-endpoint")
+      .toString();
+    const pm4botsEndpointInput = this.configMap
+      .get("pm4bots-endpoint")
+      .toString();
+    console.log(this.configMap.toJSON());
+    if (!pm4botsEndpointInput || !botManagerEndpointInput) {
+      console.warn(
+        "endpoints not configured  properly",
+        this.configMap.toJSON()
+      );
+      return;
+    }
+
+    const url = `${pm4botsEndpointInput}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpoint}`;
     console.log(url);
     try {
       const response = await fetch(url, {
@@ -66,15 +81,13 @@ class CanvasStatsOverlay extends LitElement {
           Accept: "application/json",
         },
       });
-      console.log(response);
+      this.loading = false;
+
       if (!response.ok) {
-        this.loading = false;
         return;
       }
 
       const statistics = await response.json();
-      console.log(statistics);
-      this.loading = false;
       this.statistics = statistics;
       this.addMissingNodesAndEdges(statistics);
     } catch (error) {
@@ -83,16 +96,147 @@ class CanvasStatsOverlay extends LitElement {
   }
 
   addMissingNodesAndEdges(statistics) {
+    window.jsPlumbInstance.setSuspendDrawing(true, true);
     // Add missing edges to bot model as overlay
     const botModel = this.y.getMap("data").get("model");
     const botModelEdges = botModel.edges;
     const botModelNodes = botModel.nodes;
-    for (const nodeId of statistics.graph.nodes) {
-      if (!botModelNodes[nodeId]) {
-        console.log("newNode", nodeId);
-        botModelNodes[nodeId] = node;
+    const boundingBox = this.getBotModelBoundingBox();
+    const addedNodes = [];
+    for (const node of statistics.graph.nodes) {
+      if (!botModelNodes[node.id]) {
+        if (!addedNodes.includes(node.id)) {
+          this.addMissingNode(node, boundingBox);
+          addedNodes.push(node.id);
+        }
+      } else {
+        botModelNodes[node.id].statistics = {
+          avg_confidence: node.avg_confidence,
+        };
       }
     }
+    console.log(addedNodes);
+
+    const addedEdges = [];
+
+    statloop: for (const edge of statistics.graph.edges) {
+      const sourceId = edge.source;
+      const targetId = edge.target;
+      let existingEdge = false;
+
+      for (const botModelEdge of Object.values(botModelEdges)) {
+        if (
+          botModelEdge.source === sourceId &&
+          botModelEdge.target === targetId
+        ) {
+          botModelEdge.statistics = edge.performance;
+          existingEdge = true;
+        }
+        if (!existingEdge) {
+          addedEdges.push({ sourceId, targetId });
+          const sourceNode =
+            document.querySelector(
+              `[id="pm4bots-${sourceId}"]` // added node
+            ) || document.querySelector(`[id="${sourceId}"]`); // existing node
+          const targetNode =
+            document.querySelector(
+              `[id="pm4bots-${targetId}"]` // added node
+            ) || document.querySelector(`[id="${targetId}"]`); // existing node
+          if (!sourceNode || !targetNode) {
+            console.error(
+              "source or target node not found",
+              sourceId,
+              targetId
+            );
+          }
+          this.addMissingEdge(sourceNode, targetNode);
+          continue statloop;
+        }
+      }
+    }
+    window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
+    window.jsPlumbInstance.setSuspendDrawing(false);
+    print("added edges", addedEdges);
+  }
+
+  /**
+   * Returns the smallest bounding box that contains all nodes of the bot model
+   */
+  getBotModelBoundingBox() {
+    const botModel = this.y.getMap("data").get("model");
+    const botModelNodes = botModel.nodes;
+
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    for (const [id, node] of Object.entries(botModelNodes)) {
+      const nodeHtml = document.getElementById(id);
+      if (!nodeHtml) {
+        continue;
+      }
+      const nodeX = nodeHtml.offsetLeft;
+      const nodeY = nodeHtml.offsetTop;
+      if (nodeX < minX) {
+        minX = nodeX;
+      }
+      if (nodeY < minY) {
+        minY = nodeY;
+      }
+      if (nodeX > maxX) {
+        maxX = nodeX;
+      }
+      if (nodeY > maxY) {
+        maxY = nodeY;
+      }
+    }
+    return { minX, minY, maxX, maxY };
+  }
+
+  addMissingNode(node, boundingBox) {
+    const nodeHtml = document.createElement("div");
+    nodeHtml.id = "pm4bots-" + node.id;
+    node.queryId = nodeHtml.id;
+    nodeHtml.classList.add(
+      "node",
+      "pm4bots-node",
+      "border",
+      "text-bg-dark",
+      "p-3"
+    );
+    nodeHtml.innerText = node.label;
+
+    // set position randomly on the canvas but close to the bounding box of the bot model
+    const x =
+      boundingBox.minX + Math.random() * (boundingBox.maxX - boundingBox.minX);
+    const y = boundingBox.minY - 80;
+    nodeHtml.style.left = x + "px";
+    nodeHtml.style.top = y + "px";
+    const canvas = document.querySelector("#canvas");
+    canvas.appendChild(nodeHtml);
+    window.jsPlumbInstance.manage(nodeHtml);
+    //hide
+    nodeHtml.style.display = "none";
+    // when dragging the node prevent canvas panning
+    nodeHtml.addEventListener("mousedown", (event) => {
+      window.canvas.unbindMoveToolEvents();
+    });
+    nodeHtml.addEventListener("mouseup", (event) => {
+      window.canvas.bindMoveToolEvents();
+    });
+  }
+
+  addMissingEdge(source, target) {
+    window.jsPlumbInstance.connect({
+      source: source,
+      target: target,
+      endpoint: "Dot",
+      paintStyle: { stroke: "#456", strokeWidth: 2 },
+      cssClass: "pm4bots-edge",
+      overlays: [{ type: "Arrow", options: { location: 1 } }],
+      scope: "pm4bots",
+    });
   }
 }
 
