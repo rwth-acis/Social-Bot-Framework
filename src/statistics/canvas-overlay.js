@@ -201,7 +201,8 @@ class CanvasStatsOverlay extends LitElement {
       "pm4bots-node",
       "border",
       "text-bg-dark",
-      "p-3"
+      "p-2",
+      "rounded-pill"
     );
     nodeHtml.innerText = node.label;
 
