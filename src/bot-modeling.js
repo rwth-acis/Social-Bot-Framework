@@ -92,7 +92,7 @@ class BotModeling extends LitElement {
           canvasContainer.appendChild(overelay);
         }
       }
-    }, 300);
+    }, 500);
   }
   insertUsageButton() {
     const firstButtonCol = document.querySelector(
