@@ -103,13 +103,25 @@ class BotModeling extends LitElement {
       newButton.classList.add("btn", "btn-primary", "btn-sm", "ml-2");
       newButton.innerHTML = "<i class='bi bi-graph-up'></i> Usage ";
       newButton.addEventListener("click", () => {
+        window.jsPlumbInstance.setSuspendDrawing(true, true);
         this.toggleEdgeInfoLabels();
         const overlay = document.querySelector("#model-statistics-overlay");
+        const nodes = document.querySelectorAll(".pm4bots-node");
+
         if (overlay.style.display === "none") {
+          for (const node of nodes) {
+            node.style.display = "block";
+          }
           overlay.style.display = "block";
+          window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(true);
         } else {
+          for (const node of nodes) {
+            node.style.display = "none";
+          }
           overlay.style.display = "none";
+          window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
         }
+        window.jsPlumbInstance.setSuspendDrawing(false);
       });
       firstButtonCol.appendChild(newButton);
     }
