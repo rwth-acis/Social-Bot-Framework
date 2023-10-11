@@ -148,7 +148,7 @@ class CanvasStatsOverlay extends LitElement {
               targetId
             );
           }
-          this.addMissingEdge(sourceNode, targetNode);
+          this.addMissingEdge(sourceNode, targetNode, edge.performance);
           continue statloop;
         }
       }
@@ -209,7 +209,7 @@ class CanvasStatsOverlay extends LitElement {
     // set position randomly on the canvas but close to the bounding box of the bot model
     const x =
       boundingBox.minX + Math.random() * (boundingBox.maxX - boundingBox.minX);
-    const y = boundingBox.minY - 80;
+    const y = boundingBox.maxY + Math.random() * 180;
     nodeHtml.style.left = x + "px";
     nodeHtml.style.top = y + "px";
     const canvas = document.querySelector("#canvas");
@@ -226,17 +226,72 @@ class CanvasStatsOverlay extends LitElement {
     });
   }
 
-  addMissingEdge(source, target) {
+  addMissingEdge(source, target, performance) {
+    const color = getColorScale(performance?.mean, 0, 10);
+    // if performance?.mean is defined then add an overlay to the edge with the performance value
+    const label = performance?.mean ? performance?.mean.toFixed(2) + "s" : "";
+    const strokeWidth = getStrokeWidth(performance?.mean, 0, 8);
     window.jsPlumbInstance.connect({
       source: source,
       target: target,
       endpoint: "Dot",
-      paintStyle: { stroke: "#456", strokeWidth: 2 },
+      paintStyle: { stroke: color, strokeWidth },
       cssClass: "pm4bots-edge",
-      overlays: [{ type: "Arrow", options: { location: 1 } }],
+      overlays: [
+        { type: "Arrow", options: { location: 1 } },
+        { type: "Label", options: { label } },
+      ],
       scope: "pm4bots",
     });
   }
 }
 
+function getColorScale(value, minValue, maxValue) {
+  if (!value) {
+    return "#456";
+  }
+  const colorStops = [
+    { value: minValue, color: [128, 128, 128] }, // Grey
+    { value: minValue + (maxValue - minValue) / 3, color: [255, 255, 0] }, // Yellow
+    { value: minValue + (2 * (maxValue - minValue)) / 3, color: [255, 165, 0] }, // Orange
+    { value: maxValue, color: [255, 0, 0] }, // Red
+  ];
+
+  // Find the appropriate color stop based on the value
+  let color;
+  for (let i = 1; i < colorStops.length; i++) {
+    if (value <= colorStops[i].value) {
+      const lowerStop = colorStops[i - 1];
+      const upperStop = colorStops[i];
+
+      // Interpolate between the two color stops
+      const ratio =
+        (value - lowerStop.value) / (upperStop.value - lowerStop.value);
+      color = [
+        Math.round(
+          lowerStop.color[0] + (upperStop.color[0] - lowerStop.color[0]) * ratio
+        ),
+        Math.round(
+          lowerStop.color[1] + (upperStop.color[1] - lowerStop.color[1]) * ratio
+        ),
+        Math.round(
+          lowerStop.color[2] + (upperStop.color[2] - lowerStop.color[2]) * ratio
+        ),
+      ];
+      break;
+    }
+  }
+  if (!color) {
+    color = colorStops[colorStops.length - 1].color;
+  }
+  // Convert the color to a CSS RGB string
+  return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+}
+function getStrokeWidth(value, min, max) {
+  if (!value) {
+    return min;
+  }
+  const width = Math.round(1 + ((value - min) / (max - min)) * 4);
+  return width > max ? max : width;
+}
 window.customElements.define("canvas-statistics-overlay", CanvasStatsOverlay);
