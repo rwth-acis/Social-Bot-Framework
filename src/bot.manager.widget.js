@@ -189,8 +189,7 @@ class BotManagerWidget extends LitElement {
     const spinner = $("#sendStatusSpinner");
     const btn = $("#submit-model");
     var endpoint = y.getText("sbfManager").toString();
-    var model = y.getMap("data").get("model");
-    sendStatus.text("Sending...");
+    const model = window.syncmeta.EntityManagerInstance.graphToJSON();
     spinner.show();
     btn.prop("disabled", true);
 
