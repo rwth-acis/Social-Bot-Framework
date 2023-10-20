@@ -2165,7 +2165,7 @@
                 }
             },
             "left": 3246.333333333333,
-            "top": 5630.333333333332,
+            "top": 5632.333333333332,
             "width": 150,
             "height": 100,
             "zIndex": 16059,
@@ -2272,6 +2272,20 @@
                                 "id": "90cd8b63ad44500486ddbb02[value]",
                                 "name": "",
                                 "value": "list"
+                            }
+                        },
+                        "02f10f2ddc5ad49fb427d09d": {
+                            "id": "02f10f2ddc5ad49fb427d09d",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "02f10f2ddc5ad49fb427d09d[key]",
+                                "name": "",
+                                "value": "Rateable"
+                            },
+                            "value": {
+                                "id": "02f10f2ddc5ad49fb427d09d[value]",
+                                "name": "",
+                                "value": "boolean"
                             }
                         }
                     }
