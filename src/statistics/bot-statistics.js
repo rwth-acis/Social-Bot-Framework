@@ -246,7 +246,15 @@ class BotStats extends LitElement {
     const pm4botsEndpointInput = this.configMap
       .get("pm4bots-endpoint")
       .toString();
-    if (!botManagerEndpointInput || !pm4botsEndpointInput) {
+    const eventLogEndpointInput = this.configMap
+      .get("event-log-endpoint")
+      .toString();
+
+    if (
+      !botManagerEndpointInput ||
+      !pm4botsEndpointInput ||
+      !eventLogEndpointInput
+    ) {
       return;
     }
     let url = joinAbsoluteUrlPath(
@@ -256,6 +264,8 @@ class BotStats extends LitElement {
       "petri-net"
     );
     url += `?bot-manager-url=${botManagerEndpointInput}`;
+    url += `&event-log-url=${eventLogEndpointInput}`;
+
     console.log(url);
     try {
       const response = await fetch(url, {

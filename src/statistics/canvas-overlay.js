@@ -61,7 +61,9 @@ class CanvasStatsOverlay extends LitElement {
     const pm4botsEndpointInput = this.configMap
       .get("pm4bots-endpoint")
       .toString();
-    console.log(this.configMap.toJSON());
+    const eventLogEndpointInput = this.configMap
+      .get("event-log-endpoint")
+      .toString();
     if (!pm4botsEndpointInput || !botManagerEndpointInput) {
       console.warn(
         "endpoints not configured  properly",
@@ -70,7 +72,7 @@ class CanvasStatsOverlay extends LitElement {
       return;
     }
 
-    const url = `${pm4botsEndpointInput}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpoint}`;
+    const url = `${pm4botsEndpointInput}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpoint}&event-log-url=${eventLogEndpointInput}`;
     console.log(url);
     try {
       const response = await fetch(url, {
