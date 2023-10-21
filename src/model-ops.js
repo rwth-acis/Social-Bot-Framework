@@ -35,15 +35,17 @@ class ModelOps {
         // check whether there already is a metamodel or not
         const model = y.getMap("data").get("metamodel");
         if (model != null) {
-          resolve();
+          resolve(false);
         } else {
           // ask user whether to upload the default metamodel
           const confirmed = confirm(
             "You are currently working on the metamodel. Do you want to switch to bot modeling?"
           );
           if (confirmed) {
-           
-            y.getMap("data").set("metamodel", GenerateViewpointModel(metamodel, y));
+            y.getMap("data").set(
+              "metamodel",
+              GenerateViewpointModel(metamodel, y)
+            );
             await this.uploadBotModel();
             resolve(true);
           } else {
@@ -60,13 +62,15 @@ class ModelOps {
   }
 
   async uploadBotModel() {
-    const y = await this.getY(false);
-    const model = y.getMap("data").get("model");
-    if (model == null || Object.keys(model.nodes).length === 0) {
-      y.getMap("data").set("model", botModel);
-      return botModel;
-    }
-    return model;
+    setTimeout(async () => {
+      const y = await this.getY(false);
+      const model = y.getMap("data").get("model");
+      if (model == null || Object.keys(model.nodes).length === 0) {
+        y.getMap("data").set("model", botModel);
+        return botModel;
+      }
+      return model;
+    }, 100);
   }
 
   async observeTraininingData(cb) {
