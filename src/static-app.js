@@ -233,6 +233,8 @@ class StaticApp extends LitElement {
     const currentPath = window.location.pathname;
     if (currentPath === "/") {
       Router.go(`modeling#${subRoute}`);
+    }else {
+      window.location.hash = subRoute;
     }
   }
 
