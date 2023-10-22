@@ -265,6 +265,7 @@ class BotStats extends LitElement {
     );
     url += `?bot-manager-url=${botManagerEndpointInput}`;
     url += `&event-log-url=${eventLogEndpointInput}`;
+    url += `&enhance=${true}`;
 
     console.log(url);
     try {
