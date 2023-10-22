@@ -11,6 +11,7 @@ import "./config-pane.js";
 class BotStats extends LitElement {
   static properties = {
     loading: { type: Boolean, value: true },
+    alertMessage: { type: String },
   };
   configModal = null;
 
@@ -44,11 +45,27 @@ class BotStats extends LitElement {
           <button
             type="button"
             class="btn btn-light shadow border"
+            style="z-index:10"
             @click="${this.showConfigDialog}"
           >
             <i class="bi bi-gear"></i>
           </button>
         </div>
+        ${this.alertMessage
+          ? html`<div
+              class="alert alert-warning w-50 mx-auto alert-dismissible "
+              role="alert"
+            >
+              ${this.alertMessage}
+              <button
+                type="button"
+                class="btn-close"
+                @click="${() => (this.alertMessage = null)}"
+                aria-label="Close"
+              ></button>
+            </div>`
+          : ""}
+
         <div class="row mh-100">
           <div
             class="col-8  border border-3 rounded p-6 overflow-hidden mh-100 position-relative"
@@ -60,7 +77,7 @@ class BotStats extends LitElement {
               class="spinner-border position-absolute"
               role="status"
               style="top:50%;left:50%;"
-              ?hidden="${!this.loading}"
+              ?hidden="${!this.loading || this.alertMessage != null}"
             >
               <span class="visually-hidden">Loading...</span>
             </div>
@@ -131,8 +148,6 @@ class BotStats extends LitElement {
 
     setTimeout(() => {
       this.configMap = y.getMap("pm4bots-config");
-      const botManagerEndpoint = y.getText("sbfManager").toString();
-
       const botModel = y.getMap("data").get("model");
       if (botModel) {
         const botElement = Object.values(botModel.nodes).find((node) => {
@@ -173,6 +188,7 @@ class BotStats extends LitElement {
       },
     });
     if (!res.ok) {
+      this.alertMessage = `Error from server: ${res.status} ${res.statusText}`;
       return;
     }
     const body = await res.json();
@@ -255,6 +271,8 @@ class BotStats extends LitElement {
       !pm4botsEndpointInput ||
       !eventLogEndpointInput
     ) {
+      this.alertMessage =
+        "Make sure to configure the endpoints using the button on the top right";
       return;
     }
     let url = joinAbsoluteUrlPath(
@@ -267,7 +285,6 @@ class BotStats extends LitElement {
     url += `&event-log-url=${eventLogEndpointInput}`;
     url += `&enhance=${true}`;
 
-    console.log(url);
     try {
       const response = await fetch(url, {
         timeout: 10000,
@@ -277,6 +294,7 @@ class BotStats extends LitElement {
         },
       });
       if (!response.ok) {
+        this.alertMessage = `Error from server: ${res.status} ${res.statusText}`;
         return;
       }
       this.loading = false;
@@ -303,6 +321,7 @@ class BotStats extends LitElement {
       svg.parentElement.style.zIndex = 1;
       this.makeDraggable(svg);
     } catch (error) {
+      this.alertMessage = `Server not reachable. Reason: ${error?.message}`;
       console.error(error);
     }
   }
