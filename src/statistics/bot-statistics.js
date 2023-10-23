@@ -12,6 +12,7 @@ class BotStats extends LitElement {
   static properties = {
     loading: { type: Boolean, value: true },
     alertMessage: { type: String },
+    statistics: { type: Object },
   };
   configModal = null;
 
@@ -86,6 +87,16 @@ class BotStats extends LitElement {
           <div class="col-4" style="height:98vh;overflow-y:auto">
             <div class="row h-50">
               <h3>Bot statistics</h3>
+              <div ?hidden="${this.statistics ==null}">
+                Number of Conversations:
+                <strong>${this.statistics?.numberOfConversations}</strong>
+                <br />
+                Number of unique States:
+                <strong>${this.statistics?.numberOfStates}</strong>
+                <br />
+                Number of unique Users:
+                <strong>${this.statistics?.numberOfUsers}</strong>
+              </div>
             </div>
             <div class="row h-50">
               <h3>Community statistics</h3>
@@ -155,9 +166,10 @@ class BotStats extends LitElement {
         });
         if (botElement) {
           const botName = botElement.label.value.value;
-          this.fetchStatistics(botName);
+          this.fetchConversationModel(botName);
           this.getSuccessMeasureList(botName);
           this.fetchMeasureCatalog(botName);
+          this.fetchBotStatistics(botName);
         }
       }
     }, 300);
@@ -255,7 +267,7 @@ class BotStats extends LitElement {
     }
   }
 
-  async fetchStatistics(botName) {
+  async fetchConversationModel(botName) {
     const botManagerEndpointInput = this.configMap
       .get("sbm-endpoint")
       .toString();
@@ -294,7 +306,7 @@ class BotStats extends LitElement {
         },
       });
       if (!response.ok) {
-        this.alertMessage = `Error from server: ${res.status} ${res.statusText}`;
+        this.alertMessage = `Error from server: ${response.status} ${response.statusText}`;
         return;
       }
       this.loading = false;
@@ -324,6 +336,38 @@ class BotStats extends LitElement {
       this.alertMessage = `Server not reachable. Reason: ${error?.message}`;
       console.error(error);
     }
+  }
+
+  async fetchBotStatistics(botName) {
+    const eventLogEndpointInput = this.configMap
+      .get("event-log-endpoint")
+      .toString();
+
+    const pm4botsEndpointInput = this.configMap
+      .get("pm4bots-endpoint")
+      .toString();
+    let url = joinAbsoluteUrlPath(
+      pm4botsEndpointInput,
+      "bot",
+      botName,
+      "statistics"
+    );
+    url += `?event-log-url=${eventLogEndpointInput}`;
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: toAuthorizationHeader(botName),
+      },
+    });
+
+    if (!res.ok) {
+      this.alertMessage = `Error from server: ${res.status} ${res.statusText}`;
+      return;
+    }
+    const body = await res.json();
+    console.log("statistics", body);
+    this.statistics = body;
   }
   centerElement(element) {
     const bbox = element.getBBox();
