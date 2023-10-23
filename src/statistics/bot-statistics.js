@@ -4,6 +4,7 @@ import { Common } from "../common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import interact from "interactjs";
 import "./config-pane.js";
+import "./measure-visualization.js";
 /**
  * @customElement
  *
@@ -86,34 +87,37 @@ class BotStats extends LitElement {
 
           <div class="col-4" style="height:98vh;overflow-y:auto">
             <div class="row h-50">
-              <h3>Bot statistics</h3>
-              <div ?hidden="${this.statistics ==null}">
-                Number of Conversations:
-                <strong>${this.statistics?.numberOfConversations}</strong>
-                <br />
-                Number of unique States:
-                <strong>${this.statistics?.numberOfStates}</strong>
-                <br />
-                Number of unique Users:
-                <strong>${this.statistics?.numberOfUsers}</strong>
+              <div class="col">
+                <h3>Bot statistics</h3>
+                <div ?hidden="${this.statistics == null}">
+                  Number of Conversations:
+                  <strong>${this.statistics?.numberOfConversations}</strong>
+                  <br />
+                  Number of unique States:
+                  <strong>${this.statistics?.numberOfStates}</strong>
+                  <br />
+                  Number of unique Users:
+                  <strong>${this.statistics?.numberOfUsers}</strong>
+                </div>
               </div>
             </div>
             <div class="row h-50">
-              <h3>Community statistics</h3>
+              <div class="col">
+                <h3>Community statistics</h3>
 
-              <div class="input-group mb-3" style="max-height:30px">
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="search measures"
-                  @change="${(e) => this.filterList(e.target)}"
-                />
-                <span class="input-group-text"
-                  ><i class="bi bi-search"></i
-                ></span>
+                <div class="input-group mb-3" style="max-height:30px">
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="search measures"
+                    @change="${(e) => this.filterList(e.target)}"
+                  />
+                  <span class="input-group-text"
+                    ><i class="bi bi-search"></i
+                  ></span>
+                </div>
+                <ul class="list-group" id="measure-list"></ul>
               </div>
-
-              <ul class="list-group" id="measure-list"></ul>
             </div>
           </div>
         </div>
@@ -142,10 +146,29 @@ class BotStats extends LitElement {
           </div>
         </div>
       </div>
+
+      <div
+        class="modal fade"
+        id="visualizationModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-body">
+              <measure-visualization
+                .measure=${this.selectedMeasure}
+              ></measure-visualization>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
   }
   async firstUpdated() {
     this.configModal = new bootstrap.Modal("#configModal");
+    this.visualizationModal = new bootstrap.Modal("#visualizationModal");
 
     const instance = getInstance({
       host: config.yjs_host,
@@ -226,9 +249,7 @@ class BotStats extends LitElement {
     }
     const body = await res.json();
     const xmlString = body.xml;
-    const measureNames = parseMeasures(xmlString);
-    this.measures = measureNames;
-    return measureNames;
+    this.measures = parseMeasures(xmlString);
   }
 
   async getSuccessMeasureList(botName) {
@@ -249,7 +270,18 @@ class BotStats extends LitElement {
       option.classList.add("list-group-item");
       option.innerText = measureName;
       list.appendChild(option);
+      option.addEventListener("click", () => {
+        this.openVisualization(measureName);
+      });
     });
+  }
+
+  openVisualization(measureName) {
+    const measure = this.measures.find(
+      (measure) => measure.name === measureName
+    );
+    this.selectedMeasure = measure;
+    this.visualizationModal.show();
   }
 
   filterList(input) {
