@@ -21,10 +21,10 @@ class MeasureVisualization extends LitElement {
     const oldVal = this._measure;
     this._measure = measure;
     this.requestUpdate("measure", oldVal);
-    if (!measure) {
-      this.shadowRoot
-        ? (this.shadowRoot.querySelector("p").innerHTML = "")
-        : null;
+
+    if (measure == null) {
+      if (this.visualizationContainer)
+        this.visualizationContainer.innerHTML = "";
       this.loading = true;
       return;
     }
@@ -51,7 +51,7 @@ class MeasureVisualization extends LitElement {
       />
       <div>
         <h3>${this.measure?.name}</h3>
-        <p></p>
+        <p id="visualization-container"></p>
         <div
           class="spinner-border"
           role="status"
@@ -74,6 +74,9 @@ class MeasureVisualization extends LitElement {
     this.ydoc = await instance.connect();
     setTimeout(() => {
       this.configMap = this.ydoc.getMap("pm4bots-config");
+      this.visualizationContainer = this.shadowRoot.querySelector(
+        "#visualization-container"
+      );
     }, 200);
   }
 
@@ -95,8 +98,8 @@ class MeasureVisualization extends LitElement {
     const body = {
       cache: true,
       dbkey: "las2peermon",
-      height: "200px",
-      width: "300px",
+      height: "50vh",
+      width: "80vw",
       modtypei: null,
       query: this.measure.query,
       title: "",
@@ -114,22 +117,20 @@ class MeasureVisualization extends LitElement {
       const result = await response.json();
 
       if (this.measure.visualization.unit)
-        this.shadowRoot.querySelector("p").innerHTML =
+        this.visualizationContainer.innerHTML =
           result[2][0] + this.measure.visualization.unit;
-      else this.shadowRoot.querySelector("p").innerHTML = result[2][0];
+      else this.visualizationContainer.innerHTML = result[2][0];
     } else {
       const result = await response.text();
       // embed into iframe
 
       const iframe = document.createElement("iframe");
       iframe.srcdoc = result;
-      iframe.width = "100%";
-      iframe.height = "100%";
-      iframe.frameBorder = "0";
-      iframe.scrolling = "no";
-      this.shadowRoot.querySelector("p").innerHTML = "";
-      this.shadowRoot.querySelector("p").appendChild(iframe);
-      this.shadowRoot.querySelector("p").style.height = "70vh";
+      
+      this.visualizationContainer.innerHTML = "";
+      this.visualizationContainer.appendChild(iframe);
+      this.visualizationContainer.style.height = "100%";
+      this.visualizationContainer.style.width = "100%";
     }
   }
 }

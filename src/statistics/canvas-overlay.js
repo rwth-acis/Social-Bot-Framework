@@ -73,7 +73,6 @@ class CanvasStatsOverlay extends LitElement {
     }
 
     const url = `${pm4botsEndpointInput}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpoint}&event-log-url=${eventLogEndpointInput}`;
-    console.log(url);
     try {
       const response = await fetch(url, {
         timeout: 10000,

@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit-element";
+import { LitElement, html } from "lit";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import { Common } from "../common.js";
 import config from "../../config.json";
