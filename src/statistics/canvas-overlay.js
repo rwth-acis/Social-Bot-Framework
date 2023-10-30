@@ -90,13 +90,26 @@ class CanvasStatsOverlay extends LitElement {
 
       const statistics = await response.json();
       this.statistics = statistics;
-      this.addMissingNodesAndEdges(statistics);
+      document
+        .querySelector("#bot-usage-button")
+        .addEventListener("click", () => {
+          setTimeout(() => {
+            if (
+              !this.drawn &&
+              document.querySelector("#model-statistics-overlay").style
+                .display === "block"
+            ) {
+              this.addMissingNodesAndEdges();
+            }
+          }, 100);
+        });
     } catch (error) {
       console.error(error);
     }
   }
 
-  addMissingNodesAndEdges(statistics) {
+  addMissingNodesAndEdges() {
+    const statistics = this.statistics;
     window.jsPlumbInstance.setSuspendDrawing(true, true);
     // Add missing edges to bot model as overlay
     const botModel = this.y.getMap("data").get("model");
@@ -154,8 +167,9 @@ class CanvasStatsOverlay extends LitElement {
         }
       }
     }
-    window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
+    // window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
     window.jsPlumbInstance.setSuspendDrawing(false);
+    this.drawn = true;
   }
 
   /**
@@ -217,7 +231,7 @@ class CanvasStatsOverlay extends LitElement {
     canvas.appendChild(nodeHtml);
     window.jsPlumbInstance.manage(nodeHtml);
     //hide
-    nodeHtml.style.display = "none";
+    // nodeHtml.style.display = "none";
     // when dragging the node prevent canvas panning
     nodeHtml.addEventListener("mousedown", (event) => {
       window.canvas.unbindMoveToolEvents();
