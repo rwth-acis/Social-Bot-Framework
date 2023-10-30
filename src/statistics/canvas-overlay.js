@@ -117,6 +117,7 @@ class CanvasStatsOverlay extends LitElement {
     const botModelNodes = botModel.nodes;
     const boundingBox = this.getBotModelBoundingBox();
     const addedNodes = [];
+    // add missing nodes to canvas
     for (const node of statistics.graph.nodes) {
       if (!botModelNodes[node.id]) {
         if (!addedNodes.includes(node.id)) {
@@ -131,45 +132,65 @@ class CanvasStatsOverlay extends LitElement {
     }
 
     const addedEdges = [];
-
-    statloop: for (const edge of statistics.graph.edges) {
+    startLoop: for (const edge of statistics.graph.edges) {
       const sourceId = edge.source;
       const targetId = edge.target;
-      let existingEdge = false;
+      const sourceNode = this.findNode(sourceId);
+      const targetNode = this.findNode(targetId);
+      if (!sourceNode || !targetNode) {
+        console.error("source or target node not found", sourceId, targetId);
+        continue startLoop;
+      }
 
-      for (const botModelEdge of Object.values(botModelEdges)) {
-        if (
-          botModelEdge.source === sourceId &&
-          botModelEdge.target === targetId
-        ) {
-          botModelEdge.statistics = edge.performance;
-          existingEdge = true;
+      const botModelEdge = this.findEdgeInBotModel(
+        botModelEdges,
+        sourceId,
+        targetId
+      );
+      if (botModelEdge) {
+        this.addOverlayToExistingEdge(sourceNode, targetNode, edge.performance);
+      } else {
+        if (this.findEdgeInAddedEdges(addedEdges, sourceId, targetId)) {
+          continue startLoop;
         }
-        if (!existingEdge) {
-          addedEdges.push({ sourceId, targetId });
-          const sourceNode =
-            document.querySelector(
-              `[id="pm4bots-${sourceId}"]` // added node
-            ) || document.querySelector(`[id="${sourceId}"]`); // existing node
-          const targetNode =
-            document.querySelector(
-              `[id="pm4bots-${targetId}"]` // added node
-            ) || document.querySelector(`[id="${targetId}"]`); // existing node
-          if (!sourceNode || !targetNode) {
-            console.error(
-              "source or target node not found",
-              sourceId,
-              targetId
-            );
-          }
-          this.addMissingEdge(sourceNode, targetNode, edge.performance);
-          continue statloop;
-        }
+        addedEdges.push({ sourceId, targetId });
+        this.addMissingEdge(sourceNode, targetNode, edge.performance);
       }
     }
     // window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
     window.jsPlumbInstance.setSuspendDrawing(false);
     this.drawn = true;
+  }
+
+  findNode(id) {
+    return (
+      document.querySelector(
+        `[id="pm4bots-${id}"]` // added node
+      ) || document.querySelector(`[id="${id}"]`)
+    ); // existing node
+  }
+
+  findEdgeInBotModel(botModelEdges, sourceId, targetId) {
+    for (const botModelEdge of Object.values(botModelEdges)) {
+      if (
+        botModelEdge.source === sourceId &&
+        botModelEdge.target === targetId
+      ) {
+        return botModelEdge;
+      }
+    }
+
+    return null;
+  }
+
+  findEdgeInAddedEdges(addedEdges, sourceId, targetId) {
+    for (const addedEdge of addedEdges) {
+      if (addedEdge.source === sourceId && addedEdge.target === targetId) {
+        return addedEdge;
+      }
+    }
+
+    return null;
   }
 
   /**
@@ -245,7 +266,7 @@ class CanvasStatsOverlay extends LitElement {
     const color = getColorScale(performance?.mean, 0, 10);
     // if performance?.mean is defined then add an overlay to the edge with the performance value
     const label = performance?.mean ? performance?.mean.toFixed(2) + "s" : "";
-    const strokeWidth = getStrokeWidth(performance?.mean, 0, 8);
+    const strokeWidth = getStrokeWidth(performance?.mean, 0, 10);
     window.jsPlumbInstance.connect({
       source: source,
       target: target,
@@ -254,10 +275,41 @@ class CanvasStatsOverlay extends LitElement {
       cssClass: "pm4bots-edge",
       overlays: [
         { type: "Arrow", options: { location: 1 } },
-        { type: "Label", options: { label } },
+        { type: "Label", options: { label,location:0.7 } },
       ],
       scope: "pm4bots",
     });
+  }
+  addOverlayToExistingEdge(source, target, performance) {
+    const color = getColorScale(performance?.mean, 0, 10);
+    // if performance?.mean is defined then add an overlay to the edge with the performance value
+    const label = performance?.mean ? performance?.mean.toFixed(2) + "s" : "";
+    const strokeWidth = getStrokeWidth(performance?.mean, 10, 15);
+    const connection = window.jsPlumbInstance.getConnections({
+      source: source,
+      target: target,
+    })[0];
+    connection.setPaintStyle({ stroke: color, strokeWidth });
+    connection.setHoverPaintStyle({
+      stroke: color,
+      strokeWidth: strokeWidth + 2,
+    });
+    connection.addOverlay({
+      type: "Custom",
+      options: {
+        create: function () {
+          const el = document.createElement("div");
+          el.classList.add("edge_label");
+          el.innerText = label;
+          el.zIndex = 1000;
+          return el;
+        },
+        location: 0.6,
+        id: "label",
+      },
+    });
+    // repaint the connection
+    window.jsPlumbInstance.repaintEverything();
   }
 }
 
