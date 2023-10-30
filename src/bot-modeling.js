@@ -101,6 +101,7 @@ class BotModeling extends LitElement {
     if (firstButtonCol) {
       const newButton = document.createElement("button");
       newButton.classList.add("btn", "btn-primary", "btn-sm", "ml-2");
+      newButton.id = "bot-usage-button";
       newButton.innerHTML = "<i class='bi bi-graph-up'></i> Usage ";
       newButton.addEventListener("click", () => {
         window.jsPlumbInstance.setSuspendDrawing(true, true);
