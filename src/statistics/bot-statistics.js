@@ -15,6 +15,7 @@ class BotStats extends LitElement {
     alertMessage: { type: String },
     statistics: { type: Object },
     selectedMeasure: { type: Object, state: true },
+    successModelLoaded: { type: Boolean, state: true },
   };
   configModal = null;
 
@@ -25,6 +26,10 @@ class BotStats extends LitElement {
   constructor() {
     super();
     this.loading = true;
+    this.alertMessage = null;
+    this.statistics = null;
+    this.selectedMeasure = null;
+    this.successModelLoaded = false;
   }
 
   render() {
@@ -103,7 +108,7 @@ class BotStats extends LitElement {
               </div>
             </div>
             <div class="row h-50">
-              <div class="col">
+              <div class="col position-relative">
                 <h3>Community statistics</h3>
 
                 <div class="input-group mb-3" style="max-height:30px">
@@ -116,6 +121,15 @@ class BotStats extends LitElement {
                   <span class="input-group-text"
                     ><i class="bi bi-search"></i
                   ></span>
+                </div>
+                <div
+                  class="spinner-border position-absolute"
+                  role="status"
+                  style="top:50%;left:50%;"
+                  ?hidden="${this.successModelLoaded ||
+                  this.alertMessage != null}"
+                >
+                  <span class="visually-hidden">Loading...</span>
                 </div>
                 <ul class="list-group" id="measure-list"></ul>
               </div>
@@ -167,37 +181,50 @@ class BotStats extends LitElement {
       </div>
     `;
   }
-  async firstUpdated() {
-    this.configModal = new bootstrap.Modal("#configModal");
-    this.visualizationModal = new bootstrap.Modal("#visualizationModal");
-
-    const instance = getInstance({
-      host: config.yjs_host,
-      port: config.yjs_port,
-      protocol: config.yjs_socket_protocol,
-      spaceTitle: Common.getYjsRoom(),
+  firstUpdated() {
+    // listen for the router to change to #bot-statistics
+    window.addEventListener("hashchange", async () => {
+      this.init = false;
+      this.loading = true;
+      this.runInit();
     });
-    const y = await instance.connect();
-    this.y = y;
-    super.firstUpdated();
+    this.runInit();
+  }
 
-    setTimeout(() => {
-      this.configMap = y.getMap("pm4bots-config");
-      const botModel = y.getMap("data").get("model");
-      if (botModel) {
-        const botElement = Object.values(botModel.nodes).find((node) => {
-          return node.type === "Bot";
-        });
-        if (botElement) {
-          const botName = botElement.label.value.value;
-          this.fetchConversationModel(botName);
-          this.getSuccessMeasureList(botName);
-          this.fetchMeasureCatalog(botName);
-          this.fetchBotStatistics(botName);
-          this.configMap.set("bot-name", botName);
+  async runInit() {
+    if (window.location.hash.match("#bot-statistics") && !this.init) {
+      this.configModal = new bootstrap.Modal("#configModal");
+      this.visualizationModal = new bootstrap.Modal("#visualizationModal");
+
+      const instance = getInstance({
+        host: config.yjs_host,
+        port: config.yjs_port,
+        protocol: config.yjs_socket_protocol,
+        spaceTitle: Common.getYjsRoom(),
+      });
+      const y = await instance.connect();
+      this.y = y;
+      super.firstUpdated();
+
+      setTimeout(() => {
+        this.configMap = y.getMap("pm4bots-config");
+        const botModel = y.getMap("data").get("model");
+        if (botModel) {
+          const botElement = Object.values(botModel.nodes).find((node) => {
+            return node.type === "Bot";
+          });
+          if (botElement) {
+            const botName = botElement.label.value.value;
+            this.fetchConversationModel(botName);
+            this.getSuccessMeasureList(botName);
+            this.fetchMeasureCatalog(botName);
+            this.fetchBotStatistics(botName);
+            this.configMap.set("bot-name", botName);
+            this.init = true;
+          }
         }
-      }
-    }, 300);
+      }, 300);
+    }
   }
 
   async fetchSuccessModel(botName) {
