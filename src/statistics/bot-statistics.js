@@ -14,6 +14,7 @@ class BotStats extends LitElement {
     loading: { type: Boolean, value: true },
     alertMessage: { type: String },
     statistics: { type: Object },
+    selectedMeasure: { type: Object, state: true },
   };
   configModal = null;
 
@@ -93,7 +94,7 @@ class BotStats extends LitElement {
                   Number of Conversations:
                   <strong>${this.statistics?.numberOfConversations}</strong>
                   <br />
-                  Number of unique States:
+                  Number of unique conversation topics:
                   <strong>${this.statistics?.numberOfStates}</strong>
                   <br />
                   Number of unique Users:
@@ -193,6 +194,7 @@ class BotStats extends LitElement {
           this.getSuccessMeasureList(botName);
           this.fetchMeasureCatalog(botName);
           this.fetchBotStatistics(botName);
+          this.configMap.set("bot-name", botName);
         }
       }
     }, 300);
@@ -282,6 +284,11 @@ class BotStats extends LitElement {
     );
     this.selectedMeasure = measure;
     this.visualizationModal.show();
+    document
+      .querySelector("#visualizationModal")
+      .addEventListener("hidden.bs.modal", () => {
+        this.selectedMeasure = null;
+      });
   }
 
   filterList(input) {
