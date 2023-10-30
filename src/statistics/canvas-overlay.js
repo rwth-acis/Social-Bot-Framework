@@ -284,7 +284,7 @@ class CanvasStatsOverlay extends LitElement {
     const color = getColorScale(performance?.mean, 0, 10);
     // if performance?.mean is defined then add an overlay to the edge with the performance value
     const label = performance?.mean ? performance?.mean.toFixed(2) + "s" : "";
-    const strokeWidth = getStrokeWidth(performance?.mean, 10, 15);
+    const strokeWidth = getStrokeWidth(performance?.mean, 4, 10);
     const connection = window.jsPlumbInstance.getConnections({
       source: source,
       target: target,
