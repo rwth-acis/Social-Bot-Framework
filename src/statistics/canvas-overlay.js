@@ -9,10 +9,9 @@ import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
  */
 class CanvasStatsOverlay extends LitElement {
   static properties = {
-    loading: { type: Boolean, value: true },
+    loading: { type: Boolean, value: true, state: true },
+    overlayInitialized: { type: Boolean, value: false, state: true },
   };
-
-  overlayInitialized = false;
 
   createRenderRoot() {
     return this;
@@ -23,8 +22,19 @@ class CanvasStatsOverlay extends LitElement {
   }
 
   render() {
-    return html`<div id="model-statistics-overlay" style="display:none; position:absolute; top:0; left:0;right:0;bottom:0; background-color: #e9ecef; padding: 10px; border-radius: 5px;"
-    "></div>`;
+    return html`<div
+      id="model-statistics-overlay"
+      style="display:none; position:absolute; top:0; left:0;right:0;bottom:0; background-color: #e9ecef; padding: 10px; border-radius: 5px;"
+    >
+      <div
+        class="spinner-border position-absolute"
+        role="status"
+        style="top:50%;left:50%;"
+        ?hidden="${this.loading === false}"
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>`;
   }
   async firstUpdated() {
     super.firstUpdated();
@@ -223,7 +233,7 @@ function addMissingEdge(source, target, meanDuration) {
     cssClass: "pm4bots-edge",
     overlays: [
       { type: "Arrow", options: { location: 1 } },
-      { type: "Label", options: { label, location: 0.7 } },
+      { type: "Label", options: { label, location: 0.5 } },
     ],
     scope: "pm4bots",
   });
