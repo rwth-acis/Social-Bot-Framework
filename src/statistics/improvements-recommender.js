@@ -13,9 +13,8 @@ class ImprovementRec extends LitElement {
   static properties = {
     loading: { type: Boolean, state: true, value: false },
     chatGPTRes: { type: String, state: true, value: false },
+    openaiToken: { type: String, state: true, value: null },
   };
-
-  openaiToken = null;
 
   render() {
     return html`
@@ -74,6 +73,7 @@ class ImprovementRec extends LitElement {
         type="button"
         id="askGPTButton"
         class="btn btn-info mb-2"
+        ?hidden="${!this.openaiToken}"
         @click="${this.askGPT}"
       >
         Ask ChatGPT
