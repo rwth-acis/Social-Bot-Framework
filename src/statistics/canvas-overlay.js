@@ -63,6 +63,7 @@ class CanvasStatsOverlay extends LitElement {
       const statistics = await this.fetchStatistics(botName);
       if (!statistics) return;
       this.statistics = statistics;
+      this.y.getMap("data").set("bot-statistics", statistics);
       document
         .querySelector("#bot-usage-button")
         .addEventListener("click", () => {

@@ -26,7 +26,8 @@ class BotModeling extends LitElement {
   }
 
   render() {
-    return html` <style>
+    return html`
+      <style>
         .maincontainer {
           min-height: 55vh;
           resize: both;
@@ -67,7 +68,14 @@ class BotModeling extends LitElement {
         yjsSpaceTitle="${ifDefined(
           Common.getYjsRoom() === null ? undefined : Common.getYjsRoom()
         )}"
-      ></widget-container>`;
+      ></widget-container>
+      <!-- <button
+        type="button"
+        class="btn btn-success rounded shadow-lg position-fixed bottom-0 end-0 m-2"
+      >
+        <i class="bi bi-lightbulb"></i>
+      </button> -->
+    `;
   }
   async firstUpdated() {
     const instance = getInstance({
