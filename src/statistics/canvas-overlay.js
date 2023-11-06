@@ -62,6 +62,8 @@ class CanvasStatsOverlay extends LitElement {
       this.configMap.set("bot-name", botName);
       const statistics = await this.fetchStatistics(botName);
       if (!statistics) return;
+      document.querySelector("#AIrecommendationButton").style.display =
+        "inline-block";
       this.statistics = statistics;
       this.y.getMap("data").set("bot-statistics", statistics);
       document

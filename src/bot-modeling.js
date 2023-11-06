@@ -5,6 +5,7 @@ import config from "../config.json";
 import { Common } from "./common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import { ifDefined } from "lit/directives/if-defined.js";
+import "./statistics/improvements-recommender.js";
 /**
  * @customElement
  *
@@ -69,12 +70,41 @@ class BotModeling extends LitElement {
           Common.getYjsRoom() === null ? undefined : Common.getYjsRoom()
         )}"
       ></widget-container>
-      <!-- <button
+      <button
         type="button"
         class="btn btn-success rounded shadow-lg position-fixed bottom-0 end-0 m-2"
+        style="display: none;"
+        id="AIrecommendationButton"
+        @click="${() => {
+          this.Offcanvas.show();
+        }}"
       >
-        <i class="bi bi-lightbulb"></i>
-      </button> -->
+        <i class="bi bi-lightbulb fs-3"></i>
+      </button>
+
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offCanvasChatGPT"
+        aria-labelledby="offcanvasRightLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel">
+            ChatGPT Recommendations
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            @click="${() => {
+              this.Offcanvas.hide();
+            }}"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <bot-improvements></bot-improvements>
+        </div>
+      </div>
     `;
   }
   async firstUpdated() {
@@ -86,6 +116,7 @@ class BotModeling extends LitElement {
     });
     const y = await instance.connect();
     super.firstUpdated();
+    this.Offcanvas = new bootstrap.Offcanvas("#offCanvasChatGPT");
 
     setTimeout(() => {
       const botModel = y.getMap("data").get("model");
