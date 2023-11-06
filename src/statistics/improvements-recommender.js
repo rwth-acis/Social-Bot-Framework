@@ -4,6 +4,7 @@ import { Common } from "../common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import "./recommender/general-improvements.js";
 import "./recommender/intent-improvements.js";
+import "./recommender/custom-improvements.js";
 class ImprovementRec extends LitElement {
   static styles = css``;
 
@@ -104,6 +105,20 @@ class ImprovementRec extends LitElement {
             Precision
           </button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#custom-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="custom-tab-pane"
+            aria-selected="false"
+          >
+            Custom
+          </button>
+        </li>
       </ul>
       <div class="tab-content" id="myTabContent">
         <div
@@ -128,7 +143,21 @@ class ImprovementRec extends LitElement {
             openaiToken="${this.openaiToken}"
           ></intent-improvements>
         </div>
+
+        <div
+          class="tab-pane fade"
+          id="custom-tab-pane"
+          role="tabpanel"
+          aria-labelledby="custom-tab"
+          tabindex="0"
+        >
+          <custom-improvements
+            openaiToken="${this.openaiToken}"
+          ></custom-improvements>
+        </div>
       </div>
+      <i class="bi bi-info-circle"></i> Please note that loading the results may
+      take a while...
     `;
   }
 
