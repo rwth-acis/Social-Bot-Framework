@@ -432,7 +432,6 @@ class BotStats extends LitElement {
       return;
     }
     const body = await res.json();
-    console.log("statistics", body);
     this.statistics = body;
   }
   centerElement(element) {
