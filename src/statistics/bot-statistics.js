@@ -372,7 +372,12 @@ class BotStats extends LitElement {
         },
       });
       if (!response.ok) {
-        this.alertMessage = `Error from server: ${response.status} ${response.statusText}`;
+        try {
+          const body = await response.json();
+          this.alertMessage = `${body.error}`;
+        } catch (error) {
+          this.alertMessage = `An unknown Error occurred (${response.status})`;
+        }
         return;
       }
       this.loading = false;
@@ -428,7 +433,13 @@ class BotStats extends LitElement {
     });
 
     if (!res.ok) {
-      this.alertMessage = `Error from server: ${res.status} ${res.statusText}`;
+      try {
+        const body = await res.json();
+        this.alertMessage = `Error from server: ${res.status} ${body.error}`;
+      } catch (error) {
+        this.alertMessage = `Error from server: ${res.status} ${res.statusText}`;
+      }
+      
       return;
     }
     const body = await res.json();
