@@ -188,6 +188,7 @@ class CanvasStatsOverlay extends LitElement {
     menuElement.style.position = "absolute";
     menuElement.style.top = "5px";
     menuElement.style.right = "5px";
+    menuElement.classList.add("pm4bots-overlay");
     canvasFrame.appendChild(menuElement);
   }
 }
