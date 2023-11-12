@@ -76,6 +76,7 @@ class CanvasStatsOverlay extends LitElement {
                 .display === "block"
             ) {
               this.initializeOverlay(botModel, statistics);
+              this.initializeMenu();
             }
           }, 100);
         });
@@ -172,6 +173,22 @@ class CanvasStatsOverlay extends LitElement {
     window.jsPlumbInstance.setSuspendDrawing(false);
     window.jsPlumbInstance.repaintEverything();
     this.overlayInitialized = true;
+  }
+
+  async initializeMenu() {
+    const canvasFrame = document.querySelector("#canvas-frame");
+    canvasFrame.style.position = "relative";
+    const menuElement = document.createElement("div");
+    menuElement.innerHTML = `<select class="form-select" aria-label="Default select example">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>`;
+    menuElement.style.position = "absolute";
+    menuElement.style.top = "5px";
+    menuElement.style.right = "5px";
+    canvasFrame.appendChild(menuElement);
   }
 }
 

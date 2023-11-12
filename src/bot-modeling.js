@@ -108,6 +108,7 @@ class BotModeling extends LitElement {
     `;
   }
   async firstUpdated() {
+    this.Offcanvas = new bootstrap.Offcanvas("#offCanvasChatGPT");
     const instance = getInstance({
       host: config.yjs_host,
       port: config.yjs_port,
@@ -116,7 +117,6 @@ class BotModeling extends LitElement {
     });
     const y = await instance.connect();
     super.firstUpdated();
-    this.Offcanvas = new bootstrap.Offcanvas("#offCanvasChatGPT");
 
     setTimeout(() => {
       const botModel = y.getMap("data").get("model");
