@@ -4,7 +4,7 @@ import botModel from "./botModel.js";
 import config from "../config.json";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync.js";
 import { Common } from "./common.js";
-import GenerateViewpointModel from "./generateVLS.js";
+import GenerateViewpointModel from "./lib/generateVLS.js";
 class ModelOps {
   y = null;
 
