@@ -126,7 +126,6 @@ class CanvasStatsOverlay extends LitElement {
   }
 
   async initializeOverlay(botModel, statistics) {
-    console.log("Initializing statistics overlay");
     window.jsPlumbInstance.setSuspendDrawing(true, true);
 
     // Add missing edges to bot model as overlay
