@@ -146,6 +146,8 @@ class BotModeling extends LitElement {
         window.jsPlumbInstance.setSuspendDrawing(true, true);
         this.toggleEdgeInfoLabels();
         const overlay = document.querySelector("#model-statistics-overlay");
+        const pm4botsOverlayElements =
+          document.querySelectorAll(".pm4bots-overlay");
         const nodes = document.querySelectorAll(".pm4bots-node");
 
         if (overlay.style.display === "none") {
@@ -153,12 +155,18 @@ class BotModeling extends LitElement {
             node.style.display = "block";
           }
           overlay.style.display = "block";
+          for (const el of pm4botsOverlayElements) {
+            el.style.display = "block";
+          }
           window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(true);
         } else {
           for (const node of nodes) {
             node.style.display = "none";
           }
           overlay.style.display = "none";
+             for (const el of pm4botsOverlayElements) {
+               el.style.display = "none";
+             }
           window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
         }
         window.jsPlumbInstance.setSuspendDrawing(false);
