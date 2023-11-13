@@ -12,9 +12,9 @@ class GeneralImprovement extends LitElement {
     openaiToken: { type: String, state: true, value: null },
   };
 
-  set openaiToken(measure) {
+  set openaiToken(token) {
     const oldVal = this._openaiToken;
-    this._openaiToken = measure;
+    this._openaiToken = token;
     this.requestUpdate("openaiToken", oldVal);
   }
 

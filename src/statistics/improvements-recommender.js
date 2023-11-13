@@ -15,7 +15,11 @@ class ImprovementRec extends LitElement {
   static properties = {
     loading: { type: Boolean, state: true, value: false },
     chatGPTRes: { type: String, state: true, value: false },
-    openaiToken: { type: String, state: true, value: null },
+    openaiToken: {
+      type: String,
+      state: true,
+      value: null,
+    },
   };
 
   render() {
@@ -32,6 +36,7 @@ class ImprovementRec extends LitElement {
           <i class="bi bi-gear"></i>
         </a>
       </p>
+      <br />
       <div class="collapse" id="collapseExample">
         <form @submit="${this.onSubmit}">
           <div class="input-group mb-3">
@@ -61,7 +66,7 @@ class ImprovementRec extends LitElement {
             type="button"
             @click="${() => {
               localStorage.removeItem("openai-token");
-              this.openaiToken = null;
+              this.updateToken(null);
               document.querySelector("#openai-token").value = "";
             }}"
             class="btn btn-danger"
@@ -120,7 +125,7 @@ class ImprovementRec extends LitElement {
           </button>
         </li>
       </ul>
-      <div class="tab-content" id="myTabContent">
+      <div class="tab-content" id="myTabContent" ?hidden="${!this.openaiToken}">
         <div
           class="tab-pane fade show active"
           id="home-tab-pane"
@@ -166,7 +171,20 @@ class ImprovementRec extends LitElement {
     if (e.target[1].checked) {
       localStorage.setItem("openai-token", e.target[0].value);
     }
-    this.openaiToken = e.target[0].value;
+    this.updateToken(e.target[0].value);
+  }
+
+  updateToken(value) {
+    this.openaiToken = value;
+    this.querySelectorAll("general-improvements").forEach((child) => {
+      child.openaiToken = value;
+    });
+    this.querySelectorAll("intent-improvements").forEach((child) => {
+      child.openaiToken = value;
+    });
+    this.querySelectorAll("custom-improvements").forEach((child) => {
+      child.openaiToken = value;
+    });
   }
 
   async firstUpdated() {
