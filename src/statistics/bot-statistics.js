@@ -104,6 +104,23 @@ class BotStats extends LitElement {
                   <br />
                   Number of unique Users:
                   <strong>${this.statistics?.numberOfUsers}</strong>
+                  <br />
+
+                  ${this.statistics?.conformance?.fitness?.averageFitness !=
+                  null
+                    ? html` Deviating conversations:
+                        <strong>
+                          ${Math.round(
+                            100 *
+                              (1 -
+                                this.statistics?.conformance?.fitness
+                                  ?.averageFitness) *
+                              100
+                          ) / 100}
+                          %</strong
+                        >
+                        <br />`
+                    : "-"}
                 </div>
               </div>
             </div>
@@ -417,6 +434,9 @@ class BotStats extends LitElement {
     const pm4botsEndpointInput = this.configMap
       .get("pm4bots-endpoint")
       .toString();
+    const botManagerEndpointInput = this.configMap
+      .get("sbm-endpoint")
+      .toString();
     let url = joinAbsoluteUrlPath(
       pm4botsEndpointInput,
       "bot",
@@ -424,6 +444,8 @@ class BotStats extends LitElement {
       "statistics"
     );
     url += `?event-log-url=${eventLogEndpointInput}`;
+    url += `&bot-manager-url=${botManagerEndpointInput}`;
+
     const res = await fetch(url, {
       method: "GET",
       headers: {
@@ -439,7 +461,7 @@ class BotStats extends LitElement {
       } catch (error) {
         this.alertMessage = `Error from server: ${res.status} ${res.statusText}`;
       }
-      
+
       return;
     }
     const body = await res.json();
