@@ -27,7 +27,7 @@ class CanvasStatsOverlay extends LitElement {
       style="display:none; position:absolute; top:0; left:0;right:0;bottom:0; background-color: #e9ecef; padding: 10px; border-radius: 5px;"
     >
       <div
-        class="spinner-border position-absolute"
+        class="spinner-border text-primary position-absolute"
         role="status"
         style="top:50%;left:50%;"
         ?hidden="${this.loading === false}"
@@ -126,7 +126,7 @@ class CanvasStatsOverlay extends LitElement {
     }
   }
 
-  async initializeOverlay(botModel, statistics) {
+  initializeOverlay(botModel, statistics) {
     window.jsPlumbInstance.setSuspendDrawing(true, true);
 
     // Add missing edges to bot model as overlay
@@ -175,21 +175,54 @@ class CanvasStatsOverlay extends LitElement {
     this.overlayInitialized = true;
   }
 
-  async initializeMenu() {
+  initializeMenu() {
     const canvasFrame = document.querySelector("#canvas-frame");
     canvasFrame.style.position = "relative";
     const menuElement = document.createElement("div");
-    menuElement.innerHTML = `<select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>`;
+    menuElement.innerHTML = `<select id="pm4bots-overlay-selection" class="form-select" aria-label="Default select example">
+        <option selected value="1">Durations (seconds)</option>
+        <option value="2">Frequency</option>
+    </select>`;
     menuElement.style.position = "absolute";
     menuElement.style.top = "5px";
     menuElement.style.right = "5px";
     menuElement.classList.add("pm4bots-overlay");
+    menuElement.style.zIndex = "1000000";
     canvasFrame.appendChild(menuElement);
+    menuElement.addEventListener("change", (event) => {
+      const value = event.target.value;
+      if (value === "1") {
+        this.redrawOverlay("duration");
+      } else if (value === "2") {
+        this.redrawOverlay("frequency");
+      }
+    });
+  }
+
+  redrawOverlay(type = "performance") {
+    window.jsPlumbInstance.setSuspendDrawing(true, true);
+
+    for (const edge of this.statistics.graph.edges) {
+      const sourceId = edge.source;
+      const targetId = edge.target;
+      const sourceNode = findNodeHTML(sourceId);
+      const targetNode = findNodeHTML(targetId);
+      removeExistingOverlays(sourceNode, targetNode);
+      if (!sourceNode || !targetNode) {
+        console.error("source or target node not found", sourceId, targetId);
+      } else {
+        const metric =
+          type === "performance"
+            ? edge.performance?.mean
+              ? edge.performance?.mean.toFixed(2) + "s"
+              : ""
+            : edge.frequency;
+        updateOverlay(sourceNode, targetNode, metric);
+      }
+    }
+
+    window.jsPlumbInstance.setSuspendDrawing(false);
+    window.jsPlumbInstance.repaintEverything();
   }
 }
 
@@ -259,6 +292,55 @@ function addMissingEdge(source, target, meanDuration) {
   });
 }
 
+function updateOverlay(source, target, label) {
+  const connection = window.jsPlumbInstance.getConnections({
+    source: source,
+    target: target,
+  })[0];
+  if (!connection) {
+    console.error("connection not found", source, target);
+    return;
+  }
+  const color = getColorScale(label, 0, 10);
+  const strokeWidth = getStrokeWidth(label, 0, 10);
+  connection.setPaintStyle({ stroke: color, strokeWidth });
+  connection.setHoverPaintStyle({
+    stroke: color,
+    strokeWidth: strokeWidth + 2,
+  });
+  // remove existing label
+  for (const [id, overlay] of Object.entries(connection.overlays)) {
+    if (overlay.type === "Label") {
+      connection.removeOverlay(overlay.id);
+    }
+  }
+
+  connection.addOverlay({
+    type: "Label",
+    options: {
+      label,
+      location: 0.6,
+      scope: "pm4bots",
+    },
+  });
+}
+
+function removeExistingOverlays(source, target) {
+  const connection = window.jsPlumbInstance.getConnections({
+    source: source,
+    target: target,
+  })[0];
+  if (!connection) {
+    console.error("connection not found", source, target);
+    return;
+  }
+  for (const [id, overlay] of Object.entries(connection.overlays)) {
+    if (overlay.type === "Label") {
+      connection.removeOverlay(overlay.id);
+    }
+  }
+}
+
 /**
  *  Adds an overlay to an existing edge
  * @param {*} source  source node
@@ -274,6 +356,10 @@ function addOverlayToExistingEdge(source, target, meanDuration) {
     source: source,
     target: target,
   })[0];
+  if (!connection) {
+    console.error("connection not found", source, target);
+    return;
+  }
   connection.setPaintStyle({ stroke: color, strokeWidth });
   connection.setHoverPaintStyle({
     stroke: color,
