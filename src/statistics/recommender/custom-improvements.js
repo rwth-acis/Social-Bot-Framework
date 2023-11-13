@@ -163,21 +163,33 @@ class IntentImprovement extends LitElement {
     url += "?event-log-url=" + eventLogEndpointInput;
     url += "&bot-manager-url=" + botManagerEndpointInput;
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "openai-key": this.openaiToken,
-        inputPrompt: this.quill.getText(),
-      }),
-    });
-    const result = await response.text();
-    this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
-    this.loading = false;
-    this.chatGPTRes = true;
-    this.shadowRoot.querySelector("#askGPTButton").disabled = false;
+    try {
+      const controller = new AbortController();
+
+      const timeoutId = setTimeout(() => controller.abort(), 60000);
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "openai-key": this.openaiToken,
+          inputPrompt: this.quill.getText(),
+        }),
+        signal: controller.signal,
+      });
+      if (response.ok) clearTimeout(timeoutId);
+      const result = await response.text();
+      this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
+    } catch (error) {
+      console.error(error);
+      this.shadowRoot.querySelector("#chatgptRes").innerHTML = error;
+    } finally {
+      this.loading = false;
+      this.chatGPTRes = true;
+      this.shadowRoot.querySelector("#askGPTButton").disabled = false;
+    }
   }
 }
 

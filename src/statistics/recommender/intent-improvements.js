@@ -101,20 +101,39 @@ class IntentImprovement extends LitElement {
       "llm",
       "intent-improvements"
     );
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "openai-key": this.openaiToken,
-      }),
-    });
-    const result = await response.text();
-    this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
-    this.loading = false;
-    this.chatGPTRes = true;
-    this.shadowRoot.querySelector("#askGPTButton").disabled = false;
+    const controller = new AbortController();
+
+    const timeoutId = setTimeout(() => controller.abort(), 1000);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "openai-key": this.openaiToken,
+        }),
+        signal: controller.signal,
+      });
+      const result = await response.text();
+      clearTimeout(timeoutId);
+      this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
+    } catch (error) {
+      console.error(error);
+      if (error.message)
+        this.shadowRoot.querySelector("#chatgptRes").innerHTML = error.message;
+      else if (error instanceof DOMException)
+        this.shadowRoot.querySelector("#chatgptRes").innerHTML =
+          "A timeout occurred";
+      else
+        this.shadowRoot.querySelector("#chatgptRes").innerHTML =
+          "Unknown error";
+    } finally {
+      this.loading = false;
+      this.chatGPTRes = true;
+      this.shadowRoot.querySelector("#askGPTButton").disabled = false;
+    }
   }
 }
 
