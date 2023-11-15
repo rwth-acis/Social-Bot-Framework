@@ -65,6 +65,7 @@ class CanvasStatsOverlay extends LitElement {
       document.querySelector("#AIrecommendationButton").style.display =
         "inline-block";
       this.statistics = statistics;
+      this.setMinMaxValues(statistics);
       this.y.getMap("data").set("bot-statistics", statistics);
       document
         .querySelector("#bot-usage-button")
@@ -75,17 +76,46 @@ class CanvasStatsOverlay extends LitElement {
               document.querySelector("#model-statistics-overlay").style
                 .display === "block"
             ) {
-              this.initializeOverlay(botModel, statistics);
+              this.initializeOverlay(botModel);
               this.initializeMenu();
+            } else if (
+              document.querySelector("#model-statistics-overlay").style
+                .display === "none"
+            ) {
+              this.removeAllOverlays();
             }
           }, 100);
         });
     }, 300);
   }
 
+  setMinMaxValues(statistics) {
+    let currDurationMax = 0;
+    let currDurationMin = Infinity;
+    let currFrequencyMax = 0;
+    let currFrequencyMin = Infinity;
+    for (const edge of statistics.graph.edges) {
+      if (edge.performance?.mean > currDurationMax) {
+        currDurationMax = edge.performance?.mean;
+      }
+      if (edge.frequency > currFrequencyMax) {
+        currFrequencyMax = edge.frequency;
+      }
+      if (edge.performance?.mean < currDurationMin) {
+        currDurationMin = edge.performance?.mean;
+      }
+      if (edge.frequency < currFrequencyMin) {
+        currFrequencyMin = edge.frequency;
+      }
+    }
+    this.minDurationValue = currDurationMin;
+    this.maxDurationValue = currDurationMax;
+    this.minFrequencyValue = currFrequencyMin;
+    this.maxFrequencyValue = currFrequencyMax;
+  }
+
   async fetchStatistics(botName) {
     this.loading = true;
-    // botManagerEndpoint = "http://social-bot-manager:8080/SBFManager"
     const botManagerEndpointInput = this.configMap
       .get("sbm-endpoint")
       .toString();
@@ -126,7 +156,8 @@ class CanvasStatsOverlay extends LitElement {
     }
   }
 
-  initializeOverlay(botModel, statistics) {
+  initializeOverlay(botModel) {
+    const statistics = this.statistics;
     window.jsPlumbInstance.setSuspendDrawing(true, true);
 
     // Add missing edges to bot model as overlay
@@ -162,10 +193,11 @@ class CanvasStatsOverlay extends LitElement {
         addOverlayToExistingEdge(
           sourceNode,
           targetNode,
-          edge.performance?.mean
+          edge.performance?.mean,
+          this
         );
       } else if (!findEdgeInAddedEdges(addedEdges, sourceId, targetId)) {
-        addMissingEdge(sourceNode, targetNode, edge.performance?.mean);
+        addMissingEdge(sourceNode, targetNode, edge.performance?.mean, this);
         addedEdges.push({ sourceId, targetId });
       }
     }
@@ -199,8 +231,25 @@ class CanvasStatsOverlay extends LitElement {
     });
   }
 
-  redrawOverlay(type = "performance") {
-    window.jsPlumbInstance.setSuspendDrawing(true, true);
+  removeAllOverlays() {
+    window.jsPlumbInstance.setSuspendDrawing(true);
+
+    for (const edge of this.statistics.graph.edges) {
+      const sourceId = edge.source;
+      const targetId = edge.target;
+      const sourceNode = findNodeHTML(sourceId);
+      const targetNode = findNodeHTML(targetId);
+      removeExistingOverlays(sourceNode, targetNode);
+    }
+
+    window.jsPlumbInstance.setSuspendDrawing(false);
+    setTimeout(() => {
+      window.jsPlumbInstance.repaintEverything();
+    });
+  }
+
+  redrawOverlay(type = "duration") {
+    window.jsPlumbInstance.setSuspendDrawing(true);
 
     for (const edge of this.statistics.graph.edges) {
       const sourceId = edge.source;
@@ -211,18 +260,26 @@ class CanvasStatsOverlay extends LitElement {
       if (!sourceNode || !targetNode) {
         console.error("source or target node not found", sourceId, targetId);
       } else {
-        const metric =
-          type === "performance"
+        const label =
+          type === "duration"
             ? edge.performance?.mean
               ? edge.performance?.mean.toFixed(2) + "s"
               : ""
             : edge.frequency;
-        updateOverlay(sourceNode, targetNode, metric);
+        const metric =
+          type === "duration"
+            ? edge.performance?.mean
+              ? edge.performance?.mean.toFixed(2)
+              : 0
+            : edge.frequency;
+        updateOverlay(sourceNode, targetNode, label, type, this, metric);
       }
     }
 
     window.jsPlumbInstance.setSuspendDrawing(false);
-    window.jsPlumbInstance.repaintEverything();
+    setTimeout(() => {
+      window.jsPlumbInstance.repaintEverything();
+    });
   }
 }
 
@@ -273,16 +330,22 @@ function addMissingNode(node, boundingBox) {
  * @param {*} target  target node
  * @param {*} meanDuration  mean duration of the edge
  */
-function addMissingEdge(source, target, meanDuration) {
-  const color = getColorScale(meanDuration, 0, 10);
+function addMissingEdge(source, target, meanDuration, that) {
+  const color = getColorScale(
+    meanDuration,
+    that.minDurationValue + 2,
+    that.maxDurationValue + 2,
+    "duration"
+  );
   // if meanDuration is defined then add an overlay to the edge with the performance value
   const label = meanDuration ? meanDuration.toFixed(2) + "s" : "";
-  const strokeWidth = getStrokeWidth(meanDuration, 0, 10);
+  const strokeWidth = getStrokeWidth(meanDuration, that.maxDurationValue + 2);
   window.jsPlumbInstance.connect({
     source: source,
     target: target,
-    endpoint: "Dot",
+    endpoint: "Blank",
     paintStyle: { stroke: color, strokeWidth },
+    anchor: "AutoDefault",
     cssClass: "pm4bots-edge",
     overlays: [
       { type: "Arrow", options: { location: 1 } },
@@ -292,24 +355,30 @@ function addMissingEdge(source, target, meanDuration) {
   });
 }
 
-function updateOverlay(source, target, label) {
-  const connection = window.jsPlumbInstance.getConnections({
-    source: source,
-    target: target,
-  })[0];
+function updateOverlay(source, target, label, type, that, metric) {
+  const connection = retrieveConnection(source, target);
   if (!connection) {
     console.error("connection not found", source, target);
     return;
   }
-  const color = getColorScale(label, 0, 10);
-  const strokeWidth = getStrokeWidth(label, 0, 10);
+  const color = getColorScale(
+    metric,
+    type == "duration" ? that.minDurationValue - 2 : that.minFrequencyValue - 2,
+    type == "duration" ? that.maxDurationValue + 2 : that.maxFrequencyValue + 2,
+    type
+  );
+
+  const strokeWidth = getStrokeWidth(
+    metric,
+    type == "duration" ? that.maxDurationValue + 2 : that.maxFrequencyValue + 2
+  );
   connection.setPaintStyle({ stroke: color, strokeWidth });
   connection.setHoverPaintStyle({
     stroke: color,
     strokeWidth: strokeWidth + 2,
   });
   // remove existing label
-  for (const [id, overlay] of Object.entries(connection.overlays)) {
+  for (const [, overlay] of Object.entries(connection.overlays)) {
     if (overlay.type === "Label") {
       connection.removeOverlay(overlay.id);
     }
@@ -326,19 +395,31 @@ function updateOverlay(source, target, label) {
 }
 
 function removeExistingOverlays(source, target) {
-  const connection = window.jsPlumbInstance.getConnections({
-    source: source,
-    target: target,
-  })[0];
+  const connection = retrieveConnection(source, target);
   if (!connection) {
     console.error("connection not found", source, target);
     return;
   }
-  for (const [id, overlay] of Object.entries(connection.overlays)) {
+  connection.setPaintStyle({ stroke: "black", strokeWidth: 4 });
+  for (const [, overlay] of Object.entries(connection.overlays)) {
     if (overlay.type === "Label") {
       connection.removeOverlay(overlay.id);
     }
   }
+}
+
+function retrieveConnection(source, target) {
+  let connection = window.jsPlumbInstance.getConnections({
+    source: source,
+    target: target,
+  })[0];
+  if (!connection)
+    connection = window.jsPlumbInstance.getConnections({
+      source: source,
+      target: target,
+      scope: "pm4bots",
+    })[0];
+  return connection;
 }
 
 /**
@@ -347,15 +428,17 @@ function removeExistingOverlays(source, target) {
  * @param {*} target    target node
  * @param {*} meanDuration  mean duration of the edge
  */
-function addOverlayToExistingEdge(source, target, meanDuration) {
-  const color = getColorScale(meanDuration, 0, 10);
+function addOverlayToExistingEdge(source, target, meanDuration, that) {
+  const color = getColorScale(
+    meanDuration,
+    that.minDurationValue - 2,
+    that.maxDurationValue + 2,
+    "duration"
+  );
   // if meanDuration is defined then add an overlay to the edge with the performance value
   const label = meanDuration ? meanDuration.toFixed(2) + "s" : "";
-  const strokeWidth = getStrokeWidth(meanDuration, 4, 10);
-  const connection = window.jsPlumbInstance.getConnections({
-    source: source,
-    target: target,
-  })[0];
+  const strokeWidth = getStrokeWidth(meanDuration, that.maxDurationValue + 2);
+  const connection = retrieveConnection(source, target);
   if (!connection) {
     console.error("connection not found", source, target);
     return;
@@ -424,16 +507,14 @@ function findEdgeInAddedEdges(addedEdges, sourceId, targetId) {
  * @param {*} maxValue  max value of the color scale
  * @returns
  */
-function getColorScale(value, minValue, maxValue) {
+function getColorScale(value, minValue, maxValue, type) {
   if (!value) {
     return "#456";
   }
-  const colorStops = [
-    { value: minValue, color: [128, 128, 128] }, // Grey
-    { value: minValue + (maxValue - minValue) / 3, color: [255, 255, 0] }, // Yellow
-    { value: minValue + (2 * (maxValue - minValue)) / 3, color: [255, 165, 0] }, // Orange
-    { value: maxValue, color: [255, 0, 0] }, // Red
-  ];
+  const colorStops =
+    type === "duration"
+      ? durationsColorMap(minValue, maxValue)
+      : frequencyColorMap(minValue, maxValue);
 
   // Find the appropriate color stop based on the value
   let color;
@@ -473,12 +554,12 @@ function getColorScale(value, minValue, maxValue) {
  * @param {*} max  max value of the color scale
  * @returns  stroke width
  */
-function getStrokeWidth(value, min, max) {
-  if (!value) {
-    return min;
+function getStrokeWidth(value, max) {
+  if (!value || !max) {
+    return 0;
   }
-  const width = Math.round(1 + ((value - min) / (max - min)) * 4);
-  return width > max ? max : width;
+  const width = (value / max) * 10;
+  return width;
 }
 
 /**
@@ -514,3 +595,25 @@ function getBotModelBoundingBox(botModel) {
   }
   return { minX, minY, maxX, maxY };
 }
+
+const durationsColorMap = (minValue, maxValue) => [
+  // Grey
+  { value: minValue, color: [128, 128, 128] },
+  // Yellow
+  { value: minValue + (maxValue - minValue) / 3, color: [255, 255, 0] },
+  // Orange
+  { value: minValue + (2 * (maxValue - minValue)) / 3, color: [255, 165, 0] },
+  // Red
+  { value: maxValue, color: [255, 0, 0] },
+];
+
+const frequencyColorMap = (minValue, maxValue) => [
+  // Grey
+  { value: minValue, color: [128, 128, 128] },
+  // light blue
+  { value: minValue + (maxValue - minValue) / 3, color: [0, 255, 255] },
+  // blue
+  { value: minValue + (2 * (maxValue - minValue)) / 3, color: [0, 0, 255] },
+  // dark blue
+  { value: maxValue, color: [0, 0, 128] },
+];
