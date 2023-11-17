@@ -72,12 +72,15 @@ class CanvasStatsOverlay extends LitElement {
         .addEventListener("click", () => {
           setTimeout(() => {
             if (
-              !this.overlayInitialized &&
               document.querySelector("#model-statistics-overlay").style
                 .display === "block"
             ) {
-              this.initializeOverlay(botModel);
-              this.initializeMenu();
+              if (!this.overlayInitialized) {
+                this.initializeOverlay(botModel);
+                this.initializeMenu();
+              } else {
+                this.redrawOverlay();
+              }
             } else if (
               document.querySelector("#model-statistics-overlay").style
                 .display === "none"
@@ -86,6 +89,14 @@ class CanvasStatsOverlay extends LitElement {
             }
           }, 100);
         });
+      if (
+        document.querySelector("#model-statistics-overlay").style.display ===
+          "block" &&
+        !this.overlayInitialized
+      ) {
+        this.initializeOverlay(botModel);
+        this.initializeMenu();
+      }
     }, 300);
   }
 
@@ -294,11 +305,18 @@ function addMissingNode(node, boundingBox) {
   const nodeHtml = document.createElement("div");
   nodeHtml.id = "pm4bots-" + node.id;
   node.queryId = nodeHtml.id;
+  let bgClass = "bg-dark";
+  if (!node.label || node.label === "empty" || node.label === "empty_intent") {
+    bgClass = "bg-secondary";
+  } else if (node.label === "unrecognizedIntent") {
+    bgClass = "bg-warning";
+  }
   nodeHtml.classList.add(
     "node",
     "pm4bots-node",
     "border",
     "text-bg-dark",
+    bgClass,
     "p-2",
     "rounded-pill"
   );
