@@ -43,10 +43,46 @@ class MainPage extends LitElement {
           <bot-statistics></bot-statistics>
         </div>
       </div>
+      <button
+        type="button"
+        class="btn btn-success rounded shadow-lg position-fixed bottom-0 end-0 m-2"
+        style="display: none;"
+        id="AIrecommendationButton"
+        @click="${() => {
+          this.Offcanvas.show();
+        }}"
+      >
+        <i class="bi bi-lightbulb fs-3"></i>
+      </button>
+
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offCanvasChatGPT"
+        aria-labelledby="offcanvasRightLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel">
+            ChatGPT Recommendations
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            @click="${() => {
+              this.Offcanvas.hide();
+            }}"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <bot-improvements></bot-improvements>
+        </div>
+      </div>
     `;
   }
 
   firstUpdated() {
+    this.Offcanvas = new bootstrap.Offcanvas("#offCanvasChatGPT");
     const routeFragment = window.location.hash;
     if (routeFragment) {
       let tab = routeFragment.split("#")[1];
