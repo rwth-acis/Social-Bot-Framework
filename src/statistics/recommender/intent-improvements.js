@@ -103,7 +103,7 @@ class IntentImprovement extends LitElement {
     );
     const controller = new AbortController();
 
-    const timeoutId = setTimeout(() => controller.abort(), 1000);
+    const timeoutId = setTimeout(() => controller.abort(), 120000);
 
     try {
       const response = await fetch(url, {
