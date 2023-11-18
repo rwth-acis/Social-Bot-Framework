@@ -89,6 +89,15 @@ class BotStats extends LitElement {
             >
               <span class="visually-hidden">Loading...</span>
             </div>
+            <select
+              class="form-select position-absolute top-0 right-0"
+              style="z-index:10"
+              aria-label="Default select example"
+              @change="${this.changeView}"
+            >
+              <option selected value="petri-net">Petri Net</option>
+              <option value="bpmn">BPMN</option>
+            </select>
           </div>
 
           <div class="col-4" style="height:98vh;overflow-y:auto">
@@ -206,6 +215,15 @@ class BotStats extends LitElement {
       this.runInit();
     });
     this.runInit();
+  }
+  changeView(e) {
+    if (e.target.value === "petri-net") {
+      this.loading = true;
+      this.fetchConversationModel(this.configMap.get("bot-name").toString());
+    } else {
+      this.loading = true;
+      this.fetchBPMNModel(this.configMap.get("bot-name").toString());
+    }
   }
 
   async runInit() {
@@ -350,7 +368,86 @@ class BotStats extends LitElement {
     }
   }
 
+  async fetchBPMNModel(botName) {
+    document.getElementById("pm-res").querySelector("svg")?.remove();
+
+    const botManagerEndpointInput = this.configMap
+      .get("sbm-endpoint")
+      .toString();
+    const pm4botsEndpointInput = this.configMap
+      .get("pm4bots-endpoint")
+      .toString();
+    const eventLogEndpointInput = this.configMap
+      .get("event-log-endpoint")
+      .toString();
+
+    if (
+      !botManagerEndpointInput ||
+      !pm4botsEndpointInput ||
+      !eventLogEndpointInput
+    ) {
+      this.alertMessage =
+        "Make sure to configure the endpoints using the button on the top right";
+      return;
+    }
+    let url = joinAbsoluteUrlPath(pm4botsEndpointInput, "bot", botName, "bpmn");
+    url += `?bot-manager-url=${botManagerEndpointInput}`;
+    url += `&event-log-url=${eventLogEndpointInput}`;
+    url += `&enhance=${true}`;
+
+    try {
+      const response = await fetch(url, {
+        timeout: 10000,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Accept: "text/html",
+        },
+      });
+      if (!response.ok) {
+        try {
+          const body = await response.json();
+          this.alertMessage = `${body.error}`;
+        } catch (error) {
+          this.alertMessage = `An unknown Error occurred (${response.status})`;
+        }
+        return;
+      }
+      this.loading = false;
+      const element = document.getElementById("pm-res");
+
+      // create a new div and insert the svg into it
+      const div = document.createElement("div");
+      div.innerHTML = await response.text();
+
+      document.getElementById("pm-res").appendChild(div);
+
+      const svg = document.getElementById("pm-res").querySelector("svg");
+      svg.style.position = "absolute";
+      // set height and width of svg to that of the child
+      svg.width.baseVal.value = svg.getBBox().width;
+      svg.height.baseVal.value = svg.getBBox().height;
+      this.centerElement(svg);
+      // zoom on scroll
+      svg.parentElement.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+          this.zoomIn(element);
+        }
+        if (e.deltaY > 0) {
+          this.zoomOut(element);
+        }
+      });
+      // set z index of parent frame above the svg
+      svg.parentElement.style.zIndex = 1;
+      this.makeDraggable(svg);
+    } catch (error) {
+      this.alertMessage = `Server not reachable. Reason: ${error?.message}`;
+      console.error(error);
+    }
+  }
+
   async fetchConversationModel(botName) {
+    document.getElementById("pm-res").querySelector("svg")?.remove();
     const botManagerEndpointInput = this.configMap
       .get("sbm-endpoint")
       .toString();
@@ -399,8 +496,11 @@ class BotStats extends LitElement {
       }
       this.loading = false;
       const element = document.getElementById("pm-res");
+      // create a new div and insert the svg into it
+      const div = document.createElement("div");
+      div.innerHTML = await response.text();
 
-      document.getElementById("pm-res").innerHTML = await response.text();
+      document.getElementById("pm-res").appendChild(div);
       const svg = document.getElementById("pm-res").querySelector("svg");
       svg.style.position = "absolute";
       // set height and width of svg to that of the child
