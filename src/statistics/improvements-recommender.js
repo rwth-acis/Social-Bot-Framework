@@ -59,6 +59,10 @@ class ImprovementRec extends LitElement {
               Store token locally
             </label>
           </div>
+          <select class="form-select" aria-label="GPT model selection">
+            <option selected value="gpt-3.5-turbo-1106">GPT 3.5</option>
+            <option value="gpt-4-1106-preview">GPT 4</option>
+          </select>
           <button type="submit" class="btn btn-primary">
             Set <i class="bi bi-check ms-1"></i>
           </button>
@@ -172,6 +176,10 @@ class ImprovementRec extends LitElement {
       localStorage.setItem("openai-token", e.target[0].value);
     }
     this.updateToken(e.target[0].value);
+    const model = e.target[2].value;
+    if (model) {
+      localStorage.setItem("openai-model", model);
+    }
   }
 
   updateToken(value) {
@@ -206,16 +214,6 @@ class ImprovementRec extends LitElement {
       this.statistics = this.y.getMap("data").get("statistics");
       this.configMap = y.getMap("pm4bots-config");
     }, 100);
-  }
-
-  async askGPT() {
-    this.loading = true;
-    document.querySelector("#askGPTButton").disabled = true;
-    this.fetchRecommendations();
-    setTimeout(() => {
-      document.querySelector("#askGPTButton").disabled = false;
-      this.loading = false;
-    }, 50000);
   }
 
   async fetchRecommendations() {

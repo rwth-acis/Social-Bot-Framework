@@ -107,19 +107,23 @@ class GeneralImprovement extends LitElement {
     url += "?event-log-url=" + eventLogEndpointInput;
     try {
       const controller = new AbortController();
+        const model = localStorage.getItem("openai-model")
+          ? localStorage.getItem("openai-model")
+          : "gpt-3.5-turbo-1106";
 
-      const timeoutId = setTimeout(() => controller.abort(), 1200000);
+        const timeoutId = setTimeout(() => controller.abort(), 1200000);
 
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "openai-key": this.openaiToken,
-        }),
-        signal: controller.signal,
-      });
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "openai-key": this.openaiToken,
+            "openai-model": model,
+          }),
+          signal: controller.signal,
+        });
       if (response.ok) clearTimeout(timeoutId);
       const result = await response.text();
       this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;

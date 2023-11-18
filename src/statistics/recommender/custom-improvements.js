@@ -165,6 +165,9 @@ class IntentImprovement extends LitElement {
 
     try {
       const controller = new AbortController();
+      const model = localStorage.getItem("openai-model")
+        ? localStorage.getItem("openai-model")
+        : "gpt-3.5-turbo-1106";
 
       const timeoutId = setTimeout(() => controller.abort(), 300000);
 
@@ -176,6 +179,7 @@ class IntentImprovement extends LitElement {
         body: JSON.stringify({
           "openai-key": this.openaiToken,
           inputPrompt: this.quill.getText(),
+          "openai-model": model,
         }),
         signal: controller.signal,
       });
