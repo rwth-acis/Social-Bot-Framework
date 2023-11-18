@@ -59,7 +59,7 @@ class ImprovementRec extends LitElement {
               Store token locally
             </label>
           </div>
-          <select class="form-select" aria-label="GPT model selection">
+          <select class="form-select mb-3" aria-label="GPT model selection">
             <option selected value="gpt-3.5-turbo-1106">GPT 3.5</option>
             <option value="gpt-4-1106-preview">GPT 4</option>
           </select>
@@ -79,6 +79,7 @@ class ImprovementRec extends LitElement {
           </button>
         </form>
       </div>
+      <br />
 
       <ul
         class="nav nav-tabs"
