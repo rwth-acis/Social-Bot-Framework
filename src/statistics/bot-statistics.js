@@ -90,8 +90,8 @@ class BotStats extends LitElement {
               <span class="visually-hidden">Loading...</span>
             </div>
             <select
-              class="form-select position-absolute top-0 right-0"
-              style="z-index:10"
+              class="form-select position-absolute top-0 end-0"
+              style="z-index:10; width: 200px; margin: 10px;"
               aria-label="Default select example"
               @change="${this.changeView}"
             >
