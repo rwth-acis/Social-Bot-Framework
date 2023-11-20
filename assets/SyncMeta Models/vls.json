@@ -2287,6 +2287,20 @@
                                 "name": "",
                                 "value": "list"
                             }
+                        },
+                        "02f10f2ddc5ad49fb427d09d": {
+                            "id": "02f10f2ddc5ad49fb427d09d",
+                            "name": "02f10f2ddc5ad49fb427d09d",
+                            "key": {
+                                "id": "02f10f2ddc5ad49fb427d09d[key]",
+                                "name": "",
+                                "value": "Rateable"
+                            },
+                            "value": {
+                                "id": "02f10f2ddc5ad49fb427d09d[value]",
+                                "name": "",
+                                "value": "boolean"
+                            }
                         }
                     }
                 }
