@@ -190,6 +190,7 @@ class BotManagerWidget extends LitElement {
     const btn = $("#submit-model");
     const endpoint = y.getText("sbfManager").toString();
     const model = window.syncmeta.EntityManagerInstance.graphToJSON();
+    replaceIncomingMessageNameWithIntentLabel(model); // TODO: remove this line when the backend is updated to support the new Name attribute
     spinner.show();
     btn.prop("disabled", true);
 
@@ -583,6 +584,22 @@ class BotManagerWidget extends LitElement {
 function cleanStatus(field) {
   const status = document.querySelector("#" + field);
   $(status).text("");
+}
+
+function replaceIncomingMessageNameWithIntentLabel(model) {
+  const nodes = model.nodes;
+  const incominMessageNodes = Object.values(nodes).filter(
+    (node) => node.type === "Incoming Message"
+  );
+
+  for (const incominMessageNode of incominMessageNodes) {
+    const target = Object.values(incominMessageNode.attributes).find(
+      (attr) => attr.name === "Name"
+    );
+    if (target) {
+      target.name = "Intent Label";
+    }
+  }
 }
 
 window.customElements.define("bot-manager-widget", BotManagerWidget);

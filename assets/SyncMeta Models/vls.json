@@ -2190,104 +2190,104 @@
                     "name": "Attributes",
                     "type": "KeySelectionValueListAttribute",
                     "list": {
-                        "869849f65db9be737e99bd24": {
-                            "id": "869849f65db9be737e99bd24",
-                            "name": "869849f65db9be737e99bd24",
-                            "key": {
-                                "id": "869849f65db9be737e99bd24[key]",
-                                "name": "",
-                                "value": "Intent Keyword"
-                            },
-                            "value": {
-                                "id": "869849f65db9be737e99bd24[value]",
-                                "name": "",
-                                "value": "string"
-                            }
+                      "e7d374a1e2d32c5e67bc68cc": {
+                        "id": "e7d374a1e2d32c5e67bc68cc",
+                        "name": "e7d374a1e2d32c5e67bc68cc",
+                        "key": {
+                          "id": "e7d374a1e2d32c5e67bc68cc[key]",
+                          "name": "",
+                          "value": "Name"
                         },
-                        "e7d374a1e2d32c5e67bc68cc": {
-                            "id": "e7d374a1e2d32c5e67bc68cc",
-                            "name": "e7d374a1e2d32c5e67bc68cc",
-                            "key": {
-                                "id": "e7d374a1e2d32c5e67bc68cc[key]",
-                                "name": "",
-                                "value": "Intent Label"
-                            },
-                            "value": {
-                                "id": "e7d374a1e2d32c5e67bc68cc[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "3e8bfec67da28c354a969b46": {
-                            "id": "3e8bfec67da28c354a969b46",
-                            "name": "3e8bfec67da28c354a969b46",
-                            "key": {
-                                "id": "3e8bfec67da28c354a969b46[key]",
-                                "name": "",
-                                "value": "NLU ID"
-                            },
-                            "value": {
-                                "id": "3e8bfec67da28c354a969b46[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "8f8bee572ff26bedbfb46783": {
-                            "id": "8f8bee572ff26bedbfb46783",
-                            "name": "8f8bee572ff26bedbfb46783",
-                            "key": {
-                                "id": "8f8bee572ff26bedbfb46783[key]",
-                                "name": "",
-                                "value": "IsFile"
-                            },
-                            "value": {
-                                "id": "8f8bee572ff26bedbfb46783[value]",
-                                "name": "",
-                                "value": "boolean"
-                            }
-                        },
-                        "1ae4674949cfead101f6e8d8": {
-                            "id": "1ae4674949cfead101f6e8d8",
-                            "name": "1ae4674949cfead101f6e8d8",
-                            "key": {
-                                "id": "1ae4674949cfead101f6e8d8[key]",
-                                "name": "",
-                                "value": "FileURL"
-                            },
-                            "value": {
-                                "id": "1ae4674949cfead101f6e8d8[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "1b9710d3ac9dbdfd3b46110a": {
-                            "id": "1b9710d3ac9dbdfd3b46110a",
-                            "name": "1b9710d3ac9dbdfd3b46110a",
-                            "key": {
-                                "id": "1b9710d3ac9dbdfd3b46110a[key]",
-                                "name": "",
-                                "value": "ErrorMessage"
-                            },
-                            "value": {
-                                "id": "1b9710d3ac9dbdfd3b46110a[value]",
-                                "name": "",
-                                "value": "string"
-                            }
-                        },
-                        "90cd8b63ad44500486ddbb02": {
-                            "id": "90cd8b63ad44500486ddbb02",
-                            "name": "90cd8b63ad44500486ddbb02",
-                            "key": {
-                                "id": "90cd8b63ad44500486ddbb02[key]",
-                                "name": "",
-                                "value": "Message"
-                            },
-                            "value": {
-                                "id": "90cd8b63ad44500486ddbb02[value]",
-                                "name": "",
-                                "value": "list"
-                            }
+                        "value": {
+                          "id": "e7d374a1e2d32c5e67bc68cc[value]",
+                          "name": "",
+                          "value": "string"
                         }
+                      },
+                      "869849f65db9be737e99bd24": {
+                        "id": "869849f65db9be737e99bd24",
+                        "name": "869849f65db9be737e99bd24",
+                        "key": {
+                          "id": "869849f65db9be737e99bd24[key]",
+                          "name": "",
+                          "value": "Intent Keyword"
+                        },
+                        "value": {
+                          "id": "869849f65db9be737e99bd24[value]",
+                          "name": "",
+                          "value": "string"
+                        }
+                      },
+                      "3e8bfec67da28c354a969b46": {
+                        "id": "3e8bfec67da28c354a969b46",
+                        "name": "3e8bfec67da28c354a969b46",
+                        "key": {
+                          "id": "3e8bfec67da28c354a969b46[key]",
+                          "name": "",
+                          "value": "NLU ID"
+                        },
+                        "value": {
+                          "id": "3e8bfec67da28c354a969b46[value]",
+                          "name": "",
+                          "value": "string"
+                        }
+                      },
+                      "8f8bee572ff26bedbfb46783": {
+                        "id": "8f8bee572ff26bedbfb46783",
+                        "name": "8f8bee572ff26bedbfb46783",
+                        "key": {
+                          "id": "8f8bee572ff26bedbfb46783[key]",
+                          "name": "",
+                          "value": "IsFile"
+                        },
+                        "value": {
+                          "id": "8f8bee572ff26bedbfb46783[value]",
+                          "name": "",
+                          "value": "boolean"
+                        }
+                      },
+                      "1ae4674949cfead101f6e8d8": {
+                        "id": "1ae4674949cfead101f6e8d8",
+                        "name": "1ae4674949cfead101f6e8d8",
+                        "key": {
+                          "id": "1ae4674949cfead101f6e8d8[key]",
+                          "name": "",
+                          "value": "FileURL"
+                        },
+                        "value": {
+                          "id": "1ae4674949cfead101f6e8d8[value]",
+                          "name": "",
+                          "value": "string"
+                        }
+                      },
+                      "1b9710d3ac9dbdfd3b46110a": {
+                        "id": "1b9710d3ac9dbdfd3b46110a",
+                        "name": "1b9710d3ac9dbdfd3b46110a",
+                        "key": {
+                          "id": "1b9710d3ac9dbdfd3b46110a[key]",
+                          "name": "",
+                          "value": "ErrorMessage"
+                        },
+                        "value": {
+                          "id": "1b9710d3ac9dbdfd3b46110a[value]",
+                          "name": "",
+                          "value": "string"
+                        }
+                      },
+                      "90cd8b63ad44500486ddbb02": {
+                        "id": "90cd8b63ad44500486ddbb02",
+                        "name": "90cd8b63ad44500486ddbb02",
+                        "key": {
+                          "id": "90cd8b63ad44500486ddbb02[key]",
+                          "name": "",
+                          "value": "Message"
+                        },
+                        "value": {
+                          "id": "90cd8b63ad44500486ddbb02[value]",
+                          "name": "",
+                          "value": "list"
+                        }
+                      }
                     }
                 }
             }
