@@ -96,6 +96,9 @@ class MainPage extends LitElement {
         tabElement.classList.add("show", "active");
       }
     }
+    setTimeout(() => {
+      document.querySelector("#hideType").click();
+    }, 5000);
   }
   createRenderRoot() {
     return this;
