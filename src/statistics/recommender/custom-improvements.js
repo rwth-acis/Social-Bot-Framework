@@ -50,21 +50,21 @@ class IntentImprovement extends LitElement {
         class="btn btn-light"
         @click="${() => this.insertIntoQuill("`botModel`")}"
       >
-        <i class="bi bi-clipboard-fill"></i> Insert Bot Model
+        <i class="bi bi-plus"></i> Insert Bot Model
       </button>
       <button
         type="button"
         class="btn btn-light"
         @click="${() => this.insertIntoQuill("`botIntents`")}"
       >
-        <i class="bi bi-clipboard-fill"></i> Insert Intents
+        <i class="bi bi-plus"></i> Insert Intents
       </button>
       <button
         type="button"
         class="btn btn-light"
         @click="${() => this.insertIntoQuill("`botLog`")}"
       >
-        <i class="bi bi-clipboard-fill"></i> Insert conversation logs
+        <i class="bi bi-plus"></i> Insert conversation logs
       </button>
       <button
         type="button"
@@ -81,7 +81,13 @@ class IntentImprovement extends LitElement {
           ></path>
         </svg>
       </button>
-      <br />
+      <button
+        type="button"
+        class="btn btn-outline-secondary mb-2"
+        @click="${this.copyToClipboard}"
+      >
+        <i class="bi bi-clipboard-fill"></i> Copy to clipboard
+      </button>
       <div class="spinner-border" role="status" ?hidden="${!this.loading}">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -94,14 +100,28 @@ class IntentImprovement extends LitElement {
   }
   insertIntoQuill(text) {
     const quill = this.quill;
-    const range = quill.getSelection();
+
+    let range = quill.getSelection();
+    if (range == null) {
+      quill.focus();
+      range = quill.getSelection();
+    }
     // format the text in that range such that it has a black background and white text
-    quill.format("background", "black");
-    quill.format("color", "white");
+
     quill.insertText(range.index, text);
+    quill.formatText(
+      range.index,
+      range.index + text.length,
+      "background",
+      "black"
+    );
+    quill.formatText(range.index, range.index + text.length, "color", "white");
     quill.setSelection(range.index + text.length);
-    quill.format("background", false);
-    quill.format("color", false);
+    quill.insertText(range.index + text.length, " ");
+    quill.setSelection(range.index + text.length + 1);
+    // reset color and background
+    quill.format("color", "black");
+    quill.format("background", "white");
   }
 
   async firstUpdated() {
@@ -194,6 +214,15 @@ class IntentImprovement extends LitElement {
       this.chatGPTRes = true;
       this.shadowRoot.querySelector("#askGPTButton").disabled = false;
     }
+  }
+  copyToClipboard() {
+    const copyText = this.shadowRoot.querySelector("#chatgptRes");
+    const textArea = document.createElement("textarea");
+    textArea.value = copyText.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
   }
 }
 

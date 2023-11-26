@@ -30,6 +30,10 @@ class GeneralImprovement extends LitElement {
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous"
       />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      />
       <p class="mt-2">
         Get <strong>general</strong> improvement recommendations for your bot
         model from ChatGPT.
@@ -49,6 +53,14 @@ class GeneralImprovement extends LitElement {
           ></path>
         </svg>
       </button>
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary mb-2"
+        @click="${this.copyToClipboard}"
+      >
+        <i class="bi bi-clipboard-fill"></i> Copy to clipboard
+      </button>
       <br />
       <div class="spinner-border" role="status" ?hidden="${!this.loading}">
         <span class="visually-hidden">Loading...</span>
@@ -59,6 +71,16 @@ class GeneralImprovement extends LitElement {
         class="card card-body mt-2"
       ></div>
     `;
+  }
+
+  copyToClipboard() {
+    const copyText = this.shadowRoot.querySelector("#chatgptRes");
+    const textArea = document.createElement("textarea");
+    textArea.value = copyText.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
   }
 
   async firstUpdated() {
@@ -107,23 +129,23 @@ class GeneralImprovement extends LitElement {
     url += "?event-log-url=" + eventLogEndpointInput;
     try {
       const controller = new AbortController();
-        const model = localStorage.getItem("openai-model")
-          ? localStorage.getItem("openai-model")
-          : "gpt-3.5-turbo-1106";
+      const model = localStorage.getItem("openai-model")
+        ? localStorage.getItem("openai-model")
+        : "gpt-3.5-turbo-1106";
 
-        const timeoutId = setTimeout(() => controller.abort(), 1200000);
+      const timeoutId = setTimeout(() => controller.abort(), 1200000);
 
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            "openai-key": this.openaiToken,
-            "openai-model": model,
-          }),
-          signal: controller.signal,
-        });
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "openai-key": this.openaiToken,
+          "openai-model": model,
+        }),
+        signal: controller.signal,
+      });
       if (response.ok) clearTimeout(timeoutId);
       const result = await response.text();
       this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;

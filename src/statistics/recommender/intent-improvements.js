@@ -25,6 +25,10 @@ class IntentImprovement extends LitElement {
   render() {
     return html`
       <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      />
+      <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
@@ -48,6 +52,14 @@ class IntentImprovement extends LitElement {
             fill="#000000"
           ></path>
         </svg>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary mb-2"
+        @click="${this.copyToClipboard}"
+      >
+        <i class="bi bi-clipboard-fill"></i> Copy to clipboard
       </button>
       <br />
       <div class="spinner-border" role="status" ?hidden="${!this.loading}">
@@ -78,6 +90,16 @@ class IntentImprovement extends LitElement {
     }, 100);
   }
 
+  copyToClipboard() {
+    const copyText = this.shadowRoot.querySelector("#chatgptRes");
+    const textArea = document.createElement("textarea");
+    textArea.value = copyText.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
+  }
+
   async askGPT() {
     this.loading = true;
     this.shadowRoot.querySelector("#askGPTButton").disabled = true;
@@ -102,41 +124,42 @@ class IntentImprovement extends LitElement {
       "intent-improvements"
     );
     const controller = new AbortController();
-  const model = localStorage.getItem("openai-model")
-    ? localStorage.getItem("openai-model")
-    : "gpt-3.5-turbo-1106";
+    const model = localStorage.getItem("openai-model")
+      ? localStorage.getItem("openai-model")
+      : "gpt-3.5-turbo-1106";
 
-  const timeoutId = setTimeout(() => controller.abort(), 120000);
+    const timeoutId = setTimeout(() => controller.abort(), 120000);
 
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "openai-key": this.openaiToken,
-        "openai-model": model,
-      }),
-      signal: controller.signal,
-    });
-    const result = await response.text();
-    clearTimeout(timeoutId);
-    this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
-  } catch (error) {
-    console.error(error);
-    if (error.message)
-      this.shadowRoot.querySelector("#chatgptRes").innerHTML = error.message;
-    else if (error instanceof DOMException)
-      this.shadowRoot.querySelector("#chatgptRes").innerHTML =
-        "A timeout occurred";
-    else
-      this.shadowRoot.querySelector("#chatgptRes").innerHTML = "Unknown error";
-  } finally {
-    this.loading = false;
-    this.chatGPTRes = true;
-    this.shadowRoot.querySelector("#askGPTButton").disabled = false;
-  }
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "openai-key": this.openaiToken,
+          "openai-model": model,
+        }),
+        signal: controller.signal,
+      });
+      const result = await response.text();
+      clearTimeout(timeoutId);
+      this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
+    } catch (error) {
+      console.error(error);
+      if (error.message)
+        this.shadowRoot.querySelector("#chatgptRes").innerHTML = error.message;
+      else if (error instanceof DOMException)
+        this.shadowRoot.querySelector("#chatgptRes").innerHTML =
+          "A timeout occurred";
+      else
+        this.shadowRoot.querySelector("#chatgptRes").innerHTML =
+          "Unknown error";
+    } finally {
+      this.loading = false;
+      this.chatGPTRes = true;
+      this.shadowRoot.querySelector("#askGPTButton").disabled = false;
+    }
   }
 }
 
