@@ -73,7 +73,6 @@ class BotModeling extends LitElement {
     `;
   }
   async firstUpdated() {
-
     const instance = getInstance({
       host: config.yjs_host,
       port: config.yjs_port,
@@ -84,19 +83,28 @@ class BotModeling extends LitElement {
     super.firstUpdated();
 
     setTimeout(() => {
-      const botModel = y.getMap("data").get("model");
-      if (botModel) {
-        const botElement = Object.values(botModel.nodes).find((node) => {
-          return node.type === "Bot";
+      let initialized = false;
+      y.getMap("data")
+        .get("model")
+        .observe(() => {
+          const botModel = y.getMap("data").get("model");
+          if (!initialized && botModel) {
+            const botElement = Object.values(botModel.nodes).find((node) => {
+              return node.type === "Bot";
+            });
+            if (botElement) {
+              this.insertUsageButton();
+              const overelay = document.createElement(
+                "canvas-statistics-overlay"
+              );
+              const canvasContainer = document.querySelector("#canvas");
+              canvasContainer.appendChild(overelay);
+              initialized = true;
+              y.getMap("data").get("model").unobserve();
+            }
+          }
         });
-        if (botElement) {
-          this.insertUsageButton();
-          const overelay = document.createElement("canvas-statistics-overlay");
-          const canvasContainer = document.querySelector("#canvas");
-          canvasContainer.appendChild(overelay);
-        }
-      }
-    }, 500);
+    });
   }
   insertUsageButton() {
     const firstButtonCol = document.querySelector(
@@ -129,9 +137,9 @@ class BotModeling extends LitElement {
             node.style.display = "none";
           }
           overlay.style.display = "none";
-             for (const el of pm4botsOverlayElements) {
-               el.style.display = "none";
-             }
+          for (const el of pm4botsOverlayElements) {
+            el.style.display = "none";
+          }
           window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
         }
         window.jsPlumbInstance.setSuspendDrawing(false);
