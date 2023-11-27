@@ -247,7 +247,7 @@ class ImprovementRec extends LitElement {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "openai-key": this.openaiToken,
+        "openai-key": "evaluation-lakhoune",
       }),
     });
     const result = await response.text();

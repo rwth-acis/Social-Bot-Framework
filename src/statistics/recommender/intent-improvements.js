@@ -133,7 +133,7 @@ class IntentImprovement extends LitElement {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "openai-key": this.openaiToken,
+          "openai-key": "evaluation-lakhoune",
           "openai-model": model,
         }),
         signal: controller.signal,
