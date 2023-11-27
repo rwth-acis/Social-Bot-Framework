@@ -184,6 +184,7 @@ class ImprovementRec extends LitElement {
   }
 
   updateToken(value) {
+    if (!value) return;  
     this.openaiToken = value;
     this.querySelectorAll("general-improvements").forEach((child) => {
       child.openaiToken = value;
@@ -197,7 +198,10 @@ class ImprovementRec extends LitElement {
   }
 
   async firstUpdated() {
-    const token = localStorage.getItem("openai-token");
+    let token = localStorage.getItem("openai-token");
+    if (!token) {
+      token = config["openai-default-token"];
+    }
     if (token) {
       document.querySelector("#openai-token").value = token;
       this.openaiToken = token;

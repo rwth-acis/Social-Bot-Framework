@@ -7,5 +7,6 @@
     "contact_service_url": "<CONTACT_SERVICE_URL>",
     "sbfManagerHost": "<SBF_MANAGER_HOST>",
     "rasaEndpoint": "<RASA_NLU>",
-    "pm4botsEndpoint": "<PM4BOTS_ENDPOINT>"
+    "pm4botsEndpoint": "<PM4BOTS_ENDPOINT>",
+    "openai-default-token": "<OPENAI_API_DEFAULT_TOKEN>"
 }

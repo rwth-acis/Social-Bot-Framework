@@ -75,12 +75,7 @@ class GeneralImprovement extends LitElement {
 
   copyToClipboard() {
     const copyText = this.shadowRoot.querySelector("#chatgptRes");
-    const textArea = document.createElement("textarea");
-    textArea.value = copyText.textContent;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("Copy");
-    textArea.remove();
+    navigator.clipboard.writeText(copyText.innerText);
   }
 
   async firstUpdated() {
@@ -97,6 +92,7 @@ class GeneralImprovement extends LitElement {
       this.statistics = this.y.getMap("data").get("statistics");
       this.configMap = y.getMap("pm4bots-config");
       this.openaiToken = localStorage.getItem("openai-token");
+      if (!this.openaiToken) this.openaiToken = config["openai-default-token"];
     }, 100);
   }
 
