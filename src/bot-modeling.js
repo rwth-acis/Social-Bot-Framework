@@ -84,27 +84,25 @@ class BotModeling extends LitElement {
 
     setTimeout(() => {
       let initialized = false;
-      y.getMap("data")
-        .get("model")
-        .observe(() => {
-          const botModel = y.getMap("data").get("model");
-          if (!initialized && botModel) {
-            const botElement = Object.values(botModel.nodes).find((node) => {
-              return node.type === "Bot";
-            });
-            if (botElement) {
-              this.insertUsageButton();
-              const overelay = document.createElement(
-                "canvas-statistics-overlay"
-              );
-              const canvasContainer = document.querySelector("#canvas");
-              canvasContainer.appendChild(overelay);
-              initialized = true;
-              y.getMap("data").get("model").unobserve();
-            }
+      y.getMap("data").observe(() => {
+        const botModel = y.getMap("data").get("model");
+        if (!initialized && botModel) {
+          const botElement = Object.values(botModel.nodes).find((node) => {
+            return node.type === "Bot";
+          });
+          if (botElement) {
+            this.insertUsageButton();
+            const overelay = document.createElement(
+              "canvas-statistics-overlay"
+            );
+            const canvasContainer = document.querySelector("#canvas");
+            canvasContainer.appendChild(overelay);
+            initialized = true;
+            y.getMap("data").unobserve();
           }
-        });
-    });
+        }
+      });
+    }, 200);
   }
   insertUsageButton() {
     const firstButtonCol = document.querySelector(
