@@ -82,26 +82,20 @@ class BotModeling extends LitElement {
     const y = await instance.connect();
     super.firstUpdated();
 
-    setTimeout(() => {
-      let initialized = false;
-      y.getMap("data").observe(() => {
-        const botModel = y.getMap("data").get("model");
-        if (!initialized && botModel) {
-          const botElement = Object.values(botModel.nodes).find((node) => {
-            return node.type === "Bot";
-          });
-          if (botElement) {
-            this.insertUsageButton();
-            const overelay = document.createElement(
-              "canvas-statistics-overlay"
-            );
-            const canvasContainer = document.querySelector("#canvas");
-            canvasContainer.appendChild(overelay);
-            initialized = true;
-            y.getMap("data").unobserve();
-          }
+    const poll = setInterval(() => {
+      const botModel = y.getMap("data").get("model");
+      if (botModel) {
+        const botElement = Object.values(botModel.nodes).find((node) => {
+          return node.type === "Bot";
+        });
+        if (botElement) {
+          this.insertUsageButton();
+          const overelay = document.createElement("canvas-statistics-overlay");
+          const canvasContainer = document.querySelector("#canvas");
+          canvasContainer.appendChild(overelay);
+          clearInterval(poll);
         }
-      });
+      }
     }, 200);
   }
   insertUsageButton() {
@@ -115,7 +109,6 @@ class BotModeling extends LitElement {
       newButton.innerHTML = "<i class='bi bi-graph-up'></i> Usage ";
       newButton.addEventListener("click", () => {
         window.jsPlumbInstance.setSuspendDrawing(true, true);
-        this.toggleEdgeInfoLabels();
         const overlay = document.querySelector("#model-statistics-overlay");
         const pm4botsOverlayElements =
           document.querySelectorAll(".pm4bots-overlay");
@@ -144,33 +137,6 @@ class BotModeling extends LitElement {
       });
       firstButtonCol.appendChild(newButton);
     }
-  }
-
-  toggleEdgeInfoLabels() {
-    if (!this.edgeLabels) {
-      this.edgeLabels = document.querySelectorAll(".edge_label");
-    }
-    if (!this.edgeTypes) {
-      this.edgeTypes = document.querySelectorAll(".type");
-    }
-    this.edgeInfoShown = Array.from(this.edgeLabels).some(
-      (edgeLabel) => edgeLabel.style.display !== "none"
-    ); // check if any of the edge labels are shown
-    for (const edgeLabel of this.edgeLabels) {
-      if (this.edgeInfoShown) {
-        edgeLabel.style.display = "none";
-      } else {
-        edgeLabel.style.display = "block";
-      }
-    }
-    for (const edgeType of this.edgeTypes) {
-      if (this.edgeInfoShown) {
-        edgeType.style.display = "none";
-      } else {
-        edgeType.style.display = "block";
-      }
-    }
-    this.edgeInfoShown = !this.edgeInfoShown;
   }
 
   toggleEdgeStatistics() {}
