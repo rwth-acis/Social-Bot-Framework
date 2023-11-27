@@ -174,7 +174,7 @@ class ImprovementRec extends LitElement {
   onSubmit(e) {
     e.preventDefault();
     if (e.target[1].checked) {
-      localStorage.setItem("openai-token", e.target[0].value);
+      // localStorage.setItem("openai-token", e.target[0].value);
     }
     this.updateToken(e.target[0].value);
     const model = e.target[2].value;
