@@ -56,6 +56,7 @@ class GeneralImprovement extends LitElement {
 
       <button
         type="button"
+        id="copyToClipboardButton"
         class="btn btn-outline-secondary mb-2"
         @click="${this.copyToClipboard}"
       >
@@ -75,7 +76,20 @@ class GeneralImprovement extends LitElement {
 
   copyToClipboard() {
     const resDiv = this.shadowRoot.querySelector("#chatgptRes");
-    navigator.clipboard.writeText(resDiv.innerText);
+    const clipBoardBtn = this.shadowRoot.querySelector(
+      "#copyToClipboardButton"
+    );
+    try {
+      navigator.clipboard.writeText(resDiv.innerText);
+      clipBoardBtn.classList.remove("btn-outline-secondary");
+      clipBoardBtn.classList.add("btn-success");
+      setTimeout(() => {
+        clipBoardBtn.classList.remove("btn-success");
+        clipBoardBtn.classList.add("btn-outline-secondary");
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async firstUpdated() {
