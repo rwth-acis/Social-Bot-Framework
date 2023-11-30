@@ -91,13 +91,8 @@ class IntentImprovement extends LitElement {
   }
 
   copyToClipboard() {
-    const copyText = this.shadowRoot.querySelector("#chatgptRes");
-    const textArea = document.createElement("textarea");
-    textArea.value = copyText.textContent;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("Copy");
-    textArea.remove();
+    const resDiv = this.shadowRoot.querySelector("#chatgptRes");
+    navigator.clipboard.writeText(resDiv.innerText);
   }
 
   async askGPT() {
