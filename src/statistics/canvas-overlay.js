@@ -22,7 +22,17 @@ class CanvasStatsOverlay extends LitElement {
   }
 
   render() {
-    return html`<div
+    return html` <style>
+        .pm4bots-edge-label {
+          background-color: white;
+          padding: 2px;
+          border-radius: 5px;
+          font-size: 12px;
+          font-weight: bold;
+          color: black;
+        }
+      </style>
+      <div
       id="model-statistics-overlay"
       style="display:none; position:absolute; top:0; left:0;right:0;bottom:0; background-color: #e9ecef; padding: 10px; border-radius: 5px;"
     >
@@ -408,6 +418,7 @@ function updateOverlay(source, target, label, type, that, metric) {
       label,
       location: 0.6,
       scope: "pm4bots",
+      cssClass: "pm4bots-edge-label",
     },
   });
 }
@@ -470,7 +481,8 @@ function addOverlayToExistingEdge(source, target, meanDuration, that) {
     type: "Label",
     options: {
       label,
-      location: 0.6,
+      location: 0.8,
+      cssClass: "pm4bots-edge-label",
     },
   });
 }
