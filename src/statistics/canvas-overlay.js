@@ -375,12 +375,26 @@ function addMissingEdge(source, target, meanDuration, that) {
     paintStyle: { stroke: color, strokeWidth },
     anchor: "AutoDefault",
     cssClass: "pm4bots-edge",
-    overlays: [
-      { type: "Arrow", options: { location: 1 } },
-      { type: "Label", options: { label, location: 0.5 } },
-    ],
+    overlays: [{ type: "Arrow", options: { location: 1 } }],
     scope: "pm4bots",
   });
+  setTimeout(() => {
+    window.jsPlumbInstance
+      .getConnections({
+        source: source,
+        target: target,
+        scope: "pm4bots",
+      })[0]
+      .addOverlay({
+        type: "Label",
+        options: {
+          label,
+          location: 0.6,
+          cssClass: "pm4bots-edge-label",
+        },
+      });
+    window.jsPlumbInstance.repaintEverything();
+  }, 10);
 }
 
 function updateOverlay(source, target, label, type, that, metric) {
