@@ -130,7 +130,7 @@ class CanvasStatsOverlay extends LitElement {
       }
     }
     this.minDurationValue = currDurationMin;
-    this.maxDurationValue = currDurationMax;
+    this.maxDurationValue = currDurationMax > 300 ? 300 : currDurationMax;
     this.minFrequencyValue = currFrequencyMin;
     this.maxFrequencyValue = currFrequencyMax;
   }
@@ -361,8 +361,8 @@ function addMissingNode(node, boundingBox) {
 function addMissingEdge(source, target, meanDuration, that) {
   const color = getColorScale(
     meanDuration,
-    that.minDurationValue + 2,
-    that.maxDurationValue + 2,
+    that.minDurationValue,
+    that.maxDurationValue,
     "duration"
   );
   // if meanDuration is defined then add an overlay to the edge with the performance value
@@ -585,11 +585,13 @@ function getColorScale(value, minValue, maxValue, type) {
  * @returns  stroke width
  */
 function getStrokeWidth(value, max) {
+  max = Math.min(max, 60);
+  value = Math.min(value, max);
   if (!value || !max) {
-    return 0;
+    return 1;
   }
-  const width = (value / max) * 10;
-  return width;
+  // get value between 2 and 10
+  return (value / max) * 8 + 2;
 }
 
 /**
