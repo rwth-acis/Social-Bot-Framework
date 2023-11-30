@@ -33,18 +33,18 @@ class CanvasStatsOverlay extends LitElement {
         }
       </style>
       <div
-      id="model-statistics-overlay"
-      style="display:none; position:absolute; top:0; left:0;right:0;bottom:0; background-color: #e9ecef; padding: 10px; border-radius: 5px;"
-    >
-      <div
-        class="spinner-border text-primary position-absolute"
-        role="status"
-        style="top:50%;left:50%;"
-        ?hidden="${this.loading === false}"
+        id="model-statistics-overlay"
+        style="display:none; position:absolute; top:0; left:0;right:0;bottom:0; background-color: #e9ecef; padding: 10px; border-radius: 5px;"
       >
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>`;
+        <div
+          class="spinner-border text-primary position-absolute"
+          role="status"
+          style="top:50%;left:50%;"
+          ?hidden="${this.loading === false}"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>`;
   }
   async firstUpdated() {
     super.firstUpdated();
@@ -318,6 +318,7 @@ function addMissingNode(node, boundingBox) {
   let bgClass = "bg-dark";
   if (!node.label || node.label === "empty" || node.label === "empty_intent") {
     bgClass = "bg-secondary";
+    return;
   } else if (node.label === "unrecognizedIntent") {
     bgClass = "bg-warning";
   }
