@@ -83,6 +83,7 @@ class IntentImprovement extends LitElement {
       </button>
       <button
         type="button"
+        id="copyToClipboardButton"
         class="btn btn-outline-secondary mb-2"
         @click="${this.copyToClipboard}"
       >
