@@ -448,9 +448,7 @@ class BotStats extends LitElement {
 
   async fetchConversationModel(botName) {
     document.getElementById("pm-res").querySelector("svg")?.remove();
-    const botManagerEndpointInput = this.configMap
-      .get("sbm-endpoint")
-      .toString();
+    const botModel = this.y.getMap("data").get("model");
     const pm4botsEndpointInput = this.configMap
       .get("pm4bots-endpoint")
       .toString();
@@ -458,11 +456,7 @@ class BotStats extends LitElement {
       .get("event-log-endpoint")
       .toString();
 
-    if (
-      !botManagerEndpointInput ||
-      !pm4botsEndpointInput ||
-      !eventLogEndpointInput
-    ) {
+    if (!pm4botsEndpointInput || !eventLogEndpointInput) {
       this.alertMessage =
         "Make sure to configure the endpoints using the button on the top right";
       return;
@@ -473,17 +467,22 @@ class BotStats extends LitElement {
       botName,
       "petri-net"
     );
-    url += `?bot-manager-url=${botManagerEndpointInput}`;
-    url += `&event-log-url=${eventLogEndpointInput}`;
+
+    url += `?event-log-url=${eventLogEndpointInput}`;
     url += `&enhance=${true}`;
 
     try {
       const response = await fetch(url, {
+        method: "POST",
         timeout: 10000,
         headers: {
           "Access-Control-Allow-Origin": "*",
           Accept: "text/html",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          "bot-model": botModel,
+        }),
       });
       if (!response.ok) {
         try {
