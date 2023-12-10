@@ -5,6 +5,7 @@ import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import interact from "interactjs";
 import "./config-pane.js";
 import "./measure-visualization.js";
+import { isErrorResponse } from "../lib/isErrorResponse.js";
 /**
  * @customElement
  *
@@ -219,10 +220,10 @@ class BotStats extends LitElement {
   changeView(e) {
     if (e.target.value === "petri-net") {
       this.loading = true;
-      this.fetchConversationModel(this.configMap.get("bot-name").toString());
+      this.fetchConversationModel(this.configMap.get("bot-name")?.toString());
     } else {
       this.loading = true;
-      this.fetchBPMNModel(this.configMap.get("bot-name").toString());
+      this.fetchBPMNModel(this.configMap.get("bot-name")?.toString());
     }
   }
 
@@ -369,6 +370,9 @@ class BotStats extends LitElement {
   }
 
   async fetchBPMNModel(botName) {
+    if (!botName) {
+      return;
+    }
     document.getElementById("pm-res").querySelector("svg")?.remove();
 
     const botManagerEndpointInput = this.configMap
@@ -403,6 +407,7 @@ class BotStats extends LitElement {
           Accept: "text/html",
         },
       });
+
       if (!response.ok) {
         try {
           const body = await response.json();
@@ -412,12 +417,18 @@ class BotStats extends LitElement {
         }
         return;
       }
+      const responseText = await response.text();
+      if (isErrorResponse(responseText)) {
+        this.alertMessage = `Error from server`;
+        return;
+      }
+
       this.loading = false;
       const element = document.getElementById("pm-res");
 
       // create a new div and insert the svg into it
       const div = document.createElement("div");
-      div.innerHTML = await response.text();
+      div.innerHTML = responseText;
 
       document.getElementById("pm-res").appendChild(div);
 
@@ -447,6 +458,9 @@ class BotStats extends LitElement {
   }
 
   async fetchConversationModel(botName) {
+    if (!botName) {
+      return;
+    }
     document.getElementById("pm-res").querySelector("svg")?.remove();
     const botManagerEndpointInput = this.configMap
       .get("sbm-endpoint")
@@ -485,6 +499,7 @@ class BotStats extends LitElement {
           Accept: "text/html",
         },
       });
+
       if (!response.ok) {
         try {
           const body = await response.json();
@@ -494,11 +509,17 @@ class BotStats extends LitElement {
         }
         return;
       }
+      const responseText = await response.text();
+      if (isErrorResponse(responseText)) {
+        this.alertMessage = `Error from server ${response.status}`;
+        return;
+      }
+
       this.loading = false;
       const element = document.getElementById("pm-res");
       // create a new div and insert the svg into it
       const div = document.createElement("div");
-      div.innerHTML = await response.text();
+      div.innerHTML = responseText;
 
       document.getElementById("pm-res").appendChild(div);
       const svg = document.getElementById("pm-res").querySelector("svg");
