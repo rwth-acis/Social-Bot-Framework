@@ -137,32 +137,34 @@ class CanvasStatsOverlay extends LitElement {
 
   async fetchStatistics(botName) {
     this.loading = true;
-    const botManagerEndpointInput = this.configMap
-      .get("sbm-endpoint")
-      .toString();
+    const model = this.y.getMap("data").get("model");
     const pm4botsEndpointInput = this.configMap
       .get("pm4bots-endpoint")
       .toString();
     const eventLogEndpointInput = this.configMap
       .get("event-log-endpoint")
       .toString();
-    if (!pm4botsEndpointInput || !botManagerEndpointInput) {
+    if (!pm4botsEndpointInput) {
       console.warn(
-        "endpoints not configured  properly",
+        "pm4bots endpoint not configured  properly",
         this.configMap.toJSON()
       );
       return;
     }
 
-    const url = `${pm4botsEndpointInput}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpointInput}&event-log-url=${eventLogEndpointInput}`;
+    const url = `${pm4botsEndpointInput}/bot/${botName}/enhanced-model?event-log-url=${eventLogEndpointInput}`;
     try {
       const response = await fetch(url, {
+        method: "POST",
         timeout: 10000,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        body: JSON.stringify({
+          "bot-model": model,
+        }),
       });
       this.loading = false;
 
