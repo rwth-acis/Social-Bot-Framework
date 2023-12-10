@@ -532,9 +532,6 @@ class BotStats extends LitElement {
     const pm4botsEndpointInput = this.configMap
       .get("pm4bots-endpoint")
       .toString();
-    const botManagerEndpointInput = this.configMap
-      .get("sbm-endpoint")
-      .toString();
     let url = joinAbsoluteUrlPath(
       pm4botsEndpointInput,
       "bot",
@@ -542,14 +539,16 @@ class BotStats extends LitElement {
       "statistics"
     );
     url += `?event-log-url=${eventLogEndpointInput}`;
-    url += `&bot-manager-url=${botManagerEndpointInput}`;
 
     const res = await fetch(url, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: toAuthorizationHeader(botName),
       },
+      body: JSON.stringify({
+        "bot-model": this.y.getMap("data").get("model"),
+      }),
     });
 
     if (!res.ok) {
