@@ -15,7 +15,7 @@ class BotStats extends LitElement {
     loading: { type: Boolean, value: true },
     alertMessage: { type: String },
     statistics: { type: Object },
-    selectedMeasure: { type: Object, state: true },
+    selectedMeasure: { type: Object, state: true , value: null},
     successModelLoaded: { type: Boolean, state: true },
   };
   configModal = null;
@@ -335,6 +335,7 @@ class BotStats extends LitElement {
       option.classList.add("list-group-item");
       option.innerText = measureName;
       list.appendChild(option);
+      option.style.cursor = "pointer";
       option.addEventListener("click", () => {
         this.openVisualization(measureName);
       });
@@ -347,11 +348,18 @@ class BotStats extends LitElement {
     );
     this.selectedMeasure = measure;
     this.visualizationModal.show();
+    // detect changes
     document
       .querySelector("#visualizationModal")
-      .addEventListener("hidden.bs.modal", () => {
-        this.selectedMeasure = null;
-      });
+      .querySelector("measure-visualization")
+      .requestUpdate("measure");
+    setTimeout(() => {
+      document
+        .querySelector("#visualizationModal")
+        .addEventListener("hidden.bs.modal", () => {
+          this.selectedMeasure = null;
+        });
+    });
   }
 
   filterList(input) {
