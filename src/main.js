@@ -49,6 +49,7 @@ class MainPage extends LitElement {
         style="display: none;"
         id="AIrecommendationButton"
         @click="${() => {
+          removeBackDrop();
           this.Offcanvas.show();
         }}"
       >
@@ -58,6 +59,7 @@ class MainPage extends LitElement {
       <div
         class="offcanvas offcanvas-end"
         tabindex="-1"
+        data-bs-backdrop="static"
         id="offCanvasChatGPT"
         aria-labelledby="offcanvasRightLabel"
       >
@@ -103,6 +105,15 @@ class MainPage extends LitElement {
   createRenderRoot() {
     return this;
   }
+}
+
+function removeBackDrop() {
+  setTimeout(() => {
+    const backDrop = document.querySelector(".offcanvas-backdrop");
+    if (backDrop) {
+      backDrop.remove();
+    }
+  });
 }
 
 window.customElements.define("main-page", MainPage);
