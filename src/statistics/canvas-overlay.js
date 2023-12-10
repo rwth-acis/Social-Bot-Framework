@@ -321,6 +321,8 @@ function addMissingNode(node, boundingBox) {
     return;
   } else if (node.label === "unrecognizedIntent") {
     bgClass = "bg-warning";
+  } else {
+    return;
   }
   nodeHtml.classList.add(
     "node",
@@ -360,6 +362,10 @@ function addMissingNode(node, boundingBox) {
  * @param {*} meanDuration  mean duration of the edge
  */
 function addMissingEdge(source, target, meanDuration, that) {
+  // no self loops
+  if (source === target) {
+    return;
+  }
   const color = getColorScale(
     meanDuration,
     that.minDurationValue,
