@@ -341,6 +341,14 @@
                 "3e8bfec67da28c354a969b46": {
                     "key": "IsFile",
                     "value": "boolean"
+                },
+                "02f10f2ddc5ad49fb427d09d": {
+                    "key": "Rateable",
+                    "value": "boolean"
+                },
+                "580c2dd4a8c15b911252709b": {
+                    "key": "Asynchronous",
+                    "value": "boolean"
                 }
             },
             "shape": {
