@@ -11,8 +11,8 @@
         },
         "left": 0,
         "top": 0,
-        "width": 0,
-        "height": 0,
+        "width": 50,
+        "height": 50,
         "zIndex": 0,
         "type": "ModelAttributesNode",
         "attributes": {
@@ -209,8 +209,8 @@
                     "value": "Action Parameter"
                 }
             },
-            "left": 5266.555555555556,
-            "top": 5007.777777777777,
+            "left": 5396.555555555556,
+            "top": 5025.777777777777,
             "width": 192,
             "height": 142,
             "zIndex": 16006,
@@ -923,8 +923,8 @@
                     "value": "crType"
                 }
             },
-            "left": 3175.999999999998,
-            "top": 5969.666666666664,
+            "left": 3033.999999999998,
+            "top": 6075.666666666664,
             "width": 150,
             "height": 100,
             "zIndex": 16035,
@@ -2160,8 +2160,8 @@
                     "value": "MessengerGeneratesMessage"
                 }
             },
-            "left": 3159.9999999999995,
-            "top": 5505.333333333332,
+            "left": 3199.9999999999995,
+            "top": 5453.333333333332,
             "width": 243.33333333333326,
             "height": 58.333333333333314,
             "zIndex": 16058,
@@ -2286,6 +2286,34 @@
                                 "id": "90cd8b63ad44500486ddbb02[value]",
                                 "name": "",
                                 "value": "list"
+                            }
+                        },
+                        "02f10f2ddc5ad49fb427d09d": {
+                            "id": "02f10f2ddc5ad49fb427d09d",
+                            "name": "02f10f2ddc5ad49fb427d09d",
+                            "key": {
+                                "id": "02f10f2ddc5ad49fb427d09d[key]",
+                                "name": "",
+                                "value": "Rateable"
+                            },
+                            "value": {
+                                "id": "02f10f2ddc5ad49fb427d09d[value]",
+                                "name": "",
+                                "value": "boolean"
+                            }
+                        },
+                        "580c2dd4a8c15b911252709b": {
+                            "id": "580c2dd4a8c15b911252709b",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "580c2dd4a8c15b911252709b[key]",
+                                "name": "",
+                                "value": "Asynchronous"
+                            },
+                            "value": {
+                                "id": "580c2dd4a8c15b911252709b[value]",
+                                "name": "",
+                                "value": "boolean"
                             }
                         }
                     }
@@ -2562,8 +2590,8 @@
                     "value": "IncomingMessageShape"
                 }
             },
-            "left": 3583.7500000000023,
-            "top": 5727.500000000004,
+            "left": 3815.7500000000023,
+            "top": 5839.500000000004,
             "width": 217.5,
             "height": 188.75,
             "zIndex": 16067,
@@ -2681,8 +2709,8 @@
                     "value": "NLUKnowledgeShape"
                 }
             },
-            "left": 3450.7142857142853,
-            "top": 5376.428571428571,
+            "left": 3086.7142857142853,
+            "top": 5158.428571428571,
             "width": 150,
             "height": 150,
             "zIndex": 16074,
@@ -2782,8 +2810,8 @@
                     "value": "fType"
                 }
             },
-            "left": 3461.399902343749,
-            "top": 5961.399902343749,
+            "left": 3254.399902343749,
+            "top": 6269.399902343749,
             "width": 183.33333333333337,
             "height": 156.66666666666669,
             "zIndex": 16076,

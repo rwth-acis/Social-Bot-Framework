@@ -2276,7 +2276,7 @@
                         },
                         "02f10f2ddc5ad49fb427d09d": {
                             "id": "02f10f2ddc5ad49fb427d09d",
-                            "name": "Attribute",
+                            "name": "02f10f2ddc5ad49fb427d09d",
                             "key": {
                                 "id": "02f10f2ddc5ad49fb427d09d[key]",
                                 "name": "",
@@ -2284,6 +2284,20 @@
                             },
                             "value": {
                                 "id": "02f10f2ddc5ad49fb427d09d[value]",
+                                "name": "",
+                                "value": "boolean"
+                            }
+                        },
+                        "580c2dd4a8c15b911252709b": {
+                            "id": "580c2dd4a8c15b911252709b",
+                            "name": "Attribute",
+                            "key": {
+                                "id": "580c2dd4a8c15b911252709b[key]",
+                                "name": "",
+                                "value": "Asynchronous"
+                            },
+                            "value": {
+                                "id": "580c2dd4a8c15b911252709b[value]",
                                 "name": "",
                                 "value": "boolean"
                             }
