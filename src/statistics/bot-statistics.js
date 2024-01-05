@@ -115,6 +115,13 @@ class BotStats extends LitElement {
                   Number of unique Users:
                   <strong>${this.statistics?.numberOfUsers}</strong>
                   <br />
+                  Average conversation duration:
+                  <strong
+                    >${this.statistics?.averageConversationDuration} s</strong
+                  >
+                  <br />
+                  Average conversation length:
+                  <strong>${this.statistics?.averageConversationLength}</strong>
 
                   ${this.statistics?.conformance?.fitness?.averageFitness !=
                   null
@@ -130,7 +137,7 @@ class BotStats extends LitElement {
                           %</strong
                         >
                         <br />`
-                    : "-"}
+                    : ""}
                 </div>
               </div>
             </div>
