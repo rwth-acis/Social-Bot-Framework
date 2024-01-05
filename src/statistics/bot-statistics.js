@@ -122,6 +122,7 @@ class BotStats extends LitElement {
                   <br />
                   Average conversation length:
                   <strong>${this.statistics?.averageConversationLength}</strong>
+                  <br />
 
                   ${this.statistics?.conformance?.fitness?.averageFitness !=
                   null
