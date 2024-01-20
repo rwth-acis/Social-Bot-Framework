@@ -29,7 +29,7 @@
     "las2peer-frontend-statusbar": "github:rwth-acis/las2peer-frontend-statusbar#0.4.0",
     "lit": "^2.0.2",
     "quill": "^1.3.7",
-    "vite": "^4.1.0",
+    "vite": "^4.5.2",
     "y-quill": "^0.1.5",
     "y-websocket": "^1.4.5",
     "yjs": "13.5.44"
