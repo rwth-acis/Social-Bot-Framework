@@ -189,7 +189,7 @@ class CanvasStatsOverlay extends LitElement {
     // add missing nodes to canvas
     for (const node of statistics.graph.nodes) {
       if (!botModelNodes[node.id] && !addedNodes.includes(node.id)) {
-        addMissingNode(node, boundingBox);
+          // addMissingNode(node, boundingBox);
         addedNodes.push(node.id);
       }
     }
