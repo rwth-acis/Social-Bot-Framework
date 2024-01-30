@@ -15,8 +15,10 @@ class BotStats extends LitElement {
     loading: { type: Boolean, value: true },
     alertMessage: { type: String },
     statistics: { type: Object },
-    selectedMeasure: { type: Object, state: true , value: null},
+    selectedMeasure: { type: Object, state: true, value: null },
     successModelLoaded: { type: Boolean, state: true },
+    enhance: { type: Boolean, state: true, value: false },
+    selectedModel: { type: String, state: true, value: "petri-net" },
   };
   configModal = null;
 
@@ -60,20 +62,22 @@ class BotStats extends LitElement {
             <i class="bi bi-gear"></i>
           </button>
         </div>
-        ${this.alertMessage
-          ? html`<div
-              class="alert alert-warning w-50 mx-auto alert-dismissible "
-              role="alert"
-            >
-              ${this.alertMessage}
-              <button
-                type="button"
-                class="btn-close"
-                @click="${() => (this.alertMessage = null)}"
-                aria-label="Close"
-              ></button>
-            </div>`
-          : ""}
+        ${
+          this.alertMessage
+            ? html`<div
+                class="alert alert-warning w-50 mx-auto alert-dismissible "
+                role="alert"
+              >
+                ${this.alertMessage}
+                <button
+                  type="button"
+                  class="btn-close"
+                  @click="${() => (this.alertMessage = null)}"
+                  aria-label="Close"
+                ></button>
+              </div>`
+            : ""
+        }
 
         <div class="row mh-100">
           <div
@@ -83,22 +87,48 @@ class BotStats extends LitElement {
             id="pm-res"
           >
             <div
-              class="spinner-border position-absolute"
+              class="spinner-border position-absolute align-content-center"
               role="status"
               style="top:50%;left:50%;"
               ?hidden="${!this.loading || this.alertMessage != null}"
             >
               <span class="visually-hidden">Loading...</span>
             </div>
-            <select
-              class="form-select position-absolute top-0 end-0"
-              style="z-index:10; width: 200px; margin: 10px;"
+            <div class="position-absolute top-0 end-0 bg-white d-flex flex-row-reverse rounded shadow" style="z-index:10; margin: 10px;">
+              <select
+              class="form-select flex-grow-1"
               aria-label="Default select example"
-              @change="${this.changeView}"
+              @change="${(e) => {
+                this.selectedModel = e.target.value;
+                this.changeView();
+              }}"
+              }"
             >
               <option selected value="petri-net">Petri Net</option>
               <option value="bpmn">BPMN</option>
             </select>
+            <div class="form-check form-switch me-2">
+              <input
+                class="form-check-input text-center p-2"
+                type="checkbox"
+                role="switch"
+                id="enhace-switch"
+                @change="${(e) => {
+                  if (e.target.checked) {
+                    this.enhance = true;
+                    this.changeView();
+                  } else {
+                    this.enhance = false;
+                    this.changeView();
+                  }
+                }}"
+              />
+              <label class="form-check-label" style="white-space: nowrap;" for="flexSwitchCheckDefault"
+                >Enhance using logs</label
+              >
+            </div>
+      </div>
+            
           </div>
 
           <div class="col-4" style="height:98vh;overflow-y:auto">
@@ -124,21 +154,23 @@ class BotStats extends LitElement {
                   <strong>${this.statistics?.averageConversationLength}</strong>
                   <br />
 
-                  ${this.statistics?.conformance?.fitness?.averageFitness !=
-                  null
-                    ? html` Deviating conversations:
-                        <strong>
-                          ${Math.round(
-                            100 *
-                              (1 -
-                                this.statistics?.conformance?.fitness
-                                  ?.averageFitness) *
-                              100
-                          ) / 100}
-                          %</strong
-                        >
-                        <br />`
-                    : ""}
+                  ${
+                    this.statistics?.conformance?.fitness?.averageFitness !=
+                    null
+                      ? html` Deviating conversations:
+                          <strong>
+                            ${Math.round(
+                              100 *
+                                (1 -
+                                  this.statistics?.conformance?.fitness
+                                    ?.averageFitness) *
+                                100
+                            ) / 100}
+                            %</strong
+                          >
+                          <br />`
+                      : ""
+                  }
                 </div>
               </div>
             </div>
@@ -161,8 +193,9 @@ class BotStats extends LitElement {
                   class="spinner-border position-absolute"
                   role="status"
                   style="top:50%;left:50%;"
-                  ?hidden="${this.successModelLoaded ||
-                  this.alertMessage != null}"
+                  ?hidden="${
+                    this.successModelLoaded || this.alertMessage != null
+                  }"
                 >
                   <span class="visually-hidden">Loading...</span>
                 </div>
@@ -217,6 +250,7 @@ class BotStats extends LitElement {
     `;
   }
   firstUpdated() {
+    this.selectedModel = "petri-net";
     // listen for the router to change to #bot-statistics
     window.addEventListener("hashchange", async () => {
       this.init = false;
@@ -225,13 +259,19 @@ class BotStats extends LitElement {
     });
     this.runInit();
   }
-  changeView(e) {
-    if (e.target.value === "petri-net") {
+  changeView() {
+    if (this.selectedModel === "petri-net") {
       this.loading = true;
-      this.fetchConversationModel(this.configMap.get("bot-name")?.toString());
+      this.fetchConversationModel(
+        this.configMap.get("bot-name")?.toString(),
+        this.enhance
+      );
     } else {
       this.loading = true;
-      this.fetchBPMNModel(this.configMap.get("bot-name")?.toString());
+      this.fetchBPMNModel(
+        this.configMap.get("bot-name")?.toString(),
+        this.enhance
+      );
     }
   }
 
@@ -385,7 +425,7 @@ class BotStats extends LitElement {
     }
   }
 
-  async fetchBPMNModel(botName) {
+  async fetchBPMNModel(botName, enhance = false) {
     if (!botName) {
       return;
     }
@@ -413,7 +453,7 @@ class BotStats extends LitElement {
     let url = joinAbsoluteUrlPath(pm4botsEndpointInput, "bot", botName, "bpmn");
     url += `?bot-manager-url=${botManagerEndpointInput}`;
     url += `&event-log-url=${eventLogEndpointInput}`;
-    url += `&enhance=${true}`;
+    url += `&enhance=${enhance}`;
 
     try {
       const response = await fetch(url, {
@@ -473,7 +513,7 @@ class BotStats extends LitElement {
     }
   }
 
-  async fetchConversationModel(botName) {
+  async fetchConversationModel(botName, enhance = false) {
     if (!botName) {
       return;
     }
@@ -505,7 +545,7 @@ class BotStats extends LitElement {
     );
     url += `?bot-manager-url=${botManagerEndpointInput}`;
     url += `&event-log-url=${eventLogEndpointInput}`;
-    url += `&enhance=${true}`;
+    url += `&enhance=${enhance}`;
 
     try {
       const response = await fetch(url, {
