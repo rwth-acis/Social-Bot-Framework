@@ -441,6 +441,8 @@ class BotStats extends LitElement {
       .get("event-log-endpoint")
       .toString();
 
+    const botModel = this.y.getMap("data").get('model')
+
     if (
       !botManagerEndpointInput ||
       !pm4botsEndpointInput ||
@@ -457,13 +459,17 @@ class BotStats extends LitElement {
 
     try {
       const response = await fetch(url, {
+        method: "POST",
         timeout: 10000,
         headers: {
           "Access-Control-Allow-Origin": "*",
           Accept: "text/html",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          "bot-model": botModel,
+        }),
       });
-
       if (!response.ok) {
         try {
           const body = await response.json();
@@ -528,6 +534,8 @@ class BotStats extends LitElement {
       .get("event-log-endpoint")
       .toString();
 
+      const botModel = this.y.getMap("data").get('model')
+
     if (
       !botManagerEndpointInput ||
       !pm4botsEndpointInput ||
@@ -549,11 +557,17 @@ class BotStats extends LitElement {
 
     try {
       const response = await fetch(url, {
+        method: "POST",
         timeout: 10000,
         headers: {
           "Access-Control-Allow-Origin": "*",
           Accept: "text/html",
+          'Content-type': 'application/json'
         },
+
+        body: JSON.stringify({
+          "bot-model": botModel,
+        }),
       });
 
       if (!response.ok) {
