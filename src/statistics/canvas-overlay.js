@@ -116,14 +116,14 @@ class CanvasStatsOverlay extends LitElement {
     let currFrequencyMax = 0;
     let currFrequencyMin = Infinity;
     for (const edge of statistics.graph.edges) {
-      if (edge.performance?.mean > currDurationMax) {
-        currDurationMax = edge.performance?.mean;
+      if (edge.performance > currDurationMax) {
+        currDurationMax = edge.performance;
       }
       if (edge.frequency > currFrequencyMax) {
         currFrequencyMax = edge.frequency;
       }
-      if (edge.performance?.mean < currDurationMin) {
-        currDurationMin = edge.performance?.mean;
+      if (edge.performance < currDurationMin) {
+        currDurationMin = edge.performance;
       }
       if (edge.frequency < currFrequencyMin) {
         currFrequencyMin = edge.frequency;
@@ -153,16 +153,19 @@ class CanvasStatsOverlay extends LitElement {
       );
       return;
     }
+    const botModel = this.y.getMap("data").get("model");
 
     const url = `${pm4botsEndpointInput}/bot/${botName}/enhanced-model?bot-manager-url=${botManagerEndpointInput}&event-log-url=${eventLogEndpointInput}`;
     try {
       const response = await fetch(url, {
+        method: "POST",
         timeout: 10000,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        body: JSON.stringify({'bot-model':botModel}),
       });
       this.loading = false;
 
@@ -214,11 +217,11 @@ class CanvasStatsOverlay extends LitElement {
         addOverlayToExistingEdge(
           sourceNode,
           targetNode,
-          edge.performance?.mean,
+          edge.performance,
           this
         );
       } else if (!findEdgeInAddedEdges(addedEdges, sourceId, targetId)) {
-        addMissingEdge(sourceNode, targetNode, edge.performance?.mean, this);
+        addMissingEdge(sourceNode, targetNode, edge.performance, this);
         addedEdges.push({ sourceId, targetId });
       }
     }
@@ -283,14 +286,14 @@ class CanvasStatsOverlay extends LitElement {
       } else {
         const label =
           type === "duration"
-            ? edge.performance?.mean
-              ? edge.performance?.mean.toFixed(2) + "s"
+            ? edge.performance
+              ? edge.performance.toFixed(2) + "s"
               : ""
             : edge.frequency;
         const metric =
           type === "duration"
-            ? edge.performance?.mean
-              ? edge.performance?.mean.toFixed(2)
+            ? edge.performance
+              ? edge.performance.toFixed(2)
               : 0
             : edge.frequency;
         updateOverlay(sourceNode, targetNode, label, type, this, metric);
