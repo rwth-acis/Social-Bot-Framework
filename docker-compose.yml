@@ -106,7 +106,7 @@ services:
       - MYSQL_PASSWORD=root
       - MYSQL_HOST=db
       - MYSQL_PORT=3306
-      - MYSQL_DATABASE=LAS2PEERMON
+      - MYSQL_EVENTS_DB=LAS2PEERMON
       - CORS_ORIGIN=http://localhost:8082 # Needed to prevent CORS errors
       - DEFAULT_BOT_PASSWORD = actingAgent
       - DEVELOPMENT_MODE = true
