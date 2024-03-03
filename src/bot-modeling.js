@@ -5,7 +5,7 @@ import config from "../config.json";
 import { Common } from "./common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import { ifDefined } from "lit/directives/if-defined.js";
-import "./statistics/improvements-recommender.js";
+import "./improvements-recommender.js";
 /**
  * @customElement
  *

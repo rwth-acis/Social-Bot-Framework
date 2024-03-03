@@ -17,7 +17,7 @@ class BotStats extends LitElement {
     statistics: { type: Object },
     selectedMeasure: { type: Object, state: true, value: null },
     successModelLoaded: { type: Boolean, state: true },
-    enhance: { type: Boolean, state: true, value: false },
+    modelType: { type: String, state: true, value: "de-jure" },
     selectedModel: { type: String, state: true, value: "petri-net" },
   };
   configModal = null;
@@ -94,8 +94,22 @@ class BotStats extends LitElement {
             >
               <span class="visually-hidden">Loading...</span>
             </div>
-            <div class="position-absolute top-0 end-0 bg-white d-flex flex-row-reverse rounded shadow" style="z-index:10; margin: 10px;">
-              <select
+            <div class="position-absolute top-0 end-0 p-2 bg-white d-flex flex-row rounded shadow" style="z-index:10; margin: 10px;">
+            <select
+              class="form-select flex-grow-1 me-1"
+              aria-label="Default select example"
+              @change="${(e) => {
+                this.modelType = e.target.value;
+                this.changeView();
+              }}"
+              }"
+            >
+              <option selected value="de-jure">De-jure</option>
+              <option value="de-facto">De-facto</option>
+              <option value="enhanced">Enhanced</option>
+            </select>  
+            
+            <select
               class="form-select flex-grow-1"
               aria-label="Default select example"
               @change="${(e) => {
@@ -107,27 +121,8 @@ class BotStats extends LitElement {
               <option selected value="petri-net">Petri Net</option>
               <option value="bpmn">BPMN</option>
             </select>
-            <div class="form-check form-switch me-2">
-              <input
-                class="form-check-input text-center p-2"
-                type="checkbox"
-                role="switch"
-                id="enhace-switch"
-                @change="${(e) => {
-                  if (e.target.checked) {
-                    this.enhance = true;
-                    this.changeView();
-                  } else {
-                    this.enhance = false;
-                    this.changeView();
-                  }
-                }}"
-              />
-              <label class="form-check-label" style="white-space: nowrap;" for="flexSwitchCheckDefault"
-                >Enhance using logs</label
-              >
-            </div>
-      </div>
+              
+          </div>
             
           </div>
 
@@ -260,19 +255,11 @@ class BotStats extends LitElement {
     this.runInit();
   }
   changeView() {
-    if (this.selectedModel === "petri-net") {
-      this.loading = true;
-      this.fetchConversationModel(
-        this.configMap.get("bot-name")?.toString(),
-        this.enhance
-      );
-    } else {
-      this.loading = true;
-      this.fetchBPMNModel(
-        this.configMap.get("bot-name")?.toString(),
-        this.enhance
-      );
-    }
+    this.fetchAndReplaceModel(
+      this.configMap.get("bot-name")?.toString(),
+      this.modelType,
+      this.selectedModel
+    );
   }
 
   async runInit() {
@@ -299,7 +286,7 @@ class BotStats extends LitElement {
           });
           if (botElement) {
             const botName = botElement.label.value.value;
-            this.fetchConversationModel(botName);
+            this.fetchAndReplaceModel(botName);
             this.getSuccessMeasureList(botName);
             this.fetchMeasureCatalog(botName);
             this.fetchBotStatistics(botName);
@@ -425,11 +412,14 @@ class BotStats extends LitElement {
     }
   }
 
-  async fetchBPMNModel(botName, enhance = false) {
+  async fetchAndReplaceModel(
+    botName,
+    modelType = "de-jure",
+    kind = "petri-net"
+  ) {
     if (!botName) {
       return;
     }
-    document.getElementById("pm-res").querySelector("svg")?.remove();
 
     const botManagerEndpointInput = this.configMap
       .get("sbm-endpoint")
@@ -440,8 +430,7 @@ class BotStats extends LitElement {
     const eventLogEndpointInput = this.configMap
       .get("event-log-endpoint")
       .toString();
-
-    const botModel = this.y.getMap("data").get('model')
+    const botModel = this.y.getMap("data").get("model");
 
     if (
       !botManagerEndpointInput ||
@@ -452,108 +441,20 @@ class BotStats extends LitElement {
         "Make sure to configure the endpoints using the button on the top right";
       return;
     }
-    let url = joinAbsoluteUrlPath(pm4botsEndpointInput, "bot", botName, "bpmn");
-    url += `?bot-manager-url=${botManagerEndpointInput}`;
-    url += `&event-log-url=${eventLogEndpointInput}`;
-    url += `&enhance=${enhance}`;
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        timeout: 10000,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Accept: "text/html",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "bot-model": botModel,
-        }),
-      });
-      if (!response.ok) {
-        try {
-          const body = await response.json();
-          this.alertMessage = `${body.error}`;
-        } catch (error) {
-          this.alertMessage = `An unknown Error occurred (${response.status})`;
-        }
-        return;
-      }
-      const responseText = await response.text();
-      if (isErrorResponse(responseText)) {
-        this.alertMessage = `Error from server`;
-        return;
-      }
-
-      this.loading = false;
-      const element = document.getElementById("pm-res");
-
-      // create a new div and insert the svg into it
-      const div = document.createElement("div");
-      div.innerHTML = responseText;
-
-      document.getElementById("pm-res").appendChild(div);
-
-      const svg = document.getElementById("pm-res").querySelector("svg");
-      svg.style.position = "absolute";
-      // set height and width of svg to that of the child
-      svg.width.baseVal.value = svg.getBBox().width;
-      svg.height.baseVal.value = svg.getBBox().height;
-      this.centerElement(svg);
-      // zoom on scroll
-      svg.parentElement.addEventListener("wheel", (e) => {
-        e.preventDefault();
-        if (e.deltaY < 0) {
-          this.zoomIn(element);
-        }
-        if (e.deltaY > 0) {
-          this.zoomOut(element);
-        }
-      });
-      // set z index of parent frame above the svg
-      svg.parentElement.style.zIndex = 1;
-      this.makeDraggable(svg);
-    } catch (error) {
-      this.alertMessage = `Server not reachable. Reason: ${error?.message}`;
-      console.error(error);
-    }
-  }
-
-  async fetchConversationModel(botName, enhance = false) {
-    if (!botName) {
-      return;
-    }
+    this.loading = true;
     document.getElementById("pm-res").querySelector("svg")?.remove();
-    const botManagerEndpointInput = this.configMap
-      .get("sbm-endpoint")
-      .toString();
-    const pm4botsEndpointInput = this.configMap
-      .get("pm4bots-endpoint")
-      .toString();
-    const eventLogEndpointInput = this.configMap
-      .get("event-log-endpoint")
-      .toString();
 
-      const botModel = this.y.getMap("data").get('model')
-
-    if (
-      !botManagerEndpointInput ||
-      !pm4botsEndpointInput ||
-      !eventLogEndpointInput
-    ) {
-      this.alertMessage =
-        "Make sure to configure the endpoints using the button on the top right";
-      return;
-    }
-    let url = joinAbsoluteUrlPath(
-      pm4botsEndpointInput,
-      "bot",
-      botName,
-      "petri-net"
-    );
+    let url = joinAbsoluteUrlPath(pm4botsEndpointInput, "bot", botName, kind);
     url += `?bot-manager-url=${botManagerEndpointInput}`;
     url += `&event-log-url=${eventLogEndpointInput}`;
-    url += `&enhance=${enhance}`;
+    switch (modelType) {
+      case "de-facto":
+        url += `&discover=true`;
+        break;
+      case "enhanced":
+        url += `&enhance=true`;
+        break;
+    }
 
     try {
       const response = await fetch(url, {
@@ -562,7 +463,7 @@ class BotStats extends LitElement {
         headers: {
           "Access-Control-Allow-Origin": "*",
           Accept: "text/html",
-          'Content-type': 'application/json'
+          "Content-type": "application/json",
         },
 
         body: JSON.stringify({

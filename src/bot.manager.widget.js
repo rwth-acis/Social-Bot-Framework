@@ -83,6 +83,30 @@ class BotManagerWidget extends LitElement {
       .catch((error) => {
         console.error("Error while fetching models:", error);
       });
+
+    const bots = await this.fetchCurrentBotIDsFromBotManager(
+      endpoint 
+    );
+    y.getMap("data").set("bots", bots);
+  }
+
+  async fetchCurrentBotIDsFromBotManager(botManagerUrl) {
+    const response = await fetch(botManagerUrl + "/bots");
+
+    if (response.ok) {
+      const json = await response.json();
+      const result = {};
+      for (const [id, botDefinition] of Object.entries(json)) {
+        if (botDefinition.name in result) {
+          result[botDefinition.name].push(id);
+        } else {
+          result[botDefinition.name] = [id];
+        }
+      }
+      return result;
+    } else {
+      throw new Error("Failed to fetch bots.");
+    }
   }
 
   loadModel() {

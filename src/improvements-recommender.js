@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
-import config from "../../config.json";
-import { Common } from "../common.js";
+import config from "../config.json";
+import { Common } from "./common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import "./recommender/general-improvements.js";
 import "./recommender/intent-improvements.js";
@@ -61,7 +61,7 @@ class ImprovementRec extends LitElement {
           </div>
           <select class="form-select mb-3" aria-label="GPT model selection">
             <option selected value="gpt-3.5-turbo-1106">GPT 3.5</option>
-            <option value="gpt-4-1106-preview">GPT 4</option>
+            <option value="gpt-4-turbo-preview">GPT 4</option>
           </select>
           <button type="submit" class="btn btn-primary">
             Set <i class="bi bi-check ms-1"></i>
