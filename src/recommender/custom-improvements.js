@@ -1,9 +1,11 @@
 import { LitElement, html, css } from "lit";
-import config from "../../../config.json";
-import { Common } from "../../common.js";
+import config from "../../config.json";
+import { Common } from "../common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js";
-class GeneralImprovement extends LitElement {
+import Quill from "quill";
+
+class IntentImprovement extends LitElement {
   static styles = css``;
 
   static properties = {
@@ -12,9 +14,9 @@ class GeneralImprovement extends LitElement {
     openaiToken: { type: String, state: true, value: null },
   };
 
-  set openaiToken(token) {
+  set openaiToken(measure) {
     const oldVal = this._openaiToken;
-    this._openaiToken = token;
+    this._openaiToken = measure;
     this.requestUpdate("openaiToken", oldVal);
   }
 
@@ -25,19 +27,45 @@ class GeneralImprovement extends LitElement {
   render() {
     return html`
       <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      />
+      <link
+        href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+        rel="stylesheet"
+      />
+      <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous"
       />
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-      />
       <p class="mt-2">
-        Get <strong>general</strong> improvement recommendations for your bot
-        model from ChatGPT.
+        Get <strong>custom</strong> improvement recommendations for your bot
+        model based on <strong>your prompts</strong> from ChatGPT.
       </p>
+      <div id="promptQuillContainer" class="mb-2"></div>
+      <button
+        type="button"
+        class="btn btn-light"
+        @click="${() => this.insertIntoQuill("`botModel`")}"
+      >
+        <i class="bi bi-plus"></i> Insert Bot Model
+      </button>
+      <button
+        type="button"
+        class="btn btn-light"
+        @click="${() => this.insertIntoQuill("`botIntents`")}"
+      >
+        <i class="bi bi-plus"></i> Insert Intents
+      </button>
+      <button
+        type="button"
+        class="btn btn-light"
+        @click="${() => this.insertIntoQuill("`botLog`")}"
+      >
+        <i class="bi bi-plus"></i> Insert conversation logs
+      </button>
       <button
         type="button"
         id="askGPTButton"
@@ -53,7 +81,6 @@ class GeneralImprovement extends LitElement {
           ></path>
         </svg>
       </button>
-
       <button
         type="button"
         id="copyToClipboardButton"
@@ -62,7 +89,6 @@ class GeneralImprovement extends LitElement {
       >
         <i class="bi bi-clipboard-fill"></i> Copy to clipboard
       </button>
-      <br />
       <div class="spinner-border" role="status" ?hidden="${!this.loading}">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -72,6 +98,123 @@ class GeneralImprovement extends LitElement {
         class="card card-body mt-2"
       ></div>
     `;
+  }
+  insertIntoQuill(text) {
+    const quill = this.quill;
+
+    let range = quill.getSelection();
+    if (range == null) {
+      quill.focus();
+      range = quill.getSelection();
+    }
+    // format the text in that range such that it has a black background and white text
+
+    quill.insertText(range.index, text);
+    quill.formatText(
+      range.index,
+      range.index + text.length,
+      "background",
+      "black"
+    );
+    quill.formatText(range.index, range.index + text.length, "color", "white");
+    quill.setSelection(range.index + text.length);
+    quill.insertText(range.index + text.length, " ");
+    quill.setSelection(range.index + text.length + 1);
+    // reset color and background
+    quill.format("color", "black");
+    quill.format("background", "white");
+  }
+
+  async firstUpdated() {
+    super.firstUpdated();
+
+    const instance = getInstance({
+      host: config.yjs_host,
+      port: config.yjs_port,
+      protocol: config.yjs_socket_protocol,
+      spaceTitle: Common.getYjsRoom(),
+    });
+    this.y = await instance.connect();
+    setTimeout(() => {
+      this.statistics = this.y.getMap("data").get("statistics");
+      this.configMap = y.getMap("pm4bots-config");
+      this.openaiToken = localStorage.getItem("openai-token");
+    }, 100);
+    this.quill = new Quill(
+      this.shadowRoot.querySelector("#promptQuillContainer"),
+      {
+        modules: {
+          toolbar: false, // toolbar options
+        },
+        cursors: false,
+        placeholder: "Given the following bot model...",
+        theme: "snow", // or 'bubble'
+      }
+    );
+  }
+
+  async askGPT() {
+    this.loading = true;
+    this.shadowRoot.querySelector("#askGPTButton").disabled = true;
+    this.shadowRoot.querySelector("#chatgptRes").innerHTML = "";
+    this.fetchIntentRecommendations();
+  }
+
+  async fetchIntentRecommendations() {
+    const botManagerEndpointInput = this.configMap
+      .get("sbm-endpoint")
+      .toString();
+    const pm4botsEndpointInput = this.configMap
+      .get("pm4bots-endpoint")
+      .toString();
+    const eventLogEndpointInput = this.configMap
+      .get("event-log-endpoint")
+      .toString();
+    const botName = this.configMap.get("bot-name").toString();
+    if (!botName) {
+      return console.error("No bot name provided");
+    }
+    let url = joinAbsoluteUrlPath(
+      pm4botsEndpointInput,
+      "bot",
+      botName,
+      "llm",
+      "custom-prompt"
+    );
+    url += "?event-log-url=" + eventLogEndpointInput;
+    url += "&bot-manager-url=" + botManagerEndpointInput;
+
+    try {
+      const controller = new AbortController();
+      const model = localStorage.getItem("openai-model")
+        ? localStorage.getItem("openai-model")
+        : "gpt-3.5-turbo-1106";
+
+      const timeoutId = setTimeout(() => controller.abort(), 300000);
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "openai-key": localStorage.getItem("openai-token"),
+          inputPrompt: this.quill.getText(),
+          "openai-model": model,
+        }),
+        signal: controller.signal,
+      });
+      if (response.ok) clearTimeout(timeoutId);
+      const result = await response.text();
+      this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
+    } catch (error) {
+      console.error(error);
+      this.shadowRoot.querySelector("#chatgptRes").innerHTML = error;
+    } finally {
+      this.loading = false;
+      this.chatGPTRes = true;
+      this.shadowRoot.querySelector("#askGPTButton").disabled = false;
+    }
   }
 
   copyToClipboard() {
@@ -91,93 +234,9 @@ class GeneralImprovement extends LitElement {
       console.error(error);
     }
   }
-
-  async firstUpdated() {
-    super.firstUpdated();
-
-    const instance = getInstance({
-      host: config.yjs_host,
-      port: config.yjs_port,
-      protocol: config.yjs_socket_protocol,
-      spaceTitle: Common.getYjsRoom(),
-    });
-    this.y = await instance.connect();
-    setTimeout(() => {
-      this.statistics = this.y.getMap("data").get("statistics");
-      this.configMap = y.getMap("pm4bots-config");
-      this.openaiToken = localStorage.getItem("openai-token");
-    }, 100);
-  }
-
-  async askGPT() {
-    this.loading = true;
-    this.shadowRoot.querySelector("#askGPTButton").disabled = true;
-    this.shadowRoot.querySelector("#chatgptRes").innerHTML = "";
-    this.fetchGeneralRecommendations();
-  }
-
-  async fetchGeneralRecommendations() {
-    const eventLogEndpointInput = this.configMap
-      .get("event-log-endpoint")
-      .toString();
-    const pm4botsEndpointInput = this.configMap
-      .get("pm4bots-endpoint")
-      .toString();
-
-    const botName = this.configMap.get("bot-name").toString();
-    if (!botName) {
-      return console.error("No bot name provided");
-    }
-    let url = joinAbsoluteUrlPath(
-      pm4botsEndpointInput,
-      "bot",
-      botName,
-      "llm",
-      "dfg-improvements"
-    );
-    url += "?event-log-url=" + eventLogEndpointInput;
-    try {
-      const controller = new AbortController();
-      const model = localStorage.getItem("openai-model")
-        ? localStorage.getItem("openai-model")
-        : "gpt-3.5-turbo-1106";
-
-      const timeoutId = setTimeout(() => controller.abort(), 1200000);
-
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "openai-key": "evaluation-lakhoune",
-          "openai-model": model,
-        }),
-        signal: controller.signal,
-      });
-      if (response.ok) clearTimeout(timeoutId);
-      const result = await response.text();
-      this.shadowRoot.querySelector("#chatgptRes").innerHTML = result;
-    } catch (error) {
-      console.error(error);
-      if (error.message) {
-        this.shadowRoot.querySelector("#chatgptRes").innerHTML = error.message;
-      } else if (error instanceof DOMException) {
-        this.shadowRoot.querySelector("#chatgptRes").innerHTML =
-          "A timeout occurred";
-      } else {
-        this.shadowRoot.querySelector("#chatgptRes").innerHTML =
-          "Unknown error";
-      }
-    } finally {
-      this.loading = false;
-      this.chatGPTRes = true;
-      this.shadowRoot.querySelector("#askGPTButton").disabled = false;
-    }
-  }
 }
 
-customElements.define("general-improvements", GeneralImprovement);
+customElements.define("custom-improvements", IntentImprovement);
 
 function joinAbsoluteUrlPath(...args) {
   return args
