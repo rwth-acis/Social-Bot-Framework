@@ -457,19 +457,33 @@ class BotStats extends LitElement {
     }
 
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        timeout: 10000,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Accept: "text/html",
-          "Content-type": "application/json",
-        },
+      let response;
+      if (modelType === "de-facto") {
+        // for some weird reason the POST request fails in the cluster :/
+        response = await fetch(url, {
+          method:  "GET",
+          timeout: 10000,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            Accept: "text/html",
+            "Content-type": "application/json",
+          },
+        });
+      } else {
+        response = await fetch(url, {
+          method:  "POST",
+          timeout: 10000,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            Accept: "text/html",
+            "Content-type": "application/json",
+          },
 
-        body: JSON.stringify({
-          "bot-model": botModel,
-        }),
-      });
+          body: JSON.stringify({
+            "bot-model": botModel,
+          }),
+        });
+      }
 
       if (!response.ok) {
         try {
