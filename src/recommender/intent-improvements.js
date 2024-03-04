@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
-import config from "../../../config.json";
-import { Common } from "../../common.js";
+import config from "../../config.json";
+import { Common } from "../common.js";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js";
 class IntentImprovement extends LitElement {
@@ -146,7 +146,7 @@ class IntentImprovement extends LitElement {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "openai-key": "evaluation-lakhoune",
+          "openai-key": localStorage.getItem("openai-token"),
           "openai-model": model,
         }),
         signal: controller.signal,
