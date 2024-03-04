@@ -3,7 +3,9 @@ import "./bot.manager.widget.js";
 import "@rwth-acis/syncmeta-widgets";
 import config from "../config.json";
 import { Common } from "./common.js";
-
+import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
+import { ifDefined } from "lit/directives/if-defined.js";
+import "./improvements-recommender.js";
 /**
  * @customElement
  *
@@ -12,6 +14,9 @@ class BotModeling extends LitElement {
   static properties = {
     loading: { type: Boolean, value: true },
   };
+  edgeLabels;
+  edgeTypes;
+  edgeInfoShown = true;
 
   createRenderRoot() {
     return this;
@@ -22,7 +27,8 @@ class BotModeling extends LitElement {
   }
 
   render() {
-    return html` <style>
+    return html`
+      <style>
         .maincontainer {
           min-height: 55vh;
           resize: both;
@@ -60,12 +66,80 @@ class BotModeling extends LitElement {
         yjsHost="${config.yjs_host}"
         yjsPort="${config.yjs_port}"
         yjsProtocol="${config.yjs_socket_protocol}"
-        yjsSpaceTitle="${Common.getYjsRoom()}"
-      ></widget-container>`;
+        yjsSpaceTitle="${ifDefined(
+          Common.getYjsRoom() === null ? undefined : Common.getYjsRoom()
+        )}"
+      ></widget-container>
+    `;
   }
-  firstUpdated() {
+  async firstUpdated() {
+    const instance = getInstance({
+      host: config.yjs_host,
+      port: config.yjs_port,
+      protocol: config.yjs_socket_protocol,
+      spaceTitle: Common.getYjsRoom(),
+    });
+    const y = await instance.connect();
     super.firstUpdated();
+
+    const poll = setInterval(() => {
+      const botModel = y.getMap("data").get("model");
+      if (botModel) {
+        const botElement = Object.values(botModel.nodes).find((node) => {
+          return node.type === "Bot";
+        });
+        if (botElement) {
+          this.insertUsageButton();
+          const overelay = document.createElement("canvas-statistics-overlay");
+          const canvasContainer = document.querySelector("#canvas");
+          canvasContainer.appendChild(overelay);
+          clearInterval(poll);
+        }
+      }
+    }, 200);
   }
+  insertUsageButton() {
+    const firstButtonCol = document.querySelector(
+      "#main-widget-utilities-container  > div:nth-child(1)"
+    ); // get the first button column in the canvas widget container
+    if (firstButtonCol) {
+      const newButton = document.createElement("button");
+      newButton.classList.add("btn", "btn-primary", "btn-sm", "ml-2");
+      newButton.id = "bot-usage-button";
+      newButton.innerHTML = "<i class='bi bi-graph-up'></i> Usage ";
+      newButton.addEventListener("click", () => {
+        window.jsPlumbInstance.setSuspendDrawing(true, true);
+        const overlay = document.querySelector("#model-statistics-overlay");
+        const pm4botsOverlayElements =
+          document.querySelectorAll(".pm4bots-overlay");
+        const nodes = document.querySelectorAll(".pm4bots-node");
+
+        if (overlay.style.display === "none") {
+          for (const node of nodes) {
+            node.style.display = "block";
+          }
+          overlay.style.display = "block";
+          for (const el of pm4botsOverlayElements) {
+            el.style.display = "block";
+          }
+          window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(true);
+        } else {
+          for (const node of nodes) {
+            node.style.display = "none";
+          }
+          overlay.style.display = "none";
+          for (const el of pm4botsOverlayElements) {
+            el.style.display = "none";
+          }
+          window.jsPlumbInstance.select({ scope: "pm4bots" }).setVisible(false);
+        }
+        window.jsPlumbInstance.setSuspendDrawing(false);
+      });
+      firstButtonCol.appendChild(newButton);
+    }
+  }
+
+  toggleEdgeStatistics() {}
 }
 
 window.customElements.define("bot-modeling", BotModeling);

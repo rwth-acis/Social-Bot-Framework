@@ -1,10 +1,8 @@
-import vls from "./vls.js";
-import metamodel from "./metamodel.json";
-import botModel from "./botModel.js";
+import vls from "../assets/SyncMeta Models/vls.json";
 import config from "../config.json";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync.js";
 import { Common } from "./common.js";
-import GenerateViewpointModel from "./generateVLS.js";
+import GenerateViewpointModel from "./lib/generateVLS.js";
 class ModelOps {
   y = null;
 
@@ -35,16 +33,15 @@ class ModelOps {
         // check whether there already is a metamodel or not
         const model = y.getMap("data").get("metamodel");
         if (model != null) {
-          resolve();
+          resolve(false);
         } else {
           // ask user whether to upload the default metamodel
           const confirmed = confirm(
             "You are currently working on the metamodel. Do you want to switch to bot modeling?"
           );
           if (confirmed) {
-           
-            y.getMap("data").set("metamodel", GenerateViewpointModel(metamodel, y));
-            await this.uploadBotModel();
+            y.getMap("data").set("metamodel", GenerateViewpointModel(vls, y));
+
             resolve(true);
           } else {
             resolve(false);
@@ -57,16 +54,6 @@ class ModelOps {
   async getModel() {
     const y = await this.getY(true);
     return y.getMap("data").get("model");
-  }
-
-  async uploadBotModel() {
-    const y = await this.getY(false);
-    const model = y.getMap("data").get("model");
-    if (model == null || Object.keys(model.nodes).length === 0) {
-      y.getMap("data").set("model", botModel);
-      return botModel;
-    }
-    return model;
   }
 
   async observeTraininingData(cb) {

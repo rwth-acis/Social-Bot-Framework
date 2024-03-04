@@ -121,13 +121,6 @@ class ModelTraining extends LitElement {
             <div
               class="d-flex flex-row mb-3 justify-content-end align-items-center"
             >
-              <button
-                type="button"
-                class="btn btn-lg btn-info"
-                @click="${this.showIntentCoverage}"
-              >
-                Intent Coverage
-              </button>
               <i id="trainingStatus" class="form-text text-muted me-1"></i>
               <button
                 type="button"
@@ -136,6 +129,14 @@ class ModelTraining extends LitElement {
               >
                 <i class="bi bi-cpu"></i> Training Status
               </button>
+              <button
+                type="button"
+                class="btn btn-lg btn-info me-2"
+                @click="${this.showIntentCoverage}"
+              >
+                Intent Coverage
+              </button>
+              
               <button
                 type="button"
                 class="btn btn-lg btn-primary"
@@ -476,15 +477,21 @@ class ModelTraining extends LitElement {
     const y = await ModelOps.getY(true);
     const _this = this;
     const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
-    $.ajax({
-      type: "GET",
-      url: trainingStatusUrl + "/training/",
-      contentType: "application/json",
-      success: function (data, textStatus, jqXHR) {
-        if (textStatus !== "success") {
-          return;
+    const response = await fetch(trainingStatusUrl + "/training/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      // check response body type
+
+      try {
+        if (response.headers.get("Content-Type") !== "application/json") {
+          throw new Error("Invalid response body");
         }
-        $.each(data, function (index, name) {
+        const data = await response.json();
+        data.forEach(function (name) {
           if (!_this.curModels.includes(name)) {
             var template = document.createElement("template");
             template.innerHTML = "<option>" + name + "</option>";
@@ -492,8 +499,10 @@ class ModelTraining extends LitElement {
             _this.curModels.push(name);
           }
         });
-      },
-    });
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 }
 

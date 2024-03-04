@@ -8,12 +8,13 @@ import packageInfo from "./package.json";
 
 // https://vitejs.dev/config/
 /** @type {import('vite').UserConfig} */
-export default defineConfig(({ command }) => ({
+export default defineConfig(({ command, mode }) => ({
   build: {
     output: {
       dir: "dist",
-      sourcemap: true,
+      sourcemap: mode === "development",
     },
+    sourcemap: mode === "development",
     inputs: {
       index: "/index.html",
       src: "src",

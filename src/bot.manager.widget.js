@@ -1,5 +1,4 @@
 import { html, LitElement } from "lit";
-import _ from "lodash-es";
 import { getGuidanceModeling } from "@rwth-acis/syncmeta-widgets/src/es6/Guidancemodel";
 import { getInstance } from "@rwth-acis/syncmeta-widgets/src/es6/lib/yjs-sync";
 import { Text as YText, Map as YMap } from "yjs";
@@ -72,6 +71,7 @@ class BotManagerWidget extends LitElement {
             option.text = model;
             loadNameInput.appendChild(option);
             this.botModels.push(model);
+            this.botModels = this.botModels.sort();
           }
         });
         // select the first model if there is no model selected
@@ -83,6 +83,30 @@ class BotManagerWidget extends LitElement {
       .catch((error) => {
         console.error("Error while fetching models:", error);
       });
+
+    const bots = await this.fetchCurrentBotIDsFromBotManager(
+      endpoint 
+    );
+    y.getMap("data").set("bots", bots);
+  }
+
+  async fetchCurrentBotIDsFromBotManager(botManagerUrl) {
+    const response = await fetch(botManagerUrl + "/bots");
+
+    if (response.ok) {
+      const json = await response.json();
+      const result = {};
+      for (const [id, botDefinition] of Object.entries(json)) {
+        if (botDefinition.name in result) {
+          result[botDefinition.name].push(id);
+        } else {
+          result[botDefinition.name] = [id];
+        }
+      }
+      return result;
+    } else {
+      throw new Error("Failed to fetch bots.");
+    }
   }
 
   loadModel() {
@@ -185,45 +209,60 @@ class BotManagerWidget extends LitElement {
   }
 
   submitModel() {
-    var sendStatus = $("#sendStatus");
+    const sendStatus = $("#sendStatus");
     const spinner = $("#sendStatusSpinner");
     const btn = $("#submit-model");
-    var endpoint = y.getText("sbfManager").toString();
-    var model = y.getMap("data").get("model");
-    sendStatus.text("Sending...");
+    const endpoint = y.getText("sbfManager").toString();
+    const model = window.syncmeta.EntityManagerInstance.graphToJSON();
+    replaceIncomingMessageNameWithIntentLabel(model); // TODO: remove this line when the backend is updated to support the new Name attribute
     spinner.show();
     btn.prop("disabled", true);
 
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      if (xhr.status == 200) {
-        sendStatus.text("Successfully sent.");
-        alert("The bot has been successfully sent and is now available.");
-      } else {
-        if (xhr.response != undefined) {
-          alert(
-            "There is something wrong with your bot model: " + xhr.response
+    const timeout = 10000; // 10 seconds
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    fetch(endpoint + "/bots", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(model),
+      signal: controller.signal,
+    })
+      .then((response) => {
+        clearTimeout(timeoutId);
+        if (response.ok) {
+          sendStatus.text("Successfully sent.");
+          let botName;
+          const botNode = Object.values(model["nodes"]).find(
+            (node) => node.type === "Bot"
           );
+          botName = botNode.label.value.value;
+          this.storeModel(botName);
+        } else {
+          response.text().then((errorMessage) => {
+            alert(
+              `There is something wrong with your bot model: ${errorMessage}`
+            );
+          });
+        }
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId);
+        if (error.name === "AbortError") {
+          alert("The request timed out. Please try again later.");
         } else {
           alert(
             "The bot could not be sent. Please make sure that: the Social Bot Manager is running, your endpoint is correct, your bot model is correct."
           );
         }
-      }
-      spinner.hide();
-      btn.prop("disabled", false);
-      // cleanStatus("sendStatus");
-    };
-
-    xhr.open("POST", endpoint + "/bots");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(model));
-    let botName;
-    const botNode = Object.values(model["nodes"]).find(
-      (node) => node.type === "Bot"
-    );
-    botName = botNode.label.value.value;
-    this.storeModel(botName);
+      })
+      .finally(() => {
+        spinner.hide();
+        btn.prop("disabled", false);
+        // cleanStatus("sendStatus");
+      });
   }
 
   deleteModel() {
@@ -569,6 +608,22 @@ class BotManagerWidget extends LitElement {
 function cleanStatus(field) {
   const status = document.querySelector("#" + field);
   $(status).text("");
+}
+
+function replaceIncomingMessageNameWithIntentLabel(model) {
+  const nodes = model.nodes;
+  const incominMessageNodes = Object.values(nodes).filter(
+    (node) => node.type === "Incoming Message"
+  );
+
+  for (const incominMessageNode of incominMessageNodes) {
+    const target = Object.values(incominMessageNode.attributes).find(
+      (attr) => attr.name === "Name"
+    );
+    if (target) {
+      target.name = "Intent Label";
+    }
+  }
 }
 
 window.customElements.define("bot-manager-widget", BotManagerWidget);
