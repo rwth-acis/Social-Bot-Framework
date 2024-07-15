@@ -179,7 +179,7 @@ class StaticApp extends LitElement {
       {
         path: "/modeling",
         component: "main-page",
-        action: async () => await import("./main.js"),
+        action: async () => this.handleModelingRoute(),
       },
     ]);
     // if on modeling route, upload meta model
@@ -190,6 +190,17 @@ class StaticApp extends LitElement {
         }
       });
     }
+  }
+
+  async handleModelingRoute() {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      this.alertMessage = "Please sign in to access all functionalities.";
+      Router.go("/");
+      return;
+    }
+
+    await import("./main.js");
   }
 
   _onChangeButtonClicked() {
@@ -214,6 +225,13 @@ class StaticApp extends LitElement {
    */
   goToModeling(subRoute) {
     const currentPath = window.location.pathname;
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      alert("You need to be signed in to access this feature.");
+      this.alertMessage =
+        "Please sign in to access all functionalities.";
+      return;
+    }
     if (currentPath === "/") {
       Router.go(`modeling#${subRoute}`);
     }
