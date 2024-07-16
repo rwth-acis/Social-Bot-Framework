@@ -25,6 +25,8 @@ const keyboardEnterPrevent = {
 class BotManagerWidget extends LitElement {
   storeNameInputEditor;
   sbfManagerEndpointEditor;
+  storePasswordInputEditor;
+
   botModels = [];
 
   guidance = null;
@@ -373,6 +375,59 @@ class BotManagerWidget extends LitElement {
     }
   }
 
+  storePassword(password) {
+    let spacePassword = "";
+    if (typeof password === "string") {
+      spacePassword = password;
+    } else {
+      spacePassword = y.getText("storePassword").toString();
+    }
+    var endpoint = y.getText("sbfManager").toString();
+    var saveStatus = $("#saveStatus");
+    const spinner = $("#saveStatusSpinner");
+    const btn = $("#store-password");
+    spinner.show();
+    saveStatus.text("Saving...");
+    btn.prop("disabled", true);
+
+    if (spacePassword) {
+      //todo get space name
+      fetch(endpoint + "/secure/" + "SPACE_NAME", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password: spacePassword }),
+      })
+        .then((response) => {
+          if (response.ok) {
+        if (!password) alert("Your space password has been successfully saved");
+        this.updateMenu();
+          } else {
+        throw new Error(
+          "Your space password could not be set up. Make sure that the SBF endpoint is correct."
+        );
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          spinner.hide();
+          btn.prop("disabled", false);
+        });
+    } else {
+      if (!spacePassword) {
+        alert("The space password is invalid.");
+      } else {
+        alert("The space password is empty.");
+      }
+      spinner.hide();
+      btn.prop("disabled", false);
+      cleanStatus("saveStatus");
+    }
+  }
+
   firstUpdated() {
     super.firstUpdated();
     const instance = getInstance({
@@ -417,6 +472,20 @@ class BotManagerWidget extends LitElement {
         throw new Error("Could not find quill editor");
       }
       new QuillBinding(y.getText("storeName"), this.storeNameInputEditor);
+
+      this.storePasswordInputEditor = new Quill(
+        document.querySelector("#storePasswordInput"),
+        {
+          modules: { toolbar: false, keyboard: keyboardEnterPrevent },
+          cursors: false,
+          placeholder: "Set a password for this space...",
+          theme: "snow",
+        }
+      );
+      if (!this.storePasswordInputEditor) {
+        throw new Error("Could not find quill editor");
+      }
+      new QuillBinding(y.getText("storePassword"), this.storePasswordInputEditor);
 
       this.updateMenu();
 
@@ -466,7 +535,29 @@ class BotManagerWidget extends LitElement {
         }
         
       </style>
-
+      <div class="m-1">
+        <h3>Space Settings</h3>
+        <div class="row">
+            <div id="passwordstorer" class="col col-5">
+              <label for="save-password" class="form-label">Set Password</label>
+              <div class="input-group mb-3">
+                <div id="storePasswordInput"></div>
+                <button id="save-password" class="btn btn-outline-primary"  @click="${this.storePassword}">
+                  <i class="bi bi-save"></i> Save
+                  <div
+                    class="spinner-border spinner-border-sm text-secondary"
+                    id="saveStatusSpinner"
+                    style="display: none"
+                    role="status"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="m-1">
         <h3>Bot Operations</h3>
         <div class="row">
