@@ -375,8 +375,44 @@ class BotManagerWidget extends LitElement {
     }
   }
 
+  removePassword() {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const loginName = userInfo.loginName;
+    var endpoint = y.getText("sbfManager").toString();
+    var removePassword = $("#removePassword");
+    const spinner = $("#removePasswordSpinner");
+    const btn = $("#remove-password");
+    spinner.show();
+    removePassword.text("Removing...");
+    btn.prop("disabled", true);
+
+    const currentRoomName = Common.getSyncmetaSpaceName();
+    fetch(endpoint + "/secure/"+currentRoomName+"/"+ loginName, {
+      method: "DELETE",     
+    })
+    .then((response) => {
+      if (response.ok) {
+          alert("Your space password has been successfully removed");
+          this.updateMenu();
+        } else {
+          throw new Error(
+            "Your space password could not be removed. Make sure that the SBF endpoint is correct and you set the password."
+            );
+        }
+     })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        spinner.hide();
+        btn.prop("disabled", false);
+      });
+  }
+
   storePassword(password) {
     let spacePassword = "";
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const loginName = userInfo.loginName;
     if (typeof password === "string") {
       spacePassword = password;
     } else {
@@ -391,13 +427,14 @@ class BotManagerWidget extends LitElement {
     btn.prop("disabled", true);
 
     if (spacePassword) {
-      //todo get space name
-      fetch(endpoint + "/secure/" + "SPACE_NAME", {
+      const currentRoomName = Common.getSyncmetaSpaceName();
+      var pw = btoa(spacePassword)
+      fetch(endpoint + "/secure/"+currentRoomName+"/"+ loginName, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password: spacePassword }),
+        body: JSON.stringify({ password: pw }),
       })
         .then((response) => {
           if (response.ok) {
@@ -536,17 +573,28 @@ class BotManagerWidget extends LitElement {
         
       </style>
       <div class="m-1">
-        <h3>Space Settings</h3>
+        <h3>Secure Space</h3>
         <div class="row">
             <div id="passwordstorer" class="col col-5">
               <label for="save-password" class="form-label">Set Password</label>
               <div class="input-group mb-3">
                 <div id="storePasswordInput"></div>
                 <button id="save-password" class="btn btn-outline-primary"  @click="${this.storePassword}">
-                  <i class="bi bi-save"></i> Save
+                  <i class="bi bi-person-lock"></i> Secure
                   <div
                     class="spinner-border spinner-border-sm text-secondary"
                     id="saveStatusSpinner"
+                    style="display: none"
+                    role="status"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
+                  <button id="remove-password" class="btn btn-outline-primary"  @click="${this.removePassword}">
+                  <i class="bi bi-unlock"></i> Remove Password
+                  <div
+                    class="spinner-border spinner-border-sm text-secondary"
+                    id="removePasswordSpinner"
                     style="display: none"
                     role="status"
                   >
