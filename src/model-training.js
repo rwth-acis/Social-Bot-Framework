@@ -309,6 +309,9 @@ class ModelTraining extends LitElement {
         markdownTrainingData: _this.editor.getText(),
       }),
       contentType: "application/json",
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+      },
       success: function (data, textStatus, jqXHR) {
         $(_this.htmlQuery("#trainingStatus")).text(data);
       },
@@ -413,6 +416,9 @@ class ModelTraining extends LitElement {
       type: "GET",
       url: trainingStatusUrl,
       contentType: "text/plain",
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+      },
       success: function (data, textStatus, jqXHR) {
         $(_this.htmlQuery("#trainingStatus")).text(data);
       },
@@ -435,6 +441,9 @@ class ModelTraining extends LitElement {
     $.ajax({
       type: "POST",
       url: trainingStatusUrl + name,
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+      },      
       data: trainingData,
       contentType: "text/plain",
       success: function (data, textStatus, jqXHR) {
@@ -460,6 +469,9 @@ class ModelTraining extends LitElement {
       type: "GET",
       url: trainingStatusUrl + name,
       contentType: "text/plain",
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+      },      
       success: function (data, textStatus, jqXHR) {
         $(_this.htmlQuery("#trainingStatus")).text("Data loaded.");
         _this.editor.setText(data);
@@ -480,6 +492,9 @@ class ModelTraining extends LitElement {
       type: "GET",
       url: trainingStatusUrl + "/training/",
       contentType: "application/json",
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+      },
       success: function (data, textStatus, jqXHR) {
         if (textStatus !== "success") {
           return;

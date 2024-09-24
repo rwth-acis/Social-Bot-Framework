@@ -52,8 +52,13 @@ class BotManagerWidget extends LitElement {
     if (!endpoint) {
       return;
     }
+    const accessToken = localStorage.getItem("access_token");
 
-    fetch(endpoint + "/models/")
+    fetch(endpoint + "/models/", {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    })
       .then((response) => {
         if (
           response.ok &&
