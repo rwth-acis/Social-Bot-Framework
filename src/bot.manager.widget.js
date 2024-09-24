@@ -25,7 +25,6 @@ const keyboardEnterPrevent = {
 class BotManagerWidget extends LitElement {
   storeNameInputEditor;
   sbfManagerEndpointEditor;
-  storePasswordInputEditor;
 
   botModels = [];
 
@@ -96,7 +95,12 @@ class BotManagerWidget extends LitElement {
     $(loadStatus).text("Loading...");
     spinner.show();
     btn.prop("disabled", true);
-    fetch(endpoint + "/models/" + name)
+    const accessToken = localStorage.getItem("access_token");
+    fetch(endpoint + "/models/" + name, {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    })
       .then((response) => {
         if (
           response.ok &&
@@ -195,7 +199,8 @@ class BotManagerWidget extends LitElement {
     sendStatus.text("Sending...");
     spinner.show();
     btn.prop("disabled", true);
-
+    
+    const accessToken = localStorage.getItem("access_token");
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
       if (xhr.status == 200) {
@@ -219,6 +224,7 @@ class BotManagerWidget extends LitElement {
 
     xhr.open("POST", endpoint + "/bots");
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", `Bearer ${accessToken}`);
     xhr.send(JSON.stringify(model));
     let botName;
     const botNode = Object.values(model["nodes"]).find(
@@ -270,6 +276,7 @@ class BotManagerWidget extends LitElement {
     spinner.show();
     btn.prop("disabled", true);
 
+    const accessToken = localStorage.getItem("access_token");
     var xhr = new XMLHttpRequest();
     var agentId = "";
     xhr.onload = function () {
@@ -279,6 +286,7 @@ class BotManagerWidget extends LitElement {
           agentId = JSON.parse(xhr.response)[instanceName][botName]["id"];
           xhr2.open("DELETE", endpoint + "/bots/" + agentId);
           xhr2.setRequestHeader("Content-Type", "application/json");
+          xhr2.setRequestHeader("Authorization", `Bearer ${accessToken}`);
           // delete the chosen bot
           xhr2.send(JSON.stringify({ messengers: messengers }));
         } catch (error) {
@@ -318,6 +326,7 @@ class BotManagerWidget extends LitElement {
     // first fetch the deployed bots
     xhr.open("GET", endpoint + "/bots");
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", `Bearer ${accessToken}`);
     xhr.send();
   }
 
@@ -337,11 +346,13 @@ class BotManagerWidget extends LitElement {
     storeStatus.text("Storing...");
     btn.prop("disabled", true);
 
+    const accessToken = localStorage.getItem("access_token");
     if (botName && model) {
       fetch(endpoint + "/models/" + botName, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`
         },
         body: JSON.stringify(model),
       })
@@ -372,96 +383,6 @@ class BotManagerWidget extends LitElement {
       spinner.hide();
       btn.prop("disabled", false);
       cleanStatus("storeStatus");
-    }
-  }
-
-  removePassword() {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const loginName = userInfo.loginName;
-    var endpoint = y.getText("sbfManager").toString();
-    var removePassword = $("#removePassword");
-    const spinner = $("#removePasswordSpinner");
-    const btn = $("#remove-password");
-    spinner.show();
-    removePassword.text("Removing...");
-    btn.prop("disabled", true);
-
-    const currentRoomName = Common.getSyncmetaSpaceName();
-    fetch(endpoint + "/secure/"+currentRoomName+"/"+ loginName, {
-      method: "DELETE",     
-    })
-    .then((response) => {
-      if (response.ok) {
-          alert("Your space password has been successfully removed");
-          this.updateMenu();
-        } else {
-          throw new Error(
-            "Your space password could not be removed. Make sure that the SBF endpoint is correct and you set the password."
-            );
-        }
-     })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        spinner.hide();
-        btn.prop("disabled", false);
-      });
-  }
-
-  storePassword(password) {
-    let spacePassword = "";
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const loginName = userInfo.loginName;
-    if (typeof password === "string") {
-      spacePassword = password;
-    } else {
-      spacePassword = y.getText("storePassword").toString();
-    }
-    var endpoint = y.getText("sbfManager").toString();
-    var saveStatus = $("#saveStatus");
-    const spinner = $("#saveStatusSpinner");
-    const btn = $("#store-password");
-    spinner.show();
-    saveStatus.text("Saving...");
-    btn.prop("disabled", true);
-
-    if (spacePassword) {
-      const currentRoomName = Common.getSyncmetaSpaceName();
-      var pw = btoa(spacePassword)
-      fetch(endpoint + "/secure/"+currentRoomName+"/"+ loginName, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password: pw }),
-      })
-        .then((response) => {
-          if (response.ok) {
-        if (!password) alert("Your space password has been successfully saved");
-        this.updateMenu();
-          } else {
-        throw new Error(
-          "Your space password could not be set up. Make sure that the SBF endpoint is correct."
-        );
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-        .finally(() => {
-          spinner.hide();
-          btn.prop("disabled", false);
-        });
-    } else {
-      if (!spacePassword) {
-        alert("The space password is invalid.");
-      } else {
-        alert("The space password is empty.");
-      }
-      spinner.hide();
-      btn.prop("disabled", false);
-      cleanStatus("saveStatus");
     }
   }
 
@@ -509,20 +430,6 @@ class BotManagerWidget extends LitElement {
         throw new Error("Could not find quill editor");
       }
       new QuillBinding(y.getText("storeName"), this.storeNameInputEditor);
-
-      this.storePasswordInputEditor = new Quill(
-        document.querySelector("#storePasswordInput"),
-        {
-          modules: { toolbar: false, keyboard: keyboardEnterPrevent },
-          cursors: false,
-          placeholder: "Set a password for this space...",
-          theme: "snow",
-        }
-      );
-      if (!this.storePasswordInputEditor) {
-        throw new Error("Could not find quill editor");
-      }
-      new QuillBinding(y.getText("storePassword"), this.storePasswordInputEditor);
 
       this.updateMenu();
 
@@ -572,40 +479,6 @@ class BotManagerWidget extends LitElement {
         }
         
       </style>
-      <div class="m-1">
-        <h3>Secure Space</h3>
-        <div class="row">
-            <div id="passwordstorer" class="col col-5">
-              <label for="save-password" class="form-label">Set Password</label>
-              <div class="input-group mb-3">
-                <div id="storePasswordInput"></div>
-                <button id="save-password" class="btn btn-outline-primary"  @click="${this.storePassword}">
-                  <i class="bi bi-person-lock"></i> Secure
-                  <div
-                    class="spinner-border spinner-border-sm text-secondary"
-                    id="saveStatusSpinner"
-                    style="display: none"
-                    role="status"
-                  >
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                </button>
-                  <button id="remove-password" class="btn btn-outline-primary"  @click="${this.removePassword}">
-                  <i class="bi bi-unlock"></i> Remove Password
-                  <div
-                    class="spinner-border spinner-border-sm text-secondary"
-                    id="removePasswordSpinner"
-                    style="display: none"
-                    role="status"
-                  >
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="m-1">
         <h3>Bot Operations</h3>
         <div class="row">
