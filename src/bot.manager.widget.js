@@ -25,6 +25,7 @@ const keyboardEnterPrevent = {
 class BotManagerWidget extends LitElement {
   storeNameInputEditor;
   sbfManagerEndpointEditor;
+
   botModels = [];
 
   guidance = null;
@@ -51,8 +52,13 @@ class BotManagerWidget extends LitElement {
     if (!endpoint) {
       return;
     }
+    const accessToken = localStorage.getItem("access_token");
 
-    fetch(endpoint + "/models/")
+    fetch(endpoint + "/models/", {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    })
       .then((response) => {
         if (
           response.ok &&
@@ -94,7 +100,12 @@ class BotManagerWidget extends LitElement {
     $(loadStatus).text("Loading...");
     spinner.show();
     btn.prop("disabled", true);
-    fetch(endpoint + "/models/" + name)
+    const accessToken = localStorage.getItem("access_token");
+    fetch(endpoint + "/models/" + name, {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    })
       .then((response) => {
         if (
           response.ok &&
@@ -193,7 +204,8 @@ class BotManagerWidget extends LitElement {
     sendStatus.text("Sending...");
     spinner.show();
     btn.prop("disabled", true);
-
+    
+    const accessToken = localStorage.getItem("access_token");
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
       if (xhr.status == 200) {
@@ -217,6 +229,7 @@ class BotManagerWidget extends LitElement {
 
     xhr.open("POST", endpoint + "/bots");
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", `Bearer ${accessToken}`);
     xhr.send(JSON.stringify(model));
     let botName;
     const botNode = Object.values(model["nodes"]).find(
@@ -268,6 +281,7 @@ class BotManagerWidget extends LitElement {
     spinner.show();
     btn.prop("disabled", true);
 
+    const accessToken = localStorage.getItem("access_token");
     var xhr = new XMLHttpRequest();
     var agentId = "";
     xhr.onload = function () {
@@ -277,6 +291,7 @@ class BotManagerWidget extends LitElement {
           agentId = JSON.parse(xhr.response)[instanceName][botName]["id"];
           xhr2.open("DELETE", endpoint + "/bots/" + agentId);
           xhr2.setRequestHeader("Content-Type", "application/json");
+          xhr2.setRequestHeader("Authorization", `Bearer ${accessToken}`);
           // delete the chosen bot
           xhr2.send(JSON.stringify({ messengers: messengers }));
         } catch (error) {
@@ -316,6 +331,7 @@ class BotManagerWidget extends LitElement {
     // first fetch the deployed bots
     xhr.open("GET", endpoint + "/bots");
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", `Bearer ${accessToken}`);
     xhr.send();
   }
 
@@ -335,11 +351,13 @@ class BotManagerWidget extends LitElement {
     storeStatus.text("Storing...");
     btn.prop("disabled", true);
 
+    const accessToken = localStorage.getItem("access_token");
     if (botName && model) {
       fetch(endpoint + "/models/" + botName, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`
         },
         body: JSON.stringify(model),
       })
@@ -466,7 +484,6 @@ class BotManagerWidget extends LitElement {
         }
         
       </style>
-
       <div class="m-1">
         <h3>Bot Operations</h3>
         <div class="row">
