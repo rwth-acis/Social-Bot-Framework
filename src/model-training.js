@@ -490,7 +490,7 @@ class ModelTraining extends LitElement {
     const trainingStatusUrl = y.getText("sbfManager").toString() + "/training/";
     $.ajax({
       type: "GET",
-      url: trainingStatusUrl + "/training/",
+      url: trainingStatusUrl + "training/",
       contentType: "application/json",
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("access_token"),
